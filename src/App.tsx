@@ -1,207 +1,230 @@
-import { Dna, FlaskConical, Leaf, LockKeyhole, Sparkles } from 'lucide-react'
-import { useCallback, useState } from 'react'
-import { CramView } from './components/CramView'
-import { CustomPersonaModal } from './components/CustomPersonaModal'
-import { ExplorerView } from './components/ExplorerView'
-import { ModeToggle } from './components/ModeToggle'
-import { PersonaBar } from './components/PersonaBar'
-import { TopicSelector } from './components/TopicSelector'
-import { topics } from './data/topics'
-import { useCustomPersona } from './hooks/useCustomPersona'
-import { useTopicMemory } from './hooks/useTopicMemory'
-import type {
-  PersonaPreset,
-  PersonaSelection,
-  StudyMode,
-  Topic,
-  TopicPreferences,
-} from './types'
+import {
+  ArrowLeft,
+  BookOpenText,
+  ChevronRight,
+  FlaskConical,
+  LibraryBig,
+  Pencil,
+} from 'lucide-react'
+import { useState, type FormEvent } from 'react'
+import { KitabiPage } from './components/KitabiPage'
+import { OnboardingFlow } from './components/OnboardingFlow'
+import { SubjectGrid } from './components/SubjectGrid'
+import { useLearnYourWay } from './hooks/useLearnYourWay'
+import { useStudentProfile } from './hooks/useStudentProfile'
+import { subjects } from './knowledge'
+import type { KnowledgeSection, KnowledgeTopic, StudentProfile, Subject } from './types'
 
-const TOPIC_PREFERENCES_KEY = 'globallab_topic_prefs'
+interface SiteHeaderProps {
+  profile: StudentProfile
+  onSaveProfile: (interest: string) => void
+  onHome: () => void
+}
 
-function readAllPreferences(): TopicPreferences {
-  if (typeof window === 'undefined') return {}
+function SiteHeader({ profile, onSaveProfile, onHome }: SiteHeaderProps) {
+  const [isEditing, setIsEditing] = useState(false)
+  const [draft, setDraft] = useState(profile.interest)
 
-  try {
-    const stored = window.localStorage.getItem(TOPIC_PREFERENCES_KEY)
-    return stored ? (JSON.parse(stored) as TopicPreferences) : {}
-  } catch {
-    return {}
+  const saveInterest = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const normalized = draft.trim().replace(/\s+/g, ' ')
+    if (!normalized) return
+    setDraft(normalized)
+    onSaveProfile(normalized)
+    setIsEditing(false)
   }
+
+  return (
+    <header className="site-header">
+      <button type="button" className="brand" onClick={onHome} aria-label="Global Lab home">
+        <span className="brand-mark" aria-hidden="true">
+          <FlaskConical size={21} strokeWidth={2.2} />
+        </span>
+        <span>
+          <span className="brand-name">Global Lab</span>
+          <span className="brand-subtitle">Your STEM companion</span>
+        </span>
+      </button>
+
+      <div className="profile-menu">
+        <button
+          type="button"
+          className="profile-chip"
+          aria-expanded={isEditing}
+          onClick={() => setIsEditing((current) => !current)}
+        >
+          <span className="profile-chip-label">Your lens</span>
+          <span className="profile-chip-interest">{profile.interest}</span>
+          <Pencil size={12} aria-hidden="true" />
+        </button>
+
+        {isEditing && (
+          <form className="profile-popover animate-reveal" onSubmit={saveInterest}>
+            <label className="field-label" htmlFor="edit-interest">
+              Update your interest
+            </label>
+            <input
+              id="edit-interest"
+              className="profile-input"
+              value={draft}
+              maxLength={60}
+              autoFocus
+              onChange={(event) => setDraft(event.target.value)}
+            />
+            <div className="profile-popover-actions">
+              <button type="button" onClick={() => setIsEditing(false)}>
+                Cancel
+              </button>
+              <button type="submit" disabled={!draft.trim()}>
+                Save
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
+    </header>
+  )
+}
+
+interface ActiveKitabiProps {
+  topic: KnowledgeTopic
+  subject: Subject
+  profile: StudentProfile
+  onBack: () => void
+}
+
+function ActiveKitabi({ topic, subject, profile, onBack }: ActiveKitabiProps) {
+  const {
+    rewrites,
+    loadingSectionId,
+    error,
+    errorSectionId,
+    learn,
+    clearRewrite,
+  } = useLearnYourWay(topic)
+
+  const handleLearn = (section: KnowledgeSection) => {
+    void learn(section, profile)
+  }
+
+  return (
+    <KitabiPage
+      topic={topic}
+      subject={subject}
+      profile={profile}
+      rewrites={rewrites}
+      loadingSectionId={loadingSectionId}
+      error={error}
+      errorSectionId={errorSectionId}
+      onLearnYourWay={handleLearn}
+      onClearRewrite={clearRewrite}
+      onBack={onBack}
+    />
+  )
 }
 
 function App() {
-  const [activeTopic, setActiveTopic] = useState<Topic>(topics[0])
-  const [allPreferences, setAllPreferences] = useState<TopicPreferences>(readAllPreferences)
-  const { savePreferredMode } = useTopicMemory(activeTopic.id)
-  const preferredMode = allPreferences[activeTopic.id]?.preferredMode
-  const [mode, setMode] = useState<StudyMode>(() => preferredMode ?? 'explorer')
-  const [persona, setPersona] = useState<PersonaSelection>('neutral')
-  const [isCustomModalOpen, setIsCustomModalOpen] = useState(false)
-  const {
-    result: customResult,
-    isLoading,
-    error,
-    generate,
-    clearError,
-    reset: resetCustomPersona,
-  } = useCustomPersona(activeTopic)
+  const { profile, hasProfile, saveProfile } = useStudentProfile()
+  const [activeSubject, setActiveSubject] = useState<Subject | null>(null)
+  const [activeTopic, setActiveTopic] = useState<KnowledgeTopic | null>(null)
 
-  const closeCustomModal = useCallback(() => {
-    if (!isLoading) {
-      setIsCustomModalOpen(false)
-      clearError()
-    }
-  }, [clearError, isLoading])
-
-  const handleCustomSubmit = async (interest: string) => {
-    const generated = await generate(interest)
-    if (!generated) return false
-    setPersona('custom')
-    return true
+  if (!hasProfile || !profile) {
+    return (
+      <OnboardingFlow
+        onComplete={(interest, gradeLevel) => saveProfile({ interest, gradeLevel })}
+      />
+    )
   }
 
-  const handlePersonaSelect = (nextPersona: PersonaPreset) => {
-    setPersona(nextPersona)
+  const goHome = () => {
+    setActiveTopic(null)
+    setActiveSubject(null)
   }
 
-  const handleTopicSelect = (topic: Topic) => {
-    if (topic.id === activeTopic.id) return
-
-    setActiveTopic(topic)
-    setMode(allPreferences[topic.id]?.preferredMode ?? 'explorer')
-    setPersona('neutral')
-    setIsCustomModalOpen(false)
-    resetCustomPersona()
+  const selectSubject = (subject: Subject) => {
+    if (subject.comingSoon) return
+    setActiveTopic(null)
+    setActiveSubject(subject)
   }
 
-  const handleSavePreferredMode = (nextMode: StudyMode) => {
-    savePreferredMode(nextMode)
-    setAllPreferences(readAllPreferences())
+  const updateInterest = (interest: string) => {
+    saveProfile({ interest, gradeLevel: profile.gradeLevel })
   }
-
-  const topicNumber = topics.findIndex((topic) => topic.id === activeTopic.id) + 1
 
   return (
     <div className="app-shell">
-      <header className="site-header">
-        <a href="#main-content" className="brand" aria-label="Global Lab home">
-          <span className="brand-mark" aria-hidden="true">
-            <FlaskConical size={21} strokeWidth={2.2} />
-          </span>
-          <span>
-            <span className="brand-name">Global Lab</span>
-            <span className="brand-subtitle">Biology study companion</span>
-          </span>
-        </a>
+      <SiteHeader profile={profile} onSaveProfile={updateInterest} onHome={goHome} />
 
-        <div className="version-pill">
-          <span className="version-dot" aria-hidden="true" />
-          Five focused topics · V2
-        </div>
-      </header>
-
-      <main id="main-content">
-        <section className="hero-section">
-          <div className="hero-orb hero-orb-one" aria-hidden="true" />
-          <div className="hero-orb hero-orb-two" aria-hidden="true" />
-
-          <div className="relative z-10 mx-auto max-w-3xl text-center">
-            <div className="topic-pill">
-              <span className="topic-pill-icon" aria-hidden="true">
-                <Dna size={15} />
-              </span>
-              Biology · Topic {String(topicNumber).padStart(2, '0')} of {String(topics.length).padStart(2, '0')}
+      {!activeSubject && (
+        <main className="library-page" id="main-content">
+          <section className="library-hero">
+            <div className="library-icon" aria-hidden="true">
+              <LibraryBig size={24} />
             </div>
-            <h1 className="hero-title">{activeTopic.title}</h1>
-            <p className="hero-subtitle">
-              {activeTopic.subtitle}. Choose the study mode that meets you where you are today.
+            <p className="eyebrow">Your study library</p>
+            <h1 className="library-title">What are you learning today?</h1>
+            <p className="library-copy">
+              Open a subject, choose a topic, and read. Personalize only the explanation
+              you need help with.
             </p>
-
-            <div className="hero-principles" aria-label="Study principles">
-              <span>
-                <Leaf size={15} aria-hidden="true" />
-                Grounded in biology
-              </span>
-              <span className="principle-divider" aria-hidden="true" />
-              <span>
-                <Sparkles size={15} aria-hidden="true" />
-                Analogies that fit you
-              </span>
-              <span className="principle-divider" aria-hidden="true" />
-              <span>
-                <LockKeyhole size={14} aria-hidden="true" />
-                Saved on this device
-              </span>
-            </div>
-          </div>
-        </section>
-
-        <div className="study-layout">
-          <TopicSelector
-            topics={topics}
-            activeTopic={activeTopic}
-            preferences={allPreferences}
-            onSelect={handleTopicSelect}
-          />
-
-          <section className="study-shell" aria-label={`${activeTopic.title} study space`}>
-            <div className="study-toolbar">
-              <div>
-                <p className="eyebrow">How do you want to learn?</p>
-                <h2 className="mt-1 text-lg font-semibold tracking-[-0.02em] text-stone-900">
-                  Pick your pace
-                </h2>
-              </div>
-              <ModeToggle mode={mode} preferredMode={preferredMode} onChange={setMode} />
-            </div>
-
-            {mode === 'explorer' && (
-              <PersonaBar
-                persona={persona}
-                customInterest={customResult?.interest}
-                onSelect={handlePersonaSelect}
-                onCustomClick={() => setIsCustomModalOpen(true)}
-              />
-            )}
-
-            <div className="study-content">
-              {mode === 'cram' ? (
-                <CramView
-                  topic={activeTopic}
-                  isPreferred={preferredMode === 'cram'}
-                  onMarkHelpful={() => handleSavePreferredMode('cram')}
-                />
-              ) : (
-                <ExplorerView
-                  key={`${activeTopic.id}-${customResult?.interest ?? 'preset'}`}
-                  topic={activeTopic}
-                  persona={persona}
-                  customResult={customResult}
-                  isPreferred={preferredMode === 'explorer'}
-                  onMarkHelpful={() => handleSavePreferredMode('explorer')}
-                />
-              )}
-            </div>
           </section>
-        </div>
-      </main>
+          <SubjectGrid subjects={subjects} onSelect={selectSubject} />
+        </main>
+      )}
+
+      {activeSubject && !activeTopic && (
+        <main className="library-page" id="main-content">
+          <button type="button" className="library-back" onClick={goHome}>
+            <ArrowLeft size={14} aria-hidden="true" />
+            All subjects
+          </button>
+          <section className="topic-library-heading">
+            <p className="eyebrow">Choose a Kitabi</p>
+            <h1 className="library-title">{activeSubject.title}</h1>
+            <p className="library-copy">{activeSubject.description}</p>
+          </section>
+          <div className="kitabi-grid">
+            {activeSubject.topics.map((topic, index) => (
+              <button
+                type="button"
+                className="kitabi-card"
+                key={topic.id}
+                onClick={() => setActiveTopic(topic)}
+              >
+                <span className="kitabi-card-index">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className="kitabi-card-copy">
+                  <span className="kitabi-card-title">{topic.title}</span>
+                  <span className="kitabi-card-subtitle">{topic.subtitle}</span>
+                  <span className="kitabi-card-meta">
+                    <BookOpenText size={13} aria-hidden="true" />
+                    {topic.sections.length} sections
+                  </span>
+                </span>
+                <ChevronRight className="kitabi-card-arrow" size={18} aria-hidden="true" />
+              </button>
+            ))}
+          </div>
+        </main>
+      )}
+
+      {activeSubject && activeTopic && (
+        <ActiveKitabi
+          key={activeTopic.id + '::' + profile.interest}
+          topic={activeTopic}
+          subject={activeSubject}
+          profile={profile}
+          onBack={() => setActiveTopic(null)}
+        />
+      )}
 
       <footer className="site-footer">
         <div className="footer-mark" aria-hidden="true">
           <FlaskConical size={15} />
         </div>
-        <p>Five topics. Two ways in. Built for real understanding.</p>
+        <p>Read first. Personalize where it matters.</p>
       </footer>
-
-      <CustomPersonaModal
-        isOpen={isCustomModalOpen}
-        isLoading={isLoading}
-        error={error}
-        onClose={closeCustomModal}
-        onSubmit={handleCustomSubmit}
-        onClearError={clearError}
-      />
     </div>
   )
 }

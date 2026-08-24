@@ -1,39 +1,27 @@
 # Global Lab
 
-Global Lab is a focused biology study companion that combines a ready-to-use content library with selective, interest-based analogy personalization.
+Global Lab is a profile-driven STEM study companion built around a **Kitabi**: a clean textbook page that keeps canonical science intact and adds personalized analogy cards only when a student asks for help.
 
-V2 includes five topics:
+## V3 experience
 
-- Cellular Respiration & ATP Synthesis
-- Cell Membrane Transport
-- DNA Expression
-- Action Potentials
-- Enzyme Kinetics
-
-## Study modes
-
-- **Cram:** concise, neutral, exam-focused definitions, stages, facts, and common mistakes.
-- **Explorer:** a progressive three-question Socratic path with grounded scientific explanations and visually separate analogy cards.
-- **Learning lenses:** Neutral, Gaming, Sports, Music, plus live Gemini-generated custom interests with a no-key mock fallback.
-- **Topic memory:** the preferred mode is stored locally per topic in the browser.
-- **Topic selector:** move between the five topic kits on desktop or mobile without losing each topic's saved mode.
+1. A first-visit profile saves one interest and an optional grade level on the device.
+2. The library presents Biology plus coming-soon Physics, Chemistry, and Mathematics subjects.
+3. Biology contains five source-attributed topic kits with sectioned reading, bold key terms, and KaTeX equations.
+4. “Learn it your way” adds a separate analogy card below one section. The original textbook body never changes.
+5. Gaming, sports, and music interests use hand-vetted analogies instantly. Other interests use Gemini, with a clearly marked no-key preview fallback.
 
 ## Local development
 
-```bash
-npm install
-npm test
-npm run dev
-```
+    npm install
+    npm test
+    npm run dev
 
-To enable live custom-interest generation, copy `.env.example` to `.env` and add a Gemini API key. The app remains fully usable with a clearly marked mock response when the key is absent.
+To enable live custom analogies, copy .env.example to .env and add a Gemini API key.
 
 ## Quality checks
 
-```bash
-npm run lint
-npm test
-npm run build
-```
+    npm run lint
+    npm test
+    npm run build
 
-`VITE_GEMINI_API_KEY` is intentionally git-ignored. Because Vite exposes `VITE_` values to browser code, use this setup only for local development; a public deployment should call Gemini through a server-side proxy that protects the key.
+The student profile is stored only in browser localStorage. VITE_GEMINI_API_KEY is intentionally git-ignored. Because Vite exposes VITE_ values to browser code, this key setup is for local development only; public deployment should call Gemini through a server-side proxy.
