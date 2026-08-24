@@ -1817,6 +1817,60 @@ input {
   text-align: right;
 }
 
+.section-error-fallback {
+  margin-top: 23px;
+  padding: 17px;
+  border: 1px solid #efd9bd;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #fffdf7, #fff9ed);
+}
+
+.section-error-heading {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #8d5a14;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.section-error-copy,
+.section-error-detail {
+  margin-top: 7px;
+  color: #82756a;
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.section-error-fallback .analogy-card {
+  margin-top: 14px;
+}
+
+.section-error-detail {
+  color: #9d6b2b;
+}
+
+.section-retry-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 13px;
+  padding: 6px 9px;
+  color: #845617;
+  border: 1px solid #e7ca9e;
+  border-radius: 9px;
+  background: white;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.section-retry-button:hover {
+  color: #653e0c;
+  border-color: #d8ad6c;
+}
+
 /* Sources */
 .sources-footer {
   margin-top: 48px;

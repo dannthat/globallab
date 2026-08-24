@@ -54,14 +54,21 @@ const PRESET_KEYWORDS: Record<PersonaPreset, string[]> = {
 }
 
 function detectPreset(interest: string): PersonaPreset | null {
-  const normalized = interest.toLowerCase()
+  const escapePattern = (value: string) =>
+    value.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')
 
   for (const [preset, keywords] of Object.entries(PRESET_KEYWORDS) as [
     PersonaPreset,
     string[],
   ][]) {
     if (preset === 'neutral') continue
-    if (keywords.some((keyword) => normalized.includes(keyword))) return preset
+    if (
+      keywords.some((keyword) =>
+        new RegExp('\\b' + escapePattern(keyword) + '\\b', 'i').test(interest),
+      )
+    ) {
+      return preset
+    }
   }
 
   return null

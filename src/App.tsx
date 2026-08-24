@@ -117,7 +117,7 @@ function ActiveKitabi({ topic, subject, profile, onBack }: ActiveKitabiProps) {
       error={error}
       errorSectionId={errorSectionId}
       onLearnYourWay={handleLearn}
-      onClearRewrite={clearRewrite}
+      onClearRewrite={(sectionId) => clearRewrite(sectionId, profile.interest)}
       onBack={onBack}
     />
   )

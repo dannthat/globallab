@@ -7,6 +7,7 @@ import type {
 } from '../types'
 import { AnalogyCard } from './AnalogyCard'
 import { LearnYourWayPanel } from './LearnYourWayPanel'
+import { SectionErrorBoundary } from './SectionErrorBoundary'
 
 interface KitabiSectionProps {
   section: KnowledgeSection
@@ -72,22 +73,31 @@ export function KitabiSection({
         ))}
       </div>
 
-      {rewrite && (
-        <AnalogyCard
-          analogy={rewrite.analogy}
-          persona="custom"
-          customInterest={rewrite.interest}
-        />
-      )}
-
-      <LearnYourWayPanel
-        rewrite={rewrite}
-        profile={profile}
-        isLoading={isLoading}
+      <SectionErrorBoundary
         error={error}
-        onLearnYourWay={onLearnYourWay}
-        onClearRewrite={onClearRewrite}
-      />
+        neutralAnalogy={
+          section.presetAnalogies?.neutral ??
+          'Use the original explanation above as the neutral reference for this concept.'
+        }
+        onRetry={onLearnYourWay}
+      >
+        {rewrite && (
+          <AnalogyCard
+            analogy={rewrite.analogy}
+            persona="custom"
+            customInterest={rewrite.interest}
+          />
+        )}
+
+        <LearnYourWayPanel
+          rewrite={rewrite}
+          profile={profile}
+          isLoading={isLoading}
+          error={null}
+          onLearnYourWay={onLearnYourWay}
+          onClearRewrite={onClearRewrite}
+        />
+      </SectionErrorBoundary>
     </section>
   )
 }

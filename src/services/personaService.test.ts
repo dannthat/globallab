@@ -38,6 +38,29 @@ describe('V3 section analogies', () => {
     expect(mockFetch).not.toHaveBeenCalled()
   })
 
+  it('requires whole keyword matches before selecting a preset', async () => {
+    vi.stubEnv('VITE_GEMINI_API_KEY', 'test-key')
+    const mockFetch = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: async () => ({
+        candidates: [
+          {
+            content: {
+              parts: [{ text: JSON.stringify({ analogy: 'A custom analogy.' }) }],
+            },
+          },
+        ],
+      }),
+    })
+    vi.stubGlobal('fetch', mockFetch)
+
+    const result = await rewriteSection(section, profile('boardgaming design'))
+
+    expect(mockFetch).toHaveBeenCalledOnce()
+    expect(result.analogy).toBe('A custom analogy.')
+  })
+
   it('returns a clearly marked analogy preview when the key is absent', async () => {
     vi.useFakeTimers()
     vi.stubEnv('VITE_GEMINI_API_KEY', 'PASTE_YOUR_GEMINI_API_KEY_HERE')

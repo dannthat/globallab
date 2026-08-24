@@ -6,6 +6,7 @@ import type {
   StudentProfile,
   Subject,
 } from '../types'
+import { getSectionRewriteKey } from '../hooks/useLearnYourWay'
 import { KitabiSection } from './KitabiSection'
 import { SourcesFooter } from './SourcesFooter'
 
@@ -56,7 +57,10 @@ export function KitabiPage({
       <div className="kitabi-divider" />
 
       {topic.sections.map((section) => {
-        const rewrite = rewrites[topic.id + '::' + section.id] ?? null
+        const rewrite =
+          rewrites[
+            getSectionRewriteKey(topic.id, section.id, profile?.interest ?? 'neutral')
+          ] ?? null
 
         return (
           <KitabiSection

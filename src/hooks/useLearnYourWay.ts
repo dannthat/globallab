@@ -7,6 +7,24 @@ import type {
   StudentProfile,
 } from '../types'
 
+function normalizeInterestForCache(interest: string) {
+  return interest.trim().replace(/\s+/g, ' ').toLowerCase()
+}
+
+export function getSectionRewriteKey(
+  topicId: string,
+  sectionId: string,
+  interest: string,
+) {
+  return (
+    topicId +
+    '::' +
+    sectionId +
+    '::' +
+    encodeURIComponent(normalizeInterestForCache(interest))
+  )
+}
+
 export function useLearnYourWay(topic: KnowledgeTopic) {
   const [rewrites, setRewrites] = useState<SectionRewrites>({})
   const [loadingSectionId, setLoadingSectionId] = useState<string | null>(null)
@@ -14,13 +32,14 @@ export function useLearnYourWay(topic: KnowledgeTopic) {
   const [errorSectionId, setErrorSectionId] = useState<string | null>(null)
 
   const rewriteKey = useCallback(
-    (sectionId: string) => topic.id + '::' + sectionId,
+    (sectionId: string, interest: string) =>
+      getSectionRewriteKey(topic.id, sectionId, interest),
     [topic.id],
   )
 
   const learn = useCallback(
     async (section: KnowledgeSection, profile: StudentProfile) => {
-      const key = rewriteKey(section.id)
+      const key = rewriteKey(section.id, profile.interest)
       if (rewrites[key]) return rewrites[key]
 
       setLoadingSectionId(section.id)
@@ -45,10 +64,10 @@ export function useLearnYourWay(topic: KnowledgeTopic) {
   )
 
   const clearRewrite = useCallback(
-    (sectionId: string) => {
+    (sectionId: string, interest: string) => {
       setRewrites((previous) => {
         const next = { ...previous }
-        delete next[rewriteKey(sectionId)]
+        delete next[rewriteKey(sectionId, interest)]
         return next
       })
       setError(null)
@@ -71,6 +90,7 @@ export function useLearnYourWay(topic: KnowledgeTopic) {
     learn,
     clearRewrite,
     clearAllRewrites,
-    getRewrite: (sectionId: string) => rewrites[rewriteKey(sectionId)] ?? null,
+    getRewrite: (sectionId: string, interest: string) =>
+      rewrites[rewriteKey(sectionId, interest)] ?? null,
   }
 }

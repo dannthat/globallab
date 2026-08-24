@@ -193,4 +193,65 @@ describe('Global Lab V3', () => {
       document.getElementById(section.id)?.querySelector('.section-body')?.textContent,
     ).toBe(originalBody)
   })
+
+  it('falls back to a neutral analogy on rate limits and can retry', async () => {
+    seedProfile({ interest: 'baking', gradeLevel: 'Grade 11' })
+    vi.stubEnv('VITE_GEMINI_API_KEY', 'test-gemini-key')
+    const mockFetch = vi
+      .fn()
+      .mockResolvedValueOnce({
+        ok: false,
+        status: 429,
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        json: async () => ({
+          candidates: [
+            {
+              content: {
+                parts: [
+                  {
+                    text: JSON.stringify({
+                      analogy: 'A recovered baking analogy.',
+                    }),
+                  },
+                ],
+              },
+            },
+          ],
+        }),
+      })
+    vi.stubGlobal('fetch', mockFetch)
+    const user = userEvent.setup()
+    render(<App />)
+    await openFirstTopic(user)
+
+    const section = subjects[0].topics[0].sections[0]
+    const sectionElement = document.getElementById(section.id) as HTMLElement
+    const originalBody = sectionElement.querySelector('.section-body')?.textContent
+
+    await user.click(
+      within(sectionElement).getByRole('button', { name: 'Learn it your way' }),
+    )
+
+    expect(
+      await within(sectionElement).findByText('Personalization paused'),
+    ).toBeTruthy()
+    expect(within(sectionElement).getByLabelText('Clear analogy')).toBeTruthy()
+    expect(within(sectionElement).queryByText('Rewriting…')).toBeNull()
+    expect(sectionElement.querySelector('.section-body')?.textContent).toBe(originalBody)
+
+    await user.click(
+      within(sectionElement).getByRole('button', {
+        name: 'Retry personalized analogy',
+      }),
+    )
+
+    expect(
+      await within(sectionElement).findByText('A recovered baking analogy.'),
+    ).toBeTruthy()
+    expect(mockFetch).toHaveBeenCalledTimes(2)
+    expect(sectionElement.querySelector('.section-body')?.textContent).toBe(originalBody)
+  })
 })
