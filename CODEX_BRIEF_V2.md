@@ -1,81 +1,183 @@
-import type { Topic } from '../types'
+# CODEX BRIEF — Global Lab v2
+> Read the entire brief before writing a single line. v2 builds directly on top of v1 — do not rewrite what already works.
 
-export const cellularRespiration: Topic = {
-  id: 'cellular-respiration',
-  title: 'Cellular Respiration & ATP Synthesis',
-  subtitle: 'How cells extract and store energy from glucose',
-  cram: {
-    definition:
-      'Cellular respiration is the process by which cells break down glucose (C₆H₁₂O₆) in the presence of oxygen to produce ATP, CO₂, and water — releasing the chemical energy stored in glucose.',
-    stages: [
-      'Glycolysis — cytoplasm. Glucose (6C) split into 2 pyruvate (3C). Net yield: 2 ATP + 2 NADH.',
-      'Krebs Cycle (Citric Acid Cycle) — mitochondrial matrix. Pyruvate converted to Acetyl-CoA, enters cycle. Yield per glucose: 2 ATP + 6 NADH + 2 FADH₂ + 4 CO₂.',
-      'Electron Transport Chain (ETC) & Oxidative Phosphorylation — inner mitochondrial membrane. NADH/FADH₂ donate electrons, proton gradient drives ATP synthase. Yield: ~26–28 ATP.',
-    ],
-    examFacts: [
-      'Overall equation: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ~30–32 ATP',
-      'Glycolysis is anaerobic (no oxygen needed). The later stages depend on oxygen being available as the final electron acceptor.',
-      'ATP synthase uses chemiosmosis — the proton (H⁺) gradient across the inner mitochondrial membrane drives ADP → ATP conversion.',
-      'NADH carries high-energy electrons from earlier stages to the ETC. Each NADH ≈ 2.5 ATP. Each FADH₂ ≈ 1.5 ATP.',
-      'Most ATP production occurs in mitochondria, across the inner mitochondrial membrane.',
-      'Oxygen is the final electron acceptor in the ETC — it combines with electrons and H⁺ to form water.',
-    ],
-    commonMistakes: [
-      'Glycolysis does NOT occur in mitochondria — it takes place in the cytoplasm.',
-      'The overall ATP yield is approximately 30–32, not exactly 36 or 38 as shown in some older textbooks.',
-      'Fermentation does not use the ETC; it regenerates NAD⁺ so glycolysis can continue without oxygen.',
-      'CO₂ is released during pyruvate oxidation and the Krebs Cycle, not during glycolysis.',
-    ],
-  },
-  explorer: [
-    {
-      question: 'Why does the cell need to break down glucose at all — why not just use it directly?',
-      groundedAnswer:
-        'Glucose stores a large amount of chemical energy in its bonds, but cells cannot directly use this energy for most cellular work. They need a universal energy currency — ATP (adenosine triphosphate). ATP is a small, stable molecule whose terminal phosphate bond can be broken to release a controlled, usable amount of energy exactly where and when a cell needs it. Breaking glucose down in controlled steps allows the cell to capture that energy gradually in ATP, rather than releasing it all at once as heat.',
-      analogies: {
-        neutral:
-          'Think of glucose as a large battery pack. Most devices cannot plug directly into it; they need an adapter that delivers energy in the right form. ATP is that standardized, cell-sized energy packet.',
-        gaming:
-          'Glucose is like a large resource drop you cannot spend directly. The cell converts it into ATP — the in-game currency that can actually power movement, repairs, and abilities.',
-        sports:
-          'Glucose is like fuel in a race car: it holds potential energy, but the engine must convert it into controlled motion. Cellular respiration is that conversion process; ATP is the usable power reaching the wheels.',
-        music:
-          'Glucose is like a powerful raw audio signal. The cell processes it in stages so the energy arrives as clean, controlled units instead of one damaging burst. Each ATP molecule is a usable signal level.',
-      },
-    },
-    {
-      question: 'How does ATP synthase actually make ATP — what is the proton gradient doing?',
-      groundedAnswer:
-        'ATP synthase is a molecular motor embedded in the inner mitochondrial membrane. As electrons move through the Electron Transport Chain, released energy pumps protons (H⁺ ions) from the mitochondrial matrix into the intermembrane space. This creates a proton gradient, also called the proton-motive force. Protons then flow back into the matrix through ATP synthase, rotating part of the enzyme. That mechanical rotation changes the shape of catalytic sites that join ADP and inorganic phosphate to produce ATP. Using a proton gradient to power ATP synthesis is called chemiosmosis.',
-      analogies: {
-        neutral:
-          'ATP synthase works like a water turbine in a dam. Stored water flows through the turbine and makes it rotate; here, stored protons flow through the enzyme and the rotation powers ATP production.',
-        gaming:
-          'The ETC loads protons into a charged zone, building potential energy. ATP synthase is the only controlled exit: as the protons rush through its rotating gate, the mechanism produces new ATP energy units.',
-        sports:
-          'Imagine pressure building in a stadium’s hydraulic system. When the pressurized fluid is released through a turbine, the flow spins machinery. The proton gradient supplies that pressure, and ATP synthase is the turbine.',
-        music:
-          'The ETC builds tension like energy accumulating before a musical drop. ATP synthase is the controlled release point: proton flow turns its rotor and converts that stored potential into a steady output of ATP.',
-      },
-    },
-    {
-      question: 'What would actually happen inside a cell if the Electron Transport Chain stopped working?',
-      groundedAnswer:
-        'If the ETC stopped, NADH and FADH₂ could no longer pass on their electrons efficiently. These carriers would remain reduced and could not be recycled to NAD⁺ and FAD at the required rate. The Krebs Cycle would slow or halt, and the proton gradient would collapse, stopping oxidative phosphorylation. Glycolysis could continue only if the cell regenerated NAD⁺ through fermentation, yielding just 2 ATP per glucose. That low output is insufficient for many high-demand cells, so tissues such as the brain and heart are affected especially quickly when oxygen delivery or the ETC fails.',
-      analogies: {
-        neutral:
-          'It is like a factory recycling loop breaking. Used carriers cannot be emptied and returned to the production line, so the whole system slows even while raw fuel is still present.',
-        gaming:
-          'Imagine the system that recharges spent energy tokens goes offline. Basic low-power actions may continue briefly, but the high-output abilities stay locked because the tokens cannot be reset and reused.',
-        sports:
-          'Picture a team whose substitution system fails. Tired players cannot rotate out and recover, so performance drops even though the team still has a game plan. The carriers are present, but they cannot be refreshed.',
-        music:
-          'It is like a broken send-and-return loop on a live sound board. Signals enter, but the processed channels cannot cycle back cleanly; the system saturates and the whole mix begins to collapse.',
-      },
-    },
-  ],
+---
+
+## CONTEXT — WHAT V1 BUILT (DO NOT TOUCH UNLESS SPECIFIED)
+
+v1 is complete and builds clean. It contains:
+- One topic: Cellular Respiration & ATP Synthesis
+- Two modes: Cram (static, no API) and Explorer (3-step Socratic, progressive reveal)
+- Four persona presets: Neutral, Gaming, Sports, Music (all pre-written, no API)
+- Custom persona: UX flow exists and works, but `personaService.ts` always returns a mock — **never calls any API**
+- Per-topic mode memory via localStorage
+- `VITE_GEMINI_API_KEY` is now in `.env` — the key exists, nothing uses it yet
+
+**DO NOT refactor v1 components. DO NOT change the data model. DO NOT change how Cram mode works.**
+
+---
+
+## WHAT V2 ADDS — EXACTLY THIS, NOTHING MORE
+
+1. **Wire the real Gemini API call** in `personaService.ts` — custom persona generates live, not mocked
+2. **4 new biology topics** with full Cram + Explorer + persona content
+3. **Topic selector UI** — a way to switch between the 5 topics, showing the remembered mode badge per topic
+
+---
+
+## CHANGE 1 — Wire the Gemini API call
+
+### File to modify: `src/services/personaService.ts`
+
+Replace the entire file with this implementation:
+
+```typescript
+import type { CustomPersonaResult, Topic } from '../types'
+
+const MOCK_DELAY_MS = 850
+const GEMINI_MODEL = 'gemini-2.0-flash'
+
+export function buildPersonaPrompt(interest: string, topicTitle: string): string {
+  return `You are a biology tutor explaining ${topicTitle} to a student whose favorite interest is: ${interest}.
+
+Generate a 3-turn Socratic Explorer exchange. Return ONLY valid JSON — no markdown, no code fences, no extra text.
+
+Each turn must follow this structure:
+- question: a "Why/How" question about ${topicTitle}
+- groundedAnswer: the core scientific explanation — accurate, complete, no slang, no forced theming
+- analogy: ONE short analogy using ${interest} as the reference domain. Max 2 sentences. Must illuminate the mechanism, not just name-drop the interest. If you cannot find a genuine analogy, say so honestly rather than forcing a bad one.
+
+Rules:
+1. The groundedAnswer must never change from the scientific truth regardless of the interest.
+2. The analogy must be genuinely illuminating, not decorative.
+3. Do not flood the explanation with ${interest} references. One analogy per turn only.
+4. Do not use slang, forced puns, or cringe-worthy themed language.
+5. Return ONLY this JSON structure with no surrounding text:
+
+{
+  "steps": [
+    { "question": "...", "groundedAnswer": "...", "analogy": "..." },
+    { "question": "...", "groundedAnswer": "...", "analogy": "..." },
+    { "question": "...", "groundedAnswer": "...", "analogy": "..." }
+  ]
+}`
 }
 
+function getMockResult(interest: string, topic: Topic): CustomPersonaResult {
+  return {
+    interest,
+    isMock: true,
+    steps: topic.explorer.map((step) => ({
+      question: step.question,
+      groundedAnswer: step.groundedAnswer,
+      analogy: `[Mock — no API key set] Based on your interest in ${interest}: ${step.analogies.neutral}`,
+    })),
+  }
+}
+
+export async function generateCustomPersona(
+  interest: string,
+  topic: Topic,
+): Promise<CustomPersonaResult> {
+  const normalizedInterest = interest.trim().replace(/\s+/g, ' ')
+
+  if (!normalizedInterest) {
+    throw new Error('Tell us one interest to personalize the analogies.')
+  }
+
+  if (normalizedInterest.length > 60) {
+    throw new Error('Keep your interest to 60 characters or fewer.')
+  }
+
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY as string | undefined
+
+  // Fall back to mock when no key is present
+  if (!apiKey || apiKey === 'PASTE_YOUR_NEW_KEY_HERE') {
+    await new Promise((resolve) => window.setTimeout(resolve, MOCK_DELAY_MS))
+    return getMockResult(normalizedInterest, topic)
+  }
+
+  const prompt = buildPersonaPrompt(normalizedInterest, topic.title)
+
+  const response = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 2048,
+          responseMimeType: 'application/json',
+        },
+      }),
+    },
+  )
+
+  if (!response.ok) {
+    const errorBody = await response.text()
+    console.error('Gemini API error:', response.status, errorBody)
+
+    if (response.status === 429) {
+      throw new Error('Too many requests — wait a moment and try again.')
+    }
+    if (response.status === 400) {
+      throw new Error('The interest you entered could not be processed. Try a different one.')
+    }
+    throw new Error('Could not generate a custom analogy right now. Try again in a moment.')
+  }
+
+  const data = await response.json() as {
+    candidates?: Array<{
+      content?: { parts?: Array<{ text?: string }> }
+    }>
+  }
+
+  const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text
+
+  if (!rawText) {
+    throw new Error('The model returned an empty response. Try again.')
+  }
+
+  let parsed: { steps: Array<{ question: string; groundedAnswer: string; analogy: string }> }
+
+  try {
+    parsed = JSON.parse(rawText)
+  } catch {
+    throw new Error('The generated response could not be read. Try again.')
+  }
+
+  if (!Array.isArray(parsed.steps) || parsed.steps.length !== 3) {
+    throw new Error('The response was incomplete. Try again.')
+  }
+
+  return {
+    interest: normalizedInterest,
+    isMock: false,
+    steps: parsed.steps,
+  }
+}
+```
+
+**Verify after this change:**
+- With a valid key in `.env`, custom persona should call Gemini and return real analogies
+- With no key or placeholder, it still returns the mock (no broken state)
+- All error cases (429, 400, empty response, bad JSON) show friendly messages to the student
+
+---
+
+## CHANGE 2 — Add 4 New Topics
+
+### File to modify: `src/data/topics.ts`
+
+Keep `cellularRespiration` exactly as-is. Add these 4 topics below it, then update the `topics` export array.
+
+---
+
+### Topic 2: Cell Membrane & Active Transport
+
+```typescript
 export const cellMembrane: Topic = {
   id: 'cell-membrane',
   title: 'Cell Membrane & Active Transport',
@@ -151,7 +253,13 @@ export const cellMembrane: Topic = {
     },
   ],
 }
+```
 
+---
+
+### Topic 3: DNA Transcription & Translation
+
+```typescript
 export const dnaExpression: Topic = {
   id: 'dna-expression',
   title: 'DNA Transcription & Translation',
@@ -227,7 +335,13 @@ export const dnaExpression: Topic = {
     },
   ],
 }
+```
 
+---
+
+### Topic 4: Action Potential & Synaptic Transmission
+
+```typescript
 export const actionPotential: Topic = {
   id: 'action-potential',
   title: 'Action Potential & Synaptic Transmission',
@@ -303,7 +417,13 @@ export const actionPotential: Topic = {
     },
   ],
 }
+```
 
+---
+
+### Topic 5: Enzyme Kinetics & Allosteric Regulation
+
+```typescript
 export const enzymeKinetics: Topic = {
   id: 'enzyme-kinetics',
   title: 'Enzyme Kinetics & Allosteric Regulation',
@@ -379,7 +499,15 @@ export const enzymeKinetics: Topic = {
     },
   ],
 }
+```
 
+---
+
+### Update the topics export
+
+At the bottom of `topics.ts`, update the export:
+
+```typescript
 export const topics: Topic[] = [
   cellularRespiration,
   cellMembrane,
@@ -387,3 +515,165 @@ export const topics: Topic[] = [
   actionPotential,
   enzymeKinetics,
 ]
+```
+
+---
+
+## CHANGE 3 — Topic Selector UI
+
+### New file: `src/components/TopicSelector.tsx`
+
+Create a topic selector that shows all 5 topics as selectable cards, with a badge showing the remembered mode for each:
+
+```typescript
+import { BookOpenText, Compass } from 'lucide-react'
+import type { StudyMode, Topic, TopicPreferences } from '../types'
+
+interface TopicSelectorProps {
+  topics: Topic[]
+  activeTopic: Topic
+  preferences: TopicPreferences
+  onSelect: (topic: Topic) => void
+}
+
+export function TopicSelector({ topics, activeTopic, preferences, onSelect }: TopicSelectorProps) {
+  return (
+    <nav className="topic-selector" aria-label="Biology topics">
+      <p className="eyebrow mb-3">Topics</p>
+      <ul className="space-y-2">
+        {topics.map((topic) => {
+          const isActive = topic.id === activeTopic.id
+          const remembered = preferences[topic.id]?.preferredMode as StudyMode | undefined
+
+          return (
+            <li key={topic.id}>
+              <button
+                type="button"
+                className={`topic-card ${isActive ? 'topic-card-active' : ''}`}
+                aria-current={isActive ? 'true' : undefined}
+                onClick={() => onSelect(topic)}
+              >
+                <span className="min-w-0 flex-1 text-left">
+                  <span className="block text-sm font-semibold leading-snug text-stone-900">
+                    {topic.title}
+                  </span>
+                  <span className="mt-0.5 block text-xs leading-5 text-stone-500">
+                    {topic.subtitle}
+                  </span>
+                </span>
+                {remembered && (
+                  <span className="topic-memory-badge" aria-label={`${remembered} preferred`}>
+                    {remembered === 'cram' ? (
+                      <BookOpenText size={11} aria-hidden="true" />
+                    ) : (
+                      <Compass size={11} aria-hidden="true" />
+                    )}
+                    {remembered === 'cram' ? 'Cram' : 'Explorer'}
+                  </span>
+                )}
+              </button>
+            </li>
+          )
+        })}
+      </ul>
+    </nav>
+  )
+}
+```
+
+---
+
+## CHANGE 4 — Update App.tsx
+
+`App.tsx` needs to:
+1. Import all 5 topics
+2. Manage `activeTopic` state (defaults to cellular respiration)
+3. Import and render `TopicSelector`
+4. Read all topic preferences at once to pass to `TopicSelector`
+5. Reset `customResult` and explorer `visibleCount` when topic changes (the ExplorerView `key` prop already handles this via `topic.id`)
+6. Reset persona to 'neutral' when topic changes
+
+The key structural change is the layout: add a left sidebar (on large screens) or a top scrollable strip (on mobile) that contains `TopicSelector`.
+
+Key state additions:
+```typescript
+const [activeTopic, setActiveTopic] = useState<Topic>(topics[0])
+
+const handleTopicSelect = (topic: Topic) => {
+  setActiveTopic(topic)
+  setPersona('neutral')
+  // mode should auto-load from the new topic's preference
+}
+```
+
+For preferences across all topics, read from localStorage once at mount:
+```typescript
+const [allPreferences, setAllPreferences] = useState<TopicPreferences>(() => {
+  try {
+    const stored = window.localStorage.getItem('globallab_topic_prefs')
+    return stored ? JSON.parse(stored) : {}
+  } catch {
+    return {}
+  }
+})
+```
+
+Update `allPreferences` whenever `savePreferredMode` is called.
+
+The `useTopicMemory` hook is already per-topic — keep using it for the active topic's save/load. `allPreferences` is only used to display the memory badges in `TopicSelector`.
+
+---
+
+## CSS — Add these class names to `index.css`
+
+These new components need styles. Add them after the existing component styles:
+
+```css
+/* Topic Selector */
+.topic-selector {
+  /* On large screens: fixed left sidebar. On mobile: horizontal scroll strip */
+}
+
+.topic-card {
+  @apply flex w-full items-start gap-3 rounded-xl border border-transparent px-3 py-3 text-left transition-all duration-150 hover:border-stone-200 hover:bg-stone-50;
+}
+
+.topic-card-active {
+  @apply border-orange-200 bg-orange-50;
+}
+
+.topic-memory-badge {
+  @apply flex shrink-0 items-center gap-1 rounded-full bg-white px-2 py-0.5 text-[11px] font-semibold text-stone-600 shadow-sm ring-1 ring-stone-200;
+}
+```
+
+Adjust layout in `App.tsx` to be a two-column grid on large screens (sidebar left, content right) or stacked on mobile.
+
+---
+
+## BUILD ORDER FOR V2
+
+1. Update `src/services/personaService.ts` with the real Gemini API call
+2. Add the 4 new topics to `src/data/topics.ts` and update the export
+3. Create `src/components/TopicSelector.tsx`
+4. Update `src/App.tsx` to manage `activeTopic` state and render the selector
+5. Add the new CSS classes to `src/index.css`
+6. Run `npm run build` — must pass with 0 errors
+7. Run `npm run dev` and verify:
+   - Custom persona calls Gemini and returns real analogies (not mock)
+   - All 5 topics load correctly in Cram and Explorer modes
+   - Switching topics resets persona to neutral and loads the correct remembered mode
+   - Topic selector shows memory badges for topics the student has marked
+
+---
+
+## DONE WHEN
+
+- [ ] `npm run build` passes with 0 TypeScript errors
+- [ ] Custom persona with the Gemini key returns live analogies, not mock text
+- [ ] Custom persona with no key (or placeholder) still returns mock gracefully
+- [ ] All 5 topics visible and selectable in the topic selector
+- [ ] Switching topics resets explorer progress and persona
+- [ ] Memory badges appear in the topic selector for topics the student has marked as helpful
+- [ ] Cram mode on all 5 new topics renders correct content with no API calls
+- [ ] Explorer mode on all 5 new topics shows correct 3 steps with correct persona analogies

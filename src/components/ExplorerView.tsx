@@ -83,7 +83,7 @@ export function ExplorerView({
       ) : (
         <div className="completion-note animate-reveal">
           <Check size={17} aria-hidden="true" />
-          You followed the energy pathway from fuel to failure point.
+          You followed this biological mechanism from first question to final consequence.
         </div>
       )}
 

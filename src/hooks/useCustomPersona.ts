@@ -29,6 +29,10 @@ export function useCustomPersona(topic: Topic) {
   )
 
   const clearError = useCallback(() => setError(null), [])
+  const reset = useCallback(() => {
+    setResult(null)
+    setError(null)
+  }, [])
 
-  return { result, isLoading, error, generate, clearError }
+  return { result, isLoading, error, generate, clearError, reset }
 }

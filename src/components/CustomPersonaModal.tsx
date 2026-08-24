@@ -108,7 +108,7 @@ export function CustomPersonaModal({
 
           <div className="mock-note">
             <span className="mock-dot" aria-hidden="true" />
-            V1 preview uses a no-key mock response. The full interaction is still testable.
+            Generated live with your local Gemini key, with a no-key mock fallback for development.
           </div>
 
           <button type="submit" className="modal-submit" disabled={isLoading}>

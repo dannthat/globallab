@@ -17,7 +17,7 @@ export function HelpfulButton({ mode, isPreferred, onSave }: HelpfulButtonProps)
         <p className="mt-1 text-sm text-stone-500">
           {isPreferred
             ? `We’ll open ${mode === 'cram' ? 'Cram' : 'Explorer'} first next time.`
-            : 'Save it as your preferred mode for cellular respiration.'}
+            : 'Save it as your preferred mode for this topic.'}
         </p>
       </div>
       <button
