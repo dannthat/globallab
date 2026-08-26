@@ -2071,6 +2071,30 @@ body {
   background: rgb(233 112 50 / 18%);
 }
 
+.gl-premium .textbook-nav-contents {
+  width: 28px;
+  height: 28px;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 50%;
+  color: var(--subject-color, var(--gl-orange));
+  background: transparent;
+  cursor: pointer;
+}
+
+.gl-premium .textbook-nav-contents:hover,
+.gl-premium .textbook-nav-contents[aria-expanded='true'] {
+  color: #fff;
+  background: color-mix(in srgb, var(--subject-color) 26%, transparent);
+}
+
+.gl-premium .textbook-nav-contents:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--subject-color) 72%, white);
+  outline-offset: 2px;
+}
+
 .gl-premium .textbook-nav-progress,
 .gl-premium-upload-reader .textbook-nav-progress {
   min-width: 0;
@@ -2878,6 +2902,269 @@ body {
   }
 }
 
+/* ============================================================
+   Phase 1 — final premium cascade authority
+   ============================================================ */
+
+.gl-premium {
+  --phase1-spine-width: 12px;
+  --phase1-spine-half: 6px;
+}
+
+.gl-premium .textbook-reader-page {
+  perspective: 1800px;
+  transform-style: preserve-3d;
+}
+
+.gl-premium .tbp-article.textbook-spread {
+  grid-template-columns:
+    minmax(0, 1fr)
+    var(--phase1-spine-width)
+    minmax(0, 1fr);
+}
+
+.gl-premium .textbook-spine {
+  width: var(--phase1-spine-width);
+}
+
+/* One full-spread coordinate system prevents the old quarter-width leaf bug. */
+.gl-premium .textbook-page-turn {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  perspective: 1800px;
+}
+
+.gl-premium .textbook-page-turn-sheet.page-leaf {
+  top: 0;
+  bottom: 0;
+  left: calc(50% + var(--phase1-spine-half));
+  width: calc(50% - var(--phase1-spine-half));
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.gl-premium .textbook-page-turn-sheet.page-turning-forward {
+  animation: turnPageForward 480ms cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+.gl-premium .textbook-page-turn-sheet.page-turning-backward {
+  animation: turnPageBackward 480ms cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+.gl-premium .textbook-page-turn-front {
+  background: var(--gl-paper-facing);
+  box-shadow:
+    inset 32px 0 52px rgb(48 34 19 / 9%),
+    -12px 8px 28px rgb(42 29 16 / 24%);
+}
+
+.gl-premium .textbook-page-turn-back {
+  background: var(--gl-paper);
+  box-shadow:
+    inset -32px 0 52px rgb(48 34 19 / 10%),
+    12px 8px 28px rgb(42 29 16 / 24%);
+}
+
+.gl-premium .textbook-page-turn-face::after {
+  background:
+    linear-gradient(
+      to right,
+      rgb(40 28 16 / 18%),
+      transparent 24%,
+      rgb(255 255 255 / 26%) 52%,
+      transparent 77%,
+      rgb(40 28 16 / 8%)
+    );
+}
+
+[data-theme='dark'] .gl-premium .textbook-page-turn-front {
+  background: var(--gl-paper-facing);
+  box-shadow:
+    inset 32px 0 52px rgb(0 0 0 / 28%),
+    -12px 8px 30px rgb(0 0 0 / 58%);
+}
+
+[data-theme='dark'] .gl-premium .textbook-page-turn-back {
+  background: var(--gl-paper);
+  box-shadow:
+    inset -32px 0 52px rgb(0 0 0 / 30%),
+    12px 8px 30px rgb(0 0 0 / 58%);
+}
+
+[data-theme='dark'] .gl-premium .textbook-page-turn-face::after {
+  background:
+    linear-gradient(
+      to right,
+      rgb(0 0 0 / 34%),
+      transparent 25%,
+      rgb(255 255 255 / 7%) 52%,
+      transparent 78%,
+      rgb(0 0 0 / 22%)
+    );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gl-premium .textbook-page-turn {
+    display: none;
+  }
+
+  .gl-premium .reader-spread-crossfade .tbp-article {
+    animation: reader-spread-crossfade 140ms ease-out both !important;
+  }
+}
+
+/* Below laptop-spread width, pages become one vertical reading flow. */
+@media (max-width: 1023px) {
+  .gl-premium .kitabi-shell {
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .gl-premium .textbook-reader-wrap {
+    height: calc(100dvh - var(--gl-reader-header));
+    min-height: 0;
+    padding:
+      10px
+      10px
+      calc(var(--gl-reader-dock) + 10px + env(safe-area-inset-bottom));
+    display: block;
+    overflow: hidden;
+  }
+
+  .gl-premium .textbook-reader-stage {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 8px;
+    place-items: stretch center;
+  }
+
+  .gl-premium .textbook-reader-page {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    grid-row: 1;
+    aspect-ratio: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scroll-behavior: smooth;
+    border-radius: 8px;
+  }
+
+  .gl-premium .tbp-article.textbook-spread {
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    display: block;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .gl-premium .textbook-page {
+    width: 100%;
+    height: auto;
+    min-height: min(720px, calc(100dvh - 128px));
+    padding:
+      clamp(28px, 7vw, 48px)
+      clamp(22px, 7vw, 52px)
+      68px;
+    display: flex;
+    flex: none;
+    overflow: visible;
+    scroll-snap-align: none;
+  }
+
+  .gl-premium .textbook-page-left,
+  .gl-premium .textbook-page-right {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .gl-premium .textbook-page-left {
+    border-bottom: 1px solid var(--gl-rule);
+  }
+
+  .gl-premium .textbook-page > .tbp-page-scroll,
+  .gl-premium .textbook-page .tbp-page-scroll-flow {
+    height: auto;
+    max-height: none;
+    min-height: 0;
+    overflow: visible;
+    scroll-behavior: auto;
+  }
+
+  .gl-premium .textbook-page .tbp-page-scroll-control,
+  .gl-premium .textbook-page .tbp-page-scroll-fade,
+  .gl-premium .textbook-spine,
+  .gl-premium .textbook-page-turn {
+    display: none;
+  }
+
+  .gl-premium .textbook-page-right .tbp-reference-primary,
+  .gl-premium .textbook-page-right .tbp-reference-hero,
+  .gl-premium .textbook-page-right .tbp-visual-field {
+    min-height: 0;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    flex: none;
+  }
+
+  .gl-premium .textbook-page-right .tbp-reference-hero--with-analogy {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .gl-premium .textbook-page-right .tbp-sticky-analogy,
+  .gl-premium .textbook-page-right .tbp-sticky-analogy--page {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .gl-premium .textbook-reader-page > .sources-footer {
+    position: static;
+    margin: 0;
+    padding:
+      16px
+      clamp(22px, 7vw, 52px)
+      28px;
+    border-top: 1px solid var(--gl-rule);
+    background: var(--gl-paper-facing);
+  }
+
+  .gl-premium .textbook-reader-page > .sources-footer .sources-text {
+    white-space: normal;
+  }
+
+  .gl-premium .textbook-bottom-nav {
+    position: relative;
+    inset: auto;
+    width: min(620px, calc(100vw - 20px));
+    grid-row: 2;
+    align-self: center;
+    justify-self: center;
+    transform: none;
+  }
+
+  .gl-premium .reader-toc-trigger {
+    position: absolute;
+    z-index: 95;
+    left: 4px;
+    bottom: 4px;
+  }
+}
+
 /* Short laptops keep a complete spread: protect the figure and compact the note. */
 @media (max-height: 780px) and (min-width: 901px) {
   .gl-premium .textbook-page-right .tbp-reference-layout {
@@ -3302,6 +3589,206 @@ body {
     bottom: auto;
     left: auto;
     width: min(620px, calc(100vw - 32px));
+    grid-row: 2;
+    align-self: center;
+    justify-self: center;
+    transform: none;
+  }
+}
+
+/*
+ * Phase 1 final cascade lock.
+ * This intentionally comes after every legacy reader media query.
+ */
+.gl-premium .textbook-reader-page {
+  perspective: 1800px;
+  transform-style: preserve-3d;
+}
+
+.gl-premium .tbp-article.textbook-spread {
+  grid-template-columns:
+    minmax(0, 1fr)
+    var(--phase1-spine-width)
+    minmax(0, 1fr);
+}
+
+.gl-premium .textbook-spine {
+  width: var(--phase1-spine-width);
+}
+
+.gl-premium .textbook-page-turn {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  perspective: 1800px;
+}
+
+.gl-premium .textbook-page-turn-sheet.page-leaf {
+  top: 0;
+  bottom: 0;
+  left: calc(50% + var(--phase1-spine-half));
+  width: calc(50% - var(--phase1-spine-half));
+  transform-origin: left center;
+  transform-style: preserve-3d;
+}
+
+.gl-premium .textbook-page-turn-sheet.page-turning-forward {
+  animation: turnPageForward 480ms cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+.gl-premium .textbook-page-turn-sheet.page-turning-backward {
+  animation: turnPageBackward 480ms cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gl-premium .textbook-page-turn {
+    display: none;
+  }
+
+  .gl-premium .reader-spread-crossfade .tbp-article {
+    animation: reader-spread-crossfade 140ms ease-out both !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .gl-premium .kitabi-shell {
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .gl-premium .textbook-reader-wrap {
+    height: calc(100dvh - var(--gl-reader-header));
+    min-height: 0;
+    padding:
+      10px
+      10px
+      calc(var(--gl-reader-dock) + 10px + env(safe-area-inset-bottom));
+    display: block;
+    overflow: hidden;
+  }
+
+  .gl-premium .textbook-reader-stage {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 8px;
+    place-items: stretch;
+  }
+
+  .gl-premium .textbook-reader-page {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    min-height: 0;
+    grid-row: 1;
+    align-self: stretch;
+    justify-self: stretch;
+    aspect-ratio: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    border-radius: 8px;
+  }
+
+  .gl-premium .tbp-article.textbook-spread {
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    display: block;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .gl-premium .textbook-page,
+  .gl-premium .textbook-page-left,
+  .gl-premium .textbook-page-right {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    min-height: min(720px, calc(100dvh - 128px));
+    padding:
+      clamp(28px, 7vw, 48px)
+      clamp(22px, 7vw, 52px)
+      68px;
+    display: flex;
+    flex: none;
+    overflow: visible;
+    scroll-snap-align: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .gl-premium .textbook-page-left {
+    border-bottom: 1px solid var(--gl-rule);
+  }
+
+  .gl-premium .textbook-page > .tbp-page-scroll,
+  .gl-premium .textbook-page .tbp-page-scroll-flow {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    min-height: 0;
+    overflow: visible;
+    scroll-behavior: auto;
+  }
+
+  .gl-premium .textbook-page .tbp-page-scroll-control,
+  .gl-premium .textbook-page .tbp-page-scroll-fade,
+  .gl-premium .textbook-spine,
+  .gl-premium .textbook-page-turn {
+    display: none;
+  }
+
+  .gl-premium .textbook-page-right .tbp-reference-layout,
+  .gl-premium .textbook-page-right .tbp-reference-primary,
+  .gl-premium .textbook-page-right .tbp-reference-hero,
+  .gl-premium .textbook-page-right .tbp-visual-field {
+    min-height: 0;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    flex: none;
+  }
+
+  .gl-premium .textbook-page-right .tbp-reference-hero--with-analogy {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .gl-premium .textbook-page-right .tbp-sticky-analogy,
+  .gl-premium .textbook-page-right .tbp-sticky-analogy--page {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .gl-premium .textbook-reader-page > .sources-footer {
+    position: static;
+    margin: 0;
+    padding:
+      16px
+      clamp(22px, 7vw, 52px)
+      28px;
+    border-top: 1px solid var(--gl-rule);
+    background: var(--gl-paper-facing);
+  }
+
+  .gl-premium .textbook-reader-page > .sources-footer .sources-text {
+    white-space: normal;
+  }
+
+  .gl-premium .textbook-bottom-nav {
+    position: relative;
+    inset: auto;
+    width: min(620px, calc(100vw - 20px));
     grid-row: 2;
     align-self: center;
     justify-self: center;

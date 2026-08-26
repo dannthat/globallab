@@ -184,6 +184,7 @@ interface ActiveKitabiProps {
   learnerModel: LearnerModelController
   onToggleDark: () => void
   onSaveInterest: (interest: string) => void
+  onSelectTopic: (topic: KnowledgeTopic, subject: Subject) => void
   onBack: () => void
 }
 
@@ -195,6 +196,7 @@ function ActiveKitabi({
   learnerModel,
   onToggleDark,
   onSaveInterest,
+  onSelectTopic,
   onBack,
 }: ActiveKitabiProps) {
   const {
@@ -271,6 +273,7 @@ function ActiveKitabi({
         onApplySuggestion={acceptSuggestion}
         onDeferSuggestion={notNow}
         onNeverSuggest={neverSuggest}
+        onSelectTopic={onSelectTopic}
         onBack={onBack}
       />
     </Suspense>
@@ -332,6 +335,18 @@ function App() {
       setActiveSubject(null)
       setActiveTopic(null)
       setActiveUserBook(book)
+    })
+  }
+
+  const selectGlobalTopic = (
+    topic: KnowledgeTopic,
+    subject: Subject,
+  ) => {
+    if (subject.comingSoon) return
+    transitionView(() => {
+      setActiveUserBook(null)
+      setActiveSubject(subject)
+      setActiveTopic(topic)
     })
   }
 
@@ -457,7 +472,7 @@ function App() {
       {/* Kitabi reader */}
       {activeSubject && activeTopic && (
         <ActiveKitabi
-          key={activeTopic.id}
+          key={activeSubject.id + ':' + activeTopic.id}
           topic={activeTopic}
           subject={activeSubject}
           profile={profile}
@@ -465,6 +480,7 @@ function App() {
           learnerModel={learnerModel}
           onToggleDark={toggleDark}
           onSaveInterest={updateInterest}
+          onSelectTopic={selectGlobalTopic}
           onBack={() =>
             transitionView(() => setActiveTopic(null))
           }

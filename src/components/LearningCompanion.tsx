@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   BookOpen,
   CheckCircle2,
@@ -15,6 +16,8 @@ import type {
   PersonalizationMode,
   SourceAnchor,
 } from '../personalization/types'
+
+type FeedbackOutcome = Exclude<LearningOutcome, 'unknown'>
 
 export interface LearningCompanionQuiz {
   question: string
@@ -38,7 +41,7 @@ export interface LearningCompanionProps {
   isLoading?: boolean
   error?: string | null
   onAction: (mode: PersonalizationMode) => void
-  onOutcome: (outcome: Exclude<LearningOutcome, 'unknown'>) => void
+  onOutcome: (outcome: FeedbackOutcome) => void
   onSelectQuizOption: (optionId: string) => void
   onSubmitQuiz: (optionId: string) => void
   onRevealQuiz: () => void
@@ -96,6 +99,25 @@ export function LearningCompanion({
   const normalizedInterest = interest.trim().replace(/\s+/g, ' ')
   const hasInterestLens =
     Boolean(normalizedInterest) && normalizedInterest.toLowerCase() !== 'neutral'
+  const feedbackKey = [
+    sourceAnchor.sourceId,
+    sourceAnchor.sourceRevision ?? sourceAnchor.sourceFingerprint ?? '',
+    sourceAnchor.anchorId,
+    mode,
+    title,
+    content ?? '',
+  ].join('::')
+  const [feedback, setFeedback] = useState<{
+    key: string
+    outcome: FeedbackOutcome
+  } | null>(null)
+  const selectedOutcome = feedback?.key === feedbackKey ? feedback.outcome : null
+
+  const submitOutcome = (outcome: FeedbackOutcome) => {
+    if (selectedOutcome === outcome) return
+    setFeedback({ key: feedbackKey, outcome })
+    onOutcome(outcome)
+  }
 
   return (
     <aside
@@ -249,15 +271,39 @@ export function LearningCompanion({
             <span>{sourceAnchor.anchorLabel}{location ? ` · ${location}` : ''}</span>
           </p>
         </div>
-        <div className='learning-companion__outcomes' role='group' aria-label='Was this helpful?'>
-          <button type='button' onClick={() => onOutcome('successful')}>
-            <ThumbsUp size={14} aria-hidden='true' />
-            Helped
-          </button>
-          <button type='button' onClick={() => onOutcome('needs-review')}>
-            <ThumbsDown size={14} aria-hidden='true' />
-            Not yet
-          </button>
+        <div className='learning-companion__feedback'>
+          <div className='learning-companion__outcomes' role='group' aria-label='Was this helpful?'>
+            <button
+              type='button'
+              aria-pressed={selectedOutcome === 'successful'}
+              onClick={() => submitOutcome('successful')}
+            >
+              <ThumbsUp size={14} aria-hidden='true' />
+              Helped
+            </button>
+            <button
+              type='button'
+              aria-pressed={selectedOutcome === 'needs-review'}
+              onClick={() => submitOutcome('needs-review')}
+            >
+              <ThumbsDown size={14} aria-hidden='true' />
+              Not yet
+            </button>
+          </div>
+          {selectedOutcome && (
+            <p
+              className='learning-companion__feedback-status'
+              role='status'
+              aria-label='Helpfulness feedback'
+              aria-live='polite'
+              aria-atomic='true'
+            >
+              <CheckCircle2 size={13} aria-hidden='true' />
+              {selectedOutcome === 'successful'
+                ? 'Saved — this helps tune future support.'
+                : 'Saved — try another format above; I’ll learn from this.'}
+            </p>
+          )}
         </div>
       </footer>
     </aside>

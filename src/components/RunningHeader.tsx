@@ -87,6 +87,12 @@ export function RunningHeader({
                 role="dialog"
                 aria-label="Change personal learning lens"
                 onSubmit={saveInterest}
+                onKeyDown={(event) => {
+                  if (event.key !== 'Escape') return
+                  event.preventDefault()
+                  event.stopPropagation()
+                  setIsEditingLens(false)
+                }}
               >
                 <label htmlFor="running-interest">Personal learning lens</label>
                 <p>Choose an interest you already know well.</p>

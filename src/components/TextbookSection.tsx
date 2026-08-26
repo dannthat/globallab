@@ -23,11 +23,17 @@ import type {
 } from '../personalization/types'
 import { CalloutBox } from './CalloutBox'
 import { DiagramBlock } from './DiagramBlock'
+import {
+  renderHighlightedText,
+  TextHighlightToolbar,
+  usePersistentTextHighlights,
+} from './KitabiSection'
 import { LearningCompanion } from './LearningCompanion'
 import { PreferenceSuggestionCard } from './PreferenceSuggestionCard'
 import { SectionErrorBoundary } from './SectionErrorBoundary'
 
 interface TextbookSectionProps {
+  topicId?: string
   section: KnowledgeSection
   rewrite: RewrittenSection | null
   isLoading: boolean
@@ -47,20 +53,6 @@ interface TextbookSectionProps {
   onApplySuggestion: (suggestionId: string) => void
   onDeferSuggestion: (suggestionId: string) => void
   onNeverSuggest: (suggestionId: string) => void
-}
-
-function escapePattern(value: string) {
-  return value.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')
-}
-
-function highlightTerms(text: string, keyTerms: string[]): ReactNode[] {
-  const terms = [...keyTerms].filter(Boolean).sort((a, b) => b.length - a.length)
-  if (terms.length === 0) return [text]
-  const pattern = new RegExp('(' + terms.map(escapePattern).join('|') + ')', 'gi')
-  const lookup = new Set(terms.map((term) => term.toLowerCase()))
-  return text.split(pattern).map((part, index) =>
-    lookup.has(part.toLowerCase()) ? <strong key={index}>{part}</strong> : part,
-  )
 }
 
 function extractOrderedConcepts(body: string) {
@@ -277,6 +269,7 @@ function ScrollablePageContent({
 }
 
 export function TextbookSection({
+  topicId,
   section,
   rewrite,
   isLoading,
@@ -327,6 +320,18 @@ export function TextbookSection({
     : equationHtml
       ? 'Equation plate'
       : 'Concept index'
+  const {
+    highlights,
+    toolbar,
+    handleMouseUp,
+    applyHighlight,
+    removeHighlight,
+    askCompanion,
+  } = usePersistentTextHighlights({
+    topicId: topicId ?? topicTitle,
+    sectionId: section.id,
+    onAskCompanion: () => onLearnYourWay(),
+  })
 
   useEffect(() => {
     // oxlint-disable-next-line react/set-state-in-effect -- A new immutable artifact starts a new quiz attempt.
@@ -501,12 +506,21 @@ export function TextbookSection({
           className={
             'tbp-body' + (orderedConcepts ? ' tbp-body--ordered' : '')
           }
+          onMouseUp={handleMouseUp}
         >
           {orderedConcepts ? (
             <>
               {orderedConcepts.introduction && (
-                <p className="tbp-body-lead">
-                  {highlightTerms(orderedConcepts.introduction, section.keyTerms)}
+                <p
+                  className="tbp-body-lead"
+                  data-gl-highlight-segment="ordered-intro"
+                >
+                  {renderHighlightedText(
+                    orderedConcepts.introduction,
+                    section.keyTerms,
+                    highlights,
+                    'ordered-intro',
+                  )}
                 </p>
               )}
               <ol className="tbp-concept-list">
@@ -515,7 +529,14 @@ export function TextbookSection({
                     <span className="tbp-concept-num">{index + 1}</span>
                     <div>
                       <span className="tbp-concept-label">{item.label}</span>
-                      <p>{highlightTerms(item.body, section.keyTerms)}</p>
+                      <p data-gl-highlight-segment={'ordered-' + index}>
+                        {renderHighlightedText(
+                          item.body,
+                          section.keyTerms,
+                          highlights,
+                          'ordered-' + index,
+                        )}
+                      </p>
                     </div>
                   </li>
                 ))}
@@ -523,12 +544,27 @@ export function TextbookSection({
             </>
           ) : (
             section.body.split(/\n{2,}/).map((paragraph, index) => (
-              <p key={index} className={index === 0 ? 'tbp-body-lead' : undefined}>
-                {highlightTerms(paragraph, section.keyTerms)}
+              <p
+                key={index}
+                className={index === 0 ? 'tbp-body-lead' : undefined}
+                data-gl-highlight-segment={'paragraph-' + index}
+              >
+                {renderHighlightedText(
+                  paragraph,
+                  section.keyTerms,
+                  highlights,
+                  'paragraph-' + index,
+                )}
               </p>
             ))
           )}
         </div>
+        <TextHighlightToolbar
+          state={toolbar}
+          onHighlight={applyHighlight}
+          onRemove={removeHighlight}
+          onAskCompanion={askCompanion}
+        />
 
         {canPersonalize && !rewrite && (
           <div className="tbp-learn-zone">

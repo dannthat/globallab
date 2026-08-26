@@ -1,10 +1,18 @@
-import { BookOpen, ChevronLeft, ChevronRight } from 'lucide-react'
+import {
+  BookOpen,
+  ChevronLeft,
+  ChevronRight,
+  Search,
+  X,
+} from 'lucide-react'
 import {
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
   type CSSProperties,
+  type KeyboardEvent as ReactKeyboardEvent,
   type MouseEvent as ReactMouseEvent,
 } from 'react'
 import type {
@@ -14,6 +22,7 @@ import type {
   StudentProfile,
   Subject,
 } from '../types'
+import { subjects } from '../knowledge'
 import type {
   LearningOutcome,
   PersonalizationMode,
@@ -52,6 +61,7 @@ interface KitabiPageProps {
   onApplySuggestion: (suggestionId: string) => void
   onDeferSuggestion: (suggestionId: string) => void
   onNeverSuggest: (suggestionId: string) => void
+  onSelectTopic?: (topic: KnowledgeTopic, subject: Subject) => void
   onBack: () => void
 }
 
@@ -61,14 +71,83 @@ type PageTurn = {
   direction: 'next' | 'previous'
 }
 
-const PAGE_TURN_MIDPOINT_MS = 480
-const PAGE_TURN_FALLBACK_MS = 1200
+type ReaderOverlay = 'contents' | 'topic-switcher' | null
+
+interface TopicOption {
+  topic: KnowledgeTopic
+  subject: Subject
+  searchText: string
+  order: number
+}
+
+const PAGE_TURN_MIDPOINT_MS = 240
+const PAGE_TURN_FALLBACK_MS = 800
+
+const TOPIC_OPTIONS: TopicOption[] = subjects
+  .filter((candidate) => !candidate.comingSoon)
+  .flatMap((candidate) =>
+    candidate.topics.map((candidateTopic) => ({
+      topic: candidateTopic,
+      subject: candidate,
+      searchText: [
+        candidate.title,
+        candidateTopic.title,
+        candidateTopic.subtitle,
+      ]
+        .join(' ')
+        .toLocaleLowerCase(),
+      order: 0,
+    })),
+  )
+  .map((option, order) => ({ ...option, order }))
+
+function normalizeSearch(value: string) {
+  return value.trim().toLocaleLowerCase().replace(/\s+/g, ' ')
+}
+
+function fuzzyTopicScore(option: TopicOption, rawQuery: string) {
+  const query = normalizeSearch(rawQuery)
+  if (!query) return option.order
+
+  const directIndex = option.searchText.indexOf(query)
+  if (directIndex >= 0) return directIndex
+
+  const tokens = query.split(' ')
+  if (
+    tokens.every((token) =>
+      option.searchText.split(/\s+/).some((word) => word.startsWith(token)),
+    )
+  ) {
+    return 100 + tokens.length
+  }
+
+  let textIndex = 0
+  let queryIndex = 0
+  while (
+    textIndex < option.searchText.length &&
+    queryIndex < query.length
+  ) {
+    if (option.searchText[textIndex] === query[queryIndex]) queryIndex += 1
+    textIndex += 1
+  }
+
+  return queryIndex === query.length ? 500 + textIndex : Number.POSITIVE_INFINITY
+}
 
 function prefersReducedMotion() {
   return (
     typeof window !== 'undefined' &&
     typeof window.matchMedia === 'function' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
+}
+
+function shouldUseFlatPageTransition() {
+  if (prefersReducedMotion()) return true
+  return (
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(max-width: 1023px)').matches
   )
 }
 
@@ -147,16 +226,32 @@ export function KitabiPage({
   onApplySuggestion,
   onDeferSuggestion,
   onNeverSuggest,
+  onSelectTopic,
   onBack,
 }: KitabiPageProps) {
   const [visibleSectionIndex, setVisibleSectionIndex] = useState(0)
   const [pageTurn, setPageTurn] = useState<PageTurn | null>(null)
+  const [activeOverlay, setActiveOverlay] = useState<ReaderOverlay>(null)
+  const [quickTopicQuery, setQuickTopicQuery] = useState('')
+  const [activeTopicOptionIndex, setActiveTopicOptionIndex] = useState(0)
+  const [isReducedMotionFade, setIsReducedMotionFade] = useState(false)
   const activeTurnRef = useRef<PageTurn | null>(null)
   const midpointTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const fallbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const reducedFadeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const quickTopicInputRef = useRef<HTMLInputElement>(null)
 
   const activeSection =
     topic.sections[visibleSectionIndex] ?? topic.sections[0]
+  const rewrite = activeSection
+    ? rewrites[
+        getSectionRewriteKey(
+          topic.id,
+          activeSection.id,
+          profile?.interest ?? 'neutral',
+        )
+      ] ?? null
+    : null
 
   const clearTurnTimers = useCallback(() => {
     if (midpointTimerRef.current !== null) {
@@ -168,7 +263,54 @@ export function KitabiPage({
       clearTimeout(fallbackTimerRef.current)
       fallbackTimerRef.current = null
     }
+
+    if (reducedFadeTimerRef.current !== null) {
+      clearTimeout(reducedFadeTimerRef.current)
+      reducedFadeTimerRef.current = null
+    }
   }, [])
+
+  const filteredTopicOptions = useMemo(
+    () =>
+      TOPIC_OPTIONS.map((option) => ({
+        option,
+        score: fuzzyTopicScore(option, quickTopicQuery),
+      }))
+        .filter(({ score }) => Number.isFinite(score))
+        .sort(
+          (first, second) =>
+            first.score - second.score ||
+            first.option.order - second.option.order,
+        )
+        .map(({ option }) => option),
+    [quickTopicQuery],
+  )
+
+  useEffect(() => {
+    if (activeOverlay !== 'topic-switcher') return
+    quickTopicInputRef.current?.focus()
+  }, [activeOverlay])
+
+  const openQuickTopicSwitcher = useCallback(() => {
+    setQuickTopicQuery('')
+    setActiveTopicOptionIndex(0)
+    setActiveOverlay('topic-switcher')
+  }, [])
+
+  const closeOverlay = useCallback(() => {
+    setActiveOverlay(null)
+  }, [])
+
+  const selectTopicOption = useCallback(
+    (option: TopicOption) => {
+      closeOverlay()
+      if (option.topic.id === topic.id && option.subject.id === subject.id) {
+        return
+      }
+      onSelectTopic?.(option.topic, option.subject)
+    },
+    [closeOverlay, onSelectTopic, subject.id, topic.id],
+  )
 
   const finishPageTurn = useCallback(
     (transition: PageTurn) => {
@@ -204,11 +346,16 @@ export function KitabiPage({
         return
       }
 
-      if (prefersReducedMotion()) {
+      if (shouldUseFlatPageTransition()) {
         clearTurnTimers()
         activeTurnRef.current = null
         setPageTurn(null)
+        setIsReducedMotionFade(true)
         setVisibleSectionIndex(nextIndex)
+        reducedFadeTimerRef.current = setTimeout(() => {
+          setIsReducedMotionFade(false)
+          reducedFadeTimerRef.current = null
+        }, 180)
         return
       }
 
@@ -248,6 +395,13 @@ export function KitabiPage({
     const handler = (event: AnimationEvent) => {
       if (!(event.target instanceof HTMLElement)) return
       if (!event.target.classList.contains('textbook-page-turn-sheet')) return
+      if (
+        event.animationName &&
+        event.animationName !== 'turnPageForward' &&
+        event.animationName !== 'turnPageBackward'
+      ) {
+        return
+      }
       finishPageTurn(pageTurn)
     }
 
@@ -257,35 +411,128 @@ export function KitabiPage({
 
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
+      if (event.isComposing) return
+
+      const commandPaletteShortcut =
+        (event.code === 'KeyK' ||
+          event.key.toLocaleLowerCase() === 'k') &&
+        (event.metaKey || event.ctrlKey)
+      if (commandPaletteShortcut) {
+        event.preventDefault()
+        if (activeOverlay === 'topic-switcher') {
+          closeOverlay()
+        } else {
+          openQuickTopicSwitcher()
+        }
+        return
+      }
+
+      if (event.key === 'Escape') {
+        if (activeOverlay) {
+          event.preventDefault()
+          closeOverlay()
+          return
+        }
+
+        const selection = window.getSelection()
+        if (selection && !selection.isCollapsed) {
+          selection.removeAllRanges()
+          return
+        }
+      }
+
       const target = event.target
       if (
         target instanceof HTMLElement &&
-        (target.matches('input,textarea,select,button') ||
-          target.isContentEditable)
+        (target.matches(
+          'input,textarea,select,button,a,[role=dialog],[data-reader-hotkeys=off]',
+        ) ||
+          target.isContentEditable ||
+          target.closest('[contenteditable=true]'))
       ) {
         return
       }
 
-      if (event.key === 'ArrowRight') {
+      if (event.defaultPrevented) return
+      if (
+        (event.code === 'KeyT' ||
+          event.key.toLocaleLowerCase() === 't') &&
+        !event.metaKey &&
+        !event.ctrlKey &&
+        !event.altKey &&
+        activeOverlay !== 'topic-switcher'
+      ) {
         event.preventDefault()
-        openSection(visibleSectionIndex + 1)
+        setActiveOverlay((current) =>
+          current === 'contents' ? null : 'contents',
+        )
+        return
+      }
+      if (activeOverlay) return
+      if (event.metaKey || event.ctrlKey || event.altKey || event.repeat) return
+
+      const goNext =
+        event.key === 'ArrowRight' ||
+        event.code === 'KeyK' ||
+        event.key.toLocaleLowerCase() === 'k' ||
+        event.key === 'PageDown'
+      const goPrevious =
+        event.key === 'ArrowLeft' ||
+        event.code === 'KeyJ' ||
+        event.key.toLocaleLowerCase() === 'j' ||
+        event.key === 'PageUp'
+
+      if (goNext || goPrevious) {
+        event.preventDefault()
+        openSection(
+          visibleSectionIndex + (goNext ? 1 : -1),
+        )
+        return
       }
 
-      if (event.key === 'ArrowLeft') {
+      if (
+        event.code === 'KeyD' ||
+        event.key.toLocaleLowerCase() === 'd'
+      ) {
         event.preventDefault()
-        openSection(visibleSectionIndex - 1)
+        onToggleDark()
+        return
+      }
+
+      if (event.key === 'Escape') {
+        if (preferenceSuggestion) {
+          event.preventDefault()
+          onDeferSuggestion(preferenceSuggestion.id)
+          return
+        }
+        if (rewrite && activeSection) {
+          event.preventDefault()
+          onClearRewrite(activeSection.id)
+        }
       }
     }
 
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
-  }, [openSection, visibleSectionIndex])
+  }, [
+    activeOverlay,
+    activeSection,
+    closeOverlay,
+    onClearRewrite,
+    onDeferSuggestion,
+    onToggleDark,
+    openQuickTopicSwitcher,
+    openSection,
+    preferenceSuggestion,
+    rewrite,
+    visibleSectionIndex,
+  ])
 
   const handleBookClick = (event: ReactMouseEvent<HTMLElement>) => {
     const target = event.target as HTMLElement
     if (
       target.closest(
-        'button, a, input, textarea, select, label, .tbp-page-scroll',
+        'button, a, input, textarea, select, label, mark[data-highlight-id], .tbp-page-scroll',
       )
     ) {
       return
@@ -303,15 +550,41 @@ export function KitabiPage({
     if (relativeX >= 0.9) openSection(visibleSectionIndex + 1)
   }
 
-  const rewrite = activeSection
-    ? rewrites[
-        getSectionRewriteKey(
-          topic.id,
-          activeSection.id,
-          profile?.interest ?? 'neutral',
-        )
-      ] ?? null
-    : null
+  const handleQuickTopicKeyDown = (
+    event: ReactKeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (event.key === 'Escape') {
+      event.preventDefault()
+      event.stopPropagation()
+      closeOverlay()
+      return
+    }
+
+    if (
+      (event.key === 'ArrowDown' || event.key === 'ArrowUp') &&
+      filteredTopicOptions.length > 0
+    ) {
+      event.preventDefault()
+      event.stopPropagation()
+      const direction = event.key === 'ArrowDown' ? 1 : -1
+      setActiveTopicOptionIndex(
+        (current) =>
+          (current + direction + filteredTopicOptions.length) %
+          filteredTopicOptions.length,
+      )
+      return
+    }
+
+    if (event.key === 'Enter') {
+      const selected =
+        filteredTopicOptions[activeTopicOptionIndex] ??
+        filteredTopicOptions[0]
+      if (!selected) return
+      event.preventDefault()
+      event.stopPropagation()
+      selectTopicOption(selected)
+    }
+  }
 
   const turnFromSection = pageTurn
     ? topic.sections[pageTurn.fromIndex]
@@ -343,7 +616,10 @@ export function KitabiPage({
       <div className="textbook-reader-wrap">
         <div className="textbook-reader-stage">
           <main
-            className="textbook-reader-page"
+            className={
+              'textbook-reader-page' +
+              (isReducedMotionFade ? ' reader-spread-crossfade' : '')
+            }
             id="main-content"
             aria-busy={Boolean(pageTurn)}
             data-section={activeSection?.id}
@@ -365,6 +641,7 @@ export function KitabiPage({
             {activeSection && (
               <TextbookSection
                 key={activeSection.id}
+                topicId={topic.id}
                 section={activeSection}
                 rewrite={rewrite}
                 isLoading={loadingSectionId === activeSection.id}
@@ -398,7 +675,14 @@ export function KitabiPage({
                 className={`textbook-page-turn textbook-page-turn-${pageTurn.direction}`}
                 aria-hidden="true"
               >
-                <div className="textbook-page-turn-sheet">
+                <div
+                  className={
+                    'textbook-page-turn-sheet page-leaf ' +
+                    (pageTurn.direction === 'next'
+                      ? 'page-turning-forward'
+                      : 'page-turning-backward')
+                  }
+                >
                   <div className="textbook-page-turn-face textbook-page-turn-front">
                     <PageTurnPreview
                       section={turnFrontSection}
@@ -442,7 +726,21 @@ export function KitabiPage({
                 } as CSSProperties
               }
             >
-              <BookOpen size={14} aria-hidden="true" />
+              <button
+                type="button"
+                className="textbook-nav-contents"
+                aria-label="Open table of contents"
+                aria-expanded={activeOverlay === 'contents'}
+                aria-keyshortcuts="T"
+                onClick={() =>
+                  setActiveOverlay((current) =>
+                    current === 'contents' ? null : 'contents',
+                  )
+                }
+                title="Contents (T)"
+              >
+                <BookOpen size={14} aria-hidden="true" />
+              </button>
               <span className="textbook-nav-label">Section</span>
               <div className="textbook-nav-dots">
                 {topic.sections.map((section, index) => (
@@ -486,6 +784,170 @@ export function KitabiPage({
           </nav>
         </div>
       </div>
+
+      {activeOverlay === 'contents' && (
+        <div
+          className="reader-overlay reader-overlay--contents"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) closeOverlay()
+          }}
+        >
+          <aside
+            className="reader-contents-drawer"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="reader-contents-title"
+          >
+            <header>
+              <div>
+                <p>{subject.title}</p>
+                <h2 id="reader-contents-title">Table of contents</h2>
+              </div>
+              <button
+                type="button"
+                onClick={closeOverlay}
+                aria-label="Close table of contents"
+              >
+                <X size={17} aria-hidden="true" />
+              </button>
+            </header>
+            <nav aria-label={'Sections in ' + topic.title}>
+              {topic.sections.map((section, index) => (
+                <button
+                  type="button"
+                  className={
+                    'reader-contents-item' +
+                    (index === visibleSectionIndex
+                      ? ' reader-contents-item--active'
+                      : '')
+                  }
+                  key={section.id}
+                  aria-current={
+                    index === visibleSectionIndex ? 'page' : undefined
+                  }
+                  onClick={() => {
+                    closeOverlay()
+                    openSection(index)
+                  }}
+                >
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <strong>{section.heading}</strong>
+                  <ChevronRight size={15} aria-hidden="true" />
+                </button>
+              ))}
+            </nav>
+            <p className="reader-overlay-hint">
+              Press <kbd>T</kbd> to open contents and <kbd>Esc</kbd> to close.
+            </p>
+          </aside>
+        </div>
+      )}
+
+      {activeOverlay === 'topic-switcher' && (
+        <div
+          className="reader-overlay reader-overlay--topics"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) closeOverlay()
+          }}
+        >
+          <section
+            className="quick-topic-switcher"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="quick-topic-title"
+          >
+            <header>
+              <Search size={18} aria-hidden="true" />
+              <div>
+                <p>Quick switcher</p>
+                <h2 id="quick-topic-title">Open any Global Lab topic</h2>
+              </div>
+              <button
+                type="button"
+                className="quick-topic-close"
+                onClick={closeOverlay}
+                aria-label="Close topic switcher"
+              >
+                <X size={17} aria-hidden="true" />
+              </button>
+            </header>
+
+            <div className="quick-topic-search">
+              <Search size={16} aria-hidden="true" />
+              <input
+                ref={quickTopicInputRef}
+                value={quickTopicQuery}
+                role="combobox"
+                aria-expanded="true"
+                aria-controls="quick-topic-results"
+                aria-activedescendant={
+                  filteredTopicOptions[activeTopicOptionIndex]
+                    ? 'quick-topic-' +
+                      filteredTopicOptions[activeTopicOptionIndex].topic.id
+                    : undefined
+                }
+                placeholder="Search biology, physics, chemistry, or mathematics"
+                onChange={(event) => {
+                  setQuickTopicQuery(event.target.value)
+                  setActiveTopicOptionIndex(0)
+                }}
+                onKeyDown={handleQuickTopicKeyDown}
+              />
+              <kbd>Esc</kbd>
+            </div>
+
+            <div
+              className="quick-topic-results"
+              id="quick-topic-results"
+              role="listbox"
+              aria-label="Global Lab topics"
+            >
+              {filteredTopicOptions.map((option, index) => (
+                <button
+                  type="button"
+                  role="option"
+                  id={'quick-topic-' + option.topic.id}
+                  aria-selected={index === activeTopicOptionIndex}
+                  className={
+                    'quick-topic-option' +
+                    (index === activeTopicOptionIndex
+                      ? ' quick-topic-option--active'
+                      : '')
+                  }
+                  key={option.subject.id + ':' + option.topic.id}
+                  onMouseEnter={() => setActiveTopicOptionIndex(index)}
+                  onClick={() => selectTopicOption(option)}
+                >
+                  <span
+                    className={
+                      'quick-topic-subject quick-topic-subject--' +
+                      option.subject.id
+                    }
+                  >
+                    {option.subject.title}
+                  </span>
+                  <span>
+                    <strong>{option.topic.title}</strong>
+                    <small>{option.topic.subtitle}</small>
+                  </span>
+                  <ChevronRight size={16} aria-hidden="true" />
+                </button>
+              ))}
+              {filteredTopicOptions.length === 0 && (
+                <p className="quick-topic-empty">
+                  No topic matches “{quickTopicQuery}”.
+                </p>
+              )}
+            </div>
+
+            <footer>
+              <span><kbd>↑</kbd><kbd>↓</kbd> Navigate</span>
+              <span><kbd>Enter</kbd> Open</span>
+              <span>{TOPIC_OPTIONS.length} topics</span>
+            </footer>
+          </section>
+        </div>
+      )}
     </div>
   )
 }

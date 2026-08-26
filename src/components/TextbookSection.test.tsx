@@ -61,6 +61,7 @@ const rewrite: RewrittenSection = {
 function renderSection() {
   return render(
     <TextbookSection
+      topicId="cellular-respiration"
       section={section}
       rewrite={rewrite}
       isLoading={false}
@@ -82,7 +83,10 @@ function renderSection() {
   )
 }
 
-afterEach(cleanup)
+afterEach(() => {
+  cleanup()
+  window.localStorage.clear()
+})
 
 describe('TextbookSection companion placement', () => {
   it('keeps a compact analogy on the source page and expands it into a reversible study sheet', async () => {
@@ -249,5 +253,73 @@ describe('TextbookSection companion placement', () => {
       top: 0,
       behavior: 'smooth',
     })
+  })
+})
+
+describe('TextbookSection persistent highlights', () => {
+  it('preserves canonical text and restores a topic-scoped highlight', () => {
+    const firstRender = renderSection()
+    const body = firstRender.container.querySelector<HTMLElement>('.tbp-body')
+    expect(body).not.toBeNull()
+
+    const walker = document.createTreeWalker(
+      body as HTMLElement,
+      NodeFilter.SHOW_TEXT,
+    )
+    let selectedNode: Text | null = null
+    while (walker.nextNode()) {
+      const candidate = walker.currentNode as Text
+      if (candidate.data.includes('transfers energy')) {
+        selectedNode = candidate
+        break
+      }
+    }
+    expect(selectedNode).not.toBeNull()
+
+    const start = (selectedNode as Text).data.indexOf('transfers energy')
+    const range = document.createRange()
+    range.setStart(selectedNode as Text, start)
+    range.setEnd(selectedNode as Text, start + 'transfers energy'.length)
+    const selection = window.getSelection()
+    selection?.removeAllRanges()
+    selection?.addRange(range)
+
+    fireEvent.mouseUp(body as HTMLElement, { clientX: 220, clientY: 180 })
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Highlight yellow' }),
+    )
+
+    const mark = firstRender.container.querySelector(
+      'mark.gl-text-highlight--yellow',
+    )
+    expect(mark?.textContent).toBe('transfers energy')
+    expect(body?.textContent).toBe(section.body)
+
+    const stored = JSON.parse(
+      window.localStorage.getItem(
+        'gl_highlights_cellular-respiration',
+      ) ?? '[]',
+    )
+    expect(stored).toHaveLength(1)
+    expect(stored[0]).toMatchObject({
+      sectionId: section.id,
+      text: 'transfers energy',
+      color: 'yellow',
+    })
+    expect(stored[0].anchors[0]).toMatchObject({
+      segmentId: 'paragraph-0',
+      exact: 'transfers energy',
+    })
+
+    firstRender.unmount()
+    const restored = renderSection()
+    expect(
+      restored.container.querySelector(
+        'mark.gl-text-highlight--yellow',
+      )?.textContent,
+    ).toBe('transfers energy')
+    expect(
+      restored.container.querySelector<HTMLElement>('.tbp-body')?.textContent,
+    ).toBe(section.body)
   })
 })

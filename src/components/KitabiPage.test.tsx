@@ -83,7 +83,10 @@ function stubReducedMotion(matches: boolean) {
   )
 }
 
-function renderReader() {
+function renderReader(options?: {
+  onToggleDark?: () => void
+  onSelectTopic?: Parameters<typeof KitabiPage>[0]['onSelectTopic']
+}) {
   return render(
     <KitabiPage
       topic={topic}
@@ -91,7 +94,7 @@ function renderReader() {
       subjectColor={'#168a72'}
       profile={null}
       isDark={false}
-      onToggleDark={vi.fn()}
+      onToggleDark={options?.onToggleDark ?? vi.fn()}
       onSaveInterest={vi.fn()}
       rewrites={{}}
       loadingSectionId={null}
@@ -103,6 +106,7 @@ function renderReader() {
       onApplySuggestion={vi.fn()}
       onDeferSuggestion={vi.fn()}
       onNeverSuggest={vi.fn()}
+      onSelectTopic={options?.onSelectTopic}
       onBack={vi.fn()}
     />,
   )
@@ -137,7 +141,7 @@ describe('KitabiPage page turns', () => {
     )
     expect(container.querySelector('.textbook-page-turn')).toBeTruthy()
 
-    act(() => vi.advanceTimersByTime(479))
+    act(() => vi.advanceTimersByTime(239))
     expect(screen.getByTestId('visible-section').textContent).toBe(
       'Section one',
     )
@@ -209,5 +213,54 @@ describe('KitabiPage page turns', () => {
     expect(screen.getByTestId('visible-section').textContent).toBe(
       'Section one',
     )
+  })
+
+  it('supports J/K, contents, dark-mode, and the global topic switcher', () => {
+    const onToggleDark = vi.fn()
+    const onSelectTopic = vi.fn()
+    const { container } = renderReader({ onToggleDark, onSelectTopic })
+
+    fireEvent.keyDown(window, { key: 'k', code: 'KeyK' })
+    act(() => vi.advanceTimersByTime(240))
+    expect(screen.getByTestId('visible-section').textContent).toBe(
+      'Section two',
+    )
+    fireEvent.animationEnd(
+      container.querySelector('.textbook-page-turn-sheet') as Element,
+    )
+
+    fireEvent.keyDown(window, { key: 'j', code: 'KeyJ' })
+    act(() => vi.advanceTimersByTime(240))
+    expect(screen.getByTestId('visible-section').textContent).toBe(
+      'Section one',
+    )
+    fireEvent.animationEnd(
+      container.querySelector('.textbook-page-turn-sheet') as Element,
+    )
+
+    fireEvent.keyDown(window, { key: 't', code: 'KeyT' })
+    expect(
+      screen.getByRole('dialog', { name: 'Table of contents' }),
+    ).toBeTruthy()
+    fireEvent.keyDown(window, { key: 't', code: 'KeyT' })
+    expect(
+      screen.queryByRole('dialog', { name: 'Table of contents' }),
+    ).toBeNull()
+
+    fireEvent.keyDown(window, { key: 'd', code: 'KeyD' })
+    expect(onToggleDark).toHaveBeenCalledTimes(1)
+
+    fireEvent.keyDown(window, {
+      key: 'k',
+      code: 'KeyK',
+      ctrlKey: true,
+    })
+    const search = screen.getByRole('combobox')
+    fireEvent.change(search, { target: { value: 'quantum mechanics' } })
+    fireEvent.keyDown(search, { key: 'Enter' })
+
+    expect(onSelectTopic).toHaveBeenCalledTimes(1)
+    expect(onSelectTopic.mock.calls[0][0].title).toBe('Quantum Mechanics')
+    expect(onSelectTopic.mock.calls[0][1].title).toBe('Physics')
   })
 })

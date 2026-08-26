@@ -101,11 +101,29 @@ describe('LearningCompanion', () => {
       expect(props.onAction).toHaveBeenLastCalledWith(mode)
     }
 
-    await user.click(screen.getByRole('button', { name: 'Helped' }))
-    expect(props.onOutcome).toHaveBeenLastCalledWith('successful')
+    const helped = screen.getByRole('button', { name: 'Helped' })
+    const notYet = screen.getByRole('button', { name: 'Not yet' })
 
-    await user.click(screen.getByRole('button', { name: 'Not yet' }))
+    await user.click(helped)
+    expect(props.onOutcome).toHaveBeenLastCalledWith('successful')
+    expect(helped.getAttribute('aria-pressed')).toBe('true')
+    expect(notYet.getAttribute('aria-pressed')).toBe('false')
+    const feedbackStatus = screen.getByRole('status', {
+      name: 'Helpfulness feedback',
+    })
+    expect(feedbackStatus.getAttribute('aria-live')).toBe('polite')
+    expect(feedbackStatus.getAttribute('aria-atomic')).toBe('true')
+    expect(feedbackStatus.textContent).toContain(
+      'Saved — this helps tune future support.',
+    )
+
+    await user.click(notYet)
     expect(props.onOutcome).toHaveBeenLastCalledWith('needs-review')
+    expect(helped.getAttribute('aria-pressed')).toBe('false')
+    expect(notYet.getAttribute('aria-pressed')).toBe('true')
+    expect(feedbackStatus.textContent).toContain(
+      'Saved — try another format above; I’ll learn from this.',
+    )
 
     await user.click(screen.getByRole('button', { name: 'Dismiss learning companion' }))
     expect(props.onDismiss).toHaveBeenCalledOnce()
