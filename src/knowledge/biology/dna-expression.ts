@@ -17,6 +17,19 @@ export const dnaExpression: KnowledgeTopic = {
       body: 'Gene expression turns stored genetic information into functional products. Transcription converts a DNA gene into a complementary RNA copy in the nucleus. After RNA processing, translation uses the mature mRNA sequence at a ribosome to build a specific polypeptide from amino acids. This directional flow of information is summarized by the central dogma: DNA → RNA → protein.',
       keyTerms: ['gene expression', 'transcription', 'DNA', 'RNA', 'translation', 'mRNA', 'ribosome', 'polypeptide', 'central dogma'],
       equation: '\\text{DNA} \\rightarrow \\text{RNA} \\rightarrow \\text{Protein}',
+      diagram: {
+        url: '/diagrams/biology/dna-transcription.png',
+        caption:
+          'The central dogma: DNA is transcribed to mRNA, which is translated to protein.',
+        alt: 'Flow diagram: DNA double helix → RNA polymerase → mRNA strand → ribosome → protein chain',
+      },
+      callouts: [
+        {
+          type: 'did-you-know',
+          heading: 'Each cell holds ~2 metres of DNA',
+          body: 'Every human cell nucleus contains approximately 2 metres of DNA packed into a 6-micrometre space using protein scaffolding called chromatin. Gene expression requires this packaging to be locally unwound before RNA polymerase can access the sequence.',
+        },
+      ],
     },
     {
       id: 'transcription',
@@ -41,6 +54,11 @@ export const dnaExpression: KnowledgeTopic = {
       heading: 'Translation',
       body: 'The ribosome reads the mRNA sequence in triplets called codons (e.g., AUG, GGC, UAC). Each codon is matched by a tRNA molecule carrying a complementary anticodon sequence. For example, the codon GGC is matched by a tRNA with anticodon CCG, which carries the amino acid glycine. When the correct tRNA enters the ribosome\'s A site, its anticodon forms hydrogen bonds with the mRNA codon, confirming the match. The ribosome then catalyzes the formation of a peptide bond between the incoming amino acid and the growing polypeptide chain at the P site. The ribosome shifts along the mRNA by one codon (translocation), and the cycle repeats. The process is read continuously, codon by codon, until a stop codon (UAA, UAG, or UGA) is encountered — which has no matching tRNA, causing the chain to be released.\n\nTranslation usually begins at AUG, which codes for methionine. The ribosome contains A, P, and E sites for the incoming tRNA, growing chain, and exiting tRNA.',
       keyTerms: ['codons', 'tRNA', 'anticodon', 'amino acid', 'A site', 'P site', 'E site', 'peptide bond', 'AUG', 'stop codons'],
+      diagram: {
+        url: '/diagrams/biology/translation-ribosome.png',
+        caption: 'A ribosome reading mRNA codons and assembling a polypeptide chain.',
+        alt: 'Diagram of translation showing ribosome with A, P, and E sites, mRNA strand with codons, tRNA molecules with anticodons and amino acids, and growing polypeptide chain.',
+      },
       presetAnalogies: {
         neutral: 'The ribosome is an assembly-line scanner: each codon is a barcode, and the matching tRNA delivers the specified amino-acid cargo.',
         gaming: 'The ribosome is a crafting machine reading recipe steps one at a time while keyed delivery units bring the exact ingredient each step requires.',

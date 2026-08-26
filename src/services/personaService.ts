@@ -4,9 +4,15 @@ import type {
   RewrittenSection,
   StudentProfile,
 } from '../types'
-
-const GEMINI_MODEL = 'gemini-3.1-flash-lite'
-const MOCK_DELAY_MS = 900
+import type {
+  ApprovedPresentationPreferences,
+  PersonalizationMode,
+  SourceExcerpt,
+} from '../personalization/types'
+import {
+  buildLearningCompanionPrompt,
+  createLearningCompanion,
+} from './learningCompanionService'
 
 const PRESET_KEYWORDS: Record<PersonaPreset, string[]> = {
   gaming: [
@@ -53,6 +59,20 @@ const PRESET_KEYWORDS: Record<PersonaPreset, string[]> = {
   neutral: [],
 }
 
+export interface RewriteSectionOptions {
+  mode?: PersonalizationMode
+  approvedPresentation?: ApprovedPresentationPreferences
+  excerpt?: SourceExcerpt
+  source?: {
+    id: string
+    title: string
+    url?: string
+    license?: string
+    revision?: string
+  }
+  signal?: AbortSignal
+}
+
 function detectPreset(interest: string): PersonaPreset | null {
   const escapePattern = (value: string) =>
     value.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')
@@ -70,152 +90,102 @@ function detectPreset(interest: string): PersonaPreset | null {
       return preset
     }
   }
-
   return null
+}
+
+function sectionRevision(section: KnowledgeSection) {
+  let hash = 2_166_136_261
+  const value = `${section.heading}\n${section.body}`
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index)
+    hash = Math.imul(hash, 16_777_619)
+  }
+  return `fnv1a-${(hash >>> 0).toString(16).padStart(8, '0')}`
+}
+
+function sectionExcerpt(
+  section: KnowledgeSection,
+  options: RewriteSectionOptions,
+): SourceExcerpt {
+  if (options.excerpt) return options.excerpt
+  return {
+    anchor: {
+      sourceId: options.source?.id ?? `global-lab:${section.id}`,
+      sourceKind: 'global-lab',
+      sourceTitle: options.source?.title ?? 'Global Lab curated source',
+      anchorId: section.id,
+      anchorLabel: section.heading,
+      url: options.source?.url,
+      license: options.source?.license,
+      sourceRevision: options.source?.revision ?? sectionRevision(section),
+    },
+    text: section.body,
+  }
+}
+
+function presetAnalogy(section: KnowledgeSection, interest: string) {
+  if (!section.presetAnalogies) return undefined
+  const exact = section.presetAnalogies[interest.toLowerCase()]
+  const preset = detectPreset(interest)
+  return exact ?? (preset ? section.presetAnalogies[preset] : undefined)
+}
+
+function companionRequest(
+  section: KnowledgeSection,
+  profile: StudentProfile,
+  options: RewriteSectionOptions,
+) {
+  const interest = profile.interest.trim().replace(/\s+/g, ' ') || 'neutral'
+  const mode = options.mode ?? 'analogy'
+  return {
+    excerpt: sectionExcerpt(section, options),
+    mode,
+    profile: { ...profile, interest },
+    approvedPresentation: options.approvedPresentation ?? {},
+    // The interest lens is independent from the requested presentation format.
+    // Keep a vetted bridge available when a local refinement is requested too.
+    presetAnalogy: presetAnalogy(section, interest),
+    signal: options.signal,
+  }
 }
 
 export function buildSectionRewritePrompt(
   section: KnowledgeSection,
   profile: StudentProfile,
+  options: RewriteSectionOptions = {},
 ): string {
-  const gradeInstruction =
-    profile.gradeLevel === 'Grade 9' || profile.gradeLevel === 'Grade 10'
-      ? 'Use everyday language. Avoid jargon. Sentences under 20 words.'
-      : profile.gradeLevel === 'University'
-        ? 'Use precise undergraduate-level technical vocabulary.'
-        : 'Use standard secondary-school scientific complexity.'
-
-  return [
-    'You are creating one illuminating analogy for a STEM textbook section and this student:',
-    '- Interest: ' + profile.interest,
-    '- Grade level: ' + (profile.gradeLevel ?? 'not specified'),
-    '- Language level: ' + gradeInstruction,
-    '',
-    'Section heading: ' + section.heading,
-    '',
-    'Original section text:',
-    section.body,
-    '',
-    'Create the analogy following these STRICT rules:',
-    '1. Return one short analogy only, using 2–3 sentences maximum.',
-    '2. Keep every scientific fact, term, and mechanism exactly accurate.',
-    '3. Draw the analogy from "' + profile.interest + '".',
-    '4. Illuminate the section’s central mechanism rather than merely name-dropping the interest.',
-    '5. If you cannot find a genuine illuminating analogy for "' +
-      profile.interest +
-      '", use a neutral analogy instead. Never force a bad one.',
-    '6. Do not use slang, forced puns, or cringeworthy themed language.',
-    '7. Return ONLY valid JSON with no surrounding text, no markdown, no code fences:',
-    '{"analogy":"..."}',
-  ].join('\n')
+  return buildLearningCompanionPrompt(companionRequest(section, profile, options))
 }
 
 export async function rewriteSection(
   section: KnowledgeSection,
   profile: StudentProfile,
+  options: RewriteSectionOptions = {},
 ): Promise<RewrittenSection> {
   const interest = profile.interest.trim().replace(/\s+/g, ' ')
-
-  if (!interest || interest.toLowerCase() === 'neutral') {
-    return {
-      sectionId: section.id,
-      analogy: section.presetAnalogies?.neutral ?? 'Original explanation (neutral)',
-      analogyUsed: 'Original explanation (neutral)',
-      interest,
-      isMock: false,
-    }
-  }
-
   if (interest.length > 60) {
     throw new Error('Keep your interest to 60 characters or fewer.')
   }
 
-  const preset = detectPreset(interest)
-  if (preset && section.presetAnalogies) {
-    await new Promise((resolve) => setTimeout(resolve, 250))
-    const analogyText = section.presetAnalogies[preset]
-    return {
-      sectionId: section.id,
-      analogy: analogyText,
-      analogyUsed: analogyText,
-      interest,
-      isMock: false,
-    }
-  }
-
-  const apiKey = (import.meta.env.VITE_GEMINI_API_KEY as string | undefined)?.trim()
-  if (!apiKey || apiKey.startsWith('PASTE_')) {
-    await new Promise((resolve) => setTimeout(resolve, MOCK_DELAY_MS))
-    return {
-      sectionId: section.id,
-      analogy:
-        '[Mock — no API key set] ' +
-        (section.presetAnalogies?.neutral ??
-          'This preview will become a tailored analogy when a Gemini API key is set.'),
-      analogyUsed: 'Mock analogy using ' + interest,
-      interest,
-      isMock: true,
-    }
-  }
-
-  const prompt = buildSectionRewritePrompt(section, { ...profile, interest })
-  const response = await fetch(
-    'https://generativelanguage.googleapis.com/v1beta/models/' +
-      GEMINI_MODEL +
-      ':generateContent?key=' +
-      encodeURIComponent(apiKey),
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: {
-          temperature: 0.65,
-          maxOutputTokens: 1024,
-          responseMimeType: 'application/json',
-        },
-      }),
-    },
-  )
-
-  if (!response.ok) {
-    if (response.status === 429) {
-      throw new Error('Too many requests — wait a moment and try again.')
-    }
-    if (response.status === 400) {
-      throw new Error('This section could not be rewritten. Try again.')
-    }
-    throw new Error('Could not reach the personalisation service. Try again in a moment.')
-  }
-
-  const data = (await response.json()) as {
-    candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>
-  }
-  const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text
-
-  if (!rawText) {
-    throw new Error('Empty response from personalisation service.')
-  }
-
-  let parsed: { analogy?: unknown }
-  try {
-    parsed = JSON.parse(rawText) as typeof parsed
-  } catch {
-    throw new Error('Response could not be parsed. Try again.')
-  }
-
-  if (
-    typeof parsed.analogy !== 'string' ||
-    !parsed.analogy.trim()
-  ) {
-    throw new Error('The rewritten response was incomplete. Try again.')
-  }
+  const request = companionRequest(section, profile, options)
+  const artifact = await createLearningCompanion(request)
 
   return {
     sectionId: section.id,
-    analogy: parsed.analogy,
-    analogyUsed: parsed.analogy,
+    mode: artifact.mode,
+    title: artifact.title,
+    content: artifact.content,
+    analogy: artifact.content,
+    analogyLimits: artifact.limitations,
+    analogyUsed:
+      artifact.mode === 'analogy'
+        ? artifact.content
+        : `${artifact.title}: ${artifact.content.slice(0, 180)}`,
+    quiz: artifact.quiz ?? null,
+    source: artifact.excerpt.anchor,
     interest,
-    isMock: false,
+    isMock: artifact.provider === 'local',
+    provider: artifact.provider,
+    generatedAt: artifact.createdAt,
   }
 }

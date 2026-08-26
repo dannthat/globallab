@@ -16,12 +16,30 @@ export const actionPotential: KnowledgeTopic = {
       heading: 'Electrical Signalling in Neurons',
       body: 'An action potential is a rapid, all-or-nothing change in a neuron’s membrane voltage. Voltage-gated ion channels first reverse and then restore the membrane potential, creating a signal that travels along the axon without losing amplitude. At the axon terminal, synaptic transmission converts the electrical signal into a chemical message that can influence another cell.',
       keyTerms: ['action potential', 'all-or-nothing', 'membrane voltage', 'voltage-gated ion channels', 'axon', 'synaptic transmission'],
+      diagram: {
+        url: '/diagrams/biology/action-potential.png',
+        caption:
+          'A neuron with labelled axon, myelin sheath, and nodes of Ranvier.',
+        alt: 'Neuron diagram showing soma, axon, myelin sheath sections, nodes of Ranvier, and axon terminals with arrows showing direction of signal propagation',
+      },
+      callouts: [
+        {
+          type: 'real-world',
+          heading: 'How local anaesthetics work',
+          body: 'Drugs like lidocaine block voltage-gated sodium channels in sensory neurons, preventing depolarization from reaching the threshold needed to fire an action potential. Pain signals cannot propagate to the brain. The neuron is unharmed — just silenced.',
+        },
+      ],
     },
     {
       id: 'resting-potential',
       heading: 'Resting Membrane Potential',
       body: 'The resting membrane potential of approximately −70 mV (inside negative relative to outside) exists because of two factors: the selective permeability of the membrane and the activity of the Na⁺/K⁺ ATPase pump. At rest, the membrane is more permeable to K⁺ than Na⁺. K⁺ ions leak out down their concentration gradient through open K⁺ leak channels, carrying positive charges out and leaving behind negatively charged proteins inside. The Na⁺/K⁺ pump continuously restores the gradients — moving 3 Na⁺ out for every 2 K⁺ in — and contributes to the net negative interior.\n\nThis stored electrical potential is critical because it represents potential energy. When a neuron is stimulated, rapid changes to ion permeability can use this potential energy to generate a fast electrical signal that travels the length of the axon.',
       keyTerms: ['resting membrane potential', '−70 mV', 'K⁺ leak channels', 'Na⁺/K⁺ ATPase', 'selective permeability', 'potential energy'],
+      diagram: {
+        url: '/diagrams/biology/resting-membrane-potential.png',
+        caption: 'Voltage trace of an action potential showing resting, depolarisation, and repolarisation phases.',
+        alt: 'Graph of membrane potential vs time showing resting potential at -70mV, threshold at -55mV, depolarisation peak at +40mV, and repolarisation back to resting.',
+      },
       presetAnalogies: {
         neutral: 'The resting potential is a compressed spring: stored energy is ready to release, while the pump continually restores the tension after each signal.',
         gaming: 'The resting potential is a charged ability bar maintained by passive regeneration; reaching the trigger releases the stored energy in one complete action.',
@@ -53,6 +71,11 @@ export const actionPotential: KnowledgeTopic = {
       heading: 'Synaptic Transmission',
       body: 'When an action potential reaches the axon terminal, it triggers voltage-gated Ca²⁺ channels to open. Calcium ions flood into the terminal, causing synaptic vesicles (membrane-bound packages of neurotransmitter) to fuse with the presynaptic membrane and release their neurotransmitter molecules into the synaptic cleft by exocytosis. The neurotransmitters diffuse across the narrow cleft (20–40 nm) and bind to receptors on the postsynaptic membrane.\n\nWhether the postsynaptic neuron fires depends on summation: excitatory inputs (EPSPs) bring the membrane toward threshold; inhibitory inputs (IPSPs) move it away. The postsynaptic neuron integrates all incoming signals simultaneously — spatial summation (multiple synapses firing at once) and temporal summation (repeated signals from one synapse in quick succession) — and fires only if the net effect reaches threshold.',
       keyTerms: ['Ca²⁺', 'neurotransmitter vesicles', 'presynaptic membrane', 'synaptic cleft', 'postsynaptic cell', 'EPSPs', 'IPSPs', 'summation'],
+      diagram: {
+        url: '/diagrams/biology/synapse-transmission.png',
+        caption: 'Synaptic vesicles releasing neurotransmitter into the synaptic cleft.',
+        alt: 'Diagram of a synapse showing pre-synaptic terminal, synaptic vesicles, neurotransmitter molecules in the cleft, and post-synaptic receptor proteins.',
+      },
       presetAnalogies: {
         neutral: 'A synapse is a vote count: excitatory inputs vote yes, inhibitory inputs vote no, and the next neuron fires only when the net vote crosses threshold.',
         gaming: 'Incoming excitatory hits stack toward a trigger while inhibitory shields subtract from them; the target acts only when the net total crosses the threshold.',

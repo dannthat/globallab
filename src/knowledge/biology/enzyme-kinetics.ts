@@ -16,6 +16,19 @@ export const enzymeKinetics: KnowledgeTopic = {
       heading: 'What Do Enzymes Do?',
       body: 'Enzymes are biological catalysts, usually proteins, that speed biochemical reactions by lowering activation energy without being consumed. They stabilize the transition state and help reactants reach it more readily, but they do not change a reaction’s overall free-energy change (ΔG), equilibrium position, or thermodynamic favourability. Enzyme activity is controlled by substrate concentration, inhibitors, temperature, pH, and allosteric signals.',
       keyTerms: ['enzymes', 'biological catalysts', 'activation energy', 'transition state', 'free-energy change', 'ΔG', 'equilibrium'],
+      diagram: {
+        url: '/diagrams/biology/enzyme-kinetics.png',
+        caption:
+          'An enzyme binding its substrate at the active site and releasing products.',
+        alt: 'Enzyme-substrate diagram: enzyme with complementary active site, substrate binding, product release, enzyme recycled',
+      },
+      callouts: [
+        {
+          type: 'key-insight',
+          heading: 'Enzymes are not consumed by reactions',
+          body: 'After catalysing a reaction, the enzyme is released unchanged and free to bind another substrate. A single enzyme molecule can facilitate thousands of reactions per second — which is why the body can sustain high metabolic rates with small quantities of each enzyme.',
+        },
+      ],
     },
     {
       id: 'enzyme-substrate',
@@ -23,12 +36,22 @@ export const enzymeKinetics: KnowledgeTopic = {
       body: 'A substrate binds the enzyme’s active site to form an enzyme–substrate complex. In the induced-fit model, binding causes a small shape change that positions catalytic groups and stabilizes the transition state. Product is then released, leaving the enzyme unchanged and ready for another cycle.\n\nAs substrate concentration rises, reaction velocity increases until nearly all active sites are occupied and the enzyme approaches Vmax. The Michaelis constant Km is the substrate concentration at half Vmax; a lower Km generally indicates higher apparent substrate affinity.',
       keyTerms: ['substrate', 'active site', 'enzyme–substrate complex', 'induced-fit model', 'Vmax', 'Km', 'Michaelis constant'],
       equation: 'v = \\frac{V_{\\max}[S]}{K_m + [S]}',
+      diagram: {
+        url: '/diagrams/biology/michaelis-menten.png',
+        caption: 'Michaelis-Menten curve showing reaction velocity vs substrate concentration.',
+        alt: 'Graph of reaction velocity (V) on y-axis vs substrate concentration [S] on x-axis, showing hyperbolic curve approaching Vmax, with Km marked at half-Vmax.',
+      },
     },
     {
       id: 'inhibition',
       heading: 'Competitive & Non-competitive Inhibition',
       body: 'Competitive inhibitors bind directly to the enzyme\'s active site, competing with the substrate. They are structurally similar to the substrate and block it from binding. Crucially, competitive inhibition is reversible and can be overcome by increasing substrate concentration — more substrate molecules outcompete the inhibitor for active site access. Vmax is unchanged; Km increases.\n\nAllosteric inhibitors bind to a separate regulatory site (the allosteric site), causing a conformational change in the enzyme\'s overall shape. This indirectly changes the active site geometry without physically blocking it. Allosteric inhibition cannot be overcome simply by adding more substrate — Vmax decreases. Clinically, this distinction determines drug design: many pharmaceuticals, including ACE inhibitors for blood pressure and statins for cholesterol, are competitive inhibitors designed to mimic the natural substrate and block a specific enzyme. Allosteric drugs offer additional control because they can activate or inhibit without directly competing with the substrate.',
       keyTerms: ['competitive inhibitors', 'active site', 'apparent Km', 'Vmax', 'non-competitive inhibitors', 'drug design'],
+      diagram: {
+        url: '/diagrams/biology/enzyme-inhibition.png',
+        caption: 'Competitive vs non-competitive enzyme inhibition.',
+        alt: 'Two diagrams side by side: competitive inhibitor blocking active site vs non-competitive inhibitor binding allosteric site and changing enzyme shape.',
+      },
       presetAnalogies: {
         neutral: 'Competitive inhibition is someone blocking a doorway who can be displaced by a larger crowd; allosteric inhibition is locking that door from a separate control room.',
         gaming: 'A competitive inhibitor camps on the objective and can be overwhelmed by more players; an allosteric inhibitor disables the objective from a control panel elsewhere.',

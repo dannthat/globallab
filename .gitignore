@@ -29,3 +29,13 @@ Thumbs.db
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
+
+# Visual debug screenshots and scratch
+.visual-*
+.diagram-contact-sheet.*
+visual_overflow_*
+antigravity-recovery/
+graphify-out/
+RECOVERED_ANTIGRAVITY_2_TRANSCRIPT.md
+peek-pdf.mjs
+

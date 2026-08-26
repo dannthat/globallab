@@ -1,0 +1,33 @@
+GlobalLab local OCR third-party notices
+
+Tesseract.js 7.0.0 and tesseract.js-core 7.0.0
+Copyright their respective contributors.
+Licensed under the Apache License, Version 2.0.
+The full license is included as LICENSE-Apache-2.0.txt in this directory.
+Source: https://github.com/naptha/tesseract.js
+
+@tesseract.js-data/eng 1.0.0
+English traineddata maintained by the naptha/tessdata contributors.
+Source: https://github.com/naptha/tessdata
+
+MIT License
+
+Copyright (c) the @tesseract.js-data/eng contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the Software), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

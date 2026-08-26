@@ -1,14 +1,21 @@
 # Global Lab
 
-Global Lab is a profile-driven STEM study companion built around a **Kitabi**: a clean textbook page that keeps canonical science intact and adds personalized analogy cards only when a student asks for help.
+Global Lab is a source-preserving digital textbook and study companion. The
+original lesson or uploaded file stays unchanged; Learn Your Way adds a
+separate, source-anchored explanation, analogy, reading path, example, or quiz
+only when the student asks for it.
 
-## V3 experience
+## Current experience
 
-1. A first-visit profile saves one interest and an optional grade level on the device.
-2. The library presents Biology plus coming-soon Physics, Chemistry, and Mathematics subjects.
-3. Biology contains five source-attributed topic kits with sectioned reading, bold key terms, and KaTeX equations.
-4. “Learn it your way” adds a separate analogy card below one section. The original textbook body never changes.
-5. Gaming, sports, and music interests use hand-vetted analogies instantly. Other interests use Gemini, with a clearly marked no-key preview fallback.
+1. A student can begin immediately and optionally add an interest or grade.
+2. The library contains curated, source-attributed STEM textbooks and accepts
+   student-owned learning files.
+3. Learn Your Way offers six help modes without replacing the original text.
+4. Presentation preferences are learned cautiously, shown to the student, and
+   applied only after explicit approval.
+5. The learner can inspect, edit, export, or delete learning data at any time.
+6. Uploaded text and images stay in the browser. Scanned pages and images use
+   bundled, English-language on-device OCR on the focused page.
 
 ## Local development
 
@@ -16,7 +23,14 @@ Global Lab is a profile-driven STEM study companion built around a **Kitabi**: a
     npm test
     npm run dev
 
-To enable live custom analogies, copy .env.example to .env and add a Gemini API key.
+Live AI help for curated textbook content is optional. Copy .env.example to
+.env and set GEMINI_API_KEY. The Vite development server uses that key from
+the server process and exposes only the text-only /api/personalize route.
+Never put a provider key in a VITE_ variable because those values are bundled
+into browser code.
+
+Without a key, Global Lab uses its local, source-grounded fallback. Uploaded
+sources always use the local path and are never sent to Gemini.
 
 ## Quality checks
 
@@ -24,4 +38,6 @@ To enable live custom analogies, copy .env.example to .env and add a Gemini API 
     npm test
     npm run build
 
-The student profile is stored only in browser localStorage. VITE_GEMINI_API_KEY is intentionally git-ignored. Because Vite exposes VITE_ values to browser code, this key setup is for local development only; public deployment should call Gemini through a server-side proxy.
+The learner profile, approved preferences, review history, cached companions,
+and uploaded library metadata are stored in browser-local storage. Original
+uploaded file bytes are kept in the browser's local file store.

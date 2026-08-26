@@ -3,9 +3,52 @@
 import { cleanup, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+
+vi.mock('pdfjs-dist', () => ({
+  GlobalWorkerOptions: { workerSrc: '' },
+  getDocument: vi.fn(),
+}))
+vi.mock('pdfjs-dist/legacy/build/pdf.mjs', () => ({
+  GlobalWorkerOptions: { workerSrc: '' },
+  getDocument: vi.fn(),
+}))
 import App from './App'
+import { LEARNING_COMPANION_CACHE_KEYS } from './hooks/useLearnYourWay'
 import { subjects } from './knowledge'
+import {
+  createLearnerModelState,
+  LEARNER_MODEL_STORAGE_KEY,
+} from './personalization/learnerModel'
 import type { StudentProfile } from './types'
+
+interface ProxySuccessOptions {
+  title?: string
+  limitations?: string
+  quiz?: {
+    question: string
+    options: [string, string, string, string]
+    correctIndex: number
+    explanation: string
+    evidence: string
+  } | null
+}
+
+function proxySuccess(content: string, options: ProxySuccessOptions = {}) {
+  return {
+    ok: true,
+    status: 200,
+    json: async () => ({
+      text: JSON.stringify({
+        title: options.title ?? 'A source-grounded bridge',
+        content,
+        limitations:
+          options.limitations ?? 'This help does not replace the original source.',
+        quiz: options.quiz ?? null,
+      }),
+      model: 'gemini-test',
+    }),
+  }
+}
 
 function seedProfile(overrides: Partial<StudentProfile> = {}) {
   const profile: StudentProfile = {
@@ -19,8 +62,14 @@ function seedProfile(overrides: Partial<StudentProfile> = {}) {
 async function openFirstTopic(user: ReturnType<typeof userEvent.setup>) {
   await user.click(screen.getByRole('button', { name: /^Biology/ }))
   await user.click(
-    screen.getByRole('button', { name: /Cellular Respiration & ATP Synthesis/ }),
+    await screen.findByRole('button', {
+      name: /Cellular Respiration & ATP Synthesis/,
+    }),
   )
+  await screen.findByRole('heading', {
+    level: 1,
+    name: subjects[0].topics[0].sections[0].heading,
+  })
 }
 
 afterEach(() => {
@@ -33,13 +82,13 @@ beforeEach(() => {
   window.localStorage.clear()
 })
 
-describe('Global Lab V3', () => {
+describe('Global Lab V4', () => {
   it('onboards once and shows the four-subject library', async () => {
     const user = userEvent.setup()
     const { unmount } = render(<App />)
 
     expect(
-      screen.getByRole('heading', { level: 1, name: 'Make every explanation yours' }),
+      screen.getByRole('heading', { level: 1, name: 'Make help fit the moment' }),
     ).toBeTruthy()
 
     await user.type(screen.getByLabelText('What are you into?'), 'basketball')
@@ -47,20 +96,20 @@ describe('Global Lab V3', () => {
     await user.click(screen.getByRole('button', { name: /Start studying/ }))
 
     expect(
-      screen.getByRole('heading', { level: 1, name: 'What are you learning today?' }),
+      screen.getByRole('heading', { level: 1, name: 'Your STEM Library' }),
     ).toBeTruthy()
     expect(
       (screen.getByRole('button', { name: /^Biology/ }) as HTMLButtonElement).disabled,
     ).toBe(false)
     expect(
       (screen.getByRole('button', { name: /^Physics/ }) as HTMLButtonElement).disabled,
-    ).toBe(true)
+    ).toBe(false)
     expect(
       (screen.getByRole('button', { name: /^Chemistry/ }) as HTMLButtonElement).disabled,
-    ).toBe(true)
+    ).toBe(false)
     expect(
       (screen.getByRole('button', { name: /^Mathematics/ }) as HTMLButtonElement).disabled,
-    ).toBe(true)
+    ).toBe(false)
 
     const stored = JSON.parse(
       window.localStorage.getItem('globallab_profile') ?? '{}',
@@ -70,11 +119,106 @@ describe('Global Lab V3', () => {
 
     unmount()
     render(<App />)
-    expect(screen.queryByText('Make every explanation yours')).toBeNull()
-    expect(screen.getByText('What are you learning today?')).toBeTruthy()
+    expect(screen.queryByText('Make help fit the moment')).toBeNull()
+    expect(screen.getByText('Your STEM Library')).toBeTruthy()
   })
 
-  it('opens all five Kitabi topics with sections, equations, bold terms, and sources', async () => {
+  it('deletes learner memory and every persisted companion cache without deleting the profile', async () => {
+    seedProfile({ interest: 'basketball' })
+    window.localStorage.setItem(
+      LEARNER_MODEL_STORAGE_KEY,
+      JSON.stringify(createLearnerModelState(new Date('2026-08-26T00:00:00.000Z'))),
+    )
+    for (const key of LEARNING_COMPANION_CACHE_KEYS) {
+      window.localStorage.setItem(key, '[{cached:true}]')
+    }
+    const user = userEvent.setup()
+    render(<App />)
+
+    await user.click(screen.getByRole('button', { name: /Learning settings/ }))
+    await user.click(screen.getByRole('button', { name: 'Delete learning data' }))
+    await user.click(screen.getByRole('button', { name: 'Yes, delete' }))
+
+    expect(window.localStorage.getItem(LEARNER_MODEL_STORAGE_KEY)).toBeNull()
+    for (const key of LEARNING_COMPANION_CACHE_KEYS) {
+      expect(window.localStorage.getItem(key)).toBeNull()
+    }
+    expect(window.localStorage.getItem('globallab_profile')).not.toBeNull()
+  })
+
+  it('lets a neutral student skip profiling and still use simpler and test help', async () => {
+    const mockFetch = vi
+      .fn()
+      .mockResolvedValueOnce(
+        proxySuccess('Cellular respiration releases usable energy from the source molecules.', {
+          title: 'In plain language',
+        }),
+      )
+      .mockResolvedValueOnce(
+        proxySuccess('Check the source idea with one question.', {
+          title: 'Check your understanding',
+          quiz: {
+            question: 'What does cellular respiration produce for cell activities?',
+            options: ['ATP', 'DNA', 'Cellulose', 'Chlorophyll'],
+            correctIndex: 0,
+            explanation: 'The source identifies ATP as the usable energy product.',
+            evidence: 'produce adenosine triphosphate (ATP)',
+          },
+        }),
+      )
+    vi.stubGlobal('fetch', mockFetch)
+    const user = userEvent.setup()
+    render(<App />)
+
+    await user.click(screen.getByRole('button', { name: 'Skip for now' }))
+    expect(
+      JSON.parse(window.localStorage.getItem('globallab_profile') ?? '{}'),
+    ).toMatchObject({ interest: 'neutral' })
+    await openFirstTopic(user)
+
+    const topic = subjects[0].topics[0]
+    const section = topic.sections[0]
+    const sectionElement = document.getElementById(section.id) as HTMLElement
+    const originalBody = sectionElement.querySelector('.tbp-body')?.textContent
+
+    await user.click(
+      within(sectionElement).getByRole('button', { name: 'Learn your way' }),
+    )
+    expect(
+      await within(sectionElement).findByText(
+        'Cellular respiration releases usable energy from the source molecules.',
+      ),
+    ).toBeTruthy()
+    expect(
+      within(sectionElement).getByRole('button', { name: 'Simpler' }).getAttribute(
+        'aria-pressed',
+      ),
+    ).toBe('true')
+    expect(within(sectionElement).getByText('Original unchanged.')).toBeTruthy()
+    expect(
+      within(sectionElement)
+        .getByRole('link', { name: topic.source.name })
+        .getAttribute('href'),
+    ).toBe(topic.source.url)
+
+    await user.click(within(sectionElement).getByRole('button', { name: 'Test me' }))
+    expect(
+      await within(sectionElement).findByText(
+        'What does cellular respiration produce for cell activities?',
+      ),
+    ).toBeTruthy()
+    await user.click(within(sectionElement).getByRole('radio', { name: 'ATP' }))
+    await user.click(
+      within(sectionElement).getByRole('button', { name: 'Submit answer' }),
+    )
+    expect(await within(sectionElement).findByText('Score: 1 of 1')).toBeTruthy()
+
+    expect(mockFetch).toHaveBeenCalledTimes(2)
+    expect(mockFetch.mock.calls.every(([url]) => url === '/api/personalize')).toBe(true)
+    expect(sectionElement.querySelector('.tbp-body')?.textContent).toBe(originalBody)
+  })
+
+  it('opens all five textbook topics with diagrams, callouts, navigation, and sources', async () => {
     seedProfile()
     const user = userEvent.setup()
     const { container } = render(<App />)
@@ -83,21 +227,56 @@ describe('Global Lab V3', () => {
     await user.click(screen.getByRole('button', { name: /^Biology/ }))
 
     for (const topic of biology.topics) {
-      await user.click(screen.getByRole('button', { name: new RegExp(topic.title) }))
+      await user.click(
+        await screen.findByRole('button', { name: new RegExp(topic.title) }),
+      )
 
-      expect(screen.getByRole('heading', { level: 1, name: topic.title })).toBeTruthy()
-      expect(container.querySelectorAll('.kitabi-section')).toHaveLength(topic.sections.length)
-      expect(container.querySelectorAll('.section-body strong').length).toBeGreaterThan(0)
-      expect(screen.getByText(/Scientific facts are unmodified/)).toBeTruthy()
-      expect(screen.queryByRole('button', { name: 'Learn it your way' })).toBeNull()
+      const readerHeader = container.querySelector('.running-header') as HTMLElement
+      expect(within(readerHeader).getByText(topic.title)).toBeTruthy()
+      expect(
+        screen.getByRole('heading', {
+          level: 1,
+          name: topic.sections[0].heading,
+        }),
+      ).toBeTruthy()
+      expect(container.querySelectorAll('.tbp-article')).toHaveLength(1)
+      expect(container.querySelectorAll('.tbp-body strong').length).toBeGreaterThan(0)
+      expect(container.querySelector('.tbp-diagram img')).toBeTruthy()
+      expect(container.querySelector('.callout')).toBeTruthy()
+      expect(
+        screen.getByRole('navigation', {
+          name: 'Navigate textbook sections',
+        }),
+      ).toBeTruthy()
+      expect(
+        screen.getByText(
+          '01 / ' + String(topic.sections.length).padStart(2, '0'),
+        ),
+      ).toBeTruthy()
+      expect(screen.getByText(/According to.*core material/i)).toBeTruthy()
+      expect(screen.getByRole('button', { name: 'Learn your way' })).toBeTruthy()
 
-      if (topic.sections.some((section) => section.equation)) {
-        expect(container.querySelector('.equation-block .katex')).toBeTruthy()
+      const equationSectionIndex = topic.sections.findIndex(
+        (section) => section.equation,
+      )
+      if (equationSectionIndex >= 0) {
+        await user.click(
+          screen.getByRole('button', {
+            name: topic.sections[equationSectionIndex].heading,
+          }),
+        )
+        await waitFor(() => {
+          expect(container.querySelector('.tbp-equation .katex')).toBeTruthy()
+        })
       }
 
-      await user.click(screen.getByRole('button', { name: 'Biology' }))
+      await user.click(
+        within(readerHeader).getByRole('button', {
+          name: 'Back to Biology topics',
+        }),
+      )
     }
-  })
+  }, 10_000)
 
   it('uses a hand-vetted preset analogy without changing the canonical body', async () => {
     seedProfile({ interest: 'basketball', gradeLevel: 'Grade 10' })
@@ -111,51 +290,82 @@ describe('Global Lab V3', () => {
     const section = topic.sections[0]
     const sectionElement = document.getElementById(section.id)
     expect(sectionElement).toBeTruthy()
-    expect(sectionElement?.querySelector('.section-body')?.textContent).toBe(section.body)
+    expect(sectionElement?.querySelector('.tbp-body')?.textContent).toBe(section.body)
 
     await user.click(
       within(sectionElement as HTMLElement).getByRole('button', {
-        name: 'Learn it your way',
+        name: 'Learn your way',
       }),
     )
 
     expect(
-      await within(sectionElement as HTMLElement).findByLabelText('basketball analogy'),
+      await within(sectionElement as HTMLElement).findByLabelText(
+        'Personalized learning companion',
+      ),
     ).toBeTruthy()
-    expect(sectionElement?.querySelector('.section-body')?.textContent).toBe(section.body)
+    expect(
+      within(sectionElement as HTMLElement).getByText('Original unchanged.'),
+    ).toBeTruthy()
+    expect(
+      within(sectionElement as HTMLElement)
+        .getByRole('link', { name: topic.source.name })
+        .getAttribute('href'),
+    ).toBe(topic.source.url)
+    expect(
+      within(sectionElement as HTMLElement).getByText(
+        /Where this help stops:/,
+      ),
+    ).toBeTruthy()
+    expect(sectionElement?.querySelector('.tbp-reference-layout')).toBeTruthy()
+    expect(
+      sectionElement?.querySelector('.tbp-reference-primary .tbp-diagram img'),
+    ).toBeTruthy()
+    expect(
+      sectionElement?.querySelector('.tbp-reference-primary .tbp-equation'),
+    ).toBeTruthy()
+    expect(
+      sectionElement?.querySelector(
+        '.textbook-page-left .tbp-page-scroll-flow > .tbp-sticky-analogy--note',
+      ),
+    ).toBeTruthy()
+    expect(
+      sectionElement?.querySelector(
+        '.tbp-reference-hero > .tbp-sticky-analogy',
+      ),
+    ).toBeNull()
+    expect(sectionElement?.querySelector('.tbp-callouts .callout')).toBeTruthy()
+    expect(sectionElement?.querySelector('.tbp-term-index')).toBeTruthy()
+    expect(sectionElement?.querySelector('.tbp-lens-page')).toBeNull()
+    expect(sectionElement?.querySelector('.tbp-body')?.textContent).toBe(section.body)
     expect(mockFetch).not.toHaveBeenCalled()
 
     await user.click(
       within(sectionElement as HTMLElement).getByRole('button', {
-        name: 'Back to original',
+        name: 'Dismiss learning companion',
       }),
     )
-    expect(within(sectionElement as HTMLElement).queryByLabelText(/analogy/)).toBeNull()
-    expect(sectionElement?.querySelector('.section-body')?.textContent).toBe(section.body)
+    expect(
+      within(sectionElement as HTMLElement).queryByLabelText(
+        'Personalized learning companion',
+      ),
+    ).toBeNull()
+    expect(sectionElement?.querySelector('.tbp-body')?.textContent).toBe(section.body)
   })
 
   it('renders a live analogy only and clears it when the profile interest changes', async () => {
     seedProfile({ interest: 'Formula 1', gradeLevel: 'University' })
-    vi.stubEnv('VITE_GEMINI_API_KEY', 'test-gemini-key')
-    const mockFetch = vi.fn().mockResolvedValue({
-      ok: true,
-      json: async () => ({
-        candidates: [
-          {
-            content: {
-              parts: [
-                {
-                  text: JSON.stringify({
-                    analogy:
-                      'A Formula 1 power unit converts stored fuel into controlled output, just as respiration captures glucose energy in ATP.',
-                  }),
-                },
-              ],
-            },
-          },
-        ],
-      }),
-    })
+    const browserSecret = 'browser-secret-must-not-leak'
+    vi.stubEnv('VITE_GEMINI_API_KEY', browserSecret)
+    const mockFetch = vi.fn().mockResolvedValue(
+      proxySuccess(
+        'A Formula 1 power unit converts stored fuel into controlled output, just as respiration captures glucose energy in ATP.',
+        {
+          title: 'A Formula 1 energy bridge',
+          limitations:
+            'A racing engine does not reproduce molecular electron transfer.',
+        },
+      ),
+    )
     vi.stubGlobal('fetch', mockFetch)
     const user = userEvent.setup()
     render(<App />)
@@ -163,65 +373,70 @@ describe('Global Lab V3', () => {
 
     const section = subjects[0].topics[0].sections[0]
     const sectionElement = document.getElementById(section.id) as HTMLElement
-    const originalBody = sectionElement.querySelector('.section-body')?.textContent
+    const originalBody = sectionElement.querySelector('.tbp-body')?.textContent
 
     await user.click(
-      within(sectionElement).getByRole('button', { name: 'Learn it your way' }),
+      within(sectionElement).getByRole('button', { name: 'Learn your way' }),
     )
 
     expect(
       await within(sectionElement).findByText(/A Formula 1 power unit converts/),
     ).toBeTruthy()
-    expect(sectionElement.querySelector('.section-body')?.textContent).toBe(originalBody)
+    expect(
+      within(sectionElement).getByText(
+        /A racing engine does not reproduce molecular electron transfer/,
+      ),
+    ).toBeTruthy()
+    expect(sectionElement.querySelector('.tbp-body')?.textContent).toBe(originalBody)
+    expect(
+      within(sectionElement)
+        .getByRole('link', { name: subjects[0].topics[0].source.name })
+        .getAttribute('href'),
+    ).toBe(subjects[0].topics[0].source.url)
     expect(mockFetch).toHaveBeenCalledOnce()
-    expect(mockFetch.mock.calls[0][0]).toContain('gemini-3.1-flash-lite')
-    expect(mockFetch.mock.calls[0][1].body).toContain(
-      'Use precise undergraduate-level technical vocabulary.',
+    expect(mockFetch.mock.calls[0][0]).toBe('/api/personalize')
+    const requestBody = String(mockFetch.mock.calls[0][1]?.body)
+    expect(requestBody).toContain(
+      'Use precise undergraduate-level technical vocabulary when the source supports it.',
     )
+    expect(requestBody).not.toContain(browserSecret)
+    expect(requestBody).not.toMatch(/api[_ -]?key/i)
 
-    await user.click(screen.getByRole('button', { name: /Your lens.*Formula 1/ }))
-    await user.clear(screen.getByLabelText('Update your interest'))
-    await user.type(screen.getByLabelText('Update your interest'), 'baking')
-    await user.click(screen.getByRole('button', { name: 'Save' }))
+    await user.click(
+      screen.getByRole('button', { name: /Your lens.*Formula 1/i }),
+    )
+    await user.clear(screen.getByLabelText('Personal learning lens'))
+    await user.type(screen.getByLabelText('Personal learning lens'), 'baking')
+    await user.click(screen.getByRole('button', { name: 'Save lens' }))
 
     await waitFor(() => {
       const currentSection = document.getElementById(section.id) as HTMLElement
-      expect(within(currentSection).queryByLabelText(/analogy/)).toBeNull()
+      expect(
+        within(currentSection).queryByLabelText('Personalized learning companion'),
+      ).toBeNull()
     })
-    expect(screen.getByRole('button', { name: /Your lens.*baking/ })).toBeTruthy()
+    expect(document.querySelector('.running-header-interest')?.textContent).toContain(
+      'baking',
+    )
     expect(
-      document.getElementById(section.id)?.querySelector('.section-body')?.textContent,
+      document.getElementById(section.id)?.querySelector('.tbp-body')?.textContent,
     ).toBe(originalBody)
   })
 
-  it('falls back to a neutral analogy on rate limits and can retry', async () => {
+  it('keeps the source visible on rate limits and can retry the companion', async () => {
     seedProfile({ interest: 'baking', gradeLevel: 'Grade 11' })
-    vi.stubEnv('VITE_GEMINI_API_KEY', 'test-gemini-key')
     const mockFetch = vi
       .fn()
       .mockResolvedValueOnce({
         ok: false,
         status: 429,
+        json: async () => ({}),
       })
-      .mockResolvedValueOnce({
-        ok: true,
-        status: 200,
-        json: async () => ({
-          candidates: [
-            {
-              content: {
-                parts: [
-                  {
-                    text: JSON.stringify({
-                      analogy: 'A recovered baking analogy.',
-                    }),
-                  },
-                ],
-              },
-            },
-          ],
+      .mockResolvedValueOnce(
+        proxySuccess('A recovered baking analogy.', {
+          limitations: 'Baking does not reproduce molecular chemistry.',
         }),
-      })
+      )
     vi.stubGlobal('fetch', mockFetch)
     const user = userEvent.setup()
     render(<App />)
@@ -229,22 +444,25 @@ describe('Global Lab V3', () => {
 
     const section = subjects[0].topics[0].sections[0]
     const sectionElement = document.getElementById(section.id) as HTMLElement
-    const originalBody = sectionElement.querySelector('.section-body')?.textContent
+    const originalBody = sectionElement.querySelector('.tbp-body')?.textContent
 
     await user.click(
-      within(sectionElement).getByRole('button', { name: 'Learn it your way' }),
+      within(sectionElement).getByRole('button', { name: 'Learn your way' }),
     )
 
     expect(
-      await within(sectionElement).findByText('Personalization paused'),
+      await within(sectionElement).findByText('Learn Your Way paused'),
     ).toBeTruthy()
-    expect(within(sectionElement).getByLabelText('Clear analogy')).toBeTruthy()
-    expect(within(sectionElement).queryByText('Rewriting…')).toBeNull()
-    expect(sectionElement.querySelector('.section-body')?.textContent).toBe(originalBody)
+    expect(
+      within(sectionElement).getByText(
+        'Personalization is busy. Wait a moment and try again.',
+      ),
+    ).toBeTruthy()
+    expect(sectionElement.querySelector('.tbp-body')?.textContent).toBe(originalBody)
 
     await user.click(
       within(sectionElement).getByRole('button', {
-        name: 'Retry personalized analogy',
+        name: 'Try again',
       }),
     )
 
@@ -252,6 +470,6 @@ describe('Global Lab V3', () => {
       await within(sectionElement).findByText('A recovered baking analogy.'),
     ).toBeTruthy()
     expect(mockFetch).toHaveBeenCalledTimes(2)
-    expect(sectionElement.querySelector('.section-body')?.textContent).toBe(originalBody)
+    expect(sectionElement.querySelector('.tbp-body')?.textContent).toBe(originalBody)
   })
 })

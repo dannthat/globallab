@@ -26,11 +26,12 @@ export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
           <span className="brand-name">Global Lab</span>
         </div>
 
-        <p className="eyebrow mt-8">Your study profile</p>
-        <h1 className="onboarding-title">Make every explanation yours</h1>
+        <p className="eyebrow mt-8">Optional study profile</p>
+        <h1 className="onboarding-title">Make help fit the moment</h1>
         <p className="onboarding-copy">
-          Tell us one thing you’re into. We’ll use it to rewrite any explanation in your
-          language — and we’ll never ask again.
+          Add one interest for optional analogies, or skip and start reading.
+          Learn Your Way keeps every original source unchanged and lets you choose
+          simpler, more detailed, step-by-step, examples, or a quick check.
         </p>
 
         <div className="onboarding-fields">

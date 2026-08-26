@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magical 3D Interactive Book</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="ambient-glow"></div>
+
+    <div class="scene" id="scene">
+        <div class="book" id="book">
+            <!-- Back Cover -->
+            <div class="face cover-back"></div>
+            
+            <!-- Spine -->
+            <div class="face spine"></div>
+            
+            <!-- Page Block Edges (Realistic 3D depth) -->
+            <div class="face pages-edge-right"></div>
+            <div class="face pages-edge-top"></div>
+            <div class="face pages-edge-bottom"></div>
+            
+            <!-- Dynamic Flippable Pages Container -->
+            <div class="pages-container">
+                <!-- Page 1 (Prologue) -->
+                <div class="page" id="page-0">
+                    <div class="page-face page-front">
+                        <div class="page-content">
+                            <span class="page-number">I</span>
+                            <h1>Chapter I</h1>
+                            <h2>The Awakening</h2>
+                            <p>In the forgotten archives of antiquity, amidst dust and silence, there lay a tome that whispered to those who dared to listen. Its leather was forged from the shadows of forgotten beasts, its letters penned in liquid gold.</p>
+                            <div class="page-footer-hint">Click to flip ➔</div>
+                        </div>
+                    </div>
+                    <div class="page-face page-back">
+                        <div class="page-content">
+                            <span class="page-number">II</span>
+                            <p>When the seal was finally broken, it did not merely open; it consumed the room, drawing the reader into a world long thought lost to the ages.</p>
+                            <p>Through the ethereal mist, a figure emerged, shrouded in mysteries of the past. The echoes of forgotten voices began to fill the empty space with melodic incantations.</p>
+                            <div class="page-footer-hint">Click left to return</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 2 -->
+                <div class="page" id="page-1">
+                    <div class="page-face page-front">
+                        <div class="page-content">
+                            <span class="page-number">III</span>
+                            <h1>Chapter II</h1>
+                            <h2>The Descent</h2>
+                            <p>To descend into the catacombs was to invite madness. The walls hummed with an ancient resonance, a song of sorrow and power that seeped into the marrow.</p>
+                            <p>Every step downward felt heavier, as if the earth itself sought to crush the intruder and claim them as another secret kept within its stony embrace.</p>
+                            <div class="page-footer-hint">Click to flip ➔</div>
+                        </div>
+                    </div>
+                    <div class="page-face page-back">
+                        <div class="page-content">
+                            <span class="page-number">IV</span>
+                            <p>But the allure of the arcane was too strong to resist. The promise of knowledge, however forbidden, beckoned with an irresistible pull.</p>
+                            <p>And so, into the abyss they went, leaving the light of the sun behind, forever changed by the shadows that danced upon the ancient stones.</p>
+                            <div class="page-footer-hint">Click left to return</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Page 3 -->
+                <div class="page" id="page-2">
+                    <div class="page-face page-front">
+                        <div class="page-content">
+                            <span class="page-number">V</span>
+                            <h1>Chapter III</h1>
+                            <h2>The Revelation</h2>
+                            <p>At the heart of the labyrinth, bathed in a spectral glow, stood the altar of truth. It was here that the final piece of the puzzle awaited.</p>
+                            <p>The air was thick with anticipation and the scent of ozone. The artifact pulsed, a rhythmic heartbeat in the vast, consuming void.</p>
+                            <div class="page-footer-hint">Click to flip ➔</div>
+                        </div>
+                    </div>
+                    <div class="page-face page-back">
+                        <div class="page-content">
+                            <span class="page-number">VI</span>
+                            <p>To touch it was to comprehend the infinite. A surge of energy coursed through their veins, unlocking doors in the mind that should have remained forever shut.</p>
+                            <p>The end was only the beginning. The real journey was just unfolding, stretching out into the vast unknown cosmos.</p>
+                            <div class="page-footer-hint">Click left to return</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Front Cover Container (Pivots open) -->
+            <div class="front-cover-container">
+                <div class="face cover-front">
+                    <div class="cover-glare"></div>
+                </div>
+                <!-- Inside Front Cover -->
+                <div class="face cover-front-inside">
+                    <div class="endpaper">
+                        <div class="bookplate">
+                            <span>Ex Libris</span>
+                            <p>Chronicles of Antiquity</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Visual Controls / Status -->
+    <div class="ui-overlay">
+        <div class="instructions" id="hint-open">
+            <span class="pulse-icon">✦</span> Click the Book to Focus & Open <span class="pulse-icon">✦</span>
+        </div>
+        <div class="controls" id="book-controls">
+            <button class="nav-btn prev" id="prev-btn" title="Previous Page / Close">◂ Previous</button>
+            <div class="page-indicator" id="page-indicator">Cover</div>
+            <button class="nav-btn next" id="next-btn" title="Next Page">Next Page ▸</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

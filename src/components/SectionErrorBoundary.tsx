@@ -40,11 +40,11 @@ export class SectionErrorBoundary extends Component<
       <div className="section-error-fallback" role="alert">
         <div className="section-error-heading">
           <CircleAlert size={15} aria-hidden="true" />
-          Personalization paused
+          Learn Your Way paused
         </div>
         <p className="section-error-copy">
-          We could not create a custom analogy, so here is the section’s neutral
-          analogy instead.
+          We could not create the requested help. The original explanation above
+          is unchanged; this neutral source-based bridge is available instead.
         </p>
         <AnalogyCard analogy={this.props.neutralAnalogy} persona="neutral" />
         {this.props.error && (
@@ -52,7 +52,7 @@ export class SectionErrorBoundary extends Component<
         )}
         <button type="button" className="section-retry-button" onClick={this.retry}>
           <RotateCcw size={12} aria-hidden="true" />
-          Retry personalized analogy
+          Try again
         </button>
       </div>
     )

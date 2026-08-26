@@ -9,7 +9,7 @@ export function SourcesFooter({ source }: SourcesFooterProps) {
   return (
     <footer className="sources-footer">
       <p className="sources-text">
-        Content grounded in{' '}
+        According to{' '}
         <a
           className="sources-link"
           href={source.url}
@@ -19,7 +19,7 @@ export function SourcesFooter({ source }: SourcesFooterProps) {
           {source.name}
           <ExternalLink className="ml-1 inline" size={11} aria-hidden="true" />
         </a>{' '}
-        ({source.license}). Scientific facts are unmodified.
+        ({source.license}), the core material is presented without changing the scientific facts.
       </p>
     </footer>
   )
