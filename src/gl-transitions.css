@@ -1,0 +1,205 @@
+/* ============================================================
+   GlobalLab — Transition & Animation System
+   The "alive" feeling: spring physics, crossfades, parallax,
+   glow pulses. Import once in main.tsx after index.css.
+   ============================================================ */
+
+/* ── View transition crossfade (page-level) ─────────────────── */
+@keyframes gl-fade-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-6px); }
+}
+
+@keyframes gl-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+::view-transition-old(root) {
+  animation: gl-fade-out 200ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+::view-transition-new(root) {
+  animation: gl-fade-in 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Section slide transitions ───────────────────────────────── */
+@keyframes section-arrive {
+  from { opacity: 0.3; transform: translateY(12px); }
+  to   { opacity: 1;   transform: translateY(0); }
+}
+
+@keyframes section-slide-in-right {
+  from { opacity: 0; transform: translateX(48px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes section-slide-in-left {
+  from { opacity: 0; transform: translateX(-48px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes section-slide-out-left {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-42px); }
+}
+
+@keyframes section-slide-out-right {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(42px); }
+}
+
+/* Default arrive (no direction context) */
+.gl-section-arrive {
+  animation: section-arrive 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Forward navigation (next section) — slide in from right */
+[data-turn-direction='next'] .gl-section-arrive {
+  animation: section-slide-in-right 340ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Backward navigation (prev section) — slide in from left */
+[data-turn-direction='prev'] .gl-section-arrive {
+  animation: section-slide-in-left 340ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* The live reader exposes a visual phase so the old page leaves before the
+   newly keyed section arrives. "previous" is the runtime direction value;
+   "prev" remains supported for older callers and visual-contract tests. */
+[data-turn-phase='leaving'][data-turn-direction='next'] .gl-section-arrive {
+  animation: section-slide-out-left 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+[data-turn-phase='arriving'][data-turn-direction='next'] .gl-section-arrive {
+  animation: section-slide-in-right 340ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+[data-turn-phase='leaving'][data-turn-direction='previous'] .gl-section-arrive,
+[data-turn-phase='leaving'][data-turn-direction='prev'] .gl-section-arrive {
+  animation: section-slide-out-right 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+[data-turn-phase='arriving'][data-turn-direction='previous'] .gl-section-arrive,
+[data-turn-phase='arriving'][data-turn-direction='prev'] .gl-section-arrive {
+  animation: section-slide-in-left 340ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Avoid replaying the generic vertical entrance when the directional turn
+   state clears after the new section has already settled. */
+.textbook-reader-page:not([data-turn-direction]) .gl-section-arrive {
+  animation: none;
+}
+
+/* ── Companion panel spring-in (from right) ─────────────────── */
+@keyframes companion-spring-in {
+  from {
+    opacity: 0;
+    transform: translateX(28px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes companion-spring-out {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20px) scale(0.98);
+  }
+}
+
+.gl-companion-open {
+  animation: companion-spring-in 380ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.gl-companion-close {
+  animation: companion-spring-out 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Bookmark strip glow pulse ──────────────────────────────── */
+@keyframes bookmark-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 0 rgb(201 125 42 / 0%),
+      0 -1px 0 0 rgb(201 125 42 / 18%) inset;
+  }
+  50% {
+    box-shadow:
+      0 0 22px 4px rgb(201 125 42 / 22%),
+      0 -1px 0 0 rgb(201 125 42 / 35%) inset;
+  }
+}
+
+.gl-bookmark-pulse {
+  animation: bookmark-pulse 3.2s ease-in-out infinite;
+}
+
+/* ── Hero card tilt (JS drives --tilt-x/--tilt-y) ──────────── */
+.gl-tilt-card {
+  transition:
+    transform 120ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 120ms ease;
+  will-change: transform;
+  transform:
+    perspective(900px)
+    rotateX(var(--tilt-x, 0deg))
+    rotateY(var(--tilt-y, 0deg));
+}
+
+.gl-tilt-card:hover {
+  box-shadow:
+    0 28px 64px rgb(0 0 0 / 42%),
+    0 8px 20px rgb(0 0 0 / 28%);
+}
+
+/* ── Onboarding card reveal ──────────────────────────────────── */
+@keyframes onboarding-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-reveal {
+  animation: onboarding-reveal 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Source row hover slide ──────────────────────────────────── */
+@keyframes row-slide-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Reduced motion overrides ────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+
+  .gl-section-arrive,
+  [data-turn-direction='next'] .gl-section-arrive,
+  [data-turn-direction='prev'] .gl-section-arrive,
+  [data-turn-phase] .gl-section-arrive,
+  .gl-companion-open,
+  .gl-companion-close,
+  .gl-bookmark-pulse,
+  .animate-reveal {
+    animation: none;
+  }
+
+  .gl-tilt-card {
+    transform: none !important;
+    transition: none;
+  }
+}

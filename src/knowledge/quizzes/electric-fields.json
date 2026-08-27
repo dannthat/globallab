@@ -1,0 +1,606 @@
+{
+  "topicId": "electric-fields",
+  "subjectId": "physics",
+  "questions": [
+    {
+      "id": "electric-fields--overview--q1",
+      "sectionId": "overview",
+      "question": "How do two positive point charges interact?",
+      "options": [
+        "They repel",
+        "They attract",
+        "They exchange all charge",
+        "They exert no force"
+      ],
+      "correctIndex": 0,
+      "explanation": "Charges with the same sign repel one another. Attraction occurs between unlike signs rather than two positive charges.",
+      "sourceEvidence": "Like charges repel and unlike charges attract.",
+      "misconceptionTargeted": "Reversing the attraction and repulsion rules for charge signs"
+    },
+    {
+      "id": "electric-fields--overview--q2",
+      "sectionId": "overview",
+      "question": "What does charge quantisation mean for an isolated ordinary object?",
+      "options": [
+        "Its net charge changes continuously through any value",
+        "Its net charge occurs in integer multiples of e",
+        "It can carry only positive charge",
+        "Its charge must always be zero"
+      ],
+      "correctIndex": 1,
+      "explanation": "Ordinary observable charge changes in whole multiples of the elementary charge. Quantisation does not require neutrality or forbid negative multiples.",
+      "sourceEvidence": "Charge is quantised in integer multiples of the elementary charge e, although quarks carry fractional values while confined inside hadrons.",
+      "misconceptionTargeted": "Treating charge as continuous or assuming quantisation means neutrality"
+    },
+    {
+      "id": "electric-fields--overview--q3",
+      "sectionId": "overview",
+      "question": "Electrons move from one object to another inside an isolated system. What happens to total charge?",
+      "options": [
+        "It increases",
+        "It decreases",
+        "It remains constant",
+        "It becomes positive"
+      ],
+      "correctIndex": 2,
+      "explanation": "Charge transfer redistributes charge while preserving the isolated system's algebraic total. Moving electrons does not create or destroy net charge.",
+      "sourceEvidence": "In an isolated system, the algebraic total charge remains constant even when electrons move between objects.",
+      "misconceptionTargeted": "Confusing charge transfer with creation or destruction of charge"
+    },
+    {
+      "id": "electric-fields--overview--q4",
+      "sectionId": "overview",
+      "question": "Two point charges are moved from separation r to 2r. How does the Coulomb force magnitude change?",
+      "options": [
+        "It doubles",
+        "It halves",
+        "It becomes four times larger",
+        "It becomes one quarter"
+      ],
+      "correctIndex": 3,
+      "explanation": "The inverse-square law makes doubling distance reduce force by a factor of four. An inverse-linear prediction overlooks the square on separation.",
+      "sourceEvidence": "Its magnitude is proportional to the product of the charge magnitudes and inversely proportional to the square of their separation.",
+      "misconceptionTargeted": "Treating Coulomb force as inversely proportional to distance rather than distance squared"
+    },
+    {
+      "id": "electric-fields--overview--q5",
+      "sectionId": "overview",
+      "question": "If one point charge doubles while separation and the other charge stay fixed, what happens to Coulomb force magnitude?",
+      "options": [
+        "It doubles",
+        "It stays unchanged",
+        "It halves",
+        "It quadruples"
+      ],
+      "correctIndex": 0,
+      "explanation": "Coulomb force is directly proportional to each charge magnitude, so doubling one doubles the force. The square applies to separation, not to each individual charge.",
+      "sourceEvidence": "Its magnitude is proportional to the product of the charge magnitudes and inversely proportional to the square of their separation.",
+      "misconceptionTargeted": "Applying the inverse-square dependence to charge instead of separation"
+    },
+    {
+      "id": "electric-fields--overview--q6",
+      "sectionId": "overview",
+      "question": "Along what direction does the electrostatic force between two stationary point charges act?",
+      "options": [
+        "Perpendicular to the line joining them",
+        "Along the line joining them",
+        "Always vertically upward",
+        "Tangentially around each charge"
+      ],
+      "correctIndex": 1,
+      "explanation": "The pairwise Coulomb force is directed along the line connecting the two charges. Its attractive or repulsive sense changes with signs, but it is not tangential.",
+      "sourceEvidence": "The force lies along the line joining the charges.",
+      "misconceptionTargeted": "Assigning Coulomb force a tangential or arbitrary direction"
+    },
+    {
+      "id": "electric-fields--overview--q7",
+      "sectionId": "overview",
+      "question": "What generally happens to the Coulomb interaction when the charges are placed in a polarizable medium instead of vacuum?",
+      "options": [
+        "It reverses direction for every pair",
+        "It becomes infinite",
+        "It is reduced",
+        "It loses its dependence on distance"
+      ],
+      "correctIndex": 2,
+      "explanation": "Polarisation in the medium increases effective permittivity and reduces the interaction relative to vacuum. The medium changes the magnitude without universally reversing the sign or removing distance dependence.",
+      "sourceEvidence": "In a medium, electric polarisation reduces the interaction relative to vacuum, represented by replacing the vacuum permittivity with the medium’s permittivity.",
+      "misconceptionTargeted": "Assuming a dielectric medium leaves electrostatic interaction unchanged or reverses every force"
+    },
+    {
+      "id": "electric-fields--overview--q8",
+      "sectionId": "overview",
+      "question": "Which procedure correctly finds the force on one charge from several others?",
+      "options": [
+        "Average the pairwise distances first",
+        "Add only charge magnitudes",
+        "Use only the nearest source charge",
+        "Add all pairwise force vectors"
+      ],
+      "correctIndex": 3,
+      "explanation": "Electrostatic superposition requires a vector sum of every pairwise force on the target charge. Scalar-only addition loses direction unless the geometry is strictly collinear and signed.",
+      "sourceEvidence": "For several charges, the net force is the vector sum of the pairwise Coulomb forces.",
+      "misconceptionTargeted": "Adding Coulomb force magnitudes while ignoring vector direction"
+    },
+    {
+      "id": "electric-fields--field-lines--q1",
+      "sectionId": "field-lines",
+      "question": "How is the electric field at a point defined?",
+      "options": [
+        "Force per unit positive test charge",
+        "Energy per unit mass",
+        "Charge per unit area",
+        "Potential per unit time"
+      ],
+      "correctIndex": 0,
+      "explanation": "Electric field is the force that would act on each unit of positive test charge. Energy, surface charge density, and time rate are different physical quantities.",
+      "sourceEvidence": "An electric field assigns a force per unit positive test charge to every point in space.",
+      "misconceptionTargeted": "Confusing electric field with potential, charge density, or power"
+    },
+    {
+      "id": "electric-fields--field-lines--q2",
+      "sectionId": "field-lines",
+      "question": "Does an electric field vanish when no test charge is placed at the point?",
+      "options": [
+        "Yes, because the test charge creates the field",
+        "No, the source charge creates the field independently",
+        "Yes, unless the test charge is negative",
+        "No, but only inside a conductor"
+      ],
+      "correctIndex": 1,
+      "explanation": "Source charges establish the field throughout space whether or not another charge samples it. A test charge reveals the field and should not be mistaken for its source.",
+      "sourceEvidence": "A source charge creates the field whether or not a test charge is present; a test charge merely samples it.",
+      "misconceptionTargeted": "Believing a test charge must be present to create the electric field"
+    },
+    {
+      "id": "electric-fields--field-lines--q3",
+      "sectionId": "field-lines",
+      "question": "Which directions describe point-charge electric fields?",
+      "options": [
+        "Clockwise around both signs",
+        "Inward toward positive and outward from negative",
+        "Outward from positive and inward toward negative",
+        "Parallel for every source"
+      ],
+      "correctIndex": 2,
+      "explanation": "Field direction follows the force on a positive test charge, outward from positive and inward toward negative. Reversing the signs would describe the force on a negative test charge rather than the field.",
+      "sourceEvidence": "The field of a positive point charge points radially outward, while the field of a negative charge points inward.",
+      "misconceptionTargeted": "Defining field direction using a negative test charge"
+    },
+    {
+      "id": "electric-fields--field-lines--q4",
+      "sectionId": "field-lines",
+      "question": "Which two units are equivalent for electric field strength?",
+      "options": [
+        "Volts per second and ohms",
+        "Joules and watts",
+        "Coulombs per metre and teslas",
+        "Newtons per coulomb and volts per metre"
+      ],
+      "correctIndex": 3,
+      "explanation": "Electric field can be expressed as force per charge or potential gradient, giving newtons per coulomb and volts per metre. The alternative unit pairs describe energy, power, charge density, magnetism, or resistance.",
+      "sourceEvidence": "Field strength has units of newtons per coulomb, equivalent to volts per metre.",
+      "misconceptionTargeted": "Using units of potential or force alone for electric field"
+    },
+    {
+      "id": "electric-fields--field-lines--q5",
+      "sectionId": "field-lines",
+      "question": "What information does an electric field-line drawing encode?",
+      "options": [
+        "Tangent gives direction and line density suggests relative magnitude",
+        "Line colour gives charge mass and length gives voltage",
+        "Each line is a physical wire",
+        "Only the number of lines is measurable"
+      ],
+      "correctIndex": 0,
+      "explanation": "The local tangent indicates field direction and closer line spacing represents stronger relative field. Field lines are a visual convention rather than physical threads or countable objects.",
+      "sourceEvidence": "Their tangent gives the field direction, their density indicates relative magnitude, and they begin on positive charge and end on negative charge or at infinity.",
+      "misconceptionTargeted": "Treating field lines as physical threads or a directly countable quantity"
+    },
+    {
+      "id": "electric-fields--field-lines--q6",
+      "sectionId": "field-lines",
+      "question": "Why can two electric field lines never cross?",
+      "options": [
+        "Crossing would create charge",
+        "The field cannot have two directions at one point",
+        "Lines repel mechanically",
+        "Every field must be uniform"
+      ],
+      "correctIndex": 1,
+      "explanation": "At a single location the electric field vector has one unique direction. Crossing lines would assign two incompatible directions at the intersection.",
+      "sourceEvidence": "Lines never cross because the field at one point has only one direction.",
+      "misconceptionTargeted": "Allowing a single-valued vector field to point in two directions at one point"
+    },
+    {
+      "id": "electric-fields--field-lines--q7",
+      "sectionId": "field-lines",
+      "question": "What is the electric field inside a conductor in electrostatic equilibrium?",
+      "options": [
+        "Infinite",
+        "Uniform and nonzero",
+        "Zero",
+        "Always radially outward"
+      ],
+      "correctIndex": 2,
+      "explanation": "Free charges redistribute until they cancel any internal electrostatic field. A persistent internal field would keep driving charges and contradict equilibrium.",
+      "sourceEvidence": "Inside a conductor in electrostatic equilibrium, the electric field is zero.",
+      "misconceptionTargeted": "Assuming a conductor at electrostatic equilibrium sustains an internal field"
+    },
+    {
+      "id": "electric-fields--field-lines--q8",
+      "sectionId": "field-lines",
+      "question": "Why is corona discharge likely near a sharply pointed conductor?",
+      "options": [
+        "Charge moves permanently into the conductor interior",
+        "Sharp regions eliminate all surface charge",
+        "The field becomes tangential to the surface",
+        "Sharp regions have greater surface charge density and stronger fields"
+      ],
+      "correctIndex": 3,
+      "explanation": "Surface charge crowds near sharp curvature, producing a strong nearby electric field that can ionize air. Electrostatic excess charge remains on the surface and the exterior field is normal, not tangential.",
+      "sourceEvidence": "Sharp regions have greater surface charge density, which explains strong fields and corona discharge near pointed conductors.",
+      "misconceptionTargeted": "Assuming surface curvature has no effect on charge density or field strength"
+    },
+    {
+      "id": "electric-fields--gauss-law--q1",
+      "sectionId": "gauss-law",
+      "question": "Which angle belongs in the small-area flux contribution E cos θ dA?",
+      "options": [
+        "The angle between field and outward area normal",
+        "The angle between field and surface plane only",
+        "The angle between two charges",
+        "The angle measured from vertical in every problem"
+      ],
+      "correctIndex": 0,
+      "explanation": "Flux uses the dot product between the field and the oriented area vector. Using the surface plane angle without conversion swaps sine and cosine behaviour.",
+      "sourceEvidence": "For a small flat element, the contribution is E cos θ dA, where θ is the angle between the field and the outward area normal.",
+      "misconceptionTargeted": "Using the angle to the surface plane instead of the area normal"
+    },
+    {
+      "id": "electric-fields--gauss-law--q2",
+      "sectionId": "gauss-law",
+      "question": "What is the flux contribution when an electric field is tangent to a surface element?",
+      "options": [
+        "Maximum positive",
+        "Zero",
+        "Maximum negative",
+        "Equal to the enclosed charge"
+      ],
+      "correctIndex": 1,
+      "explanation": "A tangent field is perpendicular to the area normal, so its dot product through the element is zero. A strong field can still give zero flux when it does not pass through the surface.",
+      "sourceEvidence": "A field tangent to the surface contributes no flux through that element.",
+      "misconceptionTargeted": "Equating nonzero field magnitude with nonzero flux"
+    },
+    {
+      "id": "electric-fields--gauss-law--q3",
+      "sectionId": "gauss-law",
+      "question": "What determines the net electric flux through a closed surface?",
+      "options": [
+        "The surface material",
+        "Only charges outside the surface",
+        "Only the enclosed charge",
+        "The number of drawn field lines"
+      ],
+      "correctIndex": 2,
+      "explanation": "Gauss's law relates closed-surface net flux to charge enclosed divided by vacuum permittivity. Outside charges can shape local fields but do not change the net closed flux.",
+      "sourceEvidence": "Gauss’s law states that the net electric flux through any closed surface equals the enclosed charge divided by the vacuum permittivity.",
+      "misconceptionTargeted": "Including exterior charge in the enclosed-charge side of Gauss's law"
+    },
+    {
+      "id": "electric-fields--gauss-law--q4",
+      "sectionId": "gauss-law",
+      "question": "Why does a charge outside a closed Gaussian surface contribute zero net flux through it?",
+      "options": [
+        "Its charge becomes neutral",
+        "It creates no field inside the surface",
+        "The surface blocks electric fields",
+        "Its field lines enter and leave in equal net amounts"
+      ],
+      "correctIndex": 3,
+      "explanation": "An external charge can send field through the surface, but every entering contribution is balanced by an exiting contribution. Zero net flux does not mean the external charge produces zero local field.",
+      "sourceEvidence": "Charges outside the surface can influence the local field, but their field lines enter and leave in equal net amounts, producing zero total contribution to closed-surface flux.",
+      "misconceptionTargeted": "Concluding that outside charges produce no field anywhere on a Gaussian surface"
+    },
+    {
+      "id": "electric-fields--gauss-law--q5",
+      "sectionId": "gauss-law",
+      "question": "For which closed surface shapes is Gauss's law exact?",
+      "options": [
+        "Any closed shape",
+        "Only cylinders",
+        "Only spheres",
+        "Only surfaces made of conductors"
+      ],
+      "correctIndex": 0,
+      "explanation": "The flux-charge equality holds for every closed surface regardless of shape. Symmetric shapes help calculate fields but do not limit the law's validity.",
+      "sourceEvidence": "The law is exact for any closed shape and is one of Maxwell’s equations.",
+      "misconceptionTargeted": "Confusing convenient Gaussian symmetry with the validity of Gauss's law"
+    },
+    {
+      "id": "electric-fields--gauss-law--q6",
+      "sectionId": "gauss-law",
+      "question": "When is Gauss's law especially useful for calculating field magnitude?",
+      "options": [
+        "Whenever any closed surface is drawn",
+        "When symmetry makes E constant on suitable surface parts",
+        "Only when no charge is enclosed",
+        "Only when the field is zero"
+      ],
+      "correctIndex": 1,
+      "explanation": "Strong symmetry can make the flux integral factor into a constant field magnitude times area. A closed surface alone does not guarantee that E can be removed from the integral.",
+      "sourceEvidence": "Gauss’s law becomes a practical field-calculation tool only when symmetry makes the field magnitude constant on suitable parts of a Gaussian surface and fixes its direction relative to the area vector.",
+      "misconceptionTargeted": "Assuming any Gaussian surface automatically makes the field easy to calculate"
+    },
+    {
+      "id": "electric-fields--gauss-law--q7",
+      "sectionId": "gauss-law",
+      "question": "Which Gaussian surface best matches an ideal very long line charge?",
+      "options": [
+        "A disk with no closed side",
+        "A cube tilted randomly",
+        "A coaxial cylinder",
+        "A sphere centred far away"
+      ],
+      "correctIndex": 2,
+      "explanation": "A coaxial cylinder respects the rotational and translational symmetry of a long line charge. An open disk cannot be used directly and arbitrary shapes do not expose constant field magnitude.",
+      "sourceEvidence": "Spherical symmetry suits point charges and charged spheres, cylindrical symmetry suits long line charges, and planar symmetry suits very large sheets.",
+      "misconceptionTargeted": "Choosing a Gaussian surface that does not match the source symmetry"
+    },
+    {
+      "id": "electric-fields--gauss-law--q8",
+      "sectionId": "gauss-law",
+      "question": "What is a Gaussian surface physically?",
+      "options": [
+        "A collection of measurable field lines",
+        "A charged conducting shell that must exist",
+        "A barrier that blocks outside fields",
+        "An imaginary closed surface chosen for a flux calculation"
+      ],
+      "correctIndex": 3,
+      "explanation": "A Gaussian surface is a mathematical boundary selected to simplify a closed flux integral. It need not be a real material object or shield.",
+      "sourceEvidence": "A Gaussian surface is imaginary; it is chosen to simplify the flux integral and is not a material boundary.",
+      "misconceptionTargeted": "Treating a Gaussian surface as a physical shell"
+    },
+    {
+      "id": "electric-fields--electric-potential--q1",
+      "sectionId": "electric-potential",
+      "question": "How does electric potential differ from electric potential energy?",
+      "options": [
+        "Potential is energy per unit charge at a location",
+        "Potential is a vector force",
+        "Potential energy is independent of charge",
+        "They are identical quantities with identical units"
+      ],
+      "correctIndex": 0,
+      "explanation": "Electric potential describes potential energy per unit charge, while actual potential energy depends on the charge placed there. Potential is a scalar and is not itself a force vector.",
+      "sourceEvidence": "Electric potential energy belongs to a configuration of charges, while electric potential is potential energy per unit charge at a location.",
+      "misconceptionTargeted": "Treating potential and potential energy as interchangeable"
+    },
+    {
+      "id": "electric-fields--electric-potential--q2",
+      "sectionId": "electric-potential",
+      "question": "How are potentials from several source charges combined?",
+      "options": [
+        "By vector components",
+        "Algebraically as scalars",
+        "Only the nearest potential counts",
+        "By multiplying all values"
+      ],
+      "correctIndex": 1,
+      "explanation": "Electric potential is scalar, so signed source contributions add algebraically. Vector component addition is required for electric field, not potential.",
+      "sourceEvidence": "Potential is a scalar, so contributions from multiple source charges add algebraically.",
+      "misconceptionTargeted": "Adding electric potential as a vector"
+    },
+    {
+      "id": "electric-fields--electric-potential--q3",
+      "sectionId": "electric-potential",
+      "question": "What does one volt equal?",
+      "options": [
+        "One coulomb per joule",
+        "One newton per metre",
+        "One joule per coulomb",
+        "One watt per second"
+      ],
+      "correctIndex": 2,
+      "explanation": "Voltage measures potential-energy change for each coulomb, so one volt is one joule per coulomb. Reversing the ratio or using force units changes the physical quantity.",
+      "sourceEvidence": "The potential difference ΔV between two points equals the change in potential energy per unit charge, and one volt is one joule per coulomb.",
+      "misconceptionTargeted": "Reversing the energy-per-charge definition of voltage"
+    },
+    {
+      "id": "electric-fields--electric-potential--q4",
+      "sectionId": "electric-potential",
+      "question": "In what direction does the electric field point relative to electric potential?",
+      "options": [
+        "In a direction unrelated to potential",
+        "Toward the steepest increase for every charge",
+        "Along every equipotential",
+        "Toward the steepest decrease of potential"
+      ],
+      "correctIndex": 3,
+      "explanation": "The electric field is the negative spatial gradient and points downhill in potential. A charge's force direction may reverse with its sign, but the field-potential relation does not.",
+      "sourceEvidence": "The electric field points in the direction of steepest decrease of potential.",
+      "misconceptionTargeted": "Using the force on a negative charge to define electric-field direction"
+    },
+    {
+      "id": "electric-fields--electric-potential--q5",
+      "sectionId": "electric-potential",
+      "question": "Does electrostatic potential difference between two fixed endpoints depend on the route taken?",
+      "options": [
+        "No, because the electrostatic field is conservative",
+        "Yes, it is proportional to path length",
+        "Only for positive charges",
+        "Only if the path crosses an equipotential"
+      ],
+      "correctIndex": 0,
+      "explanation": "A conservative electrostatic field gives the same potential difference for every path connecting the endpoints. Path length affects neither endpoint potential difference nor the sign of a test charge.",
+      "sourceEvidence": "Electrostatic fields are conservative, so the potential difference depends only on endpoints, not on the route.",
+      "misconceptionTargeted": "Treating electrostatic potential difference as path-dependent"
+    },
+    {
+      "id": "electric-fields--electric-potential--q6",
+      "sectionId": "electric-potential",
+      "question": "Why do electric field lines cross equipotential surfaces at right angles?",
+      "options": [
+        "Equipotentials are made of conductors in every case",
+        "Motion along an equipotential requires no electric work",
+        "The field vanishes everywhere on them",
+        "Potential is a vector tangent to them"
+      ],
+      "correctIndex": 1,
+      "explanation": "A tangential field would perform work along the surface and change potential. An equipotential can have a nonzero normal field and need not be a material conductor.",
+      "sourceEvidence": "Equipotential surfaces intersect field lines at right angles because motion along an equipotential requires no electric work.",
+      "misconceptionTargeted": "Assuming zero potential change means zero electric field"
+    },
+    {
+      "id": "electric-fields--electric-potential--q7",
+      "sectionId": "electric-potential",
+      "question": "With zero potential at infinity, what is the sign of potential near a negative point charge?",
+      "options": [
+        "Always zero",
+        "Positive",
+        "Negative",
+        "Undefined because field magnitude is positive"
+      ],
+      "correctIndex": 2,
+      "explanation": "The point-charge potential kq/r inherits the negative sign of the source charge. A nonnegative field magnitude does not force the scalar potential to be positive.",
+      "sourceEvidence": "The sign of q determines the sign of potential, whereas the field magnitude remains nonnegative and its vector direction is treated separately.",
+      "misconceptionTargeted": "Assuming electric potential must be nonnegative because field magnitude is nonnegative"
+    },
+    {
+      "id": "electric-fields--electric-potential--q8",
+      "sectionId": "electric-potential",
+      "question": "Why can a released negative charge accelerate toward higher electric potential?",
+      "options": [
+        "It has no potential energy",
+        "Its electric field reverses when released",
+        "Higher potential always means higher energy for every charge",
+        "Its potential energy qV decreases when V increases"
+      ],
+      "correctIndex": 3,
+      "explanation": "For negative q, increasing V makes qV more negative and lowers the charge's potential energy. The direction of energy decrease depends on charge sign rather than potential alone.",
+      "sourceEvidence": "A charged particle released from rest converts electric potential energy into kinetic energy when the electric force moves it toward lower potential energy; a negative charge can therefore accelerate toward higher electric potential.",
+      "misconceptionTargeted": "Assuming every charge accelerates toward lower electric potential"
+    },
+    {
+      "id": "electric-fields--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "Which pair contains vector quantities?",
+      "options": [
+        "Force and electric field",
+        "Potential energy and electric potential",
+        "Charge and potential",
+        "Energy and voltage"
+      ],
+      "correctIndex": 0,
+      "explanation": "Force and electric field require both magnitude and direction. Potential energy and electric potential are scalars and combine algebraically.",
+      "sourceEvidence": "Force and field are vectors; potential energy and potential are scalars.",
+      "misconceptionTargeted": "Treating electric potential as a vector or electric field as a scalar"
+    },
+    {
+      "id": "electric-fields--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "A positive test charge is replaced by a negative one at the same point. What changes?",
+      "options": [
+        "The field reverses but force does not",
+        "The force reverses but the source-created field does not",
+        "Both field and source potential vanish",
+        "Neither force nor field changes"
+      ],
+      "correctIndex": 1,
+      "explanation": "The same field acts on the new charge, but F = qE reverses force when q changes sign. The test charge does not redefine the field created by the sources.",
+      "sourceEvidence": "A negative test charge feels a force opposite to the field direction, but the field itself does not reverse when the test charge changes.",
+      "misconceptionTargeted": "Reversing the electric field when only the test-charge sign changes"
+    },
+    {
+      "id": "electric-fields--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "Which charges belong in Qenc for Gauss's law?",
+      "options": [
+        "Only positive charges",
+        "All charges anywhere in space",
+        "Only charges inside the chosen closed surface",
+        "Only charges lying on field lines drawn in the diagram"
+      ],
+      "correctIndex": 2,
+      "explanation": "The right side of Gauss's law uses the algebraic charge enclosed by the selected surface. Outside charges influence the integrand field but not Qenc.",
+      "sourceEvidence": "In Gauss’s law, Qenc includes only charge inside the chosen closed surface, while the flux integral uses the total electric field from all charges.",
+      "misconceptionTargeted": "Including exterior source charges in Qenc"
+    },
+    {
+      "id": "electric-fields--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "What does zero enclosed charge guarantee for a closed surface?",
+      "options": [
+        "Zero electric potential everywhere",
+        "Zero field at every surface point",
+        "Zero external charge",
+        "Zero net flux"
+      ],
+      "correctIndex": 3,
+      "explanation": "Gauss's law makes the signed total flux zero when enclosed charge is zero. External fields may still enter and leave the surface, producing nonzero local field.",
+      "sourceEvidence": "Zero enclosed charge implies zero net flux, not necessarily zero field.",
+      "misconceptionTargeted": "Equating zero net flux with zero field everywhere"
+    },
+    {
+      "id": "electric-fields--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "Can Gauss's law be applied directly to a single open disk?",
+      "options": [
+        "No, the disk must be completed into a closed surface",
+        "Yes, every surface qualifies",
+        "Yes, but only if it encloses no charge",
+        "No, because disks have zero area"
+      ],
+      "correctIndex": 0,
+      "explanation": "Gauss's law relates net flux through a closed boundary to enclosed charge. An open disk has no well-defined enclosed volume until additional surfaces close it.",
+      "sourceEvidence": "Do not use open surfaces in Gauss’s law without completing them into a closed surface.",
+      "misconceptionTargeted": "Applying closed-surface Gauss's law directly to an open surface"
+    },
+    {
+      "id": "electric-fields--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "For a negative point source with zero potential at infinity, which sign should V have?",
+      "options": [
+        "Positive because r is positive",
+        "Negative",
+        "Zero at every finite r",
+        "The same sign as field magnitude"
+      ],
+      "correctIndex": 1,
+      "explanation": "The scalar potential kq/r retains the negative source-charge sign. Positive distance and nonnegative field magnitude do not erase q's sign.",
+      "sourceEvidence": "Electric potential from a negative source charge is negative relative to infinity, and electric potential energy is qV.",
+      "misconceptionTargeted": "Dropping the source-charge sign when calculating electric potential"
+    },
+    {
+      "id": "electric-fields--exam-traps--q7",
+      "sectionId": "exam-traps",
+      "question": "When may the magnitude relation E = ΔV/d be used directly?",
+      "options": [
+        "Along any curved path",
+        "For every nonuniform radial field",
+        "For a uniform field along the displacement",
+        "Only when ΔV is zero"
+      ],
+      "correctIndex": 2,
+      "explanation": "A uniform aligned field gives a constant potential gradient whose magnitude is ΔV divided by distance. Nonuniform or misaligned fields require the line-integral relation instead.",
+      "sourceEvidence": "The relation E = ΔV/d applies in magnitude only for a uniform field along the displacement.",
+      "misconceptionTargeted": "Using E = ΔV/d in a nonuniform field or across a misaligned path"
+    },
+    {
+      "id": "electric-fields--exam-traps--q8",
+      "sectionId": "exam-traps",
+      "question": "Which orientation should be used for the area vector on a closed surface?",
+      "options": [
+        "Toward the nearest charge",
+        "Inward everywhere",
+        "Parallel to the surface",
+        "Outward everywhere"
+      ],
+      "correctIndex": 3,
+      "explanation": "Closed-surface flux convention defines each area element normal as outward. Changing orientations from point to point corrupts the signed flux sum.",
+      "sourceEvidence": "Always define the zero of potential, use metres in inverse-distance formulas, and keep the area vector outward for closed-surface flux.",
+      "misconceptionTargeted": "Using inconsistent or inward area normals for closed-surface flux"
+    }
+  ]
+}

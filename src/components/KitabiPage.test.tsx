@@ -126,6 +126,28 @@ afterEach(() => {
 })
 
 describe('KitabiPage page turns', () => {
+  it('opens the topic mastery dialog and suspends reader navigation while it is active', () => {
+    renderReader()
+
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Test Your Mastery' }),
+    )
+    expect(
+      screen.getByRole('dialog', { name: 'Test your mastery' }),
+    ).toBeTruthy()
+
+    fireEvent.keyDown(window, { key: 'ArrowRight' })
+    act(() => vi.advanceTimersByTime(1200))
+    expect(screen.getByTestId('visible-section').textContent).toBe(
+      'Section one',
+    )
+
+    fireEvent.keyDown(document, { key: 'Escape' })
+    expect(
+      screen.queryByRole('dialog', { name: 'Test your mastery' }),
+    ).toBeNull()
+  })
+
   it('keeps the outgoing section visible until the turn midpoint', () => {
     const { container } = renderReader()
 

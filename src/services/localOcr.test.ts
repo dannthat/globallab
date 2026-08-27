@@ -13,7 +13,7 @@ vi.mock('tesseract.js', () => ({
   createWorker: mocks.createWorker,
 }))
 
-import { recognizeLocalImage, terminateLocalOcr } from './localOcr'
+import { prewarmLocalOcr, recognizeLocalImage, terminateLocalOcr } from './localOcr'
 
 afterEach(async () => {
   await terminateLocalOcr()
@@ -49,6 +49,16 @@ describe('local OCR', () => {
       }),
     )
     expect(mocks.recognize.mock.calls[0]?.[0]).toBeInstanceOf(Blob)
+  })
+
+  it('prewarms local OCR worker without throwing', async () => {
+    mocks.createWorker.mockResolvedValue({
+      recognize: mocks.recognize,
+      terminate: mocks.terminate,
+    })
+
+    await expect(prewarmLocalOcr()).resolves.toBeUndefined()
+    expect(mocks.createWorker).toHaveBeenCalled()
   })
 
   it('fails honestly when no readable text is found', async () => {

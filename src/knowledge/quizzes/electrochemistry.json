@@ -1,0 +1,606 @@
+{
+  "topicId": "electrochemistry",
+  "subjectId": "chemistry",
+  "questions": [
+    {
+      "id": "electrochemistry--overview--q1",
+      "sectionId": "overview",
+      "question": "Which process involves loss of electrons and an increase in oxidation number?",
+      "options": [
+        "galvanic cell",
+        "anode",
+        "oxidation",
+        "cathode"
+      ],
+      "correctIndex": 2,
+      "explanation": "Oxidation removes electrons and raises oxidation number. Reduction gains electrons and lowers oxidation number.",
+      "sourceEvidence": "Oxidation-reduction reactions transfer electrons or redistribute electron density.",
+      "misconceptionTargeted": "Thinking oxidation means gaining electrons or lowering oxidation number."
+    },
+    {
+      "id": "electrochemistry--overview--q2",
+      "sectionId": "overview",
+      "question": "Which statement correctly pairs oxidation and reduction with electron transfer?",
+      "options": [
+        "Convert current and time to coulombs, coulombs to moles of electrons, then electrons to moles of product.",
+        "Use seconds, amperes, and the correct n value.",
+        "In aqueous electrolysis, do not assume the dissolved ion is always discharged; compare water reactions, concentration, electrode material, and overpotential before assigning products.",
+        "Oxidation is loss of electrons and an increase in oxidation number; reduction is gain of electrons and a decrease in oxidation number."
+      ],
+      "correctIndex": 3,
+      "explanation": "Oxidation is electron loss, whereas reduction is electron gain. Their oxidation-number changes follow the same directions.",
+      "sourceEvidence": "Oxidation is loss of electrons and an increase in oxidation number; reduction is gain of electrons and a decrease in oxidation number.",
+      "misconceptionTargeted": "Reversing electron transfer by saying oxidation gains electrons and reduction loses them."
+    },
+    {
+      "id": "electrochemistry--overview--q3",
+      "sectionId": "overview",
+      "question": "Which bookkeeping value is zero for an element in its standard form and equals charge for a monatomic ion?",
+      "options": [
+        "oxidation number",
+        "electrode potential",
+        "standard hydrogen electrode",
+        "reduction potential"
+      ],
+      "correctIndex": 0,
+      "explanation": "Oxidation number is assigned by formal rules to track redox changes. Its change identifies which atoms are oxidised or reduced.",
+      "sourceEvidence": "Elements in their standard form have oxidation number zero, monatomic ions equal their charge, oxygen is usually −2, and hydrogen is usually +1 with nonmetals.",
+      "misconceptionTargeted": "Treating electrode potential, rather than oxidation number, as the formal charge-bookkeeping value."
+    },
+    {
+      "id": "electrochemistry--overview--q4",
+      "sectionId": "overview",
+      "question": "How do reducing and oxidising agents differ?",
+      "options": [
+        "In molten NaCl, Na+ reduces to sodium metal and Cl− oxidises to chlorine.",
+        "The reducing agent donates electrons and is oxidised, while the oxidising agent accepts electrons and is reduced.",
+        "In aqueous solution, water may be reduced or oxidised instead of a dissolved ion, so standard potentials and kinetic barriers must be considered.",
+        "Inert electrodes mainly provide a surface, whereas active electrodes can participate chemically."
+      ],
+      "correctIndex": 1,
+      "explanation": "A reducing agent donates electrons and is therefore oxidised. An oxidising agent accepts electrons and is therefore reduced.",
+      "sourceEvidence": "The reducing agent donates electrons and is oxidised, while the oxidising agent accepts electrons and is reduced.",
+      "misconceptionTargeted": "Believing a reducing agent is reduced and an oxidising agent is oxidised."
+    },
+    {
+      "id": "electrochemistry--overview--q5",
+      "sectionId": "overview",
+      "question": "Which agent accepts electrons and is reduced?",
+      "options": [
+        "external power supply",
+        "overpotential",
+        "oxidising agent",
+        "molten electrolyte"
+      ],
+      "correctIndex": 2,
+      "explanation": "The oxidising agent accepts electrons from the reducing agent. Its own reduction enables oxidation of the other species.",
+      "sourceEvidence": "The reducing agent donates electrons and is oxidised, while the oxidising agent accepts electrons and is reduced.",
+      "misconceptionTargeted": "Calling the electron donor the oxidising agent instead of the electron acceptor."
+    },
+    {
+      "id": "electrochemistry--overview--q6",
+      "sectionId": "overview",
+      "question": "What is the correct sequence for balancing a redox equation in acidic solution?",
+      "options": [
+        "The standard cell potential is E°cell = E°cathode − E°anode when both tabulated values are reduction potentials.",
+        "Alessandro Volta built an early continuous-current battery in 1800; later cell designs made the redox chemistry and ion transport clearer.",
+        "An electrode potential measures the tendency of a half-reaction to occur as reduction relative to a reference.",
+        "In acidic solution, balance atoms other than O and H, balance O with H2O, H with H+, charge with electrons, then scale the half-reactions so electrons cancel."
+      ],
+      "correctIndex": 3,
+      "explanation": "Balance non-hydrogen and non-oxygen atoms first, then oxygen with water and hydrogen with H+. Balance charge with electrons and scale the half-reactions so electrons cancel.",
+      "sourceEvidence": "In acidic solution, balance atoms other than O and H, balance O with H2O, H with H+, charge with electrons, then scale the half-reactions so electrons cancel.",
+      "misconceptionTargeted": "Balancing charge before oxygen and hydrogen in an acidic redox half-reaction."
+    },
+    {
+      "id": "electrochemistry--overview--q7",
+      "sectionId": "overview",
+      "question": "In which medium are H2O, H+, and electrons used directly during the initial half-reaction balancing procedure?",
+      "options": [
+        "acidic solution",
+        "standard conditions",
+        "electron stoichiometry",
+        "oxidation"
+      ],
+      "correctIndex": 0,
+      "explanation": "The stated procedure is for acidic solution. Basic conditions are handled by subsequently adding OH− to neutralise H+.",
+      "sourceEvidence": "In acidic solution, balance atoms other than O and H, balance O with H2O, H with H+, charge with electrons, then scale the half-reactions so electrons cancel.",
+      "misconceptionTargeted": "Using H+ directly when balancing half-reactions in basic rather than acidic solution."
+    },
+    {
+      "id": "electrochemistry--overview--q8",
+      "sectionId": "overview",
+      "question": "How should a redox equation be balanced in basic solution?",
+      "options": [
+        "The salt bridge does not supply electrons, and its ion directions are chosen to oppose charge accumulation.",
+        "In basic solution, first balance as acidic, add OH− to neutralise H+, form water, and cancel excess water.",
+        "Use tables as reduction potentials.",
+        "Do not multiply E° when scaling a half-reaction; instead calculate cathode minus anode after identifying the actual reduction and oxidation."
+      ],
+      "correctIndex": 1,
+      "explanation": "First balance it as though the solution were acidic. Then add OH− to neutralise H+, form water, and cancel excess water.",
+      "sourceEvidence": "In basic solution, first balance as acidic, add OH− to neutralise H+, form water, and cancel excess water.",
+      "misconceptionTargeted": "Balancing a basic redox equation without first treating it as acidic and neutralising H+ with OH−."
+    },
+    {
+      "id": "electrochemistry--galvanic-cells--q1",
+      "sectionId": "galvanic-cells",
+      "question": "Which device converts the free-energy decrease of a spontaneous redox reaction into electrical work?",
+      "options": [
+        "galvanic cell",
+        "molten electrolyte",
+        "aqueous electrolysis",
+        "Faraday constant"
+      ],
+      "correctIndex": 0,
+      "explanation": "A galvanic cell harnesses a spontaneous redox reaction. The cell separates the half-reactions so electron flow can perform electrical work.",
+      "sourceEvidence": "A galvanic cell converts the free-energy decrease of a spontaneous redox reaction into electrical work.",
+      "misconceptionTargeted": "Confusing a spontaneous galvanic cell with an externally powered electrolytic cell."
+    },
+    {
+      "id": "electrochemistry--galvanic-cells--q2",
+      "sectionId": "galvanic-cells",
+      "question": "How do charge carriers move in a working galvanic cell?",
+      "options": [
+        "At equilibrium E = 0 and Q = K, recovering the link between E° and K.",
+        "Electrons travel through the external circuit from anode to cathode, while ions move through an electrolyte and salt bridge to preserve bulk electrical neutrality in each half-cell.",
+        "Walther Nernst formulated the concentration dependence in the late nineteenth century, enabling quantitative prediction of batteries, concentration cells, ion-selective electrodes, and biological membrane potentials.",
+        "An electrolytic cell uses an external power supply to drive a nonspontaneous redox reaction."
+      ],
+      "correctIndex": 1,
+      "explanation": "Electrons move through the external circuit from anode to cathode. Ions move through the electrolyte and salt bridge to maintain bulk neutrality.",
+      "sourceEvidence": "Electrons travel through the external circuit from anode to cathode, while ions move through an electrolyte and salt bridge to preserve bulk electrical neutrality in each half-cell.",
+      "misconceptionTargeted": "Believing electrons cross the salt bridge while ions travel through the wire."
+    },
+    {
+      "id": "electrochemistry--galvanic-cells--q3",
+      "sectionId": "galvanic-cells",
+      "question": "At which Daniell-cell electrode is Cu²+ reduced to copper metal?",
+      "options": [
+        "reduction potential",
+        "intensive property",
+        "cathode",
+        "Gibbs energy"
+      ],
+      "correctIndex": 2,
+      "explanation": "Cu²+ gains electrons at the cathode to form copper metal. Zinc loses electrons at the anode.",
+      "sourceEvidence": "In the Daniell cell, zinc metal is oxidised to Zn²+ at the anode and Cu²+ is reduced to copper metal at the cathode.",
+      "misconceptionTargeted": "Placing copper reduction at the Daniell-cell anode instead of the cathode."
+    },
+    {
+      "id": "electrochemistry--galvanic-cells--q4",
+      "sectionId": "galvanic-cells",
+      "question": "Which description correctly separates electron flow from ion movement in a galvanic cell?",
+      "options": [
+        "In molten NaCl, Na+ reduces to sodium metal and Cl− oxidises to chlorine.",
+        "In aqueous solution, water may be reduced or oxidised instead of a dissolved ion, so standard potentials and kinetic barriers must be considered.",
+        "Inert electrodes mainly provide a surface, whereas active electrodes can participate chemically.",
+        "Electrons travel through the external circuit from anode to cathode, while ions move through an electrolyte and salt bridge to preserve bulk electrical neutrality in each half-cell."
+      ],
+      "correctIndex": 3,
+      "explanation": "Electrons travel through the wire, while ions travel through electrolyte pathways. Both movements are needed to avoid charge buildup and sustain current.",
+      "sourceEvidence": "Electrons travel through the external circuit from anode to cathode, while ions move through an electrolyte and salt bridge to preserve bulk electrical neutrality in each half-cell.",
+      "misconceptionTargeted": "Assuming electrons and ions both travel through the same pathway in a galvanic cell."
+    },
+    {
+      "id": "electrochemistry--galvanic-cells--q5",
+      "sectionId": "galvanic-cells",
+      "question": "Which component preserves bulk electrical neutrality by allowing ions to move between half-cells?",
+      "options": [
+        "salt bridge",
+        "galvanic cell",
+        "anode",
+        "cathode"
+      ],
+      "correctIndex": 0,
+      "explanation": "The salt bridge permits compensating ion migration between half-cells. It does not carry the electrons in the external circuit.",
+      "sourceEvidence": "Electrons travel through the external circuit from anode to cathode, while ions move through an electrolyte and salt bridge to preserve bulk electrical neutrality in each half-cell.",
+      "misconceptionTargeted": "Thinking the salt bridge supplies electrons rather than allowing compensating ion migration."
+    },
+    {
+      "id": "electrochemistry--galvanic-cells--q6",
+      "sectionId": "galvanic-cells",
+      "question": "What happens to zinc and copper ions in a Daniell cell?",
+      "options": [
+        "Electrons are pulled from the anode and delivered to the cathode.",
+        "In the Daniell cell, zinc metal is oxidised to Zn²+ at the anode and Cu²+ is reduced to copper metal at the cathode.",
+        "The products depend on available species, electrode material, and overpotential.",
+        "In molten NaCl, Na+ reduces to sodium metal and Cl− oxidises to chlorine."
+      ],
+      "correctIndex": 1,
+      "explanation": "Zinc metal is oxidised to Zn²+ at the anode. Cu²+ is reduced to copper metal at the cathode.",
+      "sourceEvidence": "In the Daniell cell, zinc metal is oxidised to Zn²+ at the anode and Cu²+ is reduced to copper metal at the cathode.",
+      "misconceptionTargeted": "Reversing the Daniell-cell reactions so zinc is reduced and Cu²+ is oxidised."
+    },
+    {
+      "id": "electrochemistry--galvanic-cells--q7",
+      "sectionId": "galvanic-cells",
+      "question": "In standard cell notation, which item is written between the left-hand anode and right-hand cathode descriptions?",
+      "options": [
+        "oxidation",
+        "reduction",
+        "cell notation",
+        "oxidation number"
+      ],
+      "correctIndex": 2,
+      "explanation": "Cell notation places the anode on the left and the cathode on the right. Phase boundaries and the salt bridge are represented between the listed species.",
+      "sourceEvidence": "Cell notation writes the anode on the left and cathode on the right.",
+      "misconceptionTargeted": "Mistaking oxidation or reduction labels for the notation separating the anode and cathode half-cells."
+    },
+    {
+      "id": "electrochemistry--galvanic-cells--q8",
+      "sectionId": "galvanic-cells",
+      "question": "How is standard cell potential calculated when both table entries are reduction potentials?",
+      "options": [
+        "The standard hydrogen electrode is assigned E° = 0 V under standard conditions and provides the reference for tabulated standard reduction potentials.",
+        "A more positive reduction potential indicates a stronger tendency to be reduced and therefore a stronger oxidising agent on the reactant side.",
+        "Combining two half-cells gives E°cell from cathode minus anode reduction potentials.",
+        "The standard cell potential is E°cell = E°cathode − E°anode when both tabulated values are reduction potentials."
+      ],
+      "correctIndex": 3,
+      "explanation": "Subtract the anode reduction potential from the cathode reduction potential. Scaling a half-reaction does not scale its potential.",
+      "sourceEvidence": "The standard cell potential is E°cell = E°cathode − E°anode when both tabulated values are reduction potentials.",
+      "misconceptionTargeted": "Adding two tabulated reduction potentials without reversing the anode contribution."
+    },
+    {
+      "id": "electrochemistry--electrode-potentials--q1",
+      "sectionId": "electrode-potentials",
+      "question": "What does an electrode potential measure relative to a reference?",
+      "options": [
+        "electrode potential",
+        "external power supply",
+        "overpotential",
+        "molten electrolyte"
+      ],
+      "correctIndex": 0,
+      "explanation": "An electrode potential expresses a half-reaction’s tendency to occur as reduction. It has meaning only relative to another electrode.",
+      "sourceEvidence": "An electrode potential measures the tendency of a half-reaction to occur as reduction relative to a reference.",
+      "misconceptionTargeted": "Treating electrode potential as an absolute value rather than a reduction tendency relative to a reference."
+    },
+    {
+      "id": "electrochemistry--electrode-potentials--q2",
+      "sectionId": "electrode-potentials",
+      "question": "Which electrode defines the zero-volt reference for standard reduction potentials?",
+      "options": [
+        "Convert current and time to coulombs, coulombs to moles of electrons, then electrons to moles of product.",
+        "The standard hydrogen electrode is assigned E° = 0 V under standard conditions and provides the reference for tabulated standard reduction potentials.",
+        "Use seconds, amperes, and the correct n value.",
+        "In aqueous electrolysis, do not assume the dissolved ion is always discharged; compare water reactions, concentration, electrode material, and overpotential before assigning products."
+      ],
+      "correctIndex": 1,
+      "explanation": "The standard hydrogen electrode is assigned exactly zero volts under standard conditions. Other standard electrode potentials are measured relative to it.",
+      "sourceEvidence": "The standard hydrogen electrode is assigned E° = 0 V under standard conditions and provides the reference for tabulated standard reduction potentials.",
+      "misconceptionTargeted": "Using an electrolysis calculation in place of the standard hydrogen electrode as the zero-volt reference."
+    },
+    {
+      "id": "electrochemistry--electrode-potentials--q3",
+      "sectionId": "electrode-potentials",
+      "question": "Which tabulated quantity is used in the cathode-minus-anode calculation?",
+      "options": [
+        "electrode potential",
+        "standard hydrogen electrode",
+        "reduction potential",
+        "intensive property"
+      ],
+      "correctIndex": 2,
+      "explanation": "Tables conventionally list reduction potentials. Both entries must retain that convention before subtracting anode from cathode.",
+      "sourceEvidence": "Combining two half-cells gives E°cell from cathode minus anode reduction potentials.",
+      "misconceptionTargeted": "Substituting a general electrode potential or oxidation value for the tabulated reduction potential."
+    },
+    {
+      "id": "electrochemistry--electrode-potentials--q4",
+      "sectionId": "electrode-potentials",
+      "question": "What does a more positive reduction potential indicate about a reactant?",
+      "options": [
+        "Both half-processes must occur together because electrons are conserved.",
+        "Oxidation numbers are formal bookkeeping values assigned by rules.",
+        "Elements in their standard form have oxidation number zero, monatomic ions equal their charge, oxygen is usually −2, and hydrogen is usually +1 with nonmetals.",
+        "A more positive reduction potential indicates a stronger tendency to be reduced and therefore a stronger oxidising agent on the reactant side."
+      ],
+      "correctIndex": 3,
+      "explanation": "A more positive value means a stronger tendency to gain electrons. The reactant is therefore a stronger oxidising agent.",
+      "sourceEvidence": "A more positive reduction potential indicates a stronger tendency to be reduced and therefore a stronger oxidising agent on the reactant side.",
+      "misconceptionTargeted": "Assuming a more positive reduction potential identifies a stronger reducing agent instead of a stronger oxidising agent."
+    },
+    {
+      "id": "electrochemistry--electrode-potentials--q5",
+      "sectionId": "electrode-potentials",
+      "question": "Which equation adjusts cell potential for nonstandard concentrations and gas pressures?",
+      "options": [
+        "Nernst equation",
+        "acidic solution",
+        "basic solution",
+        "galvanic cell"
+      ],
+      "correctIndex": 0,
+      "explanation": "The Nernst equation includes the reaction quotient to account for nonstandard conditions. It reduces to the standard potential only under standard-state conditions.",
+      "sourceEvidence": "Nonstandard concentrations and gas pressures change the potential according to the Nernst equation, E = E° − (RT/nF) ln Q.",
+      "misconceptionTargeted": "Using the standard-potential calculation unchanged when concentrations or pressures are nonstandard."
+    },
+    {
+      "id": "electrochemistry--electrode-potentials--q6",
+      "sectionId": "electrode-potentials",
+      "question": "Why can an absolute potential not be assigned experimentally to one isolated electrode?",
+      "options": [
+        "Oxidation is loss of electrons and an increase in oxidation number; reduction is gain of electrons and a decrease in oxidation number.",
+        "Absolute single-electrode potentials cannot be measured; only potential differences are observable.",
+        "The reducing agent donates electrons and is oxidised, while the oxidising agent accepts electrons and is reduced.",
+        "Both half-processes must occur together because electrons are conserved."
+      ],
+      "correctIndex": 1,
+      "explanation": "Only potential differences between electrodes are observable. A reference electrode is therefore required for every measured half-cell potential.",
+      "sourceEvidence": "Absolute single-electrode potentials cannot be measured; only potential differences are observable.",
+      "misconceptionTargeted": "Believing an isolated electrode has a directly measurable absolute potential."
+    },
+    {
+      "id": "electrochemistry--electrode-potentials--q7",
+      "sectionId": "electrode-potentials",
+      "question": "Which reference is assigned E° = 0 V under standard conditions?",
+      "options": [
+        "standard conditions",
+        "electron stoichiometry",
+        "standard hydrogen electrode",
+        "oxidation"
+      ],
+      "correctIndex": 2,
+      "explanation": "The standard hydrogen electrode defines the zero point of the reduction-potential scale. It lets different half-cell measurements be compared consistently.",
+      "sourceEvidence": "The standard hydrogen electrode is assigned E° = 0 V under standard conditions and provides the reference for tabulated standard reduction potentials.",
+      "misconceptionTargeted": "Assigning the zero-volt standard reference to a condition or process instead of the standard hydrogen electrode."
+    },
+    {
+      "id": "electrochemistry--electrode-potentials--q8",
+      "sectionId": "electrode-potentials",
+      "question": "Which species is the stronger oxidising agent when its reduction potential is more positive?",
+      "options": [
+        "The salt bridge does not supply electrons, and its ion directions are chosen to oppose charge accumulation.",
+        "Use tables as reduction potentials.",
+        "Do not multiply E° when scaling a half-reaction; instead calculate cathode minus anode after identifying the actual reduction and oxidation.",
+        "A more positive reduction potential indicates a stronger tendency to be reduced and therefore a stronger oxidising agent on the reactant side."
+      ],
+      "correctIndex": 3,
+      "explanation": "The reactant in the more positive reduction half-reaction accepts electrons more readily. That stronger reduction tendency makes it the stronger oxidising agent.",
+      "sourceEvidence": "A more positive reduction potential indicates a stronger tendency to be reduced and therefore a stronger oxidising agent on the reactant side.",
+      "misconceptionTargeted": "Choosing the species with the less positive reduction potential as the stronger oxidising agent."
+    },
+    {
+      "id": "electrochemistry--electrolysis--q1",
+      "sectionId": "electrolysis",
+      "question": "Which cell type requires electrical energy to drive a nonspontaneous redox reaction?",
+      "options": [
+        "external power supply",
+        "electrolytic cell",
+        "overpotential",
+        "molten electrolyte"
+      ],
+      "correctIndex": 1,
+      "explanation": "An electrolytic cell uses an external power supply. The supplied electrical work drives a reaction that is nonspontaneous in the chosen direction.",
+      "sourceEvidence": "An electrolytic cell uses an external power supply to drive a nonspontaneous redox reaction.",
+      "misconceptionTargeted": "Confusing an electrolytic cell that consumes electrical energy with a spontaneous galvanic cell."
+    },
+    {
+      "id": "electrochemistry--electrolysis--q2",
+      "sectionId": "electrolysis",
+      "question": "What distinguishes the energy source of an electrolytic cell from that of a galvanic cell?",
+      "options": [
+        "An electrolytic cell uses an external power supply to drive a nonspontaneous redox reaction.",
+        "Electrolysis calculations require electron stoichiometry.",
+        "Convert current and time to coulombs, coulombs to moles of electrons, then electrons to moles of product.",
+        "Use seconds, amperes, and the correct n value."
+      ],
+      "correctIndex": 0,
+      "explanation": "An electrolytic cell requires an external power source to force its reaction. A galvanic cell instead produces electrical work from a spontaneous reaction.",
+      "sourceEvidence": "An electrolytic cell uses an external power supply to drive a nonspontaneous redox reaction.",
+      "misconceptionTargeted": "Believing an electrolytic cell generates its own electrical energy instead of requiring an external supply."
+    },
+    {
+      "id": "electrochemistry--electrolysis--q3",
+      "sectionId": "electrolysis",
+      "question": "Which factor can make the observed electrolysis product differ from a simple standard-potential prediction?",
+      "options": [
+        "electron flow",
+        "standard conditions",
+        "electron stoichiometry",
+        "overpotential"
+      ],
+      "correctIndex": 3,
+      "explanation": "Overpotential is a kinetic barrier that can alter which electrode process occurs. Available species and electrode material also influence the products.",
+      "sourceEvidence": "The products depend on available species, electrode material, and overpotential.",
+      "misconceptionTargeted": "Assuming standard potentials alone always predict electrolysis products and ignoring overpotential."
+    },
+    {
+      "id": "electrochemistry--electrolysis--q4",
+      "sectionId": "electrolysis",
+      "question": "How is electrical charge converted into moles of electrons during electrolysis?",
+      "options": [
+        "The reducing agent donates electrons and is oxidised, while the oxidising agent accepts electrons and is reduced.",
+        "Both half-processes must occur together because electrons are conserved.",
+        "Charge Q = It corresponds to Q/F moles of electrons, where F is the Faraday constant.",
+        "Oxidation numbers are formal bookkeeping values assigned by rules."
+      ],
+      "correctIndex": 2,
+      "explanation": "Charge equals current multiplied by time, Q = It. Dividing the charge by the Faraday constant gives moles of electrons.",
+      "sourceEvidence": "Charge Q = It corresponds to Q/F moles of electrons, where F is the Faraday constant.",
+      "misconceptionTargeted": "Converting charge directly to product moles without first using the Faraday constant to find electron moles."
+    },
+    {
+      "id": "electrochemistry--electrolysis--q5",
+      "sectionId": "electrolysis",
+      "question": "Which industrial process purifies a metal by controlled electrolysis?",
+      "options": [
+        "basic solution",
+        "electrorefining",
+        "galvanic cell",
+        "anode"
+      ],
+      "correctIndex": 1,
+      "explanation": "Electrorefining uses electrode reactions to purify a metal. It is one of several industrial applications of controlled electrolysis.",
+      "sourceEvidence": "Electrorefining, metal plating, aluminium production, chlorine manufacture, and rechargeable-battery charging all use controlled electrolysis.",
+      "misconceptionTargeted": "Confusing electrorefining with electroplating or galvanic-cell operation when purifying metal."
+    },
+    {
+      "id": "electrochemistry--electrolysis--q6",
+      "sectionId": "electrolysis",
+      "question": "What role does an external power supply play in an electrolytic cell?",
+      "options": [
+        "An electrolytic cell uses an external power supply to drive a nonspontaneous redox reaction.",
+        "Oxidation-reduction reactions transfer electrons or redistribute electron density.",
+        "Oxidation is loss of electrons and an increase in oxidation number; reduction is gain of electrons and a decrease in oxidation number.",
+        "The reducing agent donates electrons and is oxidised, while the oxidising agent accepts electrons and is reduced."
+      ],
+      "correctIndex": 0,
+      "explanation": "The power supply forces a nonspontaneous redox reaction to proceed. It pulls electrons from the anode and delivers them to the cathode.",
+      "sourceEvidence": "An electrolytic cell uses an external power supply to drive a nonspontaneous redox reaction.",
+      "misconceptionTargeted": "Thinking the external supply merely measures voltage rather than forcing a nonspontaneous reaction."
+    },
+    {
+      "id": "electrochemistry--electrolysis--q7",
+      "sectionId": "electrolysis",
+      "question": "What must supply energy for a nonspontaneous electrolytic reaction?",
+      "options": [
+        "standard cell potential",
+        "electrode potential",
+        "standard hydrogen electrode",
+        "external power supply"
+      ],
+      "correctIndex": 3,
+      "explanation": "An external power supply provides the required electrical work. Without it, the selected reaction direction would not proceed spontaneously.",
+      "sourceEvidence": "An electrolytic cell uses an external power supply to drive a nonspontaneous redox reaction.",
+      "misconceptionTargeted": "Expecting a nonspontaneous electrolytic reaction to proceed without an external power source."
+    },
+    {
+      "id": "electrochemistry--electrolysis--q8",
+      "sectionId": "electrolysis",
+      "question": "Why are available species, electrode material, and kinetic effects considered before predicting electrolysis products?",
+      "options": [
+        "The sum equals the species charge.",
+        "Changes in these values identify which atoms undergo redox even in equations without explicit ionic charge transfer.",
+        "The products depend on available species, electrode material, and overpotential.",
+        "Half-reaction balancing separates oxidation and reduction."
+      ],
+      "correctIndex": 2,
+      "explanation": "These factors determine which oxidation and reduction pathways actually compete at the electrodes. Standard potentials alone may not identify the observed products.",
+      "sourceEvidence": "The products depend on available species, electrode material, and overpotential.",
+      "misconceptionTargeted": "Ignoring competing species, electrode reactivity, and kinetic overpotential when predicting electrolysis products."
+    },
+    {
+      "id": "electrochemistry--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "At which electrode does oxidation occur in both galvanic and electrolytic cells?",
+      "options": [
+        "electrolytic cell",
+        "external power supply",
+        "overpotential",
+        "anode"
+      ],
+      "correctIndex": 3,
+      "explanation": "Oxidation always occurs at the anode. Electrode sign can change with cell type, but this reaction label does not.",
+      "sourceEvidence": "Remember “anode oxidation, cathode reduction” for both galvanic and electrolytic cells.",
+      "misconceptionTargeted": "Associating oxidation with electrode sign and placing it at the cathode in an electrolytic cell."
+    },
+    {
+      "id": "electrochemistry--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "Which path carries electrons, and which path carries ions, in an electrochemical cell?",
+      "options": [
+        "Both half-processes must occur together because electrons are conserved.",
+        "Oxidation numbers are formal bookkeeping values assigned by rules.",
+        "Electrons move through the wire from anode to cathode; ions move through electrolyte.",
+        "Elements in their standard form have oxidation number zero, monatomic ions equal their charge, oxygen is usually −2, and hydrogen is usually +1 with nonmetals."
+      ],
+      "correctIndex": 2,
+      "explanation": "Electrons move through the external wire from anode to cathode. Ions move through the electrolyte to prevent charge accumulation.",
+      "sourceEvidence": "Electrons move through the wire from anode to cathode; ions move through electrolyte.",
+      "misconceptionTargeted": "Sending ions through the wire and electrons through the electrolyte."
+    },
+    {
+      "id": "electrochemistry--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "How should values in a standard electrode-potential table be interpreted?",
+      "options": [
+        "standard cell potential",
+        "reduction potential",
+        "electrode potential",
+        "standard hydrogen electrode"
+      ],
+      "correctIndex": 1,
+      "explanation": "The tabulated values are reduction potentials. Treating an oxidation as though it were still a listed reduction leads to the wrong cell voltage.",
+      "sourceEvidence": "Use tables as reduction potentials.",
+      "misconceptionTargeted": "Reading tabulated standard electrode potentials as oxidation potentials instead of reduction potentials."
+    },
+    {
+      "id": "electrochemistry--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "What does a positive E°cell establish about spontaneity?",
+      "options": [
+        "A positive E°cell means spontaneous only under standard conditions.",
+        "A single vertical line marks a phase boundary, a double line marks the salt bridge, and commas separate species in one phase.",
+        "The standard cell potential is E°cell = E°cathode − E°anode when both tabulated values are reduction potentials.",
+        "Alessandro Volta built an early continuous-current battery in 1800; later cell designs made the redox chemistry and ion transport clearer."
+      ],
+      "correctIndex": 0,
+      "explanation": "A positive standard cell potential indicates spontaneity only under standard conditions. Nonstandard concentrations may change the actual potential and direction.",
+      "sourceEvidence": "A positive E°cell means spontaneous only under standard conditions.",
+      "misconceptionTargeted": "Treating a positive standard cell potential as proof of spontaneity under every concentration and pressure."
+    },
+    {
+      "id": "electrochemistry--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "Which equation should be used to evaluate cell potential away from standard conditions?",
+      "options": [
+        "basic solution",
+        "galvanic cell",
+        "anode",
+        "Nernst equation"
+      ],
+      "correctIndex": 3,
+      "explanation": "The Nernst equation adjusts potential using temperature, electron number, and reaction quotient. A positive standard value alone is insufficient outside standard conditions.",
+      "sourceEvidence": "Under other conditions, use the Nernst equation or ΔG = ΔG° + RT ln Q, and define Q without pure solids or liquids.",
+      "misconceptionTargeted": "Using E°cell alone instead of the Nernst equation away from standard conditions."
+    },
+    {
+      "id": "electrochemistry--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "Why should E° not be multiplied when a half-reaction is scaled?",
+      "options": [
+        "The products depend on available species, electrode material, and overpotential.",
+        "In molten NaCl, Na+ reduces to sodium metal and Cl− oxidises to chlorine.",
+        "Electrolysis calculations require electron stoichiometry.",
+        "In aqueous solution, water may be reduced or oxidised instead of a dissolved ion, so standard potentials and kinetic barriers must be considered."
+      ],
+      "correctIndex": 2,
+      "explanation": "Electrode potential is an intensive property and does not depend on the amount of reaction written. Stoichiometric scaling affects electron accounting, not the tabulated potential.",
+      "sourceEvidence": "Electrolysis calculations require electron stoichiometry.",
+      "misconceptionTargeted": "Multiplying electrode potential by a stoichiometric coefficient when scaling a half-reaction."
+    },
+    {
+      "id": "electrochemistry--exam-traps--q7",
+      "sectionId": "exam-traps",
+      "question": "What must be considered before assigning products in aqueous electrolysis?",
+      "options": [
+        "electron stoichiometry",
+        "aqueous electrolysis",
+        "oxidation",
+        "reduction"
+      ],
+      "correctIndex": 1,
+      "explanation": "Water reactions can compete with dissolved-ion discharge in aqueous solution. Concentration, electrode material, standard potentials, and overpotential all matter.",
+      "sourceEvidence": "In aqueous electrolysis, do not assume the dissolved ion is always discharged; compare water reactions, concentration, electrode material, and overpotential before assigning products.",
+      "misconceptionTargeted": "Assuming the dissolved ion must discharge in water without checking competing water reactions and overpotential."
+    },
+    {
+      "id": "electrochemistry--exam-traps--q8",
+      "sectionId": "exam-traps",
+      "question": "Which statement correctly distinguishes electron and ion transport?",
+      "options": [
+        "Electrons move through the wire from anode to cathode; ions move through electrolyte.",
+        "Half-reaction balancing separates oxidation and reduction.",
+        "In acidic solution, balance atoms other than O and H, balance O with H2O, H with H+, charge with electrons, then scale the half-reactions so electrons cancel.",
+        "In basic solution, first balance as acidic, add OH− to neutralise H+, form water, and cancel excess water."
+      ],
+      "correctIndex": 0,
+      "explanation": "Electrons move from anode to cathode through the wire. Ions move within the electrolyte rather than through the external circuit.",
+      "sourceEvidence": "Electrons move through the wire from anode to cathode; ions move through electrolyte.",
+      "misconceptionTargeted": "Failing to separate external electron flow from ion migration through the electrolyte."
+    }
+  ]
+}

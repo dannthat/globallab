@@ -22,7 +22,7 @@ import type {
   PreferenceSuggestion,
 } from '../personalization/types'
 import { CalloutBox } from './CalloutBox'
-import { DiagramBlock } from './DiagramBlock'
+import { InteractiveDiagramBlock } from './InteractiveDiagramBlock'
 import {
   renderHighlightedText,
   TextHighlightToolbar,
@@ -31,6 +31,7 @@ import {
 import { LearningCompanion } from './LearningCompanion'
 import { PreferenceSuggestionCard } from './PreferenceSuggestionCard'
 import { SectionErrorBoundary } from './SectionErrorBoundary'
+import { hasInteractiveSimulation } from './simulations'
 
 interface TextbookSectionProps {
   topicId?: string
@@ -315,11 +316,16 @@ export function TextbookSection({
         displayMode: true,
       })
     : null
-  const visualKind = section.diagram
-    ? 'Scientific figure'
-    : equationHtml
-      ? 'Equation plate'
-      : 'Concept index'
+  const hasInteractiveVisual = Boolean(
+    topicId && hasInteractiveSimulation(topicId, section.id),
+  )
+  const visualKind = hasInteractiveVisual
+    ? 'Interactive lab'
+    : section.diagram
+      ? 'Scientific figure'
+      : equationHtml
+        ? 'Equation plate'
+        : 'Concept index'
   const {
     highlights,
     toolbar,
@@ -359,7 +365,7 @@ export function TextbookSection({
         correctOptionId: String(quiz.correctIndex),
         feedback:
           quizSubmitted || quizRevealed
-            ? quiz.explanation + ' Source evidence: “' + quiz.evidence + '”'
+            ? quiz.explanation + ' Source evidence: â€œ' + quiz.evidence + 'â€'
             : null,
         outcome:
           quizSubmitted || quizRevealed
@@ -464,300 +470,304 @@ export function TextbookSection({
     </aside>
   ) : null
 
+  // Parallax watermark on mouse move
+  const surfaceRef = useRef<HTMLElement>(null)
+  useEffect(() => {
+    const surface = surfaceRef.current
+    if (!surface) return
+    const handleMouseMove = (e: MouseEvent) => {
+      const watermark = surface.querySelector<HTMLElement>('[data-watermark]')
+      if (!watermark) return
+      const rect = surface.getBoundingClientRect()
+      const x = (e.clientX - rect.left) / rect.width - 0.5
+      const y = (e.clientY - rect.top) / rect.height - 0.5
+      watermark.style.transform = `translate(${x * -12}px, ${y * -8}px)`
+    }
+    const reducedMotion =
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
+    if (!reducedMotion) {
+      surface.addEventListener('mousemove', handleMouseMove)
+    }
+    return () => surface.removeEventListener('mousemove', handleMouseMove)
+  }, [])
+
   return (
     <article
-      className="tbp-article textbook-spread"
+      className="tbp-article gl-section-arrive tbp-article--new"
       id={section.id}
       aria-busy={isLoading}
     >
+      {/* ── Reading surface ── */}
       <section
-        className="textbook-page textbook-page-left"
+        className="tbp-reading-surface"
+        ref={surfaceRef}
         aria-labelledby={`${section.id}-heading`}
       >
-        <ScrollablePageContent
-          id={`${section.id}-reading-page`}
-          label={`${section.heading} reading page`}
-          measureKey={`${section.id}:${companionArtifactKey}:${companionView}:${isLoading}:${preferenceSuggestion?.id ?? ''}`}
-          side='left'
-        >
-        <div className="tbp-running-head">
-          <span>{subjectTitle}</span>
-          <span>
-            Lesson {sectionNumber} / {String(totalSections).padStart(2, '0')}
-          </span>
-        </div>
-
-        <header className="tbp-section-head tbp-editorial-heading">
-          <p className="tbp-section-num" aria-hidden="true">
+        <div className="tbp-reading-inner">
+          {/* Watermark section number â€” parallax target */}
+          <span
+            className="tbp-watermark"
+            aria-hidden="true"
+            data-watermark="true"
+          >
             {sectionNumber}
-          </p>
-          <div className="tbp-section-title-block">
+          </span>
+
+          {/* Running head */}
+          <div className="tbp-running-head">
+            <span>{subjectTitle}</span>
+            <span>
+              Lesson {sectionNumber} / {String(totalSections).padStart(2, '0')}
+            </span>
+          </div>
+
+          {/* Section heading */}
+          <header className="tbp-section-head">
             <p className="tbp-section-kicker">{topicTitle}</p>
-            <h1 className="tbp-section-heading" id={`${section.id}-heading`}>
+            <h1
+              className="tbp-section-heading"
+              id={`${section.id}-heading`}
+            >
               {section.heading}
             </h1>
-            <p className="tbp-section-deck">{topicSubtitle}</p>
-          </div>
-        </header>
+            {topicSubtitle && (
+              <p className="tbp-section-deck">{topicSubtitle}</p>
+            )}
+          </header>
 
-        <p className="tbp-core-label">Core explanation</p>
-
-        <div
-          className={
-            'tbp-body' + (orderedConcepts ? ' tbp-body--ordered' : '')
-          }
-          onMouseUp={handleMouseUp}
-        >
-          {orderedConcepts ? (
-            <>
-              {orderedConcepts.introduction && (
-                <p
-                  className="tbp-body-lead"
-                  data-gl-highlight-segment="ordered-intro"
-                >
-                  {renderHighlightedText(
-                    orderedConcepts.introduction,
-                    section.keyTerms,
-                    highlights,
-                    'ordered-intro',
-                  )}
-                </p>
-              )}
-              <ol className="tbp-concept-list">
-                {orderedConcepts.items.map((item, index) => (
-                  <li key={item.label} className="tbp-concept-item">
-                    <span className="tbp-concept-num">{index + 1}</span>
-                    <div>
-                      <span className="tbp-concept-label">{item.label}</span>
-                      <p data-gl-highlight-segment={'ordered-' + index}>
-                        {renderHighlightedText(
-                          item.body,
-                          section.keyTerms,
-                          highlights,
-                          'ordered-' + index,
-                        )}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </>
-          ) : (
-            section.body.split(/\n{2,}/).map((paragraph, index) => (
-              <p
-                key={index}
-                className={index === 0 ? 'tbp-body-lead' : undefined}
-                data-gl-highlight-segment={'paragraph-' + index}
-              >
-                {renderHighlightedText(
-                  paragraph,
-                  section.keyTerms,
-                  highlights,
-                  'paragraph-' + index,
-                )}
-              </p>
-            ))
-          )}
-        </div>
-        <TextHighlightToolbar
-          state={toolbar}
-          onHighlight={applyHighlight}
-          onRemove={removeHighlight}
-          onAskCompanion={askCompanion}
-        />
-
-        {canPersonalize && !rewrite && (
-          <div className="tbp-learn-zone">
-            <SectionErrorBoundary
-              error={error}
-              neutralAnalogy={
-                section.presetAnalogies?.neutral ??
-                'Use the original explanation above as the neutral reference.'
-              }
-              onRetry={onLearnYourWay}
-            >
-              <div className="tbp-learn-invitation">
-                <span className="tbp-learn-icon" aria-hidden="true">
-                  <WandSparkles size={15} />
-                </span>
-                <div className="tbp-learn-copy">
-                  <p className="tbp-learn-eyebrow">Learn your way</p>
-                  <h2 className="tbp-learn-heading">
-                    {profile?.interest.trim().toLowerCase() === 'neutral'
-                      ? 'Make this explanation work for you'
-                      : `Connect this to ${profile?.interest}`}
-                  </h2>
-                  <p className="tbp-learn-desc">
-                    Get the best starting format, then choose simpler, more
-                    detailed, steps, another example, or a quick check. The
-                    textbook explanation will not change.
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  className="tbp-learn-btn"
-                  disabled={isLoading}
-                  onClick={onLearnYourWay}
-                >
-                  {isLoading ? (
-                    <LoaderCircle
-                      className="liyw-spinner"
-                      size={13}
-                      aria-hidden="true"
-                    />
-                  ) : (
-                    <WandSparkles size={13} aria-hidden="true" />
-                  )}
-                  {isLoading ? 'Creating…' : 'Learn your way'}
-                </button>
-              </div>
-            </SectionErrorBoundary>
-          </div>
-        )}
-
-        {rewrite && companionView === 'note' && companionPanel}
-
-        </ScrollablePageContent>
-
-        <footer className="tbp-page-footer">
-          <span>Global Lab · {subjectTitle}</span>
-          <span className="tbp-page-number">{sectionIndex * 2 + 2}</span>
-        </footer>
-      </section>
-
-      <div className="textbook-spine" aria-hidden="true" />
-
-      <section
-        className={
-          'textbook-page textbook-page-right' +
-          (rewrite ? ` tbp-companion-${companionView}` : '')
-        }
-        aria-label={
-          rewrite && companionView === 'page'
-            ? 'Personalized study sheet for ' + section.heading
-            : 'Visual references for ' + section.heading
-        }
-      >
-        <ScrollablePageContent
-          id={`${section.id}-reference-page`}
-          label={`${section.heading} reference page`}
-          measureKey={`${section.id}:${companionArtifactKey}:${companionView}:${isLoading}`}
-          side='right'
-        >
-        <div className="tbp-running-head">
-          <span>Figure &amp; reference</span>
-          <span>Page {sectionIndex * 2 + 3}</span>
-        </div>
-
-        <header className="tbp-plate-heading">
-          <p className="tbp-plate-number">Plate {figureNumber}</p>
-          <p className="tbp-plate-kind">{visualKind}</p>
-        </header>
-
-        <div className="tbp-reference-layout">
-          <div className="tbp-reference-primary">
-            <div
-              className={
-                'tbp-reference-hero' +
-                (rewrite && companionView === 'page'
-                  ? ' tbp-reference-hero--with-analogy'
-                  : '') +
-                (rewrite && companionView === 'page'
-                  ? ' tbp-reference-hero--companion-page'
-                  : '')
-              }
-            >
-              <div
-                className={
-                  'tbp-visual-field ' +
-                  (section.diagram
-                    ? 'tbp-visual-field--diagram'
-                    : equationHtml
-                      ? 'tbp-visual-field--equation'
-                      : 'tbp-visual-field--index')
-                }
-              >
-                {section.diagram && (
-                  <div className="tbp-diagram">
-                    <DiagramBlock
-                      diagram={section.diagram}
-                      figureNumber={figureNumber}
-                    />
-                  </div>
-                )}
-
-                {!section.diagram && (
-                  <div className="tbp-reference-plate">
-                    <span className="tbp-reference-monogram" aria-hidden="true">
-                      {sectionNumber}
-                    </span>
-                    <div>
-                      <p className="tbp-reference-label">Concept index</p>
-                      <ol className="tbp-reference-list">
-                        {section.keyTerms.slice(0, 6).map((term, index) => (
-                          <li key={term}>
-                            <span>{String(index + 1).padStart(2, '0')}</span>
-                            {term}
-                          </li>
-                        ))}
-                      </ol>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {rewrite && companionView === 'page' && companionPanel}
-            </div>
-
-            {equation}
-          </div>
-
+          {/* Body text */}
           <div
             className={
-              'tbp-reference-notes-grid' +
-              (rewrite && companionView === 'page'
-                ? ' tbp-reference-notes-grid--companion-hidden'
-                : '')
+              'tbp-body' + (orderedConcepts ? ' tbp-body--ordered' : '')
             }
+            onMouseUp={handleMouseUp}
           >
-
-        {section.callouts && section.callouts.length > 0 && (
-          <section className="tbp-supporting-notes" aria-label="Supporting notes">
-            <p className="tbp-supporting-notes-label">Margin notes</p>
-            <div
-              className={
-                'tbp-callouts' +
-                (section.callouts.length >= 2 ? ' tbp-callouts--two' : '')
-              }
-            >
-              {section.callouts.map((callout) => (
-                <CalloutBox key={callout.heading} callout={callout} />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {section.keyTerms.length > 0 &&
-          (Boolean(section.diagram) || Boolean(equationHtml)) && (
-            <aside className="tbp-term-index" aria-label="Key terms">
-              <p className="tbp-term-index-label">Key terms</p>
-              <ul className="tbp-term-index-list">
-                {section.keyTerms.map((term) => (
-                  <li key={term}>{term}</li>
-                ))}
-              </ul>
-            </aside>
-          )}
+            {orderedConcepts ? (
+              <>
+                {orderedConcepts.introduction && (
+                  <p
+                    className="tbp-body-lead"
+                    data-gl-highlight-segment="ordered-intro"
+                  >
+                    {renderHighlightedText(
+                      orderedConcepts.introduction,
+                      section.keyTerms,
+                      highlights,
+                      'ordered-intro',
+                    )}
+                  </p>
+                )}
+                <ol className="tbp-concept-list">
+                  {orderedConcepts.items.map((item, index) => (
+                    <li key={item.label} className="tbp-concept-item">
+                      <span className="tbp-concept-num">{index + 1}</span>
+                      <div>
+                        <span className="tbp-concept-label">{item.label}</span>
+                        <p data-gl-highlight-segment={'ordered-' + index}>
+                          {renderHighlightedText(
+                            item.body,
+                            section.keyTerms,
+                            highlights,
+                            'ordered-' + index,
+                          )}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </>
+            ) : (
+              section.body.split(/\n{2,}/).map((paragraph, index) => (
+                <p
+                  key={index}
+                  className={index === 0 ? 'tbp-body-lead' : undefined}
+                  data-gl-highlight-segment={'paragraph-' + index}
+                >
+                  {renderHighlightedText(
+                    paragraph,
+                    section.keyTerms,
+                    highlights,
+                    'paragraph-' + index,
+                  )}
+                </p>
+              ))
+            )}
           </div>
+
+          <TextHighlightToolbar
+            state={toolbar}
+            onHighlight={applyHighlight}
+            onRemove={removeHighlight}
+            onAskCompanion={askCompanion}
+          />
+
+          {/* Visual field: diagram / equation / concept index */}
+          <div className="tbp-reference-section">
+            <header className="tbp-plate-heading">
+              <p className="tbp-plate-number">Plate {figureNumber}</p>
+              <p className="tbp-plate-kind">{visualKind}</p>
+            </header>
+
+            {(section.diagram || hasInteractiveVisual) && (
+              <div className="tbp-diagram">
+                <InteractiveDiagramBlock
+                  topicId={topicId ?? ''}
+                  sectionId={section.id}
+                  diagram={section.diagram}
+                  figureNumber={figureNumber}
+                />
+              </div>
+            )}
+
+            {!section.diagram && !hasInteractiveVisual && (
+              <div className="tbp-reference-plate">
+                <span className="tbp-reference-monogram" aria-hidden="true">
+                  {sectionNumber}
+                </span>
+                <div>
+                  <p className="tbp-reference-label">Concept index</p>
+                  <ol className="tbp-reference-list">
+                    {section.keyTerms.slice(0, 6).map((term, index) => (
+                      <li key={term}>
+                        <span>{String(index + 1).padStart(2, '0')}</span>
+                        {term}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </div>
+            )}
+
+            {equation}
+
+            {section.callouts && section.callouts.length > 0 && (
+              <section
+                className="tbp-supporting-notes"
+                aria-label="Supporting notes"
+              >
+                <p className="tbp-supporting-notes-label">Margin notes</p>
+                <div
+                  className={
+                    'tbp-callouts' +
+                    (section.callouts.length >= 2 ? ' tbp-callouts--two' : '')
+                  }
+                >
+                  {section.callouts.map((callout) => (
+                    <CalloutBox key={callout.heading} callout={callout} />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {section.keyTerms.length > 0 &&
+              (Boolean(section.diagram) || Boolean(equationHtml)) && (
+                <aside className="tbp-term-index" aria-label="Key terms">
+                  <p className="tbp-term-index-label">Key terms</p>
+                  <ul className="tbp-term-index-list">
+                    {section.keyTerms.map((term) => (
+                      <li key={term}>{term}</li>
+                    ))}
+                  </ul>
+                </aside>
+              )}
+          </div>
+
+          {/* Preference suggestion (no companion open) */}
+          {preferenceSuggestion && !rewrite && (
+            <PreferenceSuggestionCard
+              suggestion={preferenceSuggestion}
+              onApply={(suggestion) => onApplySuggestion(suggestion.id)}
+              onNotNow={(suggestion) => onDeferSuggestion(suggestion.id)}
+              onNeverSuggest={(suggestion) => onNeverSuggest(suggestion.id)}
+            />
+          )}
         </div>
 
-        </ScrollablePageContent>
-
-        <footer className="tbp-page-footer">
-          <span>{topicTitle}</span>
-          <span className="tbp-page-number">{sectionIndex * 2 + 3}</span>
-        </footer>
+        {/* Bookmark strip â€” personalization CTA */}
+        {canPersonalize && !rewrite && (
+          <SectionErrorBoundary
+            error={error}
+            neutralAnalogy={
+              section.presetAnalogies?.neutral ??
+              'Use the original explanation above as the neutral reference.'
+            }
+            onRetry={onLearnYourWay}
+          >
+            <button
+              type="button"
+              className="tbp-bookmark-strip gl-bookmark-pulse"
+              disabled={isLoading}
+              onClick={onLearnYourWay}
+            >
+              {isLoading ? (
+                <LoaderCircle
+                  className="liyw-spinner"
+                  size={14}
+                  aria-hidden="true"
+                />
+              ) : (
+                <WandSparkles size={14} aria-hidden="true" />
+              )}
+              <span>
+                {isLoading
+                  ? 'Creatingâ€¦'
+                  : profile?.interest &&
+                      profile.interest.trim().toLowerCase() !== 'neutral'
+                    ? `Connect this to ${profile.interest}`
+                    : 'Learn your way'}
+              </span>
+            </button>
+          </SectionErrorBoundary>
+        )}
       </section>
+
+      {/* â”€â”€ Companion panel â€” slides in from right â”€â”€ */}
+      {rewrite && (
+        <aside
+          className="tbp-companion-panel tbp-companion-panel--open gl-companion-open"
+          aria-label="Personalized learning companion"
+        >
+          <LearningCompanion
+            sourceAnchor={rewrite.source}
+            interest={rewrite.interest}
+            mode={rewrite.mode}
+            title={rewrite.title}
+            content={rewrite.content}
+            limits={rewrite.analogyLimits}
+            isLoading={isLoading}
+            error={error}
+            quiz={companionQuiz}
+            onAction={onRefine}
+            onOutcome={(outcome) => onOutcome(rewrite.mode, outcome)}
+            onSelectQuizOption={setSelectedQuizOption}
+            onSubmitQuiz={(optionId) => {
+              const selected = Number.parseInt(optionId, 10)
+              const score =
+                rewrite.quiz && selected === rewrite.quiz.correctIndex ? 1 : 0
+              setSelectedQuizOption(optionId)
+              setQuizSubmitted(true)
+              setQuizRevealed(false)
+              onQuizResult(rewrite.mode, score, 1)
+            }}
+            onRevealQuiz={() => {
+              if (!quizSubmitted && !quizRevealed) {
+                onQuizResult(rewrite.mode, 0, 1)
+              }
+              setQuizRevealed(true)
+            }}
+            onRetry={() => onRefine(rewrite.mode)}
+            onDismiss={onClearRewrite}
+          />
+          {preferenceSuggestion && (
+            <PreferenceSuggestionCard
+              suggestion={preferenceSuggestion}
+              onApply={(suggestion) => onApplySuggestion(suggestion.id)}
+              onNotNow={(suggestion) => onDeferSuggestion(suggestion.id)}
+              onNeverSuggest={(suggestion) => onNeverSuggest(suggestion.id)}
+            />
+          )}
+        </aside>
+      )}
     </article>
   )
 }

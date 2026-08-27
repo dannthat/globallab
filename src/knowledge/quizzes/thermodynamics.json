@@ -1,0 +1,606 @@
+{
+  "topicId": "thermodynamics",
+  "subjectId": "chemistry",
+  "questions": [
+    {
+      "id": "thermodynamics--overview--q1",
+      "sectionId": "overview",
+      "question": "Which field examines energy transfer and the direction of macroscopic change?",
+      "options": [
+        "Thermodynamics",
+        "Kinetics",
+        "Stoichiometry",
+        "Spectroscopy"
+      ],
+      "correctIndex": 0,
+      "explanation": "Thermodynamics studies energy transfer and the direction of large-scale change. Kinetics instead focuses on reaction pathways and timescales.",
+      "sourceEvidence": "Thermodynamics studies energy transfer and the direction of macroscopic change.",
+      "misconceptionTargeted": "Confusing thermodynamic direction with kinetic rate."
+    },
+    {
+      "id": "thermodynamics--overview--q2",
+      "sectionId": "overview",
+      "question": "Which classification correctly distinguishes open, closed, and isolated systems?",
+      "options": [
+        "Open exchanges energy only, closed exchanges matter only, and isolated exchanges both",
+        "Open exchanges matter and energy, closed exchanges energy but not matter, and isolated exchanges neither",
+        "Open exchanges matter only, closed exchanges neither, and isolated exchanges energy only",
+        "All three exchange energy, but only isolated systems exchange matter"
+      ],
+      "correctIndex": 1,
+      "explanation": "The categories depend on whether matter and energy can cross the boundary. An open system exchanges both, a closed system exchanges energy only, and an isolated system exchanges neither.",
+      "sourceEvidence": "Systems may be open to matter and energy, closed to energy but not matter, or isolated from both.",
+      "misconceptionTargeted": "Reversing the matter-and-energy exchange rules for system types."
+    },
+    {
+      "id": "thermodynamics--overview--q3",
+      "sectionId": "overview",
+      "question": "During an exothermic reaction, where is net heat transferred?",
+      "options": [
+        "Into the system from the surroundings",
+        "Only into chemical bonds with no boundary transfer",
+        "To the surroundings from the system",
+        "Nowhere because heat is a state function"
+      ],
+      "correctIndex": 2,
+      "explanation": "An exothermic reaction transfers net heat from the system to its surroundings. An endothermic reaction has the opposite net heat direction under the stated conditions.",
+      "sourceEvidence": "An exothermic reaction transfers net heat to the surroundings, while an endothermic reaction absorbs net heat under the specified conditions.",
+      "misconceptionTargeted": "Reversing the direction of heat transfer for an exothermic process."
+    },
+    {
+      "id": "thermodynamics--overview--q4",
+      "sectionId": "overview",
+      "question": "Which distinction correctly separates a state function from heat and work?",
+      "options": [
+        "Heat is a state function, while internal energy exists only during transfer",
+        "Work depends only on the final state, while internal energy depends on the route",
+        "All three depend only on the initial and final states",
+        "A state function depends only on the current state, while heat and work depend on transfer pathways"
+      ],
+      "correctIndex": 3,
+      "explanation": "Internal energy is determined by the system state. Heat and work describe ways energy crosses the boundary, so their amounts depend on the path.",
+      "sourceEvidence": "State functions such as internal energy depend only on the current state, whereas heat and work describe transfer pathways.",
+      "misconceptionTargeted": "Treating heat or work as a stored state property."
+    },
+    {
+      "id": "thermodynamics--overview--q5",
+      "sectionId": "overview",
+      "question": "Which quantity depends only on the current thermodynamic state?",
+      "options": [
+        "Internal energy",
+        "Heat",
+        "Expansion work",
+        "Reaction pathway length"
+      ],
+      "correctIndex": 0,
+      "explanation": "Internal energy is a state function and is fixed by the current state. Heat and work are path-dependent transfer quantities.",
+      "sourceEvidence": "State functions such as internal energy depend only on the current state, whereas heat and work describe transfer pathways.",
+      "misconceptionTargeted": "Classifying a pathway quantity as a state function."
+    },
+    {
+      "id": "thermodynamics--overview--q6",
+      "sectionId": "overview",
+      "question": "How does the chemistry sign convention interpret ΔU = q + w?",
+      "options": [
+        "Positive q and w both mean energy leaves the system",
+        "Positive q and w both mean energy enters the system",
+        "Positive q means energy enters, while positive w always means energy leaves",
+        "The signs have no relation to energy direction"
+      ],
+      "correctIndex": 1,
+      "explanation": "The chemistry convention takes both heat entering and work done on the system as positive. Their algebraic sum gives the internal-energy change.",
+      "sourceEvidence": "The first law expresses energy conservation: ΔU = q + w under the chemistry sign convention, where heat entering the system and work done on the system are positive.",
+      "misconceptionTargeted": "Using inconsistent signs for heat and work entering the system."
+    },
+    {
+      "id": "thermodynamics--overview--q7",
+      "sectionId": "overview",
+      "question": "Which kind of work is described by w = −PextΔV?",
+      "options": [
+        "Electrical work",
+        "Surface work",
+        "Expansion work",
+        "Chemical work"
+      ],
+      "correctIndex": 2,
+      "explanation": "Pressure-volume expansion work is negative when the system expands against external pressure. The system then transfers energy to the surroundings as work.",
+      "sourceEvidence": "Expansion work at constant external pressure is w = −PextΔV, so expansion does work on the surroundings and lowers the system’s energy unless heat compensates.",
+      "misconceptionTargeted": "Assigning a positive sign to work done by an expanding system."
+    },
+    {
+      "id": "thermodynamics--overview--q8",
+      "sectionId": "overview",
+      "question": "A reaction is thermodynamically favourable but has a large activation barrier. What can be concluded?",
+      "options": [
+        "It must finish immediately",
+        "It cannot occur under any conditions",
+        "Its equilibrium constant must be zero",
+        "It may remain extremely slow"
+      ],
+      "correctIndex": 3,
+      "explanation": "Thermodynamic favourability does not specify reaction speed. A large activation barrier can make a favourable process imperceptibly slow.",
+      "sourceEvidence": "Thermodynamic favourability does not determine reaction speed: a process can be spontaneous but extremely slow if it faces a large activation barrier.",
+      "misconceptionTargeted": "Assuming spontaneous or favourable reactions must be fast."
+    },
+    {
+      "id": "thermodynamics--enthalpy--q1",
+      "sectionId": "enthalpy",
+      "question": "Which state function is defined by H = U + PV?",
+      "options": [
+        "Enthalpy",
+        "Entropy",
+        "Gibbs energy",
+        "Heat"
+      ],
+      "correctIndex": 0,
+      "explanation": "Enthalpy combines internal energy with the pressure-volume term. Because it is a state function, only the initial and final states determine its change.",
+      "sourceEvidence": "Enthalpy is the state function H = U + PV.",
+      "misconceptionTargeted": "Confusing enthalpy with heat under all conditions."
+    },
+    {
+      "id": "thermodynamics--enthalpy--q2",
+      "sectionId": "enthalpy",
+      "question": "At constant pressure with only pressure-volume work, what equals the heat absorbed by the system?",
+      "options": [
+        "The entropy change",
+        "The enthalpy change",
+        "The activation energy",
+        "The equilibrium constant"
+      ],
+      "correctIndex": 1,
+      "explanation": "Under the stated constraints, the enthalpy change equals qp. Other work modes would require additional terms.",
+      "sourceEvidence": "At constant pressure with only pressure-volume work, the enthalpy change equals the heat absorbed by the system, ΔH = qp.",
+      "misconceptionTargeted": "Applying ΔH = qp without the constant-pressure and work constraints."
+    },
+    {
+      "id": "thermodynamics--enthalpy--q3",
+      "sectionId": "enthalpy",
+      "question": "What does a negative ΔH indicate for the system?",
+      "options": [
+        "An endothermic process",
+        "A process at equilibrium",
+        "An exothermic process",
+        "A necessarily rapid process"
+      ],
+      "correctIndex": 2,
+      "explanation": "Negative ΔH denotes an exothermic process. Positive ΔH denotes an endothermic process instead.",
+      "sourceEvidence": "Negative ΔH denotes an exothermic process and positive ΔH an endothermic process.",
+      "misconceptionTargeted": "Reversing the sign convention for exothermic and endothermic enthalpy."
+    },
+    {
+      "id": "thermodynamics--enthalpy--q4",
+      "sectionId": "enthalpy",
+      "question": "Which sign pairing for reaction enthalpy is correct?",
+      "options": [
+        "Exothermic is positive and endothermic is negative",
+        "Both are always positive",
+        "Both are always zero",
+        "Exothermic is negative and endothermic is positive"
+      ],
+      "correctIndex": 3,
+      "explanation": "An exothermic system releases net heat and has negative ΔH. An endothermic system absorbs net heat and has positive ΔH.",
+      "sourceEvidence": "Negative ΔH denotes an exothermic process and positive ΔH an endothermic process.",
+      "misconceptionTargeted": "Assigning the wrong ΔH sign to heat release or absorption."
+    },
+    {
+      "id": "thermodynamics--enthalpy--q5",
+      "sectionId": "enthalpy",
+      "question": "Why must physical states and stoichiometric coefficients appear in a thermochemical equation?",
+      "options": [
+        "They affect the associated enthalpy change",
+        "They determine only reaction speed",
+        "They eliminate the need for a sign convention",
+        "They make enthalpy path-dependent"
+      ],
+      "correctIndex": 0,
+      "explanation": "Enthalpy change depends on the amounts and physical states of the reacting substances. Omitting these details makes a thermochemical equation incomplete.",
+      "sourceEvidence": "A thermochemical equation must include physical states and stoichiometric coefficients because both affect the enthalpy change.",
+      "misconceptionTargeted": "Ignoring states or coefficients when reporting a reaction enthalpy."
+    },
+    {
+      "id": "thermodynamics--enthalpy--q6",
+      "sectionId": "enthalpy",
+      "question": "How does Hess’s law obtain the enthalpy change of an overall reaction?",
+      "options": [
+        "It multiplies all electrode potentials by coefficients",
+        "It sums the enthalpy changes of steps that give the same net reaction",
+        "It uses only the slowest elementary step",
+        "It sets every intermediate enthalpy to zero"
+      ],
+      "correctIndex": 1,
+      "explanation": "Hess’s law adds step enthalpies when their equations sum to the target reaction. This is valid because enthalpy is a state function.",
+      "sourceEvidence": "Hess’s law states that the enthalpy change for an overall reaction equals the sum of enthalpy changes for any sequence of steps that produces the same net reaction.",
+      "misconceptionTargeted": "Treating reaction enthalpy as dependent on the chosen sequence of steps."
+    },
+    {
+      "id": "thermodynamics--enthalpy--q7",
+      "sectionId": "enthalpy",
+      "question": "Which method infers reaction heat from q = mcΔT or a calibrated heat capacity?",
+      "options": [
+        "Chromatography",
+        "Electrolysis",
+        "Calorimetry",
+        "Titration without temperature measurement"
+      ],
+      "correctIndex": 2,
+      "explanation": "Calorimetry measures heat transfer through a temperature change and known heat capacity. Energy conservation relates the calorimeter’s heat to the reaction heat with the opposite sign.",
+      "sourceEvidence": "Calorimetry measures heat transfer experimentally using q = mcΔT or a calibrated heat capacity, with heat gained by one part balancing heat lost by another in an insulated setup.",
+      "misconceptionTargeted": "Assigning the same heat sign to both reaction and calorimeter."
+    },
+    {
+      "id": "thermodynamics--enthalpy--q8",
+      "sectionId": "enthalpy",
+      "question": "What happens to ΔH when a reaction equation is reversed or scaled?",
+      "options": [
+        "It stays unchanged in both cases",
+        "It becomes zero when reversed",
+        "It changes sign only when coefficients are doubled",
+        "It reverses sign when reversed and scales with the coefficients"
+      ],
+      "correctIndex": 3,
+      "explanation": "Reversing the chemical equation reverses the sign of its enthalpy change. Multiplying the equation multiplies ΔH by the same factor.",
+      "sourceEvidence": "When a reaction equation is reversed, the sign of ΔH reverses; when coefficients are multiplied, ΔH is multiplied by the same factor.",
+      "misconceptionTargeted": "Failing to transform ΔH along with a thermochemical equation."
+    },
+    {
+      "id": "thermodynamics--entropy--q1",
+      "sectionId": "entropy",
+      "question": "Which quantity relates a macrostate to the number and distribution of compatible microscopic arrangements?",
+      "options": [
+        "Entropy",
+        "Enthalpy",
+        "Activation energy",
+        "Expansion work"
+      ],
+      "correctIndex": 0,
+      "explanation": "Entropy is a state function connected to accessible microscopic arrangements. A macrostate compatible with more dispersed arrangements generally has greater entropy.",
+      "sourceEvidence": "Entropy S is a state function related to the number and distribution of microscopic arrangements compatible with a macroscopic state.",
+      "misconceptionTargeted": "Reducing entropy to a vague visual notion without microstates."
+    },
+    {
+      "id": "thermodynamics--entropy--q2",
+      "sectionId": "entropy",
+      "question": "Why do overwhelmingly probable macrostates dominate statistically?",
+      "options": [
+        "They contain the least energy in every case",
+        "They correspond to vastly more microstates",
+        "They require zero temperature",
+        "They violate energy conservation less often"
+      ],
+      "correctIndex": 1,
+      "explanation": "A highly probable macrostate can be realised by vastly more microscopic arrangements. This multiplicity makes the second law statistical.",
+      "sourceEvidence": "The second law is statistical: overwhelmingly probable macrostates dominate because they correspond to vastly more microstates.",
+      "misconceptionTargeted": "Treating the second law as a ban on individual microscopic fluctuations."
+    },
+    {
+      "id": "thermodynamics--entropy--q3",
+      "sectionId": "entropy",
+      "question": "In S = kB ln W, what does W represent?",
+      "options": [
+        "Pressure-volume work",
+        "Enthalpy",
+        "Multiplicity",
+        "Reaction quotient"
+      ],
+      "correctIndex": 2,
+      "explanation": "W is the multiplicity of microscopic arrangements compatible with the macrostate. Entropy grows as the logarithm of that multiplicity.",
+      "sourceEvidence": "Boltzmann’s relation S = kB ln W connects entropy to multiplicity W.",
+      "misconceptionTargeted": "Interpreting W as macroscopic mechanical work."
+    },
+    {
+      "id": "thermodynamics--entropy--q4",
+      "sectionId": "entropy",
+      "question": "How can ΔS be calculated for an irreversible spontaneous process?",
+      "options": [
+        "Only by making the actual process reversible",
+        "By setting ΔS to zero",
+        "Using the fastest kinetic pathway",
+        "Using any imagined reversible path between the same states"
+      ],
+      "correctIndex": 3,
+      "explanation": "Entropy is a state function, so its change depends only on the endpoints. An imagined reversible path may therefore be used even when the real process is irreversible.",
+      "sourceEvidence": "A real spontaneous process may be irreversible, but its entropy change is calculated using any imagined reversible path between the same states because S is a state function.",
+      "misconceptionTargeted": "Believing entropy change cannot be calculated for an irreversible process."
+    },
+    {
+      "id": "thermodynamics--entropy--q5",
+      "sectionId": "entropy",
+      "question": "Which law requires the entropy of the universe to increase for a spontaneous process?",
+      "options": [
+        "The second law",
+        "The first law",
+        "Hess’s law",
+        "The Arrhenius law"
+      ],
+      "correctIndex": 0,
+      "explanation": "The second law evaluates the sum of system and surroundings entropy changes. A spontaneous process has a positive entropy change for the universe.",
+      "sourceEvidence": "The second law states that the entropy of the universe increases for a spontaneous process: ΔSuniv = ΔSsys + ΔSsurr > 0.",
+      "misconceptionTargeted": "Applying the spontaneity criterion to the system alone."
+    },
+    {
+      "id": "thermodynamics--entropy--q6",
+      "sectionId": "entropy",
+      "question": "Which equation gives the entropy criterion for spontaneous change?",
+      "options": [
+        "ΔU = q + w = 0 for every process",
+        "ΔSuniv = ΔSsys + ΔSsurr > 0",
+        "ΔH = Ea",
+        "S = q for any irreversible path"
+      ],
+      "correctIndex": 1,
+      "explanation": "The universe’s entropy change combines the changes of system and surroundings. Its value must be positive for a spontaneous process.",
+      "sourceEvidence": "The second law states that the entropy of the universe increases for a spontaneous process: ΔSuniv = ΔSsys + ΔSsurr > 0.",
+      "misconceptionTargeted": "Omitting the surroundings from the second-law entropy balance."
+    },
+    {
+      "id": "thermodynamics--entropy--q7",
+      "sectionId": "entropy",
+      "question": "Who introduced entropy in thermodynamics before Boltzmann developed its statistical interpretation?",
+      "options": [
+        "Josiah Willard Gibbs",
+        "Germain Hess",
+        "Rudolf Clausius",
+        "Svante Arrhenius"
+      ],
+      "correctIndex": 2,
+      "explanation": "Rudolf Clausius introduced entropy as a thermodynamic concept. Ludwig Boltzmann later linked it to microscopic statistics.",
+      "sourceEvidence": "Rudolf Clausius introduced entropy in thermodynamics, while Ludwig Boltzmann developed its statistical interpretation.",
+      "misconceptionTargeted": "Attributing the introduction of entropy and its statistical interpretation to the same scientist."
+    },
+    {
+      "id": "thermodynamics--entropy--q8",
+      "sectionId": "entropy",
+      "question": "Can the system’s entropy decrease during a spontaneous process?",
+      "options": [
+        "No, every subsystem must increase in entropy",
+        "Yes, but only when total entropy also decreases",
+        "No, unless the process is at equilibrium",
+        "Yes, if the surroundings increase by a larger amount"
+      ],
+      "correctIndex": 3,
+      "explanation": "The second law applies to the total entropy change of system plus surroundings. A local decrease is allowed when a larger surroundings increase keeps the universe total positive.",
+      "sourceEvidence": "The system’s entropy may decrease if the surroundings increase by a larger amount.",
+      "misconceptionTargeted": "Assuming spontaneity requires ΔSsys to be positive by itself."
+    },
+    {
+      "id": "thermodynamics--gibbs--q1",
+      "sectionId": "gibbs",
+      "question": "At constant temperature and pressure, which potential is defined by G = H − TS?",
+      "options": [
+        "Gibbs free energy",
+        "Internal energy",
+        "Heat capacity",
+        "Activation energy"
+      ],
+      "correctIndex": 0,
+      "explanation": "Gibbs free energy combines enthalpy and entropy at a specified temperature. Its change predicts thermodynamic direction at constant temperature and pressure.",
+      "sourceEvidence": "At constant temperature and pressure, Gibbs free energy combines enthalpy and entropy as G = H − TS.",
+      "misconceptionTargeted": "Confusing Gibbs free energy with a kinetic activation barrier."
+    },
+    {
+      "id": "thermodynamics--gibbs--q2",
+      "sectionId": "gibbs",
+      "question": "What does “spontaneous” mean in thermodynamics?",
+      "options": [
+        "Instantaneous and explosive",
+        "Permitted without continuous external driving",
+        "Guaranteed to reach complete conversion",
+        "Unable to face an activation barrier"
+      ],
+      "correctIndex": 1,
+      "explanation": "Spontaneous means thermodynamically permitted in the stated direction without continuous driving. It says nothing by itself about reaction speed or violence.",
+      "sourceEvidence": "Spontaneous means permitted without continuous external driving; it does not mean rapid or explosive.",
+      "misconceptionTargeted": "Equating thermodynamic spontaneity with rapid reaction."
+    },
+    {
+      "id": "thermodynamics--gibbs--q3",
+      "sectionId": "gibbs",
+      "question": "At constant temperature and pressure, what condition describes equilibrium?",
+      "options": [
+        "ΔG < 0",
+        "ΔG > 0",
+        "ΔG = 0",
+        "ΔH must equal zero"
+      ],
+      "correctIndex": 2,
+      "explanation": "The forward Gibbs free-energy change is zero at equilibrium. Negative and positive values instead favour forward and reverse change, respectively.",
+      "sourceEvidence": "A process is thermodynamically spontaneous in the forward direction when ΔG < 0, at equilibrium when ΔG = 0, and nonspontaneous forward when ΔG > 0.",
+      "misconceptionTargeted": "Using the wrong ΔG sign for equilibrium."
+    },
+    {
+      "id": "thermodynamics--gibbs--q4",
+      "sectionId": "gibbs",
+      "question": "What determines how reaction favourability changes with temperature?",
+      "options": [
+        "Only the sign of activation energy",
+        "Only the reaction rate constant",
+        "The number of elementary steps",
+        "The signs of ΔH and ΔS"
+      ],
+      "correctIndex": 3,
+      "explanation": "The temperature term in ΔG combines T with ΔS, while ΔH contributes separately. Their signs determine whether heating favours or disfavors the reaction.",
+      "sourceEvidence": "The signs of ΔH and ΔS determine temperature dependence.",
+      "misconceptionTargeted": "Ignoring entropy when predicting temperature dependence of ΔG."
+    },
+    {
+      "id": "thermodynamics--gibbs--q5",
+      "sectionId": "gibbs",
+      "question": "What does a negative ΔG° imply about the equilibrium constant?",
+      "options": [
+        "K is greater than one but conversion need not be complete",
+        "K is exactly zero",
+        "K is less than one in every case",
+        "All reactants must disappear"
+      ],
+      "correctIndex": 0,
+      "explanation": "A negative standard free-energy change corresponds to K greater than one. Products are favoured at equilibrium, but a finite K does not mean complete conversion.",
+      "sourceEvidence": "A negative standard free-energy change therefore corresponds to K > 1, not to complete conversion.",
+      "misconceptionTargeted": "Interpreting product-favoured equilibrium as complete conversion."
+    },
+    {
+      "id": "thermodynamics--gibbs--q6",
+      "sectionId": "gibbs",
+      "question": "Which expression combines enthalpy and entropy into Gibbs free energy?",
+      "options": [
+        "G = H + TS",
+        "G = H − TS",
+        "G = q + w",
+        "G = kB ln W"
+      ],
+      "correctIndex": 1,
+      "explanation": "At constant temperature and pressure, Gibbs free energy is enthalpy minus temperature times entropy. The entropy term can therefore change the direction predicted from enthalpy alone.",
+      "sourceEvidence": "At constant temperature and pressure, Gibbs free energy combines enthalpy and entropy as G = H − TS.",
+      "misconceptionTargeted": "Using the wrong sign for the entropy contribution to Gibbs free energy."
+    },
+    {
+      "id": "thermodynamics--gibbs--q7",
+      "sectionId": "gibbs",
+      "question": "How is the forward direction classified when ΔG is less than zero?",
+      "options": [
+        "At equilibrium",
+        "Thermodynamically forbidden in both directions",
+        "Thermodynamically spontaneous",
+        "Necessarily slow"
+      ],
+      "correctIndex": 2,
+      "explanation": "A negative ΔG makes the forward direction thermodynamically spontaneous. It does not determine how quickly the process proceeds.",
+      "sourceEvidence": "A process is thermodynamically spontaneous in the forward direction when ΔG < 0, at equilibrium when ΔG = 0, and nonspontaneous forward when ΔG > 0.",
+      "misconceptionTargeted": "Confusing the sign criterion for spontaneity with a rate prediction."
+    },
+    {
+      "id": "thermodynamics--gibbs--q8",
+      "sectionId": "gibbs",
+      "question": "Which relationship holds at equilibrium between Q, K, and ΔG?",
+      "options": [
+        "Q = 0 and ΔG < 0",
+        "Q is always greater than K and ΔG > 0",
+        "K = 0 and ΔG° = 0",
+        "Q = K and ΔG = 0"
+      ],
+      "correctIndex": 3,
+      "explanation": "At equilibrium the current composition quotient equals K and there is no net Gibbs driving force. Substitution into the nonstandard equation gives ΔG° = −RT ln K.",
+      "sourceEvidence": "At equilibrium, Q = K and ΔG = 0, giving ΔG° = −RT ln K.",
+      "misconceptionTargeted": "Failing to distinguish the current reaction quotient from its equilibrium value."
+    },
+    {
+      "id": "thermodynamics--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "What is the safest first step when assigning signs to thermodynamic heat and work?",
+      "options": [
+        "Follow one sign convention consistently",
+        "Switch conventions to make every value positive",
+        "Assume expansion work is positive",
+        "Ignore the system boundary"
+      ],
+      "correctIndex": 0,
+      "explanation": "A consistent sign convention preserves the physical meaning of every transfer. Mixing conventions leads to contradictory energy accounting.",
+      "sourceEvidence": "Follow one sign convention consistently.",
+      "misconceptionTargeted": "Switching sign conventions within one calculation."
+    },
+    {
+      "id": "thermodynamics--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "Under the chemistry convention, which signs describe energy entering the system and expansion work?",
+      "options": [
+        "q is negative and w is positive whenever energy enters",
+        "q and w are positive when energy enters, while expansion work is negative",
+        "q and w are always negative",
+        "Expansion work is always positive"
+      ],
+      "correctIndex": 1,
+      "explanation": "Positive q and positive w mean energy enters the system in the chemistry convention. Expansion work is negative because the expanding system does work on its surroundings.",
+      "sourceEvidence": "In chemistry, q > 0 and w > 0 mean energy enters the system; expansion work is negative.",
+      "misconceptionTargeted": "Giving expansion work a positive sign under the chemistry convention."
+    },
+    {
+      "id": "thermodynamics--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "What must be changed when a thermochemical equation is reversed or multiplied?",
+      "options": [
+        "Only the physical states",
+        "The equilibrium temperature only",
+        "The associated ΔH sign or scale",
+        "Nothing because enthalpy ignores stoichiometry"
+      ],
+      "correctIndex": 2,
+      "explanation": "Reversing an equation reverses ΔH, and multiplying coefficients multiplies ΔH. Formation-enthalpy sums must also retain stoichiometric coefficients.",
+      "sourceEvidence": "When reversing or scaling a thermochemical equation, reverse or scale ΔH as well, and include stoichiometric coefficients in formation-enthalpy sums.",
+      "misconceptionTargeted": "Leaving ΔH unchanged after reversing or scaling a reaction."
+    },
+    {
+      "id": "thermodynamics--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "Which concepts describe entropy more precisely than the single word “disorder”?",
+      "options": [
+        "Reaction speed, catalyst mass, and pressure work",
+        "Bond strength, colour, and density",
+        "Only the sign of ΔH",
+        "Energy dispersal, accessible microstates, and multiplicity"
+      ],
+      "correctIndex": 3,
+      "explanation": "Entropy is grounded in energy dispersal and the multiplicity of accessible microscopic arrangements. The vague word “disorder” can conceal this statistical meaning.",
+      "sourceEvidence": "Use energy dispersal, accessible microstates, and multiplicity.",
+      "misconceptionTargeted": "Defining entropy only as visual disorder."
+    },
+    {
+      "id": "thermodynamics--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "Does a negative entropy change for the system necessarily violate the second law?",
+      "options": [
+        "No, if the surroundings gain more entropy",
+        "Yes, because every system must become more disordered",
+        "Yes, unless ΔH is zero",
+        "No, because the second law ignores surroundings"
+      ],
+      "correctIndex": 0,
+      "explanation": "The second law concerns the combined entropy change of system and surroundings. A larger positive surroundings change can outweigh a negative system change.",
+      "sourceEvidence": "A negative system entropy change does not violate the second law if the surroundings gain more entropy.",
+      "misconceptionTargeted": "Applying the second law to ΔSsys alone."
+    },
+    {
+      "id": "thermodynamics--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "How are thermodynamic spontaneity and reaction rate related?",
+      "options": [
+        "Every spontaneous reaction is fast",
+        "They are independent properties",
+        "Every slow reaction is nonspontaneous",
+        "A catalyst makes ΔG negative"
+      ],
+      "correctIndex": 1,
+      "explanation": "Spontaneity describes thermodynamic direction, while rate describes kinetic timescale. A reaction may be spontaneous yet slow because of an activation barrier.",
+      "sourceEvidence": "Spontaneity and rate are independent.",
+      "misconceptionTargeted": "Assuming thermodynamic favourability fixes reaction speed."
+    },
+    {
+      "id": "thermodynamics--exam-traps--q7",
+      "sectionId": "exam-traps",
+      "question": "What does a catalyst leave unchanged?",
+      "options": [
+        "Activation barrier and pathway",
+        "Forward and reverse reaction rates",
+        "ΔG° and the equilibrium constant",
+        "The time required to approach equilibrium"
+      ],
+      "correctIndex": 2,
+      "explanation": "A catalyst lowers the kinetic barrier and accelerates approach to equilibrium. It does not alter the standard Gibbs-energy change or K.",
+      "sourceEvidence": "ΔG < 0 does not guarantee a fast reaction, and a catalyst changes neither ΔG° nor K.",
+      "misconceptionTargeted": "Believing a catalyst changes thermodynamic equilibrium."
+    },
+    {
+      "id": "thermodynamics--exam-traps--q8",
+      "sectionId": "exam-traps",
+      "question": "How should Q and K be distinguished?",
+      "options": [
+        "Q is always equal to K",
+        "Q describes equilibrium and K describes the current mixture",
+        "Both describe reaction speed",
+        "Q is the current composition and K is the equilibrium composition"
+      ],
+      "correctIndex": 3,
+      "explanation": "Q represents the composition at the current moment, whereas K is the equilibrium value. Comparing them determines the thermodynamically driven direction of change.",
+      "sourceEvidence": "Q describes the current composition, K the equilibrium composition, and their comparison determines the direction in which ΔG drives change.",
+      "misconceptionTargeted": "Interchanging reaction quotient and equilibrium constant."
+    }
+  ]
+}

@@ -1,0 +1,606 @@
+{
+  "topicId": "quantum-mechanics",
+  "subjectId": "physics",
+  "questions": [
+    {
+      "id": "quantum-mechanics--overview--q1",
+      "sectionId": "overview",
+      "question": "Which situation most clearly requires quantum mechanics rather than classical mechanics?",
+      "options": [
+        "Predicting electron diffraction through a crystal",
+        "Calculating a thrown ball's arc",
+        "Estimating a car's stopping distance",
+        "Finding the pressure at the bottom of a pool"
+      ],
+      "correctIndex": 0,
+      "explanation": "Electron diffraction occurs at the atomic scale and displays wave behaviour that a definite classical trajectory cannot reproduce. Everyday projectiles and fluids are well described by classical approximations.",
+      "sourceEvidence": "Quantum mechanics describes matter and radiation at atomic and subatomic scales.",
+      "misconceptionTargeted": "Assuming classical mechanics remains complete at atomic and subatomic scales"
+    },
+    {
+      "id": "quantum-mechanics--overview--q2",
+      "sectionId": "overview",
+      "question": "What combination of observations demonstrates wave-particle duality for light?",
+      "options": [
+        "Continuous energy transfer and no diffraction",
+        "Discrete photon transfers and interference",
+        "Definite trajectories and constant acceleration",
+        "Rest mass and a fixed classical orbit"
+      ],
+      "correctIndex": 1,
+      "explanation": "Light transfers energy in discrete photons while still producing an interference pattern. Treating light as only a classical particle or only a classical wave omits one of those observations.",
+      "sourceEvidence": "Quantum objects display both kinds of behaviour: light arrives in discrete energy transfers called photons yet produces interference, and electrons form localised detections yet diffract through crystals and slits.",
+      "misconceptionTargeted": "Forcing light into one complete classical category"
+    },
+    {
+      "id": "quantum-mechanics--overview--q3",
+      "sectionId": "overview",
+      "question": "What did Max Planck propose while modelling blackbody radiation?",
+      "options": [
+        "Electrons follow exact planetary orbits",
+        "All radiation travels slower at lower frequency",
+        "Oscillators exchange energy in frequency-dependent units",
+        "Matter has no discrete energy exchanges"
+      ],
+      "correctIndex": 2,
+      "explanation": "Planck introduced energy quanta whose size is proportional to oscillator frequency. The proposal concerned discrete energy exchange, not altered light speed or planetary electron paths.",
+      "sourceEvidence": "Max Planck introduced energy quanta in 1900 to model blackbody radiation, proposing that oscillators exchange energy in units proportional to frequency.",
+      "misconceptionTargeted": "Reducing Planck's quantum proposal to a classical change in wave speed"
+    },
+    {
+      "id": "quantum-mechanics--overview--q4",
+      "sectionId": "overview",
+      "question": "According to E = hf, what happens to a photon's energy when its frequency doubles?",
+      "options": [
+        "It is halved",
+        "It is unchanged",
+        "It quadruples",
+        "It doubles"
+      ],
+      "correctIndex": 3,
+      "explanation": "Photon energy is directly proportional to frequency, so doubling frequency doubles energy. The relation is linear rather than inverse or quadratic.",
+      "sourceEvidence": "Albert Einstein applied the quantum relation E = hf to light in 1905, explaining the photoelectric effect.",
+      "misconceptionTargeted": "Treating photon energy as inversely proportional or proportional to frequency squared"
+    },
+    {
+      "id": "quantum-mechanics--overview--q5",
+      "sectionId": "overview",
+      "question": "Why does classical mechanics usually work well for a football?",
+      "options": [
+        "Its associated wavelength is extraordinarily small",
+        "Its wavefunction is exactly zero",
+        "Planck's constant grows with mass",
+        "It cannot exchange energy"
+      ],
+      "correctIndex": 0,
+      "explanation": "An everyday object has such a tiny associated wavelength that quantum discreteness is normally unobservable. Classical behaviour is an excellent approximation rather than proof that quantum laws switch off.",
+      "sourceEvidence": "The constant h sets the scale at which quantum discreteness becomes important; for everyday objects, the associated wavelengths are so small that classical mechanics is an excellent approximation.",
+      "misconceptionTargeted": "Believing macroscopic objects are exempt from quantum mechanics rather than approximated classically"
+    },
+    {
+      "id": "quantum-mechanics--overview--q6",
+      "sectionId": "overview",
+      "question": "What does the Born rule identify as a probability density?",
+      "options": [
+        "The wavefunction ψ itself",
+        "The squared magnitude |ψ|²",
+        "The phase of ψ alone",
+        "The Schrödinger equation"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Born rule converts the complex wavefunction into observable probabilities through |ψ|². The amplitude ψ can be complex and is not itself a probability density.",
+      "sourceEvidence": "The Born rule interprets |ψ|² as a probability density for measurement outcomes.",
+      "misconceptionTargeted": "Mistaking a complex probability amplitude for a probability density"
+    },
+    {
+      "id": "quantum-mechanics--overview--q7",
+      "sectionId": "overview",
+      "question": "At what stage do indistinguishable quantum alternatives interfere?",
+      "options": [
+        "After their probabilities are rounded",
+        "Only after a classical trajectory is assigned",
+        "While their amplitudes are superposed",
+        "Only when each alternative is measured separately"
+      ],
+      "correctIndex": 2,
+      "explanation": "Quantum alternatives interfere when their complex amplitudes are combined before measurement. Adding finished probabilities first removes the phase information that creates interference.",
+      "sourceEvidence": "Superposition applies to amplitudes, so alternatives can interfere before measurement.",
+      "misconceptionTargeted": "Adding probabilities instead of amplitudes for indistinguishable alternatives"
+    },
+    {
+      "id": "quantum-mechanics--overview--q8",
+      "sectionId": "overview",
+      "question": "Which statement best expresses wave-particle duality?",
+      "options": [
+        "A quantum object switches between two literal classical objects",
+        "Every measurement reveals a smeared material wave",
+        "Particles always have hidden definite trajectories",
+        "One quantum framework predicts localisation and interference"
+      ],
+      "correctIndex": 3,
+      "explanation": "Quantum theory uses one mathematical framework whose predictions include both localised detections and interference. Calling the object simultaneously a literal classical wave and particle misstates the theory.",
+      "sourceEvidence": "Quantum theory does not say a particle is literally a classical wave and a classical particle simultaneously; it supplies one mathematical framework whose measurable predictions include both localisation and interference.",
+      "misconceptionTargeted": "Interpreting wave-particle duality as two simultaneous classical identities"
+    },
+    {
+      "id": "quantum-mechanics--photoelectric--q1",
+      "sectionId": "photoelectric",
+      "question": "A metal is illuminated below its threshold frequency. What will increasing the light intensity do in the one-photon regime?",
+      "options": [
+        "Produce no photoelectrons",
+        "Eject electrons with greater maximum energy",
+        "Eject electrons after a longer delay",
+        "Lower the metal's work function"
+      ],
+      "correctIndex": 0,
+      "explanation": "Below threshold, each photon lacks the energy needed to release an electron, regardless of how many arrive. Intensity changes photon count but cannot combine separate low-energy photons into one qualifying event in this regime.",
+      "sourceEvidence": "Experiments showed a threshold frequency below which no electrons are emitted, regardless of intensity.",
+      "misconceptionTargeted": "Believing sufficiently intense sub-threshold light must eventually eject electrons"
+    },
+    {
+      "id": "quantum-mechanics--photoelectric--q2",
+      "sectionId": "photoelectric",
+      "question": "Above the threshold frequency, which change raises the maximum kinetic energy of emitted electrons?",
+      "options": [
+        "Increasing beam area only",
+        "Increasing frequency",
+        "Increasing exposure time only",
+        "Increasing intensity at fixed frequency"
+      ],
+      "correctIndex": 1,
+      "explanation": "A higher frequency gives each photon more energy and raises the maximum electron kinetic energy. At fixed frequency, greater intensity supplies more photons rather than more energy per photon.",
+      "sourceEvidence": "Above threshold, emission begins without a measurable delay and the maximum electron kinetic energy increases with frequency.",
+      "misconceptionTargeted": "Confusing photon number with energy per photon"
+    },
+    {
+      "id": "quantum-mechanics--photoelectric--q3",
+      "sectionId": "photoelectric",
+      "question": "At a fixed above-threshold frequency, brighter light primarily increases which measured quantity?",
+      "options": [
+        "The work function",
+        "The threshold frequency",
+        "The number of emitted electrons",
+        "The maximum kinetic energy per electron"
+      ],
+      "correctIndex": 2,
+      "explanation": "Greater intensity means more photons arrive, so more electrons can be emitted. Brightness at fixed frequency does not raise each photon's energy or the electron maximum kinetic energy.",
+      "sourceEvidence": "Greater intensity increases the number of emitted electrons, not their maximum energy, when frequency is fixed.",
+      "misconceptionTargeted": "Equating brighter light with more energetic individual photoelectrons"
+    },
+    {
+      "id": "quantum-mechanics--photoelectric--q4",
+      "sectionId": "photoelectric",
+      "question": "A photon supplies 5 electronvolts to a metal with a 2 electronvolt work function. What is the maximum photoelectron kinetic energy?",
+      "options": [
+        "2 electronvolts",
+        "7 electronvolts",
+        "5 electronvolts",
+        "3 electronvolts"
+      ],
+      "correctIndex": 3,
+      "explanation": "Einstein's balance gives maximum kinetic energy as 5 minus 2, which is 3 electronvolts. Adding the work function would count the escape energy as extra kinetic energy.",
+      "sourceEvidence": "One photon transfers its energy to one electron.",
+      "misconceptionTargeted": "Adding rather than subtracting the work function in the photoelectric energy balance"
+    },
+    {
+      "id": "quantum-mechanics--photoelectric--q5",
+      "sectionId": "photoelectric",
+      "question": "What does the stopping potential determine in a photoelectric experiment?",
+      "options": [
+        "The maximum photoelectron kinetic energy",
+        "The metal's electrical resistance",
+        "The number of photons emitted by the metal",
+        "The wavelength of electrons before illumination"
+      ],
+      "correctIndex": 0,
+      "explanation": "The stopping voltage is chosen so even the most energetic photoelectrons are just prevented from reaching the collector. It measures an energy cutoff rather than photon count or material resistance.",
+      "sourceEvidence": "The stopping potential Vs required to halt the most energetic electrons satisfies eVs = Kmax, providing a direct experimental measure.",
+      "misconceptionTargeted": "Treating stopping potential as a measure of photocurrent rather than maximum energy"
+    },
+    {
+      "id": "quantum-mechanics--photoelectric--q6",
+      "sectionId": "photoelectric",
+      "question": "Why did the photoelectric effect conflict with a purely classical wave account?",
+      "options": [
+        "Classical theory predicted instantaneous one-photon transfers",
+        "Classical theory predicted intensity could gradually supply enough energy below threshold",
+        "Classical theory predicted a universal work function of zero",
+        "Classical theory predicted electrons could never absorb light"
+      ],
+      "correctIndex": 1,
+      "explanation": "A continuous classical wave should allow intense low-frequency light to accumulate enough energy over time. The observed threshold and prompt emission instead require energy delivered in individual frequency-dependent packets.",
+      "sourceEvidence": "The effect contradicts a purely classical wave prediction in which energy is spread continuously across the wavefront and intensity alone should eventually eject electrons.",
+      "misconceptionTargeted": "Ignoring the threshold-frequency evidence against continuous energy accumulation"
+    },
+    {
+      "id": "quantum-mechanics--photoelectric--q7",
+      "sectionId": "photoelectric",
+      "question": "Whose measurements confirmed Einstein's linear frequency relation for the photoelectric effect?",
+      "options": [
+        "Werner Heisenberg",
+        "Louis de Broglie",
+        "Robert Millikan",
+        "Christiaan Huygens"
+      ],
+      "correctIndex": 2,
+      "explanation": "Robert Millikan measured the photoelectric relation carefully and confirmed Einstein's prediction. The other scientists are associated with matter waves, uncertainty, or classical wavefronts.",
+      "sourceEvidence": "Robert Millikan’s careful measurements later confirmed Einstein’s linear frequency relation despite Millikan’s initial scepticism.",
+      "misconceptionTargeted": "Attributing Millikan's photoelectric measurements to a different quantum pioneer"
+    },
+    {
+      "id": "quantum-mechanics--photoelectric--q8",
+      "sectionId": "photoelectric",
+      "question": "Which device relies directly on quantised light-matter interactions related to the photoelectric effect?",
+      "options": [
+        "A hydraulic press",
+        "A mercury thermometer",
+        "A mechanical pendulum",
+        "A camera sensor"
+      ],
+      "correctIndex": 3,
+      "explanation": "Camera sensors convert incident photon interactions into electronic signals. The other devices operate primarily through fluid pressure, mechanics, or thermal expansion.",
+      "sourceEvidence": "Modern photodiodes, camera sensors, solar cells, and photoelectron spectroscopy all depend on quantised light-matter interactions related to this principle.",
+      "misconceptionTargeted": "Treating the photoelectric effect as historically important but technologically unused"
+    },
+    {
+      "id": "quantum-mechanics--de-broglie--q1",
+      "sectionId": "de-broglie",
+      "question": "Which quantity determines a particle's de Broglie wavelength?",
+      "options": [
+        "Its momentum",
+        "Its electric charge alone",
+        "Its temperature alone",
+        "Its acceleration"
+      ],
+      "correctIndex": 0,
+      "explanation": "The de Broglie relation assigns wavelength h divided by momentum. Charge, temperature, and acceleration do not replace momentum in that relation.",
+      "sourceEvidence": "Louis de Broglie proposed in 1924 that a particle with momentum p has wavelength λ = h/p.",
+      "misconceptionTargeted": "Substituting an unrelated particle property for momentum in the de Broglie relation"
+    },
+    {
+      "id": "quantum-mechanics--de-broglie--q2",
+      "sectionId": "de-broglie",
+      "question": "If a particle's momentum doubles, how does its de Broglie wavelength change?",
+      "options": [
+        "It doubles",
+        "It halves",
+        "It quadruples",
+        "It stays constant"
+      ],
+      "correctIndex": 1,
+      "explanation": "Because wavelength is inversely proportional to momentum, doubling momentum halves wavelength. A direct proportionality would reverse the relation stated by h divided by p.",
+      "sourceEvidence": "Because momentum appears in the denominator, slow electrons can have wavelengths comparable to atomic spacings, while macroscopic objects have wavelengths far too small to observe under ordinary conditions.",
+      "misconceptionTargeted": "Treating de Broglie wavelength as directly proportional to momentum"
+    },
+    {
+      "id": "quantum-mechanics--de-broglie--q3",
+      "sectionId": "de-broglie",
+      "question": "Why are matter-wave effects easier to observe for electrons than for moving footballs?",
+      "options": [
+        "Electrons have no momentum",
+        "Football wavelengths are too large",
+        "Electron wavelengths can match atomic spacings",
+        "Only charged objects have wavelengths"
+      ],
+      "correctIndex": 2,
+      "explanation": "Electrons can have momenta that give wavelengths comparable with crystal spacings and therefore measurable diffraction. A macroscopic football has an extraordinarily small wavelength rather than no wavelength.",
+      "sourceEvidence": "Because momentum appears in the denominator, slow electrons can have wavelengths comparable to atomic spacings, while macroscopic objects have wavelengths far too small to observe under ordinary conditions.",
+      "misconceptionTargeted": "Believing matter waves exist only for microscopic or charged particles"
+    },
+    {
+      "id": "quantum-mechanics--de-broglie--q4",
+      "sectionId": "de-broglie",
+      "question": "What observation by Davisson and Germer confirmed matter waves?",
+      "options": [
+        "Nuclear mass loss in fission",
+        "Photon emission below threshold",
+        "Muon survival through the atmosphere",
+        "Electron diffraction from a nickel crystal"
+      ],
+      "correctIndex": 3,
+      "explanation": "Their nickel-crystal experiment produced an electron diffraction pattern characteristic of waves. The other observations test different areas of quantum or relativistic physics.",
+      "sourceEvidence": "Davisson and Germer confirmed electron matter waves in 1927 by observing diffraction from a nickel crystal.",
+      "misconceptionTargeted": "Confusing the experimental evidence for matter waves with unrelated modern-physics results"
+    },
+    {
+      "id": "quantum-mechanics--de-broglie--q5",
+      "sectionId": "de-broglie",
+      "question": "Why can electron microscopes resolve finer detail than visible-light microscopes?",
+      "options": [
+        "Accelerated electrons can have much shorter wavelengths",
+        "Electrons always travel faster than light",
+        "Electron lenses have no aberrations",
+        "Electrons never interact with samples"
+      ],
+      "correctIndex": 0,
+      "explanation": "Accelerated electrons can have wavelengths far below visible wavelengths, improving the diffraction-limited resolution scale. Practical resolution is still limited by aberrations and sample interactions.",
+      "sourceEvidence": "Electron microscopes exploit the much shorter wavelength of accelerated electrons compared with visible light, enabling substantially finer resolution, although lens aberrations and sample interactions impose practical limits.",
+      "misconceptionTargeted": "Attributing electron-microscope resolution to impossible speed or perfect lenses"
+    },
+    {
+      "id": "quantum-mechanics--de-broglie--q6",
+      "sectionId": "de-broglie",
+      "question": "For a slowly moving particle, which expression may be used in λ = h/p?",
+      "options": [
+        "p = mc²",
+        "p = mv",
+        "p = hf",
+        "p = qV"
+      ],
+      "correctIndex": 1,
+      "explanation": "Nonrelativistic motion permits momentum to be calculated as mass times velocity. Energy and voltage expressions are not substitutes for momentum in this condition.",
+      "sourceEvidence": "For nonrelativistic motion, p = mv and the de Broglie wavelength is h/mv.",
+      "misconceptionTargeted": "Using an energy formula in place of nonrelativistic momentum"
+    },
+    {
+      "id": "quantum-mechanics--de-broglie--q7",
+      "sectionId": "de-broglie",
+      "question": "Which momentum must be used for a particle moving at relativistic speed?",
+      "options": [
+        "p = mv without correction",
+        "p = hλ",
+        "p = γmv",
+        "p = mc²/v²"
+      ],
+      "correctIndex": 2,
+      "explanation": "At high speed, the Lorentz factor must be included in the particle momentum. Using mass times velocity alone is only the nonrelativistic approximation.",
+      "sourceEvidence": "At high speeds, relativistic momentum p = γmv must be used.",
+      "misconceptionTargeted": "Using p = mv outside its nonrelativistic range"
+    },
+    {
+      "id": "quantum-mechanics--de-broglie--q8",
+      "sectionId": "de-broglie",
+      "question": "Why do confined quantum systems have discrete energy states?",
+      "options": [
+        "The wavefunction becomes a classical trajectory",
+        "The particle loses all momentum at a boundary",
+        "Every wavelength becomes identical",
+        "Only boundary-compatible matter wavelengths are allowed"
+      ],
+      "correctIndex": 3,
+      "explanation": "Confinement selects only wave patterns that satisfy the system boundaries, leaving a discrete set of allowed states. Quantisation follows from boundary conditions rather than the loss of all motion or a return to classical paths.",
+      "sourceEvidence": "A confined matter wave supports only boundary-compatible wavelengths, leading naturally to discrete energy states.",
+      "misconceptionTargeted": "Treating atomic quantisation as an arbitrary rule unrelated to wave boundaries"
+    },
+    {
+      "id": "quantum-mechanics--uncertainty--q1",
+      "sectionId": "uncertainty",
+      "question": "What does the Heisenberg uncertainty principle limit for one spatial axis?",
+      "options": [
+        "The simultaneous narrowness of position and momentum distributions",
+        "The precision of position measurements alone",
+        "The speed of every quantum particle",
+        "The number of particles in a sample"
+      ],
+      "correctIndex": 0,
+      "explanation": "The principle places a lower bound on the product of position and momentum spreads along the same axis. It does not ban a precise value for either variable considered by itself.",
+      "sourceEvidence": "The uncertainty principle states that a quantum state cannot possess arbitrarily narrow distributions of both position and momentum along the same axis.",
+      "misconceptionTargeted": "Interpreting uncertainty as a ban on precise measurement of either quantity individually"
+    },
+    {
+      "id": "quantum-mechanics--uncertainty--q2",
+      "sectionId": "uncertainty",
+      "question": "If a state reaches the minimum uncertainty product and Δx is halved, what must happen to Δp?",
+      "options": [
+        "It is halved",
+        "It doubles",
+        "It remains unchanged",
+        "It becomes zero"
+      ],
+      "correctIndex": 1,
+      "explanation": "Keeping the minimum product fixed requires momentum uncertainty to double when position uncertainty halves. Reducing both spreads would violate the quantum lower bound.",
+      "sourceEvidence": "Their standard deviations satisfy ΔxΔpx ≥ ħ/2.",
+      "misconceptionTargeted": "Assuming position and momentum uncertainties can both shrink without limit"
+    },
+    {
+      "id": "quantum-mechanics--uncertainty--q3",
+      "sectionId": "uncertainty",
+      "question": "Why would a perfect measuring instrument not eliminate quantum uncertainty?",
+      "options": [
+        "Position has no physical meaning",
+        "All instruments add exactly the same random error",
+        "The limitation belongs to quantum states and noncommuting operators",
+        "Momentum is never measurable"
+      ],
+      "correctIndex": 2,
+      "explanation": "The bound is a property of the state because position and momentum are represented by noncommuting operators. Better apparatus can reduce measurement error but cannot remove the intrinsic distribution constraint.",
+      "sourceEvidence": "This is not merely poor instrument design or disturbance by an observer; it is a property of quantum states arising because position and momentum are represented by noncommuting operators.",
+      "misconceptionTargeted": "Reducing intrinsic quantum uncertainty to experimental clumsiness"
+    },
+    {
+      "id": "quantum-mechanics--uncertainty--q4",
+      "sectionId": "uncertainty",
+      "question": "What is required to construct a tightly localised wave packet?",
+      "options": [
+        "One exact wavelength only",
+        "A classical point trajectory",
+        "Zero momentum components",
+        "A superposition of many wavelengths"
+      ],
+      "correctIndex": 3,
+      "explanation": "A narrow packet is built by combining many wavelength components and therefore many momenta. A single wavelength extends broadly through space and cannot form a sharply localised packet.",
+      "sourceEvidence": "A tightly localised wave packet requires the superposition of many wavelengths and therefore many momenta.",
+      "misconceptionTargeted": "Believing one precise wavelength produces precise localisation"
+    },
+    {
+      "id": "quantum-mechanics--uncertainty--q5",
+      "sectionId": "uncertainty",
+      "question": "A nearly single-wavelength quantum state has which combination of properties?",
+      "options": [
+        "Well-defined momentum and broad position",
+        "Broad momentum and narrow position",
+        "Zero position and zero momentum uncertainty",
+        "Well-defined position and momentum"
+      ],
+      "correctIndex": 0,
+      "explanation": "A narrow wavelength range gives a narrow momentum range while the state spreads widely in position. Assigning narrow distributions to both variables contradicts their Fourier relationship.",
+      "sourceEvidence": "A nearly single-wavelength state has well-defined momentum but is spread broadly through space.",
+      "misconceptionTargeted": "Assuming a precise wavelength also makes position precise"
+    },
+    {
+      "id": "quantum-mechanics--uncertainty--q6",
+      "sectionId": "uncertainty",
+      "question": "Can a quantum state have a very small position uncertainty?",
+      "options": [
+        "No, position can never be precise",
+        "Yes, if its momentum distribution is correspondingly broad",
+        "Yes, with zero momentum uncertainty as well",
+        "Only if no measurement is made"
+      ],
+      "correctIndex": 1,
+      "explanation": "A state may be prepared with a narrow position distribution provided its momentum distribution widens. The uncertainty principle constrains the product rather than imposing an identical minimum on each spread.",
+      "sourceEvidence": "A state can be prepared with very small position uncertainty, but its momentum distribution must then be broad.",
+      "misconceptionTargeted": "Believing the uncertainty principle forbids precise position by itself"
+    },
+    {
+      "id": "quantum-mechanics--uncertainty--q7",
+      "sectionId": "uncertainty",
+      "question": "How does the uncertainty principle help explain atomic stability?",
+      "options": [
+        "Atoms avoid all quantum confinement",
+        "An electron at the nucleus would have exactly zero momentum",
+        "Confining an electron tightly would carry a large kinetic-energy cost",
+        "Nuclei repel every electron classically"
+      ],
+      "correctIndex": 2,
+      "explanation": "Extreme confinement produces a large momentum spread and therefore a substantial kinetic-energy cost. The electron cannot be assigned both exact nuclear position and zero momentum.",
+      "sourceEvidence": "The principle helps explain atomic stability: confining an electron extremely close to a nucleus would generate a large momentum spread and kinetic-energy cost.",
+      "misconceptionTargeted": "Assuming an electron can sit at the nucleus with exact position and negligible kinetic energy"
+    },
+    {
+      "id": "quantum-mechanics--uncertainty--q8",
+      "sectionId": "uncertainty",
+      "question": "Which physicist formulated matrix mechanics and the uncertainty relation during the 1920s?",
+      "options": [
+        "Albert Einstein",
+        "Louis de Broglie",
+        "Robert Millikan",
+        "Werner Heisenberg"
+      ],
+      "correctIndex": 3,
+      "explanation": "Werner Heisenberg developed matrix mechanics and formulated the uncertainty relation during quantum theory's foundational period. The other scientists made different contributions to photons, photoelectric measurements, or matter waves.",
+      "sourceEvidence": "Werner Heisenberg formulated matrix mechanics and the uncertainty relation during the foundational development of quantum theory in the 1920s.",
+      "misconceptionTargeted": "Attributing the uncertainty relation to another early quantum physicist"
+    },
+    {
+      "id": "quantum-mechanics--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "Which quantity is the probability density for a quantum state?",
+      "options": [
+        "|ψ|²",
+        "ψ",
+        "The phase of ψ",
+        "The classical trajectory"
+      ],
+      "correctIndex": 0,
+      "explanation": "The squared magnitude |ψ|² is the probability density prescribed by the Born rule. The wavefunction ψ is a complex amplitude rather than a directly observable probability.",
+      "sourceEvidence": "A wavefunction is not a material wave carrying smeared charge in the classical sense, and |ψ|²—not ψ itself—is the probability density.",
+      "misconceptionTargeted": "Using ψ itself as a probability density"
+    },
+    {
+      "id": "quantum-mechanics--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "How should probabilities be found when two alternatives are indistinguishable?",
+      "options": [
+        "Add the probabilities before considering phase",
+        "Combine amplitudes first and then calculate probability",
+        "Choose one alternative at random",
+        "Assign both alternatives classical trajectories"
+      ],
+      "correctIndex": 1,
+      "explanation": "Indistinguishable alternatives retain phase information, so their amplitudes must be combined before squaring. Adding probabilities first discards the interference cross terms.",
+      "sourceEvidence": "Superposition concerns amplitudes, so probabilities must be calculated only after amplitudes for indistinguishable alternatives are combined.",
+      "misconceptionTargeted": "Adding probabilities before amplitudes in an interference problem"
+    },
+    {
+      "id": "quantum-mechanics--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "In the photoelectric effect, what does intensity change at fixed frequency above threshold?",
+      "options": [
+        "Photon energy",
+        "Work function",
+        "Photocurrent",
+        "Threshold frequency"
+      ],
+      "correctIndex": 2,
+      "explanation": "Intensity changes the rate of arriving photons and therefore the photocurrent. Photon energy depends on frequency rather than intensity.",
+      "sourceEvidence": "In the photoelectric effect, intensity changes photocurrent while frequency changes photon energy.",
+      "misconceptionTargeted": "Swapping the roles of intensity and frequency"
+    },
+    {
+      "id": "quantum-mechanics--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "What occurs when monochromatic light remains below a metal's threshold frequency but becomes extremely intense?",
+      "options": [
+        "Photoelectrons emerge with high energy",
+        "The work function vanishes",
+        "Every electron receives a fraction of each photon",
+        "No electrons are ejected in the one-photon regime"
+      ],
+      "correctIndex": 3,
+      "explanation": "Each sub-threshold photon is individually unable to overcome the work function, so no photoelectrons appear in the stated regime. Greater intensity supplies more inadequate photons rather than increasing each photon's energy.",
+      "sourceEvidence": "Below threshold, arbitrarily intense monochromatic light does not eject electrons in the one-photon regime.",
+      "misconceptionTargeted": "Assuming many low-energy photons act as one high-energy photon in the one-photon regime"
+    },
+    {
+      "id": "quantum-mechanics--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "Why does Einstein's photoelectric equation use Kmax rather than the kinetic energy of every emitted electron?",
+      "options": [
+        "Only the fastest electrons necessarily represent the full photon balance",
+        "All electrons have exactly the same binding history",
+        "The equation predicts average current instead",
+        "Kmax equals the work function"
+      ],
+      "correctIndex": 0,
+      "explanation": "The maximum-energy electrons best preserve the direct photon energy minus escape-energy balance. Other electrons may lose differing amounts of energy before leaving the material.",
+      "sourceEvidence": "Use Kmax, not every electron’s kinetic energy, in Einstein’s equation because electrons lose different amounts of energy before escape.",
+      "misconceptionTargeted": "Applying the maximum-energy equation to every emitted electron"
+    },
+    {
+      "id": "quantum-mechanics--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "What is the correct relationship between h and ħ?",
+      "options": [
+        "ħ = 2πh",
+        "ħ = h/2π",
+        "ħ = h²",
+        "ħ = 1/h"
+      ],
+      "correctIndex": 1,
+      "explanation": "Reduced Planck constant equals Planck constant divided by two pi. Multiplying by two pi reverses the defined relationship.",
+      "sourceEvidence": "Keep h and ħ distinct: ħ = h/2π.",
+      "misconceptionTargeted": "Interchanging Planck constant with reduced Planck constant"
+    },
+    {
+      "id": "quantum-mechanics--exam-traps--q7",
+      "sectionId": "exam-traps",
+      "question": "When is p = mv appropriate inside the de Broglie relation?",
+      "options": [
+        "For every speed below infinity",
+        "Only for photons",
+        "Only in the nonrelativistic regime",
+        "Only when kinetic energy is zero"
+      ],
+      "correctIndex": 2,
+      "explanation": "Mass times velocity is the nonrelativistic momentum approximation. At high speed the relativistic momentum must replace it.",
+      "sourceEvidence": "The de Broglie relation uses momentum, not kinetic energy directly; choose p = mv only when nonrelativistic.",
+      "misconceptionTargeted": "Using nonrelativistic momentum at relativistic speed"
+    },
+    {
+      "id": "quantum-mechanics--exam-traps--q8",
+      "sectionId": "exam-traps",
+      "question": "What does ΔxΔp ≥ ħ/2 imply about the two uncertainties?",
+      "options": [
+        "They must always be equal",
+        "Either uncertainty may always be zero",
+        "Each must equal ħ/2",
+        "Their product has a lower bound"
+      ],
+      "correctIndex": 3,
+      "explanation": "The inequality constrains the product of the two distribution spreads. It does not require equal spreads or assign the same fixed value to each.",
+      "sourceEvidence": "The inequality sets a lower bound on their product and does not mean both uncertainties are always equal.",
+      "misconceptionTargeted": "Reading an uncertainty product inequality as equality of the two uncertainties"
+    }
+  ]
+}

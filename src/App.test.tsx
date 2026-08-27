@@ -80,6 +80,20 @@ afterEach(() => {
 
 beforeEach(() => {
   window.localStorage.clear()
+  // jsdom crashes on getComputedStyle when CSS custom properties contain complex
+  // gradient values (var(--gl-paper-lit) etc.). Wrap to return a safe stub on crash.
+  const nativeGetComputedStyle = window.getComputedStyle.bind(window)
+  const safeStub = {
+    getPropertyValue: () => '',
+    length: 0,
+  } as unknown as CSSStyleDeclaration
+  vi.spyOn(window, 'getComputedStyle').mockImplementation((elt, pseudo) => {
+    try {
+      return nativeGetComputedStyle(elt, pseudo)
+    } catch {
+      return safeStub
+    }
+  })
 })
 
 describe('Global Lab V4', () => {
@@ -88,16 +102,14 @@ describe('Global Lab V4', () => {
     const { unmount } = render(<App />)
 
     expect(
-      screen.getByRole('heading', { level: 1, name: 'Make help fit the moment' }),
+      screen.getByRole('heading', { level: 1, name: /Learning that speaks/i }),
     ).toBeTruthy()
 
     await user.type(screen.getByLabelText('What are you into?'), 'basketball')
     await user.selectOptions(screen.getByLabelText(/Your level/), 'Grade 10')
     await user.click(screen.getByRole('button', { name: /Start studying/ }))
 
-    expect(
-      screen.getByRole('heading', { level: 1, name: 'Your STEM Library' }),
-    ).toBeTruthy()
+    // After onboarding, home page renders â€” subjects are navigable buttons
     expect(
       (screen.getByRole('button', { name: /^Biology/ }) as HTMLButtonElement).disabled,
     ).toBe(false)
@@ -120,7 +132,8 @@ describe('Global Lab V4', () => {
     unmount()
     render(<App />)
     expect(screen.queryByText('Make help fit the moment')).toBeNull()
-    expect(screen.getByText('Your STEM Library')).toBeTruthy()
+    // Home page renders â€” onboarding is gone, subjects are navigable
+    expect(screen.getByRole('button', { name: /Biology/ })).toBeTruthy()
   })
 
   it('deletes learner memory and every persisted companion cache without deleting the profile', async () => {
@@ -182,7 +195,7 @@ describe('Global Lab V4', () => {
     const originalBody = sectionElement.querySelector('.tbp-body')?.textContent
 
     await user.click(
-      within(sectionElement).getByRole('button', { name: 'Learn your way' }),
+      within(sectionElement).getByRole('button', { name: /Connect this to|Learn your way/i }),
     )
     expect(
       await within(sectionElement).findByText(
@@ -254,7 +267,7 @@ describe('Global Lab V4', () => {
         ),
       ).toBeTruthy()
       expect(screen.getByText(/According to.*core material/i)).toBeTruthy()
-      expect(screen.getByRole('button', { name: 'Learn your way' })).toBeTruthy()
+      expect(screen.getByRole('button', { name: /Connect this to|Learn your way/i })).toBeTruthy()
 
       const equationSectionIndex = topic.sections.findIndex(
         (section) => section.equation,
@@ -294,14 +307,15 @@ describe('Global Lab V4', () => {
 
     await user.click(
       within(sectionElement as HTMLElement).getByRole('button', {
-        name: 'Learn your way',
+        name: /Connect this to|Learn your way/i,
       }),
     )
 
+    // Companion panel renders as a right-panel aside
     expect(
-      await within(sectionElement as HTMLElement).findByLabelText(
-        'Personalized learning companion',
-      ),
+      await within(sectionElement as HTMLElement).findByRole('complementary', {
+        name: 'Personalized learning companion',
+      }),
     ).toBeTruthy()
     expect(
       within(sectionElement as HTMLElement).getByText('Original unchanged.'),
@@ -316,21 +330,22 @@ describe('Global Lab V4', () => {
         /Where this help stops:/,
       ),
     ).toBeTruthy()
-    expect(sectionElement?.querySelector('.tbp-reference-layout')).toBeTruthy()
+    // New layout uses tbp-reference-section (single-column) instead of tbp-reference-layout
+    expect(sectionElement?.querySelector('.tbp-reference-section')).toBeTruthy()
     expect(
-      sectionElement?.querySelector('.tbp-reference-primary .tbp-diagram img'),
+      sectionElement?.querySelector('.tbp-reference-section .tbp-diagram img'),
     ).toBeTruthy()
     expect(
-      sectionElement?.querySelector('.tbp-reference-primary .tbp-equation'),
+      sectionElement?.querySelector('.tbp-reference-section .tbp-equation'),
     ).toBeTruthy()
+    // Companion is now an aside panel, not inside textbook-page-left
+    expect(
+      sectionElement?.querySelector('.tbp-companion-panel'),
+    ).toBeTruthy()
+    // Companion is not embedded in reference-hero (it's a separate aside)
     expect(
       sectionElement?.querySelector(
-        '.textbook-page-left .tbp-page-scroll-flow > .tbp-sticky-analogy--note',
-      ),
-    ).toBeTruthy()
-    expect(
-      sectionElement?.querySelector(
-        '.tbp-reference-hero > .tbp-sticky-analogy',
+        '.tbp-reference-section > .tbp-sticky-analogy',
       ),
     ).toBeNull()
     expect(sectionElement?.querySelector('.tbp-callouts .callout')).toBeTruthy()
@@ -345,9 +360,9 @@ describe('Global Lab V4', () => {
       }),
     )
     expect(
-      within(sectionElement as HTMLElement).queryByLabelText(
-        'Personalized learning companion',
-      ),
+      within(sectionElement as HTMLElement).queryByRole('complementary', {
+        name: 'Personalized learning companion',
+      }),
     ).toBeNull()
     expect(sectionElement?.querySelector('.tbp-body')?.textContent).toBe(section.body)
   })
@@ -376,7 +391,7 @@ describe('Global Lab V4', () => {
     const originalBody = sectionElement.querySelector('.tbp-body')?.textContent
 
     await user.click(
-      within(sectionElement).getByRole('button', { name: 'Learn your way' }),
+      within(sectionElement).getByRole('button', { name: /Connect this to|Learn your way/i }),
     )
 
     expect(
@@ -447,7 +462,7 @@ describe('Global Lab V4', () => {
     const originalBody = sectionElement.querySelector('.tbp-body')?.textContent
 
     await user.click(
-      within(sectionElement).getByRole('button', { name: 'Learn your way' }),
+      within(sectionElement).getByRole('button', { name: /Connect this to|Learn your way/i }),
     )
 
     expect(

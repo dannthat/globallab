@@ -1,0 +1,606 @@
+{
+  "topicId": "cellular-respiration",
+  "subjectId": "biology",
+  "questions": [
+    {
+      "id": "cellular-respiration--overview--q1",
+      "sectionId": "overview",
+      "question": "What is the central purpose of cellular respiration?",
+      "options": [
+        "To convert energy in organic molecules into usable ATP",
+        "To store all glucose permanently in the nucleus",
+        "To convert ATP into genetic information",
+        "To make oxygen from carbon dioxide"
+      ],
+      "correctIndex": 0,
+      "explanation": "Cellular respiration transfers energy from glucose and other organic molecules into ATP. Describing respiration as glucose storage ignores its role in energy conversion.",
+      "sourceEvidence": "Cellular respiration is the process by which cells break down glucose and other organic molecules to produce adenosine triphosphate (ATP) — the universal energy currency of the cell.",
+      "misconceptionTargeted": "Describing respiration as glucose storage ignores its role in energy conversion"
+    },
+    {
+      "id": "cellular-respiration--overview--q2",
+      "sectionId": "overview",
+      "question": "Which pair contains the main reactants in the overall respiration equation?",
+      "options": [
+        "Carbon dioxide and water",
+        "Glucose and oxygen",
+        "ATP and pyruvate",
+        "NADH and carbon dioxide"
+      ],
+      "correctIndex": 1,
+      "explanation": "The overall equation consumes one glucose molecule and six oxygen molecules. Choosing carbon dioxide and water reverses reactants with products.",
+      "sourceEvidence": "The overall equation is: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + approximately 30–32 ATP.",
+      "misconceptionTargeted": "Choosing carbon dioxide and water reverses reactants with products"
+    },
+    {
+      "id": "cellular-respiration--overview--q3",
+      "sectionId": "overview",
+      "question": "What are the principal chemical products of complete cellular respiration?",
+      "options": [
+        "Glucose, oxygen, and exactly 2 ATP",
+        "Pyruvate only",
+        "Carbon dioxide, water, and approximately 30–32 ATP",
+        "Lactic acid and 38 ATP in every cell"
+      ],
+      "correctIndex": 2,
+      "explanation": "Complete respiration produces carbon dioxide and water while capturing energy in about 30–32 ATP. Listing glucose and oxygen as products reverses the overall reaction.",
+      "sourceEvidence": "The overall equation is: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + approximately 30–32 ATP.",
+      "misconceptionTargeted": "Listing glucose and oxygen as products reverses the overall reaction"
+    },
+    {
+      "id": "cellular-respiration--overview--q4",
+      "sectionId": "overview",
+      "question": "Which sequence gives the three major stages in their correct order?",
+      "options": [
+        "Krebs cycle → glycolysis → fermentation",
+        "Electron transport chain → glycolysis → Krebs cycle",
+        "Fermentation → Krebs cycle → photosynthesis",
+        "Glycolysis → Krebs cycle → electron transport chain"
+      ],
+      "correctIndex": 3,
+      "explanation": "Energy extraction proceeds from glycolysis through the Krebs cycle to the electron transport chain. Placing the electron transport chain first ignores its dependence on carriers made earlier.",
+      "sourceEvidence": "The process occurs in three connected stages: glycolysis (cytoplasm), the Krebs cycle (mitochondrial matrix), and the electron transport chain (inner mitochondrial membrane).",
+      "misconceptionTargeted": "Placing the electron transport chain first ignores its dependence on carriers made earlier"
+    },
+    {
+      "id": "cellular-respiration--overview--q5",
+      "sectionId": "overview",
+      "question": "Where does each major stage occur?",
+      "options": [
+        "Glycolysis in cytoplasm, Krebs in matrix, ETC in inner membrane",
+        "Glycolysis in matrix, Krebs in nucleus, ETC in cytoplasm",
+        "All three stages in the cytoplasm",
+        "Glycolysis in inner membrane, Krebs outside the cell, ETC in nucleus"
+      ],
+      "correctIndex": 0,
+      "explanation": "The stages are compartmentalized between cytoplasm, mitochondrial matrix, and inner mitochondrial membrane. Assigning all stages to mitochondria incorrectly relocates glycolysis.",
+      "sourceEvidence": "The process occurs in three connected stages: glycolysis (cytoplasm), the Krebs cycle (mitochondrial matrix), and the electron transport chain (inner mitochondrial membrane).",
+      "misconceptionTargeted": "Assigning all stages to mitochondria incorrectly relocates glycolysis"
+    },
+    {
+      "id": "cellular-respiration--overview--q6",
+      "sectionId": "overview",
+      "question": "Why is ATP called an energy currency?",
+      "options": [
+        "It stores the cell’s hereditary code",
+        "It transfers captured energy to many kinds of cellular work",
+        "It forms the phospholipid bilayer by itself",
+        "It is used only during muscle contraction"
+      ],
+      "correctIndex": 1,
+      "explanation": "ATP provides a common usable form of energy for diverse cellular activities. Restricting ATP to one process ignores its broad role in cellular work.",
+      "sourceEvidence": "Each stage extracts energy progressively, transferring it into ATP molecules that power every cellular activity from muscle contraction to protein synthesis.",
+      "misconceptionTargeted": "Restricting ATP to one process ignores its broad role in cellular work"
+    },
+    {
+      "id": "cellular-respiration--overview--q7",
+      "sectionId": "overview",
+      "question": "How many oxygen molecules are consumed for each glucose in the overall equation?",
+      "options": [
+        "1 oxygen molecule",
+        "2 oxygen molecules",
+        "6 oxygen molecules",
+        "12 oxygen molecules"
+      ],
+      "correctIndex": 2,
+      "explanation": "The balanced overview equation pairs one glucose with six oxygen molecules. Using the glucose coefficient for oxygen leaves the equation unbalanced.",
+      "sourceEvidence": "The overall equation is: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + approximately 30–32 ATP.",
+      "misconceptionTargeted": "Using the glucose coefficient for oxygen leaves the equation unbalanced"
+    },
+    {
+      "id": "cellular-respiration--overview--q8",
+      "sectionId": "overview",
+      "question": "Why are the stages of respiration described as connected?",
+      "options": [
+        "Each stage makes a separate copy of DNA",
+        "All stages occur in the same enzyme",
+        "Later stages recreate the original glucose unchanged",
+        "Products and energy carriers from earlier stages feed later stages"
+      ],
+      "correctIndex": 3,
+      "explanation": "Progressive extraction passes material and captured energy from one stage to the next. Treating the stages as independent overlooks their metabolic continuity.",
+      "sourceEvidence": "Each stage extracts energy progressively, transferring it into ATP molecules that power every cellular activity from muscle contraction to protein synthesis.",
+      "misconceptionTargeted": "Treating the stages as independent overlooks their metabolic continuity"
+    },
+    {
+      "id": "cellular-respiration--glycolysis--q1",
+      "sectionId": "glycolysis",
+      "question": "Where does glycolysis occur in a eukaryotic cell?",
+      "options": [
+        "In the cytoplasm",
+        "In the mitochondrial matrix",
+        "In the inner mitochondrial membrane",
+        "Inside the nucleus"
+      ],
+      "correctIndex": 0,
+      "explanation": "Glycolysis takes place in the cytoplasm rather than inside the mitochondrion. Moving glycolysis into the mitochondrion confuses it with later respiratory stages.",
+      "sourceEvidence": "Glycolysis occurs in the cytoplasm and requires no oxygen — it is the only stage that can proceed anaerobically.",
+      "misconceptionTargeted": "Moving glycolysis into the mitochondrion confuses it with later respiratory stages"
+    },
+    {
+      "id": "cellular-respiration--glycolysis--q2",
+      "sectionId": "glycolysis",
+      "question": "Which stage of respiration can continue without oxygen?",
+      "options": [
+        "The electron transport chain",
+        "Glycolysis",
+        "Oxidative phosphorylation only",
+        "ATP synthase rotation driven by oxygen"
+      ],
+      "correctIndex": 1,
+      "explanation": "Glycolysis is the only major stage that can proceed anaerobically. Claiming the electron transport chain runs normally without oxygen ignores its final electron acceptor.",
+      "sourceEvidence": "Glycolysis occurs in the cytoplasm and requires no oxygen — it is the only stage that can proceed anaerobically.",
+      "misconceptionTargeted": "Claiming the electron transport chain runs normally without oxygen ignores its final electron acceptor"
+    },
+    {
+      "id": "cellular-respiration--glycolysis--q3",
+      "sectionId": "glycolysis",
+      "question": "What happens to the six carbons of one glucose during glycolysis?",
+      "options": [
+        "They become six one-carbon dioxide molecules",
+        "They remain in one six-carbon ATP molecule",
+        "They are divided between two three-carbon pyruvates",
+        "They form three two-carbon oxygen molecules"
+      ],
+      "correctIndex": 2,
+      "explanation": "Glycolysis conserves the six carbons by producing two pyruvates with three carbons each. Releasing all carbon as carbon dioxide during glycolysis places decarboxylation in the wrong stage.",
+      "sourceEvidence": "One molecule of glucose (6 carbons) is split into two molecules of pyruvate (3 carbons each) through a series of enzyme-catalysed reactions.",
+      "misconceptionTargeted": "Releasing all carbon as carbon dioxide during glycolysis places decarboxylation in the wrong stage"
+    },
+    {
+      "id": "cellular-respiration--glycolysis--q4",
+      "sectionId": "glycolysis",
+      "question": "What is the net ATP gain from one glucose during glycolysis?",
+      "options": [
+        "1 ATP",
+        "4 ATP net",
+        "30–32 ATP",
+        "2 ATP"
+      ],
+      "correctIndex": 3,
+      "explanation": "After ATP investment and payoff, glycolysis gains two ATP per glucose. Using the gross ATP production instead of the net gain overstates glycolytic yield.",
+      "sourceEvidence": "The net energy yield is 2 ATP and 2 NADH per glucose molecule.",
+      "misconceptionTargeted": "Using the gross ATP production instead of the net gain overstates glycolytic yield"
+    },
+    {
+      "id": "cellular-respiration--glycolysis--q5",
+      "sectionId": "glycolysis",
+      "question": "Two glucose molecules undergo glycolysis. What is their combined net yield?",
+      "options": [
+        "4 ATP and 4 NADH",
+        "2 ATP and 2 NADH",
+        "6 ATP and 2 NADH",
+        "60 ATP and no NADH"
+      ],
+      "correctIndex": 0,
+      "explanation": "Each glucose yields two ATP and two NADH, so doubling gives four of each. Failing to scale both products treats the two glucose molecules as one.",
+      "sourceEvidence": "The net energy yield is 2 ATP and 2 NADH per glucose molecule.",
+      "misconceptionTargeted": "Failing to scale both products treats the two glucose molecules as one"
+    },
+    {
+      "id": "cellular-respiration--glycolysis--q6",
+      "sectionId": "glycolysis",
+      "question": "What is the main job of NADH produced during glycolysis?",
+      "options": [
+        "Hydrolyze glucose in the nucleus",
+        "Carry high-energy electrons to the electron transport chain",
+        "Act as the final electron acceptor",
+        "Form the phospholipid bilayer"
+      ],
+      "correctIndex": 1,
+      "explanation": "NADH transfers captured electrons to the third stage of respiration. Calling NADH the final acceptor confuses its carrier role with oxygen’s role.",
+      "sourceEvidence": "NADH is an electron carrier that will deliver high-energy electrons to the electron transport chain in stage 3.",
+      "misconceptionTargeted": "Calling NADH the final acceptor confuses its carrier role with oxygen’s role"
+    },
+    {
+      "id": "cellular-respiration--glycolysis--q7",
+      "sectionId": "glycolysis",
+      "question": "If glycolysis processes five glucose molecules, how many pyruvate molecules form?",
+      "options": [
+        "5 pyruvate molecules",
+        "15 pyruvate molecules",
+        "10 pyruvate molecules",
+        "30 pyruvate molecules"
+      ],
+      "correctIndex": 2,
+      "explanation": "Each glucose splits into two pyruvates, so five glucose molecules produce ten. Using a one-to-one conversion ignores the glucose split.",
+      "sourceEvidence": "One molecule of glucose (6 carbons) is split into two molecules of pyruvate (3 carbons each) through a series of enzyme-catalysed reactions.",
+      "misconceptionTargeted": "Using a one-to-one conversion ignores the glucose split"
+    },
+    {
+      "id": "cellular-respiration--glycolysis--q8",
+      "sectionId": "glycolysis",
+      "question": "Why is glycolysis found across such a broad range of organisms?",
+      "options": [
+        "It occurs only in specialized mitochondria",
+        "It requires a nucleus to function",
+        "It can operate only in high oxygen conditions",
+        "It is an ancient pathway that does not depend on oxygen"
+      ],
+      "correctIndex": 3,
+      "explanation": "Glycolysis arose before oxygen was abundant and can function anaerobically. Making oxygen a requirement contradicts the pathway’s anaerobic capability.",
+      "sourceEvidence": "Glycolysis evolved before oxygen was abundant in Earth's atmosphere and is shared by nearly every living organism on Earth.",
+      "misconceptionTargeted": "Making oxygen a requirement contradicts the pathway’s anaerobic capability"
+    },
+    {
+      "id": "cellular-respiration--krebs--q1",
+      "sectionId": "krebs",
+      "question": "In which mitochondrial compartment does the Krebs cycle occur?",
+      "options": [
+        "The mitochondrial matrix",
+        "The intermembrane space",
+        "The outer membrane",
+        "The cytoplasm"
+      ],
+      "correctIndex": 0,
+      "explanation": "The enzymes of the Krebs cycle operate in the mitochondrial matrix. Placing the cycle on the inner membrane confuses it with the electron transport chain.",
+      "sourceEvidence": "The Krebs cycle (citric acid cycle) occurs in the mitochondrial matrix.",
+      "misconceptionTargeted": "Placing the cycle on the inner membrane confuses it with the electron transport chain"
+    },
+    {
+      "id": "cellular-respiration--krebs--q2",
+      "sectionId": "krebs",
+      "question": "What happens when one pyruvate is prepared for entry into the Krebs cycle?",
+      "options": [
+        "It becomes glucose while consuming oxygen",
+        "It forms acetyl-CoA while releasing CO₂ and making NADH",
+        "It directly produces 30 ATP",
+        "It forms two pyruvates"
+      ],
+      "correctIndex": 1,
+      "explanation": "Pyruvate oxidation produces two-carbon acetyl-CoA, one carbon dioxide, and one NADH. Skipping carbon dioxide release fails to account for the lost carbon atom.",
+      "sourceEvidence": "Each pyruvate from glycolysis is first converted to acetyl-CoA (2 carbons), releasing one CO₂ and producing one NADH.",
+      "misconceptionTargeted": "Skipping carbon dioxide release fails to account for the lost carbon atom"
+    },
+    {
+      "id": "cellular-respiration--krebs--q3",
+      "sectionId": "krebs",
+      "question": "What does one turn of the Krebs cycle produce directly?",
+      "options": [
+        "6 NADH, 2 FADH₂, 2 ATP, and 4 CO₂",
+        "2 ATP and 2 pyruvate only",
+        "3 NADH, 1 FADH₂, 1 ATP, and 2 CO₂",
+        "30 ATP and one glucose"
+      ],
+      "correctIndex": 2,
+      "explanation": "A single turn yields three NADH, one FADH₂, one ATP, and two carbon dioxide molecules. Using per-glucose totals for one turn doubles every product.",
+      "sourceEvidence": "Acetyl-CoA then enters the cycle, which regenerates a 4-carbon molecule through a series of reactions, releasing 2 more CO₂ and producing 3 NADH, 1 FADH₂, and 1 ATP per turn.",
+      "misconceptionTargeted": "Using per-glucose totals for one turn doubles every product"
+    },
+    {
+      "id": "cellular-respiration--krebs--q4",
+      "sectionId": "krebs",
+      "question": "Why does the Krebs cycle turn twice for each glucose molecule?",
+      "options": [
+        "Each glucose contains two oxygen molecules",
+        "The first turn produces no carriers",
+        "ATP synthase requires two rotations",
+        "Glycolysis produces two pyruvates from one glucose"
+      ],
+      "correctIndex": 3,
+      "explanation": "Each of the two pyruvate-derived acetyl groups feeds one cycle turn. Assuming one turn per glucose ignores the two pyruvate products of glycolysis.",
+      "sourceEvidence": "Because glycolysis produces two pyruvates per glucose, the Krebs cycle turns twice per glucose molecule, yielding 6 NADH, 2 FADH₂, and 2 ATP from this stage.",
+      "misconceptionTargeted": "Assuming one turn per glucose ignores the two pyruvate products of glycolysis"
+    },
+    {
+      "id": "cellular-respiration--krebs--q5",
+      "sectionId": "krebs",
+      "question": "What is the Krebs-cycle yield per glucose, excluding pyruvate oxidation?",
+      "options": [
+        "6 NADH, 2 FADH₂, and 2 ATP",
+        "3 NADH, 1 FADH₂, and 1 ATP",
+        "2 NADH and 30 ATP",
+        "6 ATP and no electron carriers"
+      ],
+      "correctIndex": 0,
+      "explanation": "Two cycle turns double the one-turn yields to six NADH, two FADH₂, and two ATP. Reporting one-turn values as per-glucose values forgets that the cycle turns twice.",
+      "sourceEvidence": "Because glycolysis produces two pyruvates per glucose, the Krebs cycle turns twice per glucose molecule, yielding 6 NADH, 2 FADH₂, and 2 ATP from this stage.",
+      "misconceptionTargeted": "Reporting one-turn values as per-glucose values forgets that the cycle turns twice"
+    },
+    {
+      "id": "cellular-respiration--krebs--q6",
+      "sectionId": "krebs",
+      "question": "What is the most important energetic role of the Krebs cycle?",
+      "options": [
+        "Producing most ATP directly",
+        "Loading high-energy electrons onto NADH and FADH₂",
+        "Using oxygen to split glucose",
+        "Regenerating NAD⁺ by fermentation"
+      ],
+      "correctIndex": 1,
+      "explanation": "The cycle mainly harvests electrons into carriers for the electron transport chain. Calling direct ATP its main output overlooks the much larger carrier yield.",
+      "sourceEvidence": "The primary role of the Krebs cycle is not direct ATP production — it is harvesting high-energy electrons into carrier molecules (NADH and FADH₂) for delivery to the electron transport chain.",
+      "misconceptionTargeted": "Calling direct ATP its main output overlooks the much larger carrier yield"
+    },
+    {
+      "id": "cellular-respiration--krebs--q7",
+      "sectionId": "krebs",
+      "question": "What feature allows the Krebs pathway to operate as a cycle?",
+      "options": [
+        "Glucose is regenerated after every turn",
+        "Oxygen is converted into acetyl-CoA",
+        "A four-carbon acceptor molecule is regenerated",
+        "Every product remains bound to one enzyme"
+      ],
+      "correctIndex": 2,
+      "explanation": "Regeneration of the four-carbon molecule lets another acetyl group enter. Assuming the acceptor is consumed permanently would stop the pathway after one turn.",
+      "sourceEvidence": "Acetyl-CoA then enters the cycle, which regenerates a 4-carbon molecule through a series of reactions, releasing 2 more CO₂ and producing 3 NADH, 1 FADH₂, and 1 ATP per turn.",
+      "misconceptionTargeted": "Assuming the acceptor is consumed permanently would stop the pathway after one turn"
+    },
+    {
+      "id": "cellular-respiration--krebs--q8",
+      "sectionId": "krebs",
+      "question": "Two pyruvate molecules are converted to acetyl-CoA before the cycle. What is produced during those conversions?",
+      "options": [
+        "1 CO₂ and 1 NADH",
+        "4 CO₂ and 6 NADH",
+        "2 ATP and no NADH",
+        "2 CO₂ and 2 NADH"
+      ],
+      "correctIndex": 3,
+      "explanation": "Each pyruvate conversion releases one carbon dioxide and forms one NADH. Using one-pyruvate values for two conversions undercounts both products.",
+      "sourceEvidence": "Each pyruvate from glycolysis is first converted to acetyl-CoA (2 carbons), releasing one CO₂ and producing one NADH.",
+      "misconceptionTargeted": "Using one-pyruvate values for two conversions undercounts both products"
+    },
+    {
+      "id": "cellular-respiration--etc--q1",
+      "sectionId": "etc",
+      "question": "Where are the electron transport chain complexes located?",
+      "options": [
+        "In the inner mitochondrial membrane",
+        "In the cytoplasm",
+        "In the mitochondrial matrix as free molecules",
+        "In the nuclear envelope"
+      ],
+      "correctIndex": 0,
+      "explanation": "The chain is embedded in the inner mitochondrial membrane. Placing the chain in the cytoplasm confuses its location with glycolysis.",
+      "sourceEvidence": "The electron transport chain (ETC) is embedded in the inner mitochondrial membrane and produces approximately 26–28 of the 30–32 ATP generated per glucose.",
+      "misconceptionTargeted": "Placing the chain in the cytoplasm confuses its location with glycolysis"
+    },
+    {
+      "id": "cellular-respiration--etc--q2",
+      "sectionId": "etc",
+      "question": "Approximately how much ATP does the electron transport chain stage contribute per glucose?",
+      "options": [
+        "2 ATP",
+        "26–28 ATP",
+        "4 ATP",
+        "36–38 ATP"
+      ],
+      "correctIndex": 1,
+      "explanation": "The electron transport chain accounts for roughly twenty-six to twenty-eight ATP. Assigning only two ATP to this stage confuses its yield with glycolysis.",
+      "sourceEvidence": "The electron transport chain (ETC) is embedded in the inner mitochondrial membrane and produces approximately 26–28 of the 30–32 ATP generated per glucose.",
+      "misconceptionTargeted": "Assigning only two ATP to this stage confuses its yield with glycolysis"
+    },
+    {
+      "id": "cellular-respiration--etc--q3",
+      "sectionId": "etc",
+      "question": "What do NADH and FADH₂ deliver to the electron transport chain?",
+      "options": [
+        "Glucose molecules",
+        "Carbon dioxide as fuel",
+        "High-energy electrons",
+        "Complete ATP synthase proteins"
+      ],
+      "correctIndex": 2,
+      "explanation": "NADH and FADH₂ carry electrons harvested during earlier stages. Treating the carriers as ATP molecules ignores their electron-transfer role.",
+      "sourceEvidence": "NADH and FADH₂ deliver electrons to protein complexes in the chain.",
+      "misconceptionTargeted": "Treating the carriers as ATP molecules ignores their electron-transfer role"
+    },
+    {
+      "id": "cellular-respiration--etc--q4",
+      "sectionId": "etc",
+      "question": "As electrons move along the chain, in which direction are protons pumped?",
+      "options": [
+        "From the intermembrane space to the matrix",
+        "From the cytoplasm into the nucleus",
+        "Out of the cell through the plasma membrane",
+        "From the matrix to the intermembrane space"
+      ],
+      "correctIndex": 3,
+      "explanation": "Electron-transfer energy drives protons out of the matrix and into the intermembrane space. Reversing proton pumping would dissipate rather than build the proton gradient.",
+      "sourceEvidence": "As electrons move through these complexes, the released energy pumps protons (H⁺) from the mitochondrial matrix into the intermembrane space, creating a steep proton gradient — the proton-motive force.",
+      "misconceptionTargeted": "Reversing proton pumping would dissipate rather than build the proton gradient"
+    },
+    {
+      "id": "cellular-respiration--etc--q5",
+      "sectionId": "etc",
+      "question": "How does ATP synthase use the proton gradient?",
+      "options": [
+        "Proton flow into the matrix rotates the enzyme and drives ATP formation",
+        "Proton flow out of the matrix splits ATP",
+        "The enzyme converts protons directly into glucose",
+        "It blocks all proton movement permanently"
+      ],
+      "correctIndex": 0,
+      "explanation": "Protons returning through ATP synthase power its rotor and ATP synthesis. Claiming ATP synthase pumps protons outward reverses the energy-harvesting flow.",
+      "sourceEvidence": "Protons flow back into the matrix through ATP synthase, a molecular rotor whose rotation drives ATP synthesis from ADP and inorganic phosphate.",
+      "misconceptionTargeted": "Claiming ATP synthase pumps protons outward reverses the energy-harvesting flow"
+    },
+    {
+      "id": "cellular-respiration--etc--q6",
+      "sectionId": "etc",
+      "question": "What is chemiosmosis?",
+      "options": [
+        "Splitting glucose into pyruvate",
+        "Using a proton gradient to power ATP synthesis",
+        "Releasing carbon dioxide from acetyl-CoA",
+        "Moving water by osmosis across the cell membrane"
+      ],
+      "correctIndex": 1,
+      "explanation": "Chemiosmosis couples downhill proton flow to ATP production. Equating chemiosmosis with ordinary water osmosis confuses protons with water.",
+      "sourceEvidence": "This mechanism — using a proton gradient to power ATP synthesis — is called chemiosmosis.",
+      "misconceptionTargeted": "Equating chemiosmosis with ordinary water osmosis confuses protons with water"
+    },
+    {
+      "id": "cellular-respiration--etc--q7",
+      "sectionId": "etc",
+      "question": "What happens to oxygen at the end of the electron transport chain?",
+      "options": [
+        "It becomes glucose",
+        "It pumps protons without accepting electrons",
+        "It accepts electrons and protons to form water",
+        "It is released as carbon dioxide"
+      ],
+      "correctIndex": 2,
+      "explanation": "Oxygen removes electrons from the chain and combines with protons to make water. Calling oxygen an electron donor reverses its role as the final acceptor.",
+      "sourceEvidence": "Oxygen is the final electron acceptor, combining with electrons and protons to form water.",
+      "misconceptionTargeted": "Calling oxygen an electron donor reverses its role as the final acceptor"
+    },
+    {
+      "id": "cellular-respiration--etc--q8",
+      "sectionId": "etc",
+      "question": "A cell suddenly loses oxygen but still has glucose. What ATP yield can glycolysis continue to provide per glucose?",
+      "options": [
+        "0 ATP",
+        "26–28 ATP",
+        "30–32 ATP",
+        "2 ATP"
+      ],
+      "correctIndex": 3,
+      "explanation": "Without oxygen the electron transport chain stops, leaving the two ATP from glycolysis. Expecting full aerobic yield ignores oxygen’s essential role at the end of the chain.",
+      "sourceEvidence": "Without oxygen, the ETC stalls and ATP production collapses to the 2 ATP of glycolysis alone.",
+      "misconceptionTargeted": "Expecting full aerobic yield ignores oxygen’s essential role at the end of the chain"
+    },
+    {
+      "id": "cellular-respiration--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "A student labels glycolysis inside the mitochondrion. What correction is needed?",
+      "options": [
+        "Place glycolysis in the cytoplasm",
+        "Place it in the mitochondrial matrix",
+        "Place it in the inner membrane",
+        "Place it in the nucleus"
+      ],
+      "correctIndex": 0,
+      "explanation": "Glycolysis occurs in the cytoplasm before mitochondrial stages begin. Putting every respiratory stage in mitochondria mislocates glycolysis.",
+      "sourceEvidence": "First: glycolysis occurs in the cytoplasm, not the mitochondria — the most frequently lost point on location questions.",
+      "misconceptionTargeted": "Putting every respiratory stage in mitochondria mislocates glycolysis"
+    },
+    {
+      "id": "cellular-respiration--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "Which total ATP yield per glucose best reflects living cells?",
+      "options": [
+        "Exactly 2 ATP under all conditions",
+        "Approximately 30–32 ATP",
+        "Exactly 36–38 ATP in every cell",
+        "More than 100 ATP"
+      ],
+      "correctIndex": 1,
+      "explanation": "Modern estimates account for real proton-gradient inefficiency and give about thirty to thirty-two ATP. Using thirty-six to thirty-eight assumes unrealistically perfect gradient efficiency.",
+      "sourceEvidence": "Second: the correct ATP yield per glucose is approximately 30–32, not 36 or 38 as stated in older textbooks; the higher numbers assumed 100% proton gradient efficiency, which does not occur in living cells.",
+      "misconceptionTargeted": "Using thirty-six to thirty-eight assumes unrealistically perfect gradient efficiency"
+    },
+    {
+      "id": "cellular-respiration--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "Why are older estimates of 36–38 ATP considered too high?",
+      "options": [
+        "They omitted glycolysis entirely",
+        "They counted oxygen as ATP",
+        "They assumed complete proton-gradient efficiency",
+        "They assumed the Krebs cycle occurs once"
+      ],
+      "correctIndex": 2,
+      "explanation": "Living mitochondria do not convert the proton gradient with perfect efficiency. Treating oxidative phosphorylation as lossless inflates the ATP total.",
+      "sourceEvidence": "Second: the correct ATP yield per glucose is approximately 30–32, not 36 or 38 as stated in older textbooks; the higher numbers assumed 100% proton gradient efficiency, which does not occur in living cells.",
+      "misconceptionTargeted": "Treating oxidative phosphorylation as lossless inflates the ATP total"
+    },
+    {
+      "id": "cellular-respiration--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "What is fermentation’s essential function when oxygen is unavailable?",
+      "options": [
+        "Replace the electron transport chain and make 30 ATP",
+        "Release all carbon dioxide during glycolysis",
+        "Move glycolysis into the mitochondrion",
+        "Regenerate NAD⁺ so glycolysis can continue"
+      ],
+      "correctIndex": 3,
+      "explanation": "Fermentation restores NAD⁺ needed to sustain glycolysis under anaerobic conditions. Calling fermentation a high-yield replacement ignores its lack of electron transport.",
+      "sourceEvidence": "Third: fermentation is not a stage of cellular respiration — it is an emergency anaerobic pathway that regenerates NAD⁺ to keep glycolysis running when no oxygen is available, producing only 2 ATP per glucose and no ETC involvement.",
+      "misconceptionTargeted": "Calling fermentation a high-yield replacement ignores its lack of electron transport"
+    },
+    {
+      "id": "cellular-respiration--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "How much ATP per glucose is associated with glycolysis supported by fermentation?",
+      "options": [
+        "2 ATP",
+        "26–28 ATP",
+        "30–32 ATP",
+        "38 ATP"
+      ],
+      "correctIndex": 0,
+      "explanation": "Fermentation permits the two-ATP glycolytic pathway to continue without adding ETC yield. Crediting fermentation with aerobic-level ATP confuses NAD⁺ regeneration with oxidative phosphorylation.",
+      "sourceEvidence": "Third: fermentation is not a stage of cellular respiration — it is an emergency anaerobic pathway that regenerates NAD⁺ to keep glycolysis running when no oxygen is available, producing only 2 ATP per glucose and no ETC involvement.",
+      "misconceptionTargeted": "Crediting fermentation with aerobic-level ATP confuses NAD⁺ regeneration with oxidative phosphorylation"
+    },
+    {
+      "id": "cellular-respiration--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "How should fermentation be classified relative to the three stages of cellular respiration?",
+      "options": [
+        "The fourth stage after the electron transport chain",
+        "An emergency anaerobic pathway, not one of the three stages",
+        "Another name for the Krebs cycle",
+        "The oxygen-requiring stage of respiration"
+      ],
+      "correctIndex": 1,
+      "explanation": "Fermentation is an alternative that supports glycolysis when oxygen is absent. Adding it as a standard respiratory stage obscures its emergency anaerobic role.",
+      "sourceEvidence": "Third: fermentation is not a stage of cellular respiration — it is an emergency anaerobic pathway that regenerates NAD⁺ to keep glycolysis running when no oxygen is available, producing only 2 ATP per glucose and no ETC involvement.",
+      "misconceptionTargeted": "Adding it as a standard respiratory stage obscures its emergency anaerobic role"
+    },
+    {
+      "id": "cellular-respiration--exam-traps--q7",
+      "sectionId": "exam-traps",
+      "question": "During which processes is carbon dioxide released?",
+      "options": [
+        "Glycolysis only",
+        "The electron transport chain only",
+        "Pyruvate oxidation and the Krebs cycle",
+        "ATP synthase rotation only"
+      ],
+      "correctIndex": 2,
+      "explanation": "Decarboxylation occurs while pyruvate is prepared and during Krebs-cycle reactions. Assigning carbon dioxide release to glycolysis places carbon loss before it occurs.",
+      "sourceEvidence": "Fourth: CO₂ is released during pyruvate oxidation and the Krebs cycle, not during glycolysis.",
+      "misconceptionTargeted": "Assigning carbon dioxide release to glycolysis places carbon loss before it occurs"
+    },
+    {
+      "id": "cellular-respiration--exam-traps--q8",
+      "sectionId": "exam-traps",
+      "question": "A glycolysis diagram shows carbon dioxide as a direct product. What is wrong with it?",
+      "options": [
+        "Glycolysis must release six CO₂",
+        "Glycolysis releases CO₂ only when oxygen is present",
+        "Glycolysis converts CO₂ into glucose",
+        "Glycolysis does not release CO₂"
+      ],
+      "correctIndex": 3,
+      "explanation": "Carbon dioxide first appears during pyruvate oxidation and continues in the Krebs cycle. Adding carbon dioxide to glycolysis confuses it with later decarboxylation steps.",
+      "sourceEvidence": "Fourth: CO₂ is released during pyruvate oxidation and the Krebs cycle, not during glycolysis.",
+      "misconceptionTargeted": "Adding carbon dioxide to glycolysis confuses it with later decarboxylation steps"
+    }
+  ]
+}

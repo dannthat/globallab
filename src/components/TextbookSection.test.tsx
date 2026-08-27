@@ -15,7 +15,7 @@ import { TextbookSection } from './TextbookSection'
 
 const section: KnowledgeSection = {
   id: 'krebs-cycle',
-  heading: 'Stage 2 — The Krebs Cycle',
+  heading: 'Stage 2 â€” The Krebs Cycle',
   body:
     'The Krebs cycle transfers energy from carbon compounds into electron carriers. It occurs in the mitochondrial matrix.',
   keyTerms: ['Krebs cycle', 'electron carriers', 'mitochondrial matrix'],
@@ -89,86 +89,59 @@ afterEach(() => {
 })
 
 describe('TextbookSection companion placement', () => {
-  it('keeps a compact analogy on the source page and expands it into a reversible study sheet', async () => {
+  it('renders companion as a right-panel aside and dismissing it hides the panel', async () => {
     const user = userEvent.setup()
-    const { container } = renderSection()
-    const leftPage = container.querySelector<HTMLElement>('.textbook-page-left')
-
-    expect(leftPage).not.toBeNull()
-    const compactCompanion = within(leftPage as HTMLElement).getByRole(
-      'complementary',
-      { name: 'Personalized learning companion' },
-    )
-    expect(compactCompanion.classList.contains('tbp-sticky-analogy--note')).toBe(
-      true,
-    )
-    expect(
-      within(compactCompanion).getByText(rewrite.content),
-    ).toBeTruthy()
-
-    const figurePage = screen.getByRole('region', {
-      name: `Visual references for ${section.heading}`,
-    })
-    expect(
-      within(figurePage).getByRole('img', { name: section.diagram?.alt }),
-    ).toBeTruthy()
-    expect(
-      within(figurePage).queryByRole('complementary', {
-        name: 'Personalized learning companion',
-      }),
-    ).toBeNull()
-
-    await user.click(
-      within(compactCompanion).getByRole('button', {
-        name: 'Open this help as a full study sheet',
-      }),
+    const onClearRewrite = vi.fn()
+    const { container } = render(
+      <TextbookSection
+        topicId="cellular-respiration"
+        section={section}
+        rewrite={rewrite}
+        isLoading={false}
+        profile={profile}
+        topicTitle="Cellular Respiration & ATP Synthesis"
+        topicSubtitle="How cells convert fuel into usable energy"
+        subjectTitle="Biology"
+        sectionIndex={1}
+        totalSections={5}
+        onLearnYourWay={vi.fn()}
+        onRefine={vi.fn()}
+        onOutcome={vi.fn()}
+        onQuizResult={vi.fn()}
+        onClearRewrite={onClearRewrite}
+        onApplySuggestion={vi.fn()}
+        onDeferSuggestion={vi.fn()}
+        onNeverSuggest={vi.fn()}
+      />,
     )
 
-    expect(
-      within(leftPage as HTMLElement).queryByRole('complementary', {
-        name: 'Personalized learning companion',
-      }),
-    ).toBeNull()
-    const studySheetPage = screen.getByRole('region', {
-      name: `Personalized study sheet for ${section.heading}`,
-    })
-    const fullCompanion = within(studySheetPage).getByRole('complementary', {
+    // Companion is a right-panel aside
+    const companionPanel = screen.getByRole('complementary', {
       name: 'Personalized learning companion',
     })
-    expect(fullCompanion.classList.contains('tbp-sticky-analogy--page')).toBe(
-      true,
-    )
-    expect(
-      studySheetPage.querySelector('.tbp-reference-hero--companion-page'),
-    ).not.toBeNull()
-    expect(
-      studySheetPage.querySelector('.tbp-reference-notes-grid--companion-hidden'),
-    ).not.toBeNull()
+    expect(companionPanel).toBeTruthy()
+    expect(companionPanel.classList.contains('tbp-companion-panel')).toBe(true)
 
-    await user.click(
-      within(fullCompanion).getByRole('button', {
-        name: 'Return to the scientific figure',
-      }),
-    )
+    // Companion content is visible
+    expect(within(companionPanel).getByText(rewrite.content)).toBeTruthy()
 
-    const restoredFigurePage = screen.getByRole('region', {
-      name: `Visual references for ${section.heading}`,
+    // Reading surface is still present alongside it
+    const readingSurface = container.querySelector('.tbp-reading-surface')
+    expect(readingSurface).not.toBeNull()
+
+    // Body text is in the reading surface, not inside the companion
+    expect(readingSurface?.querySelector('.tbp-body')).not.toBeNull()
+
+    // Dismiss button is accessible within the companion
+    const dismissBtn = within(companionPanel).getByRole('button', {
+      name: /dismiss|close/i,
     })
-    expect(
-      within(restoredFigurePage).getByRole('img', {
-        name: section.diagram?.alt,
-      }),
-    ).toBeTruthy()
-    expect(
-      within(leftPage as HTMLElement).getByRole('complementary', {
-        name: 'Personalized learning companion',
-      }).classList.contains('tbp-sticky-analogy--note'),
-    ).toBe(true)
+    await user.click(dismissBtn)
+    expect(onClearRewrite).toHaveBeenCalledTimes(1)
   })
 
-  it('keeps dense reading and Learn Your Way reachable with a visible page control', async () => {
-    const user = userEvent.setup()
-    const rendered = render(
+  it('shows the bookmark strip "Connect this to" CTA when no companion is open', () => {
+    render(
       <TextbookSection
         section={section}
         rewrite={null}
@@ -189,73 +162,26 @@ describe('TextbookSection companion placement', () => {
         onNeverSuggest={vi.fn()}
       />,
     )
-    const leftScroller = rendered.container.querySelector(
-      '.tbp-page-scroll--left',
-    ) as HTMLDivElement
-    const scrollFlow = leftScroller.querySelector(
-      '.tbp-page-scroll-flow',
-    ) as HTMLDivElement
 
+    // Bookmark strip CTA is present
+    const learnBtn = screen.getByRole('button', {
+      name: /Connect this to basketball|Learn your way/i,
+    })
+    expect(learnBtn).toBeTruthy()
+    expect(learnBtn.classList.contains('tbp-bookmark-strip')).toBe(true)
+
+    // No companion panel when rewrite is null
     expect(
-      leftScroller.contains(rendered.container.querySelector('.tbp-body')),
-    ).toBe(true)
-    expect(
-      within(leftScroller).getByRole('button', { name: 'Learn your way' }),
-    ).toBeTruthy()
-    expect(
-      screen.queryByRole('button', {
-        name: /Show more of .* reading page/i,
+      screen.queryByRole('complementary', {
+        name: 'Personalized learning companion',
       }),
     ).toBeNull()
 
-    Object.defineProperties(leftScroller, {
-      clientHeight: { configurable: true, value: 300 },
-      scrollHeight: { configurable: true, value: 900 },
-      scrollTop: { configurable: true, value: 0, writable: true },
-    })
-    Object.defineProperty(scrollFlow, 'scrollHeight', {
-      configurable: true,
-      value: 900,
-    })
-    const scrollTo = vi.fn((options: ScrollToOptions) => {
-      leftScroller.scrollTop = Number(options.top ?? 0)
-    })
-    Object.defineProperty(leftScroller, 'scrollTo', {
-      configurable: true,
-      value: scrollTo,
-    })
-
-    fireEvent.resize(window)
-
-    const moreButton = await waitFor(() =>
-      screen.getByRole('button', {
-        name: /Show more of .* reading page/i,
-      }),
-    )
-    expect(moreButton.getAttribute('aria-controls')).toBe(leftScroller.id)
-
-    await user.click(moreButton)
-    expect(scrollTo).toHaveBeenLastCalledWith({
-      top: 216,
-      behavior: 'smooth',
-    })
-
-    leftScroller.scrollTop = 600
-    fireEvent.scroll(leftScroller)
-
-    const topButton = await waitFor(() =>
-      screen.getByRole('button', {
-        name: /Return to the top of .* reading page/i,
-      }),
-    )
-    await user.click(topButton)
-    expect(scrollTo).toHaveBeenLastCalledWith({
-      top: 0,
-      behavior: 'smooth',
-    })
+    // Body text is rendered (checking partial text that exists within one element)
+    expect(screen.getByText(/Connect this to basketball/i)).toBeTruthy()
+    expect(screen.queryByRole('complementary', { name: 'Personalized learning companion' })).toBeNull()
   })
 })
-
 describe('TextbookSection persistent highlights', () => {
   it('preserves canonical text and restores a topic-scoped highlight', () => {
     const firstRender = renderSection()

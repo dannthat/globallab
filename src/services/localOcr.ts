@@ -4,6 +4,8 @@ import type { SourceInlineData } from './sourceContext'
 export const LOCAL_OCR_LIMITS = {
   textCharacters: 12_000,
   jpegBytes: 15 * 1024 * 1024,
+  initTimeoutMs: 20_000,
+  recognizeTimeoutMs: 25_000,
 } as const
 
 export interface LocalOcrProgress {
@@ -54,7 +56,19 @@ function reportProgress(message: LoggerMessage) {
 
 async function getWorker() {
   if (!workerPromise) {
-    workerPromise = import('tesseract.js')
+    let timeoutId: ReturnType<typeof setTimeout> | undefined
+    const timeoutPromise = new Promise<never>((_, reject) => {
+      timeoutId = setTimeout(() => {
+        workerPromise = null
+        reject(
+          new Error(
+            'Local OCR initialization timed out. The English language data or worker is unavailable.',
+          ),
+        )
+      }, LOCAL_OCR_LIMITS.initTimeoutMs)
+    })
+
+    const initWorkerPromise = import('tesseract.js')
       .then(({ createWorker, OEM }) =>
         createWorker('eng', OEM.LSTM_ONLY, {
           workerPath: localAsset('tesseract/worker.min.js'),
@@ -65,12 +79,28 @@ async function getWorker() {
           logger: reportProgress,
         }),
       )
+      .then((worker) => {
+        if (timeoutId) clearTimeout(timeoutId)
+        return worker
+      })
       .catch((cause) => {
+        if (timeoutId) clearTimeout(timeoutId)
         workerPromise = null
         throw cause
       })
+
+    workerPromise = Promise.race([initWorkerPromise, timeoutPromise])
   }
   return workerPromise
+}
+
+export async function prewarmLocalOcr(): Promise<void> {
+  if (typeof window === 'undefined') return
+  try {
+    await getWorker()
+  } catch {
+    // Non-blocking background warmup
+  }
 }
 
 function abortError() {
@@ -98,8 +128,24 @@ export async function recognizeLocalImage(
   }
   options.signal?.addEventListener('abort', abort, { once: true })
 
+  let timeoutId: ReturnType<typeof setTimeout> | undefined
+  const timeoutPromise = new Promise<never>((_, reject) => {
+    timeoutId = setTimeout(() => {
+      reject(
+        new Error(
+          'Local OCR took too long to read this page. The handwriting or layout may be too complex.',
+        ),
+      )
+    }, LOCAL_OCR_LIMITS.recognizeTimeoutMs)
+  })
+
   try {
-    const result = await worker.recognize(image)
+    const recognizePromise = worker.recognize(image).then((result) => {
+      if (timeoutId) clearTimeout(timeoutId)
+      return result
+    })
+
+    const result = await Promise.race([recognizePromise, timeoutPromise])
     if (options.signal?.aborted) throw abortError()
     const text = result.data.text
       .replace(/\r\n?/g, '\n')
@@ -115,14 +161,21 @@ export async function recognizeLocalImage(
     }
     return text
   } catch (cause) {
+    if (timeoutId) clearTimeout(timeoutId)
     if (options.signal?.aborted) throw abortError()
-    if (cause instanceof Error && cause.message.includes('could not find enough')) {
+    if (
+      cause instanceof Error &&
+      (cause.message.includes('could not find enough') ||
+        cause.message.includes('took too long') ||
+        cause.message.includes('timed out'))
+    ) {
       throw cause
     }
     throw new Error(
       'Local OCR could not read this focused image. Its worker or English language data may be unavailable.',
     )
   } finally {
+    if (timeoutId) clearTimeout(timeoutId)
     options.signal?.removeEventListener('abort', abort)
     activeProgress = undefined
   }

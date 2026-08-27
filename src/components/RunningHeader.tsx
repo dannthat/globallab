@@ -35,11 +35,11 @@ export function RunningHeader({
   }
 
   return (
-    <header className="running-header">
-      <div className="reader-utility-group">
+    <header className="site-header tbp-reader-header running-header">
+      <div className="site-header__left reader-utility-group">
         <button
           type="button"
-          className="running-header-back subject-selector"
+          className="ubr-reader-back running-header-back"
           aria-label={`Back to ${subject.title} topics`}
           onClick={onBack}
         >
@@ -60,12 +60,12 @@ export function RunningHeader({
         <strong>{topic.title}</strong>
       </div>
 
-      <div className="running-header-actions">
+      <div className="site-header__right running-header-actions">
         {profile?.interest && (
           <div className="running-lens-control running-lens-control--utility">
             <button
               type="button"
-              className="running-header-interest"
+              className="lens-pill running-header-interest"
               aria-expanded={isEditingLens}
               aria-controls="running-lens-popover"
               aria-haspopup="dialog"
@@ -118,9 +118,10 @@ export function RunningHeader({
 
         <button
           type="button"
-          className="dark-toggle"
+          className="site-theme-toggle"
           onClick={onToggleDark}
           aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          title={isDark ? 'Light mode' : 'Dark mode'}
         >
           {isDark ? (
             <Sun size={16} aria-hidden="true" />
@@ -132,3 +133,4 @@ export function RunningHeader({
     </header>
   )
 }
+

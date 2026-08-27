@@ -1,0 +1,606 @@
+{
+  "topicId": "linear-algebra",
+  "subjectId": "mathematics",
+  "questions": [
+    {
+      "id": "linear-algebra--overview--q1",
+      "sectionId": "overview",
+      "question": "What mathematical object may represent displacement, force, data, a polynomial, or a function while supporting addition and scalar multiplication?",
+      "options": [
+        "vector",
+        "pivot",
+        "rank",
+        "column space"
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because a vector is an element of a vector space and may represent displacement, force, data, a polynomial, a function, or another object that supports vector addition and scalar multiplication. The alternative involving pivot applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A vector is an element of a vector space and may represent displacement, force, data, a polynomial, a function, or another object that supports vector addition and scalar multiplication.",
+      "misconceptionTargeted": "Using pivot instead of vector when reasoning about A vector is an element of"
+    },
+    {
+      "id": "linear-algebra--overview--q2",
+      "sectionId": "overview",
+      "question": "Which statement correctly describes vectors and vector spaces?",
+      "options": [
+        "Do not confuse a set of vectors with the matrix that stores them as columns.",
+        "A vector space is closed under addition and scalar multiplication and satisfies axioms including associativity, distributivity, and the existence of zero and additive inverses.",
+        "Matrix multiplication is not elementwise and generally not commutative.",
+        "Row operations preserve a system’s solution set but usually change the matrix’s determinant according to specific rules."
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because a vector space is closed under addition and scalar multiplication and satisfies axioms including associativity, distributivity, and the existence of zero and additive inverses. The alternative involving Matrix multiplication is not elementwise and generally not applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A vector space is closed under addition and scalar multiplication and satisfies axioms including associativity, distributivity, and the existence of zero and additive inverses.",
+      "misconceptionTargeted": "Using Matrix multiplication is not elementwise and generally not instead of A vector space is closed under addition and when reasoning about A vector space is closed under"
+    },
+    {
+      "id": "linear-algebra--overview--q3",
+      "sectionId": "overview",
+      "question": "Which operation measures alignment through u·v = ||u||||v||cos θ?",
+      "options": [
+        "nullspace",
+        "determinant",
+        "dot product",
+        "oriented volume"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because their geometric length comes from a norm, and the dot product measures alignment through u·v = ||u||||v||cos θ. The alternative involving oriented volume applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Their geometric length comes from a norm, and the dot product measures alignment through u·v = ||u||||v||cos θ.",
+      "misconceptionTargeted": "Using oriented volume instead of dot product when reasoning about Their geometric length comes from a"
+    },
+    {
+      "id": "linear-algebra--overview--q4",
+      "sectionId": "overview",
+      "question": "A student is applying vectors and vector spaces. Which statement is mathematically valid?",
+      "options": [
+        "A system is consistent exactly when b lies in the column space of A; free variables correspond to directions in the nullspace.",
+        "For a square matrix, invertibility has many equivalent forms: a pivot in every row and column, trivial nullspace, independent columns, full rank, nonzero determinant, and a unique solution for every b.",
+        "Factorisation A = LU records elimination as lower- and upper-triangular matrices, allowing many systems with the same A to be solved efficiently.",
+        "The span of vectors is the set of all their linear combinations; it is always a subspace and captures every direction reachable from the generating set."
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because the span of vectors is the set of all their linear combinations; it is always a subspace and captures every direction reachable from the generating set. The alternative involving A system is consistent exactly when b lies applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The span of vectors is the set of all their linear combinations; it is always a subspace and captures every direction reachable from the generating set.",
+      "misconceptionTargeted": "Using A system is consistent exactly when b lies instead of The span of vectors is the set of when reasoning about The span of vectors is the"
+    },
+    {
+      "id": "linear-algebra--overview--q5",
+      "sectionId": "overview",
+      "question": "A subspace must contain zero and remain closed under what operation on its vectors?",
+      "options": [
+        "linear combination",
+        "orientation",
+        "noninvertible",
+        "triangular matrix"
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because a subspace must contain zero and remain closed under linear combinations. The alternative involving orientation applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A subspace must contain zero and remain closed under linear combinations.",
+      "misconceptionTargeted": "Using orientation instead of linear combination when reasoning about A subspace must contain zero and"
+    },
+    {
+      "id": "linear-algebra--overview--q6",
+      "sectionId": "overview",
+      "question": "Which fact should guide the student's reasoning about vectors and vector spaces?",
+      "options": [
+        "Eigenvalues satisfy det(A − λI) = 0, and each eigenspace is the nullspace of A − λI.",
+        "A basis is a linearly independent set that spans the space.",
+        "If an n by n matrix has n linearly independent eigenvectors, form P from those eigenvectors and D from the corresponding eigenvalues.",
+        "Then A = PDP⁻¹ and powers become Ak = PDkP⁻¹."
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because a basis is a linearly independent set that spans the space. The alternative involving If an n by n matrix has n applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A basis is a linearly independent set that spans the space.",
+      "misconceptionTargeted": "Using If an n by n matrix has n instead of A basis is a linearly independent set that when reasoning about A basis is a linearly independent"
+    },
+    {
+      "id": "linear-algebra--overview--q7",
+      "sectionId": "overview",
+      "question": "What is a linearly independent set that spans an entire vector space called?",
+      "options": [
+        "cofactor expansion",
+        "Cramer’s rule",
+        "basis",
+        "Jacobian"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because a basis is a linearly independent set that spans the space. The alternative involving Jacobian applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A basis is a linearly independent set that spans the space.",
+      "misconceptionTargeted": "Using Jacobian instead of basis when reasoning about A basis is a linearly independent"
+    },
+    {
+      "id": "linear-algebra--overview--q8",
+      "sectionId": "overview",
+      "question": "Which conclusion about vectors and vector spaces is supported by the mathematics?",
+      "options": [
+        "Eigenvectors must be nonzero, while zero may be an eigenvalue.",
+        "Solve the characteristic equation for λ and then solve (A − λI)v = 0 for vectors; substituting λ alone does not produce an eigenvector.",
+        "A repeated eigenvalue may have too few independent eigenvectors for diagonalisation.",
+        "The number of vectors in any basis is the dimension."
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because the number of vectors in any basis is the dimension. The alternative involving Eigenvectors must be nonzero while zero may be applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The number of vectors in any basis is the dimension.",
+      "misconceptionTargeted": "Using Eigenvectors must be nonzero while zero may be instead of The number of vectors in any basis is when reasoning about The number of vectors in any"
+    },
+    {
+      "id": "linear-algebra--matrices--q1",
+      "sectionId": "matrices",
+      "question": "What represents a linear transformation after bases have been chosen?",
+      "options": [
+        "cofactor expansion",
+        "Cramer’s rule",
+        "Jacobian",
+        "matrix"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because a matrix represents a linear transformation after bases are chosen. The alternative involving cofactor expansion applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A matrix represents a linear transformation after bases are chosen.",
+      "misconceptionTargeted": "Using cofactor expansion instead of matrix when reasoning about A matrix represents a linear transformation"
+    },
+    {
+      "id": "linear-algebra--matrices--q2",
+      "sectionId": "matrices",
+      "question": "Which statement correctly describes matrix operations and linear systems?",
+      "options": [
+        "A negative determinant reverses orientation, and determinant zero collapses dimension, making the transformation noninvertible.",
+        "Determinants satisfy det(AB) = det A det B and det(Aᵀ) = det A.",
+        "A matrix represents a linear transformation after bases are chosen.",
+        "Swapping two rows reverses the sign, scaling one row scales the determinant, and adding a multiple of one row to another leaves it unchanged."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because a matrix represents a linear transformation after bases are chosen. The alternative involving Swapping two rows reverses the sign scaling one applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A matrix represents a linear transformation after bases are chosen.",
+      "misconceptionTargeted": "Using Swapping two rows reverses the sign scaling one instead of A matrix represents a linear transformation after bases when reasoning about A matrix represents a linear transformation"
+    },
+    {
+      "id": "linear-algebra--matrices--q3",
+      "sectionId": "matrices",
+      "question": "Which matrix operation composes linear transformations and therefore generally depends on order?",
+      "options": [
+        "eigenvector",
+        "matrix multiplication",
+        "eigenvalue",
+        "eigenspace"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because matrix multiplication composes transformations, so order matters: AB generally differs from BA. The alternative involving eigenvalue applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Matrix multiplication composes transformations, so order matters: AB generally differs from BA.",
+      "misconceptionTargeted": "Using eigenvalue instead of matrix multiplication when reasoning about Matrix multiplication composes transformations so order"
+    },
+    {
+      "id": "linear-algebra--matrices--q4",
+      "sectionId": "matrices",
+      "question": "A student is applying matrix operations and linear systems. Which statement is mathematically valid?",
+      "options": [
+        "Gaussian elimination uses row swaps, nonzero scaling, and row replacement to reach echelon form without changing the solution set.",
+        "Then A = PDP⁻¹ and powers become Ak = PDkP⁻¹.",
+        "Diagonalisation reveals independent modes of the transformation, but repeated eigenvalues do not guarantee enough eigenvectors; defective matrices require other canonical tools.",
+        "Eigenvectors identify natural patterns in dynamical systems."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because gaussian elimination uses row swaps, nonzero scaling, and row replacement to reach echelon form without changing the solution set. The alternative involving Then A = PDP ¹ and powers become applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Gaussian elimination uses row swaps, nonzero scaling, and row replacement to reach echelon form without changing the solution set.",
+      "misconceptionTargeted": "Using Then A = PDP ¹ and powers become instead of Gaussian elimination uses row swaps nonzero scaling and when reasoning about Gaussian elimination uses row swaps nonzero"
+    },
+    {
+      "id": "linear-algebra--matrices--q5",
+      "sectionId": "matrices",
+      "question": "Which positions in a row-echelon matrix reveal its rank?",
+      "options": [
+        "nullspace",
+        "determinant",
+        "oriented volume",
+        "pivot"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because pivot positions reveal rank. The alternative involving nullspace applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Pivot positions reveal rank.",
+      "misconceptionTargeted": "Using nullspace instead of pivot when reasoning about Pivot positions reveal rank"
+    },
+    {
+      "id": "linear-algebra--matrices--q6",
+      "sectionId": "matrices",
+      "question": "Which fact should guide the student's reasoning about matrix operations and linear systems?",
+      "options": [
+        "Matrix multiplication is not elementwise and generally not commutative.",
+        "Row operations preserve a system’s solution set but usually change the matrix’s determinant according to specific rules.",
+        "For a square matrix, invertibility has many equivalent forms: a pivot in every row and column, trivial nullspace, independent columns, full rank, nonzero determinant, and a unique solution for every b.",
+        "Rank counts pivots, not rows or columns automatically."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because for a square matrix, invertibility has many equivalent forms: a pivot in every row and column, trivial nullspace, independent columns, full rank, nonzero determinant, and a unique solution for every b. The alternative involving Rank counts pivots not rows or columns automatically applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "For a square matrix, invertibility has many equivalent forms: a pivot in every row and column, trivial nullspace, independent columns, full rank, nonzero determinant, and a unique solution for every b.",
+      "misconceptionTargeted": "Using Rank counts pivots not rows or columns automatically instead of For a square matrix invertibility has many equivalent when reasoning about For a square matrix invertibility has"
+    },
+    {
+      "id": "linear-algebra--matrices--q7",
+      "sectionId": "matrices",
+      "question": "For Ax = b, where must b lie for the system to be consistent?",
+      "options": [
+        "orientation",
+        "column space",
+        "noninvertible",
+        "triangular matrix"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because a system is consistent exactly when b lies in the column space of A; free variables correspond to directions in the nullspace. The alternative involving noninvertible applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A system is consistent exactly when b lies in the column space of A; free variables correspond to directions in the nullspace.",
+      "misconceptionTargeted": "Using noninvertible instead of column space when reasoning about A system is consistent exactly when"
+    },
+    {
+      "id": "linear-algebra--matrices--q8",
+      "sectionId": "matrices",
+      "question": "Which conclusion about matrix operations and linear systems is supported by the mathematics?",
+      "options": [
+        "For a square matrix, invertibility has many equivalent forms: a pivot in every row and column, trivial nullspace, independent columns, full rank, nonzero determinant, and a unique solution for every b.",
+        "A subspace must contain zero and remain closed under linear combinations.",
+        "The span of vectors is the set of all their linear combinations; it is always a subspace and captures every direction reachable from the generating set.",
+        "A basis is a linearly independent set that spans the space."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because for a square matrix, invertibility has many equivalent forms: a pivot in every row and column, trivial nullspace, independent columns, full rank, nonzero determinant, and a unique solution for every b. The alternative involving A subspace must contain zero and remain closed applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "For a square matrix, invertibility has many equivalent forms: a pivot in every row and column, trivial nullspace, independent columns, full rank, nonzero determinant, and a unique solution for every b.",
+      "misconceptionTargeted": "Using A subspace must contain zero and remain closed instead of For a square matrix invertibility has many equivalent when reasoning about For a square matrix invertibility has"
+    },
+    {
+      "id": "linear-algebra--determinants--q1",
+      "sectionId": "determinants",
+      "question": "Which scalar quantity is assigned to a square matrix?",
+      "options": [
+        "Cramer’s rule",
+        "Jacobian",
+        "eigenvector",
+        "determinant"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because the determinant assigns a scalar to a square matrix. The alternative involving Cramer s rule applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The determinant assigns a scalar to a square matrix.",
+      "misconceptionTargeted": "Using Cramer s rule instead of determinant when reasoning about The determinant assigns a scalar to"
+    },
+    {
+      "id": "linear-algebra--determinants--q2",
+      "sectionId": "determinants",
+      "question": "Which statement correctly describes determinants and invertibility?",
+      "options": [
+        "Gilbert Strang’s linear-algebra teaching emphasises using these structures to understand computations, not just perform them.",
+        "A set is a subspace only if it contains zero and is closed under all linear combinations.",
+        "Determinants also appear in Jacobian change-of-variables factors, eigenvalue equations, orientation tests, and volume calculations.",
+        "A basis must both span and be linearly independent; neither condition alone is enough."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because determinants also appear in Jacobian change-of-variables factors, eigenvalue equations, orientation tests, and volume calculations. The alternative involving A basis must both span and be linearly applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Determinants also appear in Jacobian change-of-variables factors, eigenvalue equations, orientation tests, and volume calculations.",
+      "misconceptionTargeted": "Using A basis must both span and be linearly instead of Determinants also appear in Jacobian change of variables when reasoning about Determinants also appear in Jacobian change"
+    },
+    {
+      "id": "linear-algebra--determinants--q3",
+      "sectionId": "determinants",
+      "question": "How is a linear transformation classified when its determinant is zero and it collapses dimension?",
+      "options": [
+        "eigenvalue",
+        "noninvertible",
+        "eigenspace",
+        "characteristic equation"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because a negative determinant reverses orientation, and determinant zero collapses dimension, making the transformation noninvertible. The alternative involving eigenspace applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A negative determinant reverses orientation, and determinant zero collapses dimension, making the transformation noninvertible.",
+      "misconceptionTargeted": "Using eigenspace instead of noninvertible when reasoning about A negative determinant reverses orientation and"
+    },
+    {
+      "id": "linear-algebra--determinants--q4",
+      "sectionId": "determinants",
+      "question": "A student is applying determinants and invertibility. Which statement is mathematically valid?",
+      "options": [
+        "Cofactor expansion gives a theoretical formula, and Cramer’s rule expresses components of Ax = b as determinant ratios, but both are inefficient for large numerical systems.",
+        "A vector space is closed under addition and scalar multiplication and satisfies axioms including associativity, distributivity, and the existence of zero and additive inverses.",
+        "A subspace must contain zero and remain closed under linear combinations.",
+        "The span of vectors is the set of all their linear combinations; it is always a subspace and captures every direction reachable from the generating set."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because cofactor expansion gives a theoretical formula, and Cramer’s rule expresses components of Ax = b as determinant ratios, but both are inefficient for large numerical systems. The alternative involving A vector space is closed under addition and applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Cofactor expansion gives a theoretical formula, and Cramer’s rule expresses components of Ax = b as determinant ratios, but both are inefficient for large numerical systems.",
+      "misconceptionTargeted": "Using A vector space is closed under addition and instead of Cofactor expansion gives a theoretical formula and Cramer when reasoning about Cofactor expansion gives a theoretical formula"
+    },
+    {
+      "id": "linear-algebra--determinants--q5",
+      "sectionId": "determinants",
+      "question": "Which method expresses the components of Ax = b as ratios of determinants?",
+      "options": [
+        "diagonalisation",
+        "defective matrix",
+        "dynamical system",
+        "Cramer’s rule"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because cofactor expansion gives a theoretical formula, and Cramer’s rule expresses components of Ax = b as determinant ratios, but both are inefficient for large numerical systems. The alternative involving diagonalisation applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Cofactor expansion gives a theoretical formula, and Cramer’s rule expresses components of Ax = b as determinant ratios, but both are inefficient for large numerical systems.",
+      "misconceptionTargeted": "Using diagonalisation instead of Cramer s rule when reasoning about Cofactor expansion gives a theoretical formula"
+    },
+    {
+      "id": "linear-algebra--determinants--q6",
+      "sectionId": "determinants",
+      "question": "Which fact should guide the student's reasoning about determinants and invertibility?",
+      "options": [
+        "Factorisation A = LU records elimination as lower- and upper-triangular matrices, allowing many systems with the same A to be solved efficiently.",
+        "Numerical computation normally favours factorisation over explicitly forming A⁻¹.",
+        "Determinants also appear in Jacobian change-of-variables factors, eigenvalue equations, orientation tests, and volume calculations.",
+        "A nonzero vector v is an eigenvector of A if Av = λv for some scalar eigenvalue λ."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because determinants also appear in Jacobian change-of-variables factors, eigenvalue equations, orientation tests, and volume calculations. The alternative involving A nonzero vector v is an eigenvector of applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Determinants also appear in Jacobian change-of-variables factors, eigenvalue equations, orientation tests, and volume calculations.",
+      "misconceptionTargeted": "Using A nonzero vector v is an eigenvector of instead of Determinants also appear in Jacobian change of variables when reasoning about Determinants also appear in Jacobian change"
+    },
+    {
+      "id": "linear-algebra--determinants--q7",
+      "sectionId": "determinants",
+      "question": "Which matrix quantity appears in Jacobian factors, eigenvalue equations, orientation tests, and volume calculations?",
+      "options": [
+        "principal component analysis",
+        "determinant",
+        "subspace test",
+        "coordinates"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because determinants also appear in Jacobian change-of-variables factors, eigenvalue equations, orientation tests, and volume calculations. The alternative involving subspace test applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Determinants also appear in Jacobian change-of-variables factors, eigenvalue equations, orientation tests, and volume calculations.",
+      "misconceptionTargeted": "Using subspace test instead of determinant when reasoning about Determinants also appear in Jacobian change"
+    },
+    {
+      "id": "linear-algebra--determinants--q8",
+      "sectionId": "determinants",
+      "question": "Which conclusion about determinants and invertibility is supported by the mathematics?",
+      "options": [
+        "Determinants also appear in Jacobian change-of-variables factors, eigenvalue equations, orientation tests, and volume calculations.",
+        "Matrix multiplication is not elementwise and generally not commutative.",
+        "Row operations preserve a system’s solution set but usually change the matrix’s determinant according to specific rules.",
+        "Rank counts pivots, not rows or columns automatically."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because determinants also appear in Jacobian change-of-variables factors, eigenvalue equations, orientation tests, and volume calculations. The alternative involving Matrix multiplication is not elementwise and generally not applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Determinants also appear in Jacobian change-of-variables factors, eigenvalue equations, orientation tests, and volume calculations.",
+      "misconceptionTargeted": "Using Matrix multiplication is not elementwise and generally not instead of Determinants also appear in Jacobian change of variables when reasoning about Determinants also appear in Jacobian change"
+    },
+    {
+      "id": "linear-algebra--eigenvalues--q1",
+      "sectionId": "eigenvalues",
+      "question": "What is a nonzero vector v called when Av = λv for some scalar λ?",
+      "options": [
+        "principal component analysis",
+        "subspace test",
+        "coordinates",
+        "eigenvector"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because a nonzero vector v is an eigenvector of A if Av = λv for some scalar eigenvalue λ. The alternative involving principal component analysis applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A nonzero vector v is an eigenvector of A if Av = λv for some scalar eigenvalue λ.",
+      "misconceptionTargeted": "Using principal component analysis instead of eigenvector when reasoning about A nonzero vector v is an"
+    },
+    {
+      "id": "linear-algebra--eigenvalues--q2",
+      "sectionId": "eigenvalues",
+      "question": "Which statement correctly describes eigenvalues and eigenvectors?",
+      "options": [
+        "A matrix represents a linear transformation after bases are chosen.",
+        "Multiplying Ax forms linear combinations of A’s columns with coefficients from x.",
+        "Eigenvalues satisfy det(A − λI) = 0, and each eigenspace is the nullspace of A − λI.",
+        "Matrix multiplication composes transformations, so order matters: AB generally differs from BA."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because eigenvalues satisfy det(A − λI) = 0, and each eigenspace is the nullspace of A − λI. The alternative involving Matrix multiplication composes transformations so order matters AB applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Eigenvalues satisfy det(A − λI) = 0, and each eigenspace is the nullspace of A − λI.",
+      "misconceptionTargeted": "Using Matrix multiplication composes transformations so order matters AB instead of Eigenvalues satisfy det A − λI = 0 when reasoning about Eigenvalues satisfy det A − λI"
+    },
+    {
+      "id": "linear-algebra--eigenvalues--q3",
+      "sectionId": "eigenvalues",
+      "question": "What is the nullspace of A − λI called for a fixed eigenvalue λ?",
+      "options": [
+        "row operation",
+        "eigenspace",
+        "vector",
+        "vector space"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because eigenvalues satisfy det(A − λI) = 0, and each eigenspace is the nullspace of A − λI. The alternative involving vector applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Eigenvalues satisfy det(A − λI) = 0, and each eigenspace is the nullspace of A − λI.",
+      "misconceptionTargeted": "Using vector instead of eigenspace when reasoning about Eigenvalues satisfy det A − λI"
+    },
+    {
+      "id": "linear-algebra--eigenvalues--q4",
+      "sectionId": "eigenvalues",
+      "question": "A student is applying eigenvalues and eigenvectors. Which statement is mathematically valid?",
+      "options": [
+        "Diagonalisation reveals independent modes of the transformation, but repeated eigenvalues do not guarantee enough eigenvectors; defective matrices require other canonical tools.",
+        "For triangular matrices, the determinant is the product of diagonal entries.",
+        "These rules make elimination an efficient calculation method.",
+        "A square matrix is invertible exactly when det A ≠ 0."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because diagonalisation reveals independent modes of the transformation, but repeated eigenvalues do not guarantee enough eigenvectors; defective matrices require other canonical tools. The alternative involving For triangular matrices the determinant is the product applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Diagonalisation reveals independent modes of the transformation, but repeated eigenvalues do not guarantee enough eigenvectors; defective matrices require other canonical tools.",
+      "misconceptionTargeted": "Using For triangular matrices the determinant is the product instead of Diagonalisation reveals independent modes of the transformation but when reasoning about Diagonalisation reveals independent modes of the"
+    },
+    {
+      "id": "linear-algebra--eigenvalues--q5",
+      "sectionId": "eigenvalues",
+      "question": "In what kind of system do eigenvectors identify natural patterns of evolution?",
+      "options": [
+        "dot product",
+        "subspace",
+        "linear combination",
+        "dynamical system"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because eigenvectors identify natural patterns in dynamical systems. The alternative involving dot product applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Eigenvectors identify natural patterns in dynamical systems.",
+      "misconceptionTargeted": "Using dot product instead of dynamical system when reasoning about Eigenvectors identify natural patterns in dynamical"
+    },
+    {
+      "id": "linear-algebra--eigenvalues--q6",
+      "sectionId": "eigenvalues",
+      "question": "Which fact should guide the student's reasoning about eigenvalues and eigenvectors?",
+      "options": [
+        "A repeated eigenvalue may have too few independent eigenvectors for diagonalisation.",
+        "A vector is an element of a vector space and may represent displacement, force, data, a polynomial, a function, or another object that supports vector addition and scalar multiplication.",
+        "Eigenvectors underpin vibration modes, stability, Markov chains, principal component analysis, quantum observables, and Google’s original PageRank method.",
+        "In Rn, vectors are ordered coordinate lists."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because eigenvectors underpin vibration modes, stability, Markov chains, principal component analysis, quantum observables, and Google’s original PageRank method. The alternative involving In Rn vectors are ordered coordinate lists applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Eigenvectors underpin vibration modes, stability, Markov chains, principal component analysis, quantum observables, and Google’s original PageRank method.",
+      "misconceptionTargeted": "Using In Rn vectors are ordered coordinate lists instead of Eigenvectors underpin vibration modes stability Markov chains principal when reasoning about Eigenvectors underpin vibration modes stability Markov"
+    },
+    {
+      "id": "linear-algebra--eigenvalues--q7",
+      "sectionId": "eigenvalues",
+      "question": "A nonzero direction is preserved by A up to multiplication by λ. What is that vector called?",
+      "options": [
+        "span",
+        "eigenvector",
+        "basis",
+        "dimension"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because a nonzero vector v is an eigenvector of A if Av = λv for some scalar eigenvalue λ. The alternative involving basis applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A nonzero vector v is an eigenvector of A if Av = λv for some scalar eigenvalue λ.",
+      "misconceptionTargeted": "Using basis instead of eigenvector when reasoning about A nonzero vector v is an"
+    },
+    {
+      "id": "linear-algebra--eigenvalues--q8",
+      "sectionId": "eigenvalues",
+      "question": "Which conclusion about eigenvalues and eigenvectors is supported by the mathematics?",
+      "options": [
+        "Diagonalisation reveals independent modes of the transformation, but repeated eigenvalues do not guarantee enough eigenvectors; defective matrices require other canonical tools.",
+        "Gaussian elimination uses row swaps, nonzero scaling, and row replacement to reach echelon form without changing the solution set.",
+        "Pivot positions reveal rank.",
+        "A system is consistent exactly when b lies in the column space of A; free variables correspond to directions in the nullspace."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because diagonalisation reveals independent modes of the transformation, but repeated eigenvalues do not guarantee enough eigenvectors; defective matrices require other canonical tools. The alternative involving Gaussian elimination uses row swaps nonzero scaling and applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Diagonalisation reveals independent modes of the transformation, but repeated eigenvalues do not guarantee enough eigenvectors; defective matrices require other canonical tools.",
+      "misconceptionTargeted": "Using Gaussian elimination uses row swaps nonzero scaling and instead of Diagonalisation reveals independent modes of the transformation but when reasoning about Diagonalisation reveals independent modes of the"
+    },
+    {
+      "id": "linear-algebra--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "Which set must both span the space and be linearly independent?",
+      "options": [
+        "defective matrix",
+        "basis",
+        "dynamical system",
+        "principal component analysis"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because a basis must both span and be linearly independent; neither condition alone is enough. The alternative involving dynamical system applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A basis must both span and be linearly independent; neither condition alone is enough.",
+      "misconceptionTargeted": "Using dynamical system instead of basis when reasoning about A basis must both span and"
+    },
+    {
+      "id": "linear-algebra--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "Which statement identifies a genuine issue students must watch for among common linear-algebra errors?",
+      "options": [
+        "Coordinates depend on the chosen basis even though the underlying vector does not.",
+        "A matrix represents a linear transformation after bases are chosen.",
+        "Multiplying Ax forms linear combinations of A’s columns with coefficients from x.",
+        "Matrix multiplication composes transformations, so order matters: AB generally differs from BA."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because coordinates depend on the chosen basis even though the underlying vector does not. The alternative involving A matrix represents a linear transformation after bases applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Coordinates depend on the chosen basis even though the underlying vector does not.",
+      "misconceptionTargeted": "Using A matrix represents a linear transformation after bases instead of Coordinates depend on the chosen basis even though when reasoning about Coordinates depend on the chosen basis"
+    },
+    {
+      "id": "linear-algebra--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "Which matrix operation is neither elementwise nor generally commutative?",
+      "options": [
+        "eigenspace",
+        "characteristic equation",
+        "diagonalisation",
+        "matrix multiplication"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because matrix multiplication is not elementwise and generally not commutative. The alternative involving eigenspace applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Matrix multiplication is not elementwise and generally not commutative.",
+      "misconceptionTargeted": "Using eigenspace instead of matrix multiplication when reasoning about Matrix multiplication is not elementwise and"
+    },
+    {
+      "id": "linear-algebra--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "A student is checking work for common linear-algebra errors. Which statement is mathematically correct?",
+      "options": [
+        "Eigenvalues satisfy det(A − λI) = 0, and each eigenspace is the nullspace of A − λI.",
+        "If an n by n matrix has n linearly independent eigenvectors, form P from those eigenvectors and D from the corresponding eigenvalues.",
+        "Row operations preserve a system’s solution set but usually change the matrix’s determinant according to specific rules.",
+        "Then A = PDP⁻¹ and powers become Ak = PDkP⁻¹."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because row operations preserve a system’s solution set but usually change the matrix’s determinant according to specific rules. The alternative involving Then A = PDP ¹ and powers become applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Row operations preserve a system’s solution set but usually change the matrix’s determinant according to specific rules.",
+      "misconceptionTargeted": "Using Then A = PDP ¹ and powers become instead of Row operations preserve a system s solution set when reasoning about Row operations preserve a system s"
+    },
+    {
+      "id": "linear-algebra--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "Which quantity equals the number of pivot positions in a matrix?",
+      "options": [
+        "Jacobian",
+        "rank",
+        "eigenvector",
+        "eigenvalue"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because rank counts pivots, not rows or columns automatically. The alternative involving eigenvector applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Rank counts pivots, not rows or columns automatically.",
+      "misconceptionTargeted": "Using eigenvector instead of rank when reasoning about Rank counts pivots not rows or"
+    },
+    {
+      "id": "linear-algebra--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "Which check would help a student avoid one of common linear-algebra errors?",
+      "options": [
+        "The determinant is a scalar, not a matrix, and det(A + B) is generally not det A + det B.",
+        "Gaussian elimination uses row swaps, nonzero scaling, and row replacement to reach echelon form without changing the solution set.",
+        "Pivot positions reveal rank.",
+        "A system is consistent exactly when b lies in the column space of A; free variables correspond to directions in the nullspace."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because the determinant is a scalar, not a matrix, and det(A + B) is generally not det A + det B. The alternative involving Gaussian elimination uses row swaps nonzero scaling and applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The determinant is a scalar, not a matrix, and det(A + B) is generally not det A + det B.",
+      "misconceptionTargeted": "Using Gaussian elimination uses row swaps nonzero scaling and instead of The determinant is a scalar not a matrix when reasoning about The determinant is a scalar not"
+    },
+    {
+      "id": "linear-algebra--exam-traps--q7",
+      "sectionId": "exam-traps",
+      "question": "What property can fail when a repeated eigenvalue has too few independent eigenvectors?",
+      "options": [
+        "triangular matrix",
+        "cofactor expansion",
+        "Cramer’s rule",
+        "diagonalisation"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because a repeated eigenvalue may have too few independent eigenvectors for diagonalisation. The alternative involving triangular matrix applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A repeated eigenvalue may have too few independent eigenvectors for diagonalisation.",
+      "misconceptionTargeted": "Using triangular matrix instead of diagonalisation when reasoning about A repeated eigenvalue may have too"
+    },
+    {
+      "id": "linear-algebra--exam-traps--q8",
+      "sectionId": "exam-traps",
+      "question": "Which statement correctly resolves a misconception associated with common linear-algebra errors?",
+      "options": [
+        "In x′ = Ax, an eigenvector mode evolves as e^{λt}; the sign of the real part of λ determines growth or decay, while complex pairs describe oscillation.",
+        "Eigenvectors underpin vibration modes, stability, Markov chains, principal component analysis, quantum observables, and Google’s original PageRank method.",
+        "Coordinates depend on the chosen basis even though the underlying vector does not.",
+        "Gilbert Strang’s linear-algebra teaching emphasises using these structures to understand computations, not just perform them."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because coordinates depend on the chosen basis even though the underlying vector does not. The alternative involving Gilbert Strang s linear algebra teaching emphasises using applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Coordinates depend on the chosen basis even though the underlying vector does not.",
+      "misconceptionTargeted": "Using Gilbert Strang s linear algebra teaching emphasises using instead of Coordinates depend on the chosen basis even though when reasoning about Coordinates depend on the chosen basis"
+    }
+  ]
+}

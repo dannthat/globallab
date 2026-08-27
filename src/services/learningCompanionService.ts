@@ -11,7 +11,11 @@ import type {
 
 export const LEARNING_PROMPT_VERSION = 'gl-companion-v1'
 export const MAX_COMPANION_SOURCE_CHARACTERS = 12_000
+/** Timeout for curated textbook sections — source text is small and clean. */
 export const COMPANION_TIMEOUT_MS = 28_000
+/** Timeout for user-uploaded sources — OCR output can be up to 12 000 chars
+ *  and is noisier, so the server needs more processing time. */
+export const COMPANION_TIMEOUT_MS_UPLOAD = 45_000
 
 const MODE_TITLES: Record<PersonalizationMode, string> = {
   analogy: 'A bridge to something familiar',
@@ -348,6 +352,9 @@ function clozeDistractors(
 ): [string, string, string] {
   const correctShape = wordShape(correct.value)
   const seen = new Set([correct.normalized])
+
+  // First pass: prefer content words that match the shape and length of the
+  // correct answer (better distractors — same language, similar visual weight).
   const candidates = sourceWords(text)
     .filter(
       (word) =>
@@ -375,12 +382,26 @@ function clozeDistractors(
     }
   }
 
+  // Second pass: relax all filters — use ANY word from the source.
+  // This keeps distractors in the source language even when the passage is
+  // short or mostly common words (e.g. non-English or highly technical text).
+  const allWords = sourceWords(text).sort((left, right) => left.start - right.start)
+  for (const word of allWords) {
+    if (seen.has(word.normalized)) continue
+    seen.add(word.normalized)
+    distractors.push(word.value)
+    if (distractors.length === 3) {
+      return [distractors[0], distractors[1], distractors[2]]
+    }
+  }
+
+  // Absolute last resort — only reached on passages with < 4 unique words total.
+  // Anchor label is preserved (may be in any language); the other two strings are
+  // intentionally vague so they don't read as definitive wrong answers.
   const fallbacks = [
-    `Not stated in ${anchor.anchorLabel}`,
-    'No source term is supplied',
-    'The selected passage leaves it blank',
-    'The source gives no matching term',
-    'No exact source answer appears here',
+    anchor.anchorLabel,
+    '—',
+    '–',
   ]
   for (const fallback of fallbacks) {
     const normalized = fallback.toLowerCase()
@@ -391,6 +412,8 @@ function clozeDistractors(
   }
   return [distractors[0], distractors[1], distractors[2]]
 }
+
+
 
 function deterministicIndex(value: string) {
   let hash = 2_166_136_261
@@ -611,13 +634,13 @@ export function parseLearningCompanionResponse(
   }
 }
 
-function linkedSignal(externalSignal: AbortSignal | undefined) {
+function linkedSignal(externalSignal: AbortSignal | undefined, timeoutMs: number) {
   const controller = new AbortController()
   let didTimeout = false
   const timeout = setTimeout(() => {
     didTimeout = true
     controller.abort()
-  }, COMPANION_TIMEOUT_MS)
+  }, timeoutMs)
   const abort = () => controller.abort()
   externalSignal?.addEventListener('abort', abort, { once: true })
 
@@ -634,10 +657,7 @@ function linkedSignal(externalSignal: AbortSignal | undefined) {
 export async function createLearningCompanion(
   request: LearningCompanionRequest,
 ): Promise<LearningCompanionArtifact> {
-  if (!request.excerpt.text.trim()) {
-    throw new Error('The selected source does not contain readable text yet.')
-  }
-  if (request.localOnly || request.excerpt.anchor.sourceKind === 'upload') {
+  if (request.localOnly) {
     return localFallback(request)
   }
   if (request.mode === 'analogy' && request.presetAnalogy) {
@@ -647,7 +667,15 @@ export async function createLearningCompanion(
   const endpoint =
     (import.meta.env.VITE_PERSONALIZATION_ENDPOINT as string | undefined)?.trim() ||
     '/api/personalize'
-  const linked = linkedSignal(request.signal)
+
+  // Uploads carry up to 12 000 chars of OCR output — allow extra server time.
+  const timeoutMs =
+    request.excerpt.anchor.sourceKind === 'upload'
+      ? COMPANION_TIMEOUT_MS_UPLOAD
+      : COMPANION_TIMEOUT_MS
+
+  const linked = linkedSignal(request.signal, timeoutMs)
+
 
   try {
     const response = await fetch(endpoint, {

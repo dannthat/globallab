@@ -1,0 +1,606 @@
+{
+  "topicId": "integration",
+  "subjectId": "mathematics",
+  "questions": [
+    {
+      "id": "integration--overview--q1",
+      "sectionId": "overview",
+      "question": "What is a function F called when F′ = f throughout an interval?",
+      "options": [
+        "antiderivative",
+        "dimensional analysis",
+        "logarithmic antiderivative",
+        "substitution bounds"
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because an antiderivative of f on an interval is a function F satisfying F′ = f there. The alternative involving dimensional analysis applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "An antiderivative of f on an interval is a function F satisfying F′ = f there.",
+      "misconceptionTargeted": "Using dimensional analysis instead of antiderivative when reasoning about An antiderivative of f on an"
+    },
+    {
+      "id": "integration--overview--q2",
+      "sectionId": "overview",
+      "question": "Which statement correctly describes antiderivatives and indefinite integrals?",
+      "options": [
+        "For definite integrals, either transform both limits into u-values or return to x before applying the original bounds.",
+        "The indefinite integral ∫f(x)dx denotes this family, so omitting +C loses valid solutions.",
+        "Mixing transformed integrands with untransformed limits is invalid.",
+        "Integration by parts reverses the product rule: ∫u dv = uv − ∫v du."
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because the indefinite integral ∫f(x)dx denotes this family, so omitting +C loses valid solutions. The alternative involving Mixing transformed integrands with untransformed limits is invalid applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The indefinite integral ∫f(x)dx denotes this family, so omitting +C loses valid solutions.",
+      "misconceptionTargeted": "Using Mixing transformed integrands with untransformed limits is invalid instead of The indefinite integral f x dx denotes this when reasoning about The indefinite integral f x dx"
+    },
+    {
+      "id": "integration--overview--q3",
+      "sectionId": "overview",
+      "question": "Which integration rule gives ∫x^n dx = x^(n+1)/(n+1) + C for n ≠ −1?",
+      "options": [
+        "LIATE",
+        "partial fractions",
+        "power rule",
+        "elementary antiderivative"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because the power rule gives ∫x^n dx = x^(n+1)/(n+1) + C for n ≠ −1, while ∫1/x dx = ln|x| + C. The alternative involving elementary antiderivative applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The power rule gives ∫x^n dx = x^(n+1)/(n+1) + C for n ≠ −1, while ∫1/x dx = ln|x| + C.",
+      "misconceptionTargeted": "Using elementary antiderivative instead of power rule when reasoning about The power rule gives x n"
+    },
+    {
+      "id": "integration--overview--q4",
+      "sectionId": "overview",
+      "question": "A student is applying antiderivatives and indefinite integrals. Which statement is mathematically valid?",
+      "options": [
+        "This relationship, recognised by Newton and Leibniz, unifies the tangent and area problems that motivated calculus.",
+        "Definite integrals represent far more than geometric area: integrating velocity gives displacement, density gives mass, force over distance gives work, and a probability density gives probability.",
+        "Units multiply accordingly.",
+        "Linearity allows constants and sums to be handled term by term."
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because linearity allows constants and sums to be handled term by term. The alternative involving This relationship recognised by Newton and Leibniz unifies applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Linearity allows constants and sums to be handled term by term.",
+      "misconceptionTargeted": "Using This relationship recognised by Newton and Leibniz unifies instead of Linearity allows constants and sums to be handled when reasoning about Linearity allows constants and sums to"
+    },
+    {
+      "id": "integration--overview--q5",
+      "sectionId": "overview",
+      "question": "What information selects one specific member from a family of antiderivatives?",
+      "options": [
+        "initial condition",
+        "displacement",
+        "numerical integration",
+        "substitution"
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because initial conditions select one member of an antiderivative family. The alternative involving displacement applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Initial conditions select one member of an antiderivative family.",
+      "misconceptionTargeted": "Using displacement instead of initial condition when reasoning about Initial conditions select one member of"
+    },
+    {
+      "id": "integration--overview--q6",
+      "sectionId": "overview",
+      "question": "Which fact should guide the student's reasoning about antiderivatives and indefinite integrals?",
+      "options": [
+        "Units multiply accordingly.",
+        "Leibniz’s integral notation preserves the differential dx, which identifies the integration variable and becomes essential in substitution and multivariable settings.",
+        "Numerical methods such as midpoint, trapezoidal, and Simpson rules approximate integrals when an elementary antiderivative is unavailable or data are discrete.",
+        "Substitution reverses the chain rule."
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because leibniz’s integral notation preserves the differential dx, which identifies the integration variable and becomes essential in substitution and multivariable settings. The alternative involving Numerical methods such as midpoint trapezoidal and Simpson applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Leibniz’s integral notation preserves the differential dx, which identifies the integration variable and becomes essential in substitution and multivariable settings.",
+      "misconceptionTargeted": "Using Numerical methods such as midpoint trapezoidal and Simpson instead of Leibniz s integral notation preserves the differential dx when reasoning about Leibniz s integral notation preserves the"
+    },
+    {
+      "id": "integration--overview--q7",
+      "sectionId": "overview",
+      "question": "Which kind of formula should be checked by differentiating it back to the original integrand?",
+      "options": [
+        "power rule",
+        "linearity",
+        "antiderivative",
+        "initial condition"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because an antiderivative formula is always checked by differentiation, which also exposes missing constants, chain factors, or domain restrictions. The alternative involving initial condition applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "An antiderivative formula is always checked by differentiation, which also exposes missing constants, chain factors, or domain restrictions.",
+      "misconceptionTargeted": "Using initial condition instead of antiderivative when reasoning about An antiderivative formula is always checked"
+    },
+    {
+      "id": "integration--overview--q8",
+      "sectionId": "overview",
+      "question": "Which conclusion about antiderivatives and indefinite integrals is supported by the mathematics?",
+      "options": [
+        "The result is signed accumulation: regions below the axis contribute negatively.",
+        "The Fundamental Theorem of Calculus links accumulation and local change.",
+        "If f is continuous and A(x) = ∫a^x f(t)dt, then A′(x) = f(x).",
+        "The indefinite integral ∫f(x)dx denotes this family, so omitting +C loses valid solutions."
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because the indefinite integral ∫f(x)dx denotes this family, so omitting +C loses valid solutions. The alternative involving The result is signed accumulation regions below the applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The indefinite integral ∫f(x)dx denotes this family, so omitting +C loses valid solutions.",
+      "misconceptionTargeted": "Using The result is signed accumulation regions below the instead of The indefinite integral f x dx denotes this when reasoning about The indefinite integral f x dx"
+    },
+    {
+      "id": "integration--definite-integrals--q1",
+      "sectionId": "definite-integrals",
+      "question": "What quantity is defined as the limit of Riemann sums over increasingly fine partitions?",
+      "options": [
+        "Riemann sum",
+        "partition",
+        "integrable",
+        "definite integral"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because a definite integral is the limit of Riemann sums. The alternative involving Riemann sum applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A definite integral is the limit of Riemann sums.",
+      "misconceptionTargeted": "Using Riemann sum instead of definite integral when reasoning about A definite integral is the limit"
+    },
+    {
+      "id": "integration--definite-integrals--q2",
+      "sectionId": "definite-integrals",
+      "question": "Which statement correctly describes definite integrals and the Fundamental Theorem of Calculus?",
+      "options": [
+        "Rotating a region around an axis produces disks or washers when slices are perpendicular to the axis, with area π(R² − r²).",
+        "Cylindrical shells use slices parallel to the axis, giving 2π(radius)(height) times thickness.",
+        "A definite integral is the limit of Riemann sums.",
+        "The geometry determines the method; formulas should be reconstructed from a representative slice rather than memorised without context."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because a definite integral is the limit of Riemann sums. The alternative involving The geometry determines the method formulas should be applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A definite integral is the limit of Riemann sums.",
+      "misconceptionTargeted": "Using The geometry determines the method formulas should be instead of A definite integral is the limit of Riemann when reasoning about A definite integral is the limit"
+    },
+    {
+      "id": "integration--definite-integrals--q3",
+      "sectionId": "definite-integrals",
+      "question": "What is the first step in constructing a Riemann sum on [a,b]?",
+      "options": [
+        "representative slice",
+        "partition",
+        "variable upper limit",
+        "dummy variable"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because partition [a,b] into subintervals, multiply each width by a sampled function value, and sum. The alternative involving variable upper limit applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Partition [a,b] into subintervals, multiply each width by a sampled function value, and sum.",
+      "misconceptionTargeted": "Using variable upper limit instead of partition when reasoning about Partition a b into subintervals multiply"
+    },
+    {
+      "id": "integration--definite-integrals--q4",
+      "sectionId": "definite-integrals",
+      "question": "A student is applying definite integrals and the Fundamental Theorem of Calculus. Which statement is mathematically valid?",
+      "options": [
+        "If these sums approach one value as the maximum subinterval width tends to zero, f is integrable and the limit is ∫a^b f(x)dx.",
+        "The area between y = f(x) and y = g(x) over [a,b] is ∫a^b |f(x) − g(x)|dx.",
+        "If one function stays above the other, the absolute value becomes top minus bottom.",
+        "When curves cross, solve for intersection points and split the integral so the ordering is correct."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because if these sums approach one value as the maximum subinterval width tends to zero, f is integrable and the limit is ∫a^b f(x)dx. The alternative involving The area between y = f x and applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "If these sums approach one value as the maximum subinterval width tends to zero, f is integrable and the limit is ∫a^b f(x)dx.",
+      "misconceptionTargeted": "Using The area between y = f x and instead of If these sums approach one value as the when reasoning about If these sums approach one value"
+    },
+    {
+      "id": "integration--definite-integrals--q5",
+      "sectionId": "definite-integrals",
+      "question": "What does a definite integral measure when regions below the axis contribute negatively?",
+      "options": [
+        "centre of mass",
+        "dimensional analysis",
+        "logarithmic antiderivative",
+        "signed accumulation"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because the result is signed accumulation: regions below the axis contribute negatively. The alternative involving centre of mass applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The result is signed accumulation: regions below the axis contribute negatively.",
+      "misconceptionTargeted": "Using centre of mass instead of signed accumulation when reasoning about The result is signed accumulation regions"
+    },
+    {
+      "id": "integration--definite-integrals--q6",
+      "sectionId": "definite-integrals",
+      "question": "Which fact should guide the student's reasoning about definite integrals and the Fundamental Theorem of Calculus?",
+      "options": [
+        "Definite integral and geometric area are not synonyms.",
+        "Below-axis contributions are negative, so split at zeros or integrate an absolute value for total area.",
+        "The Fundamental Theorem of Calculus links accumulation and local change.",
+        "For area between curves, verify top minus bottom or right minus left on every subinterval."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because the Fundamental Theorem of Calculus links accumulation and local change. The alternative involving For area between curves verify top minus bottom applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The Fundamental Theorem of Calculus links accumulation and local change.",
+      "misconceptionTargeted": "Using For area between curves verify top minus bottom instead of The Fundamental Theorem of Calculus links accumulation and when reasoning about The Fundamental Theorem of Calculus links"
+    },
+    {
+      "id": "integration--definite-integrals--q7",
+      "sectionId": "definite-integrals",
+      "question": "What physical quantity results from integrating velocity over time?",
+      "options": [
+        "product rule",
+        "displacement",
+        "LIATE",
+        "partial fractions"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because definite integrals represent far more than geometric area: integrating velocity gives displacement, density gives mass, force over distance gives work, and a probability density gives probability. The alternative involving LIATE applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Definite integrals represent far more than geometric area: integrating velocity gives displacement, density gives mass, force over distance gives work, and a probability density gives probability.",
+      "misconceptionTargeted": "Using LIATE instead of displacement when reasoning about Definite integrals represent far more than"
+    },
+    {
+      "id": "integration--definite-integrals--q8",
+      "sectionId": "definite-integrals",
+      "question": "Which conclusion about definite integrals and the Fundamental Theorem of Calculus is supported by the mathematics?",
+      "options": [
+        "Definite integrals represent far more than geometric area: integrating velocity gives displacement, density gives mass, force over distance gives work, and a probability density gives probability.",
+        "A correct-looking antiderivative cannot repair an incorrectly modelled slice.",
+        "Include +C for indefinite integrals but not for a definite integral evaluated by endpoint subtraction.",
+        "The power rule excludes n = −1, whose antiderivative is ln|x|."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because definite integrals represent far more than geometric area: integrating velocity gives displacement, density gives mass, force over distance gives work, and a probability density gives probability. The alternative involving A correct looking antiderivative cannot repair an incorrectly applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Definite integrals represent far more than geometric area: integrating velocity gives displacement, density gives mass, force over distance gives work, and a probability density gives probability.",
+      "misconceptionTargeted": "Using A correct looking antiderivative cannot repair an incorrectly instead of Definite integrals represent far more than geometric area when reasoning about Definite integrals represent far more than"
+    },
+    {
+      "id": "integration--techniques--q1",
+      "sectionId": "techniques",
+      "question": "Which integration technique reverses the chain rule?",
+      "options": [
+        "substitution",
+        "representative slice",
+        "variable upper limit",
+        "dummy variable"
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because substitution reverses the chain rule. The alternative involving representative slice applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Substitution reverses the chain rule.",
+      "misconceptionTargeted": "Using representative slice instead of substitution when reasoning about Substitution reverses the chain rule"
+    },
+    {
+      "id": "integration--techniques--q2",
+      "sectionId": "techniques",
+      "question": "Which statement correctly describes substitution and integration by parts?",
+      "options": [
+        "Include +C for indefinite integrals but not for a definite integral evaluated by endpoint subtraction.",
+        "Substitution reverses the chain rule.",
+        "The power rule excludes n = −1, whose antiderivative is ln|x|.",
+        "After substitution, transform the differential and either transform bounds or return fully to the original variable."
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because substitution reverses the chain rule. The alternative involving The power rule excludes n = −1 whose applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Substitution reverses the chain rule.",
+      "misconceptionTargeted": "Using The power rule excludes n = −1 whose instead of Substitution reverses the chain rule when reasoning about Substitution reverses the chain rule"
+    },
+    {
+      "id": "integration--techniques--q3",
+      "sectionId": "techniques",
+      "question": "Which technique reverses the product rule through ∫u dv = uv − ∫v du?",
+      "options": [
+        "intersection point",
+        "cross-sectional area",
+        "integration by parts",
+        "washer method"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because integration by parts reverses the product rule: ∫u dv = uv − ∫v du. The alternative involving washer method applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Integration by parts reverses the product rule: ∫u dv = uv − ∫v du.",
+      "misconceptionTargeted": "Using washer method instead of integration by parts when reasoning about Integration by parts reverses the product"
+    },
+    {
+      "id": "integration--techniques--q4",
+      "sectionId": "techniques",
+      "question": "A student is applying substitution and integration by parts. Which statement is mathematically valid?",
+      "options": [
+        "After substitution, transform the differential and either transform bounds or return fully to the original variable.",
+        "Partial substitutions leave an inconsistent integral.",
+        "Definite integral and geometric area are not synonyms.",
+        "Integration by parts reverses the product rule: ∫u dv = uv − ∫v du."
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because integration by parts reverses the product rule: ∫u dv = uv − ∫v du. The alternative involving After substitution transform the differential and either transform applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Integration by parts reverses the product rule: ∫u dv = uv − ∫v du.",
+      "misconceptionTargeted": "Using After substitution transform the differential and either transform instead of Integration by parts reverses the product rule u when reasoning about Integration by parts reverses the product"
+    },
+    {
+      "id": "integration--techniques--q5",
+      "sectionId": "techniques",
+      "question": "Which heuristic can help choose u when applying integration by parts?",
+      "options": [
+        "LIATE",
+        "displacement",
+        "numerical integration",
+        "substitution"
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because choosing u with the LIATE heuristic can help, but the decisive criterion is whether the remaining integral becomes simpler. The alternative involving displacement applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Choosing u with the LIATE heuristic can help, but the decisive criterion is whether the remaining integral becomes simpler.",
+      "misconceptionTargeted": "Using displacement instead of LIATE when reasoning about Choosing u with the LIATE heuristic"
+    },
+    {
+      "id": "integration--techniques--q6",
+      "sectionId": "techniques",
+      "question": "Which fact should guide the student's reasoning about substitution and integration by parts?",
+      "options": [
+        "Definite integral and geometric area are not synonyms.",
+        "Some integrals require algebra before a named technique: completing the square, polynomial division, trigonometric identities, or partial fractions.",
+        "Below-axis contributions are negative, so split at zeros or integrate an absolute value for total area.",
+        "For area between curves, verify top minus bottom or right minus left on every subinterval."
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because some integrals require algebra before a named technique: completing the square, polynomial division, trigonometric identities, or partial fractions. The alternative involving Below axis contributions are negative so split at applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Some integrals require algebra before a named technique: completing the square, polynomial division, trigonometric identities, or partial fractions.",
+      "misconceptionTargeted": "Using Below axis contributions are negative so split at instead of Some integrals require algebra before a named technique when reasoning about Some integrals require algebra before a"
+    },
+    {
+      "id": "integration--techniques--q7",
+      "sectionId": "techniques",
+      "question": "What may fail to exist in elementary form even when the integrand itself is elementary, as with e^(−x²)?",
+      "options": [
+        "power rule",
+        "linearity",
+        "elementary antiderivative",
+        "initial condition"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because no elementary antiderivative exists for every elementary function; e^(−x²) is a standard example. The alternative involving initial condition applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "No elementary antiderivative exists for every elementary function; e^(−x²) is a standard example.",
+      "misconceptionTargeted": "Using initial condition instead of elementary antiderivative when reasoning about No elementary antiderivative exists for every"
+    },
+    {
+      "id": "integration--techniques--q8",
+      "sectionId": "techniques",
+      "question": "Which conclusion about substitution and integration by parts is supported by the mathematics?",
+      "options": [
+        "When curves cross, solve for intersection points and split the integral so the ordering is correct.",
+        "Horizontal slicing instead uses right minus left and integrates with respect to y.",
+        "Volumes can be assembled from cross-sectional area: V = ∫A(x)dx.",
+        "In such cases, definite values can still be defined and accurately approximated numerically or represented using special functions."
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because in such cases, definite values can still be defined and accurately approximated numerically or represented using special functions. The alternative involving When curves cross solve for intersection points and applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "In such cases, definite values can still be defined and accurately approximated numerically or represented using special functions.",
+      "misconceptionTargeted": "Using When curves cross solve for intersection points and instead of In such cases definite values can still be when reasoning about In such cases definite values can"
+    },
+    {
+      "id": "integration--applications--q1",
+      "sectionId": "applications",
+      "question": "Before integrating the area between curves that cross, which locations must be found so the integral can be split correctly?",
+      "options": [
+        "intersection point",
+        "dimensional analysis",
+        "logarithmic antiderivative",
+        "substitution bounds"
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because when curves cross, solve for intersection points and split the integral so the ordering is correct. The alternative involving dimensional analysis applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "When curves cross, solve for intersection points and split the integral so the ordering is correct.",
+      "misconceptionTargeted": "Using dimensional analysis instead of intersection point when reasoning about When curves cross solve for intersection"
+    },
+    {
+      "id": "integration--applications--q2",
+      "sectionId": "applications",
+      "question": "Which statement correctly describes areas and volumes?",
+      "options": [
+        "The result is signed accumulation: regions below the axis contribute negatively.",
+        "Volumes can be assembled from cross-sectional area: V = ∫A(x)dx.",
+        "The Fundamental Theorem of Calculus links accumulation and local change.",
+        "If f is continuous and A(x) = ∫a^x f(t)dt, then A′(x) = f(x)."
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because volumes can be assembled from cross-sectional area: V = ∫A(x)dx. The alternative involving The Fundamental Theorem of Calculus links accumulation and applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Volumes can be assembled from cross-sectional area: V = ∫A(x)dx.",
+      "misconceptionTargeted": "Using The Fundamental Theorem of Calculus links accumulation and instead of Volumes can be assembled from cross sectional area when reasoning about Volumes can be assembled from cross"
+    },
+    {
+      "id": "integration--applications--q3",
+      "sectionId": "applications",
+      "question": "Which volume method uses slices parallel to the axis and the factor 2π(radius)(height)?",
+      "options": [
+        "LIATE",
+        "partial fractions",
+        "cylindrical shell",
+        "elementary antiderivative"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because cylindrical shells use slices parallel to the axis, giving 2π(radius)(height) times thickness. The alternative involving elementary antiderivative applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Cylindrical shells use slices parallel to the axis, giving 2π(radius)(height) times thickness.",
+      "misconceptionTargeted": "Using elementary antiderivative instead of cylindrical shell when reasoning about Cylindrical shells use slices parallel to"
+    },
+    {
+      "id": "integration--applications--q4",
+      "sectionId": "applications",
+      "question": "A student is applying areas and volumes. Which statement is mathematically valid?",
+      "options": [
+        "For definite integrals, either transform both limits into u-values or return to x before applying the original bounds.",
+        "Mixing transformed integrands with untransformed limits is invalid.",
+        "Integration by parts reverses the product rule: ∫u dv = uv − ∫v du.",
+        "Integration also finds arc length, surface area, centres of mass, hydrostatic force, and average value."
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because integration also finds arc length, surface area, centres of mass, hydrostatic force, and average value. The alternative involving For definite integrals either transform both limits into applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Integration also finds arc length, surface area, centres of mass, hydrostatic force, and average value.",
+      "misconceptionTargeted": "Using For definite integrals either transform both limits into instead of Integration also finds arc length surface area centres when reasoning about Integration also finds arc length surface"
+    },
+    {
+      "id": "integration--applications--q5",
+      "sectionId": "applications",
+      "question": "Which check confirms that an area integral has squared units and a volume integral has cubed units?",
+      "options": [
+        "dimensional analysis",
+        "Riemann sum",
+        "partition",
+        "integrable"
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because dimensional analysis checks the setup: area integrals must yield squared units and volume integrals cubed units. The alternative involving Riemann sum applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Dimensional analysis checks the setup: area integrals must yield squared units and volume integrals cubed units.",
+      "misconceptionTargeted": "Using Riemann sum instead of dimensional analysis when reasoning about Dimensional analysis checks the setup area"
+    },
+    {
+      "id": "integration--applications--q6",
+      "sectionId": "applications",
+      "question": "Which fact should guide the student's reasoning about areas and volumes?",
+      "options": [
+        "After substitution, transform the differential and either transform bounds or return fully to the original variable.",
+        "When curves cross, solve for intersection points and split the integral so the ordering is correct.",
+        "Partial substitutions leave an inconsistent integral.",
+        "Definite integral and geometric area are not synonyms."
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because when curves cross, solve for intersection points and split the integral so the ordering is correct. The alternative involving Partial substitutions leave an inconsistent integral applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "When curves cross, solve for intersection points and split the integral so the ordering is correct.",
+      "misconceptionTargeted": "Using Partial substitutions leave an inconsistent integral instead of When curves cross solve for intersection points and when reasoning about When curves cross solve for intersection"
+    },
+    {
+      "id": "integration--applications--q7",
+      "sectionId": "applications",
+      "question": "In V = ∫A(x)dx, what does A(x) represent?",
+      "options": [
+        "variable upper limit",
+        "dummy variable",
+        "cross-sectional area",
+        "antiderivative"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because volumes can be assembled from cross-sectional area: V = ∫A(x)dx. The alternative involving antiderivative applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Volumes can be assembled from cross-sectional area: V = ∫A(x)dx.",
+      "misconceptionTargeted": "Using antiderivative instead of cross sectional area when reasoning about Volumes can be assembled from cross"
+    },
+    {
+      "id": "integration--applications--q8",
+      "sectionId": "applications",
+      "question": "Which conclusion about areas and volumes is supported by the mathematics?",
+      "options": [
+        "Linearity allows constants and sums to be handled term by term.",
+        "An antiderivative formula is always checked by differentiation, which also exposes missing constants, chain factors, or domain restrictions.",
+        "Initial conditions select one member of an antiderivative family.",
+        "Cylindrical shells use slices parallel to the axis, giving 2π(radius)(height) times thickness."
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because cylindrical shells use slices parallel to the axis, giving 2π(radius)(height) times thickness. The alternative involving Linearity allows constants and sums to be handled applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Cylindrical shells use slices parallel to the axis, giving 2π(radius)(height) times thickness.",
+      "misconceptionTargeted": "Using Linearity allows constants and sums to be handled instead of Cylindrical shells use slices parallel to the axis when reasoning about Cylindrical shells use slices parallel to"
+    },
+    {
+      "id": "integration--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "To compute total area without separately splitting at every zero, what should be applied to the integrand?",
+      "options": [
+        "area between curves",
+        "absolute value",
+        "intersection point",
+        "cross-sectional area"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because below-axis contributions are negative, so split at zeros or integrate an absolute value for total area. The alternative involving intersection point applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Below-axis contributions are negative, so split at zeros or integrate an absolute value for total area.",
+      "misconceptionTargeted": "Using intersection point instead of absolute value when reasoning about Below axis contributions are negative so"
+    },
+    {
+      "id": "integration--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "Which statement identifies a genuine issue students must watch for among common integration errors?",
+      "options": [
+        "Sketching the region and marking a representative slice prevents reversed radii and missing intersections.",
+        "Integration also finds arc length, surface area, centres of mass, hydrostatic force, and average value.",
+        "Each application begins with a small contribution expressed in terms of one variable, then accumulates it across the domain.",
+        "Dimensional analysis checks the setup: area integrals must yield squared units and volume integrals cubed units."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because sketching the region and marking a representative slice prevents reversed radii and missing intersections. The alternative involving Integration also finds arc length surface area centres applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Sketching the region and marking a representative slice prevents reversed radii and missing intersections.",
+      "misconceptionTargeted": "Using Integration also finds arc length surface area centres instead of Sketching the region and marking a representative slice when reasoning about Sketching the region and marking a"
+    },
+    {
+      "id": "integration--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "When differentiating ∫a^{g(x)} f(t)dt, which feature introduces the chain factor g′(x)?",
+      "options": [
+        "absolute value",
+        "representative slice",
+        "dummy variable",
+        "variable upper limit"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because the Fundamental Theorem requires attention to variable upper limits and chain factors: d/dx ∫a^{g(x)} f(t)dt = f(g(x))g′(x). The alternative involving absolute value applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The Fundamental Theorem requires attention to variable upper limits and chain factors: d/dx ∫a^{g(x)} f(t)dt = f(g(x))g′(x).",
+      "misconceptionTargeted": "Using absolute value instead of variable upper limit when reasoning about The Fundamental Theorem requires attention to"
+    },
+    {
+      "id": "integration--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "A student is checking work for common integration errors. Which statement is mathematically correct?",
+      "options": [
+        "If F is one antiderivative, then F + C is another for every constant C, and all antiderivatives on a connected interval differ by a constant.",
+        "The indefinite integral ∫f(x)dx denotes this family, so omitting +C loses valid solutions.",
+        "Keep dummy variables distinct from the outer variable.",
+        "Integration reverses familiar derivative rules."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because keep dummy variables distinct from the outer variable. The alternative involving Integration reverses familiar derivative rules applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Keep dummy variables distinct from the outer variable.",
+      "misconceptionTargeted": "Using Integration reverses familiar derivative rules instead of Keep dummy variables distinct from the outer variable when reasoning about Keep dummy variables distinct from the"
+    },
+    {
+      "id": "integration--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "Which operation prevents below-axis regions from cancelling positive regions when total area is required?",
+      "options": [
+        "constant of integration",
+        "absolute value",
+        "power rule",
+        "linearity"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because below-axis contributions are negative, so split at zeros or integrate an absolute value for total area. The alternative involving power rule applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Below-axis contributions are negative, so split at zeros or integrate an absolute value for total area.",
+      "misconceptionTargeted": "Using power rule instead of absolute value when reasoning about Below axis contributions are negative so"
+    },
+    {
+      "id": "integration--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "Which check would help a student avoid one of common integration errors?",
+      "options": [
+        "Sketching the region and marking a representative slice prevents reversed radii and missing intersections.",
+        "Some integrals require algebra before a named technique: completing the square, polynomial division, trigonometric identities, or partial fractions.",
+        "No elementary antiderivative exists for every elementary function; e^(−x²) is a standard example.",
+        "In such cases, definite values can still be defined and accurately approximated numerically or represented using special functions."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because sketching the region and marking a representative slice prevents reversed radii and missing intersections. The alternative involving Some integrals require algebra before a named technique applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Sketching the region and marking a representative slice prevents reversed radii and missing intersections.",
+      "misconceptionTargeted": "Using Some integrals require algebra before a named technique instead of Sketching the region and marking a representative slice when reasoning about Sketching the region and marking a"
+    },
+    {
+      "id": "integration--exam-traps--q7",
+      "sectionId": "exam-traps",
+      "question": "Which changing bound requires both the Fundamental Theorem and a chain-rule factor?",
+      "options": [
+        "Fundamental Theorem of Calculus",
+        "displacement",
+        "numerical integration",
+        "variable upper limit"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because the Fundamental Theorem requires attention to variable upper limits and chain factors: d/dx ∫a^{g(x)} f(t)dt = f(g(x))g′(x). The alternative involving Fundamental Theorem of Calculus applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The Fundamental Theorem requires attention to variable upper limits and chain factors: d/dx ∫a^{g(x)} f(t)dt = f(g(x))g′(x).",
+      "misconceptionTargeted": "Using Fundamental Theorem of Calculus instead of variable upper limit when reasoning about The Fundamental Theorem requires attention to"
+    },
+    {
+      "id": "integration--exam-traps--q8",
+      "sectionId": "exam-traps",
+      "question": "Which statement correctly resolves a misconception associated with common integration errors?",
+      "options": [
+        "When curves cross, solve for intersection points and split the integral so the ordering is correct.",
+        "Horizontal slicing instead uses right minus left and integrates with respect to y.",
+        "Keep dummy variables distinct from the outer variable.",
+        "Volumes can be assembled from cross-sectional area: V = ∫A(x)dx."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because keep dummy variables distinct from the outer variable. The alternative involving Volumes can be assembled from cross sectional area applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Keep dummy variables distinct from the outer variable.",
+      "misconceptionTargeted": "Using Volumes can be assembled from cross sectional area instead of Keep dummy variables distinct from the outer variable when reasoning about Keep dummy variables distinct from the"
+    }
+  ]
+}

@@ -1,0 +1,606 @@
+{
+  "topicId": "statistics-probability",
+  "subjectId": "mathematics",
+  "questions": [
+    {
+      "id": "statistics-probability--overview--q1",
+      "sectionId": "overview",
+      "question": "What is the set of all possible outcomes to whose events probabilities are assigned?",
+      "options": [
+        "independence",
+        "sample space",
+        "mutual exclusivity",
+        "Bayes’ theorem"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because probability assigns numbers from zero to one to events in a sample space. The alternative involving mutual exclusivity applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Probability assigns numbers from zero to one to events in a sample space.",
+      "misconceptionTargeted": "Using mutual exclusivity instead of sample space when reasoning about Probability assigns numbers from zero to"
+    },
+    {
+      "id": "statistics-probability--overview--q2",
+      "sectionId": "overview",
+      "question": "Which statement correctly describes probability foundations?",
+      "options": [
+        "According to the Kolmogorov axioms, the whole sample space has probability one and probabilities of disjoint events add.",
+        "The theorem justifies normal approximations for confidence intervals and hypothesis tests involving sums and means.",
+        "It does not rescue biased sampling, dependence, infinite-variance models, or a sample statistic dominated by rare extreme observations.",
+        "Increasing n reduces standard error as 1/√n, so halving uncertainty requires approximately four times the sample size."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because according to the Kolmogorov axioms, the whole sample space has probability one and probabilities of disjoint events add. The alternative involving The theorem justifies normal approximations for confidence intervals applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "According to the Kolmogorov axioms, the whole sample space has probability one and probabilities of disjoint events add.",
+      "misconceptionTargeted": "Using The theorem justifies normal approximations for confidence intervals instead of According to the Kolmogorov axioms the whole sample when reasoning about According to the Kolmogorov axioms the"
+    },
+    {
+      "id": "statistics-probability--overview--q3",
+      "sectionId": "overview",
+      "question": "Which axioms require the whole sample space to have probability one and probabilities of disjoint events to add?",
+      "options": [
+        "z-score",
+        "null hypothesis",
+        "alternative hypothesis",
+        "Kolmogorov axioms"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because according to the Kolmogorov axioms, the whole sample space has probability one and probabilities of disjoint events add. The alternative involving z score applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "According to the Kolmogorov axioms, the whole sample space has probability one and probabilities of disjoint events add.",
+      "misconceptionTargeted": "Using z score instead of Kolmogorov axioms when reasoning about According to the Kolmogorov axioms the"
+    },
+    {
+      "id": "statistics-probability--overview--q4",
+      "sectionId": "overview",
+      "question": "A student is applying probability foundations. Which statement is mathematically valid?",
+      "options": [
+        "The empirical 68–95–99.7 rule is an approximation for data that actually follow a normal distribution, not a universal law for every dataset.",
+        "A hypothesis test evaluates sample evidence against a null hypothesis H0 and a defined alternative Ha.",
+        "Conditional probability P(A|B) measures the probability of A after restricting attention to outcomes where B occurred.",
+        "A test statistic measures discrepancy between the data and H0 in standard-error units."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because conditional probability P(A|B) measures the probability of A after restricting attention to outcomes where B occurred. The alternative involving A test statistic measures discrepancy between the data applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Conditional probability P(A|B) measures the probability of A after restricting attention to outcomes where B occurred.",
+      "misconceptionTargeted": "Using A test statistic measures discrepancy between the data instead of Conditional probability P A B measures the probability when reasoning about Conditional probability P A B measures"
+    },
+    {
+      "id": "statistics-probability--overview--q5",
+      "sectionId": "overview",
+      "question": "Which relationship satisfies P(A ∩ B) = P(A)P(B) and must not be confused with mutual exclusivity?",
+      "options": [
+        "sample mean",
+        "independence",
+        "sampling distribution",
+        "standard error"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because events are independent when P(A ∩ B) = P(A)P(B); independence is not the same as mutual exclusivity, because two nonempty mutually exclusive events cannot occur together and are therefore dependent. The alternative involving sampling distribution applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Events are independent when P(A ∩ B) = P(A)P(B); independence is not the same as mutual exclusivity, because two nonempty mutually exclusive events cannot occur together and are therefore dependent.",
+      "misconceptionTargeted": "Using sampling distribution instead of independence when reasoning about Events are independent when P A"
+    },
+    {
+      "id": "statistics-probability--overview--q6",
+      "sectionId": "overview",
+      "question": "Which fact should guide the student's reasoning about probability foundations?",
+      "options": [
+        "Events are independent when P(A ∩ B) = P(A)P(B); independence is not the same as mutual exclusivity, because two nonempty mutually exclusive events cannot occur together and are therefore dependent.",
+        "A z-score is measured in standard deviations, not original units.",
+        "According to de Moivre’s approximation, continuity corrections improve normal approximations to discrete counts.",
+        "Never interpret p as P(H0|data)."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because events are independent when P(A ∩ B) = P(A)P(B); independence is not the same as mutual exclusivity, because two nonempty mutually exclusive events cannot occur together and are therefore dependent. The alternative involving A z score is measured in standard deviations applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Events are independent when P(A ∩ B) = P(A)P(B); independence is not the same as mutual exclusivity, because two nonempty mutually exclusive events cannot occur together and are therefore dependent.",
+      "misconceptionTargeted": "Using A z score is measured in standard deviations instead of Events are independent when P A B = when reasoning about Events are independent when P A"
+    },
+    {
+      "id": "statistics-probability--overview--q7",
+      "sectionId": "overview",
+      "question": "Which theorem combines a prior probability with evidence likelihood to reverse conditioning?",
+      "options": [
+        "continuity correction",
+        "statistical significance",
+        "sample space",
+        "Bayes’ theorem"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because bayes’ theorem reverses conditioning by combining a prior probability with evidence likelihood. The alternative involving continuity correction applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Bayes’ theorem reverses conditioning by combining a prior probability with evidence likelihood.",
+      "misconceptionTargeted": "Using continuity correction instead of Bayes theorem when reasoning about Bayes theorem reverses conditioning by combining"
+    },
+    {
+      "id": "statistics-probability--overview--q8",
+      "sectionId": "overview",
+      "question": "Which conclusion about probability foundations is supported by the mathematics?",
+      "options": [
+        "The central limit theorem states that, under suitable conditions, the standardised sum or mean of many independent identically distributed random variables with finite variance approaches a normal distribution as sample size grows.",
+        "For sample mean X̄, the sampling distribution has mean μ and standard error σ/√n.",
+        "A posterior probability is proportional to likelihood times prior, with the denominator normalising across alternatives.",
+        "The original population itself need not be normal."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because a posterior probability is proportional to likelihood times prior, with the denominator normalising across alternatives. The alternative involving The original population itself need not be normal applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A posterior probability is proportional to likelihood times prior, with the denominator normalising across alternatives.",
+      "misconceptionTargeted": "Using The original population itself need not be normal instead of A posterior probability is proportional to likelihood times when reasoning about A posterior probability is proportional to"
+    },
+    {
+      "id": "statistics-probability--distributions--q1",
+      "sectionId": "distributions",
+      "question": "What maps outcomes to numerical values before a probability distribution assigns their probabilities?",
+      "options": [
+        "normal approximation",
+        "random variable",
+        "mutually exclusive",
+        "independent events"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because a random variable maps outcomes to numerical values, and its probability distribution specifies their probabilities. The alternative involving mutually exclusive applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A random variable maps outcomes to numerical values, and its probability distribution specifies their probabilities.",
+      "misconceptionTargeted": "Using mutually exclusive instead of random variable when reasoning about A random variable maps outcomes to"
+    },
+    {
+      "id": "statistics-probability--distributions--q2",
+      "sectionId": "distributions",
+      "question": "Which statement correctly describes probability distributions?",
+      "options": [
+        "A random variable maps outcomes to numerical values, and its probability distribution specifies their probabilities.",
+        "The multiplication rule is P(A ∩ B) = P(A|B)P(B).",
+        "Events are independent when P(A ∩ B) = P(A)P(B); independence is not the same as mutual exclusivity, because two nonempty mutually exclusive events cannot occur together and are therefore dependent.",
+        "Bayes’ theorem reverses conditioning by combining a prior probability with evidence likelihood."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because a random variable maps outcomes to numerical values, and its probability distribution specifies their probabilities. The alternative involving The multiplication rule is P A B = applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A random variable maps outcomes to numerical values, and its probability distribution specifies their probabilities.",
+      "misconceptionTargeted": "Using The multiplication rule is P A B = instead of A random variable maps outcomes to numerical values when reasoning about A random variable maps outcomes to"
+    },
+    {
+      "id": "statistics-probability--distributions--q3",
+      "sectionId": "distributions",
+      "question": "Which distribution counts successes in n independent Bernoulli trials with constant success probability p?",
+      "options": [
+        "conditional probability",
+        "independence",
+        "mutual exclusivity",
+        "binomial distribution"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because the binomial distribution counts successes in n independent Bernoulli trials with constant success probability p. The alternative involving conditional probability applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The binomial distribution counts successes in n independent Bernoulli trials with constant success probability p.",
+      "misconceptionTargeted": "Using conditional probability instead of binomial distribution when reasoning about The binomial distribution counts successes in"
+    },
+    {
+      "id": "statistics-probability--distributions--q4",
+      "sectionId": "distributions",
+      "question": "A student is applying probability distributions. Which statement is mathematically valid?",
+      "options": [
+        "A z-score is measured in standard deviations, not original units.",
+        "According to de Moivre’s approximation, continuity corrections improve normal approximations to discrete counts.",
+        "The binomial distribution counts successes in n independent Bernoulli trials with constant success probability p.",
+        "Never interpret p as P(H0|data)."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because the binomial distribution counts successes in n independent Bernoulli trials with constant success probability p. The alternative involving Never interpret p as P H0 data applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The binomial distribution counts successes in n independent Bernoulli trials with constant success probability p.",
+      "misconceptionTargeted": "Using Never interpret p as P H0 data instead of The binomial distribution counts successes in n independent when reasoning about The binomial distribution counts successes in"
+    },
+    {
+      "id": "statistics-probability--distributions--q5",
+      "sectionId": "distributions",
+      "question": "Which distribution models independent event counts over a fixed interval at a constant average rate λ?",
+      "options": [
+        "standard deviation",
+        "Poisson distribution",
+        "z-score",
+        "null hypothesis"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because the Poisson distribution models counts in a fixed interval when events occur independently at a constant average rate λ and simultaneous events are negligible. The alternative involving z score applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The Poisson distribution models counts in a fixed interval when events occur independently at a constant average rate λ and simultaneous events are negligible.",
+      "misconceptionTargeted": "Using z score instead of Poisson distribution when reasoning about The Poisson distribution models counts in"
+    },
+    {
+      "id": "statistics-probability--distributions--q6",
+      "sectionId": "distributions",
+      "question": "Which fact should guide the student's reasoning about probability distributions?",
+      "options": [
+        "The empirical 68–95–99.7 rule is an approximation for data that actually follow a normal distribution, not a universal law for every dataset.",
+        "It does not rescue biased sampling, dependence, infinite-variance models, or a sample statistic dominated by rare extreme observations.",
+        "Increasing n reduces standard error as 1/√n, so halving uncertainty requires approximately four times the sample size.",
+        "The law of large numbers instead describes convergence of the sample mean toward μ; it is related but not the same theorem."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because the empirical 68–95–99.7 rule is an approximation for data that actually follow a normal distribution, not a universal law for every dataset. The alternative involving It does not rescue biased sampling dependence infinite applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The empirical 68–95–99.7 rule is an approximation for data that actually follow a normal distribution, not a universal law for every dataset.",
+      "misconceptionTargeted": "Using It does not rescue biased sampling dependence infinite instead of The empirical 68 95 99 7 rule is when reasoning about The empirical 68 95 99 7"
+    },
+    {
+      "id": "statistics-probability--distributions--q7",
+      "sectionId": "distributions",
+      "question": "Besides its mean μ, which parameter σ determines a normal distribution?",
+      "options": [
+        "standardised sum",
+        "sample mean",
+        "sampling distribution",
+        "standard deviation"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because the normal distribution is continuous, symmetric, and determined by mean μ and standard deviation σ. The alternative involving standardised sum applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The normal distribution is continuous, symmetric, and determined by mean μ and standard deviation σ.",
+      "misconceptionTargeted": "Using standardised sum instead of standard deviation when reasoning about The normal distribution is continuous symmetric"
+    },
+    {
+      "id": "statistics-probability--distributions--q8",
+      "sectionId": "distributions",
+      "question": "Which conclusion about probability distributions is supported by the mathematics?",
+      "options": [
+        "The p-value is the probability, assuming H0 and all model conditions are true, of obtaining a result at least as incompatible with H0 as the observed result.",
+        "According to the Neyman–Pearson framework, a decision rule controls long-run error rates.",
+        "A random variable maps outcomes to numerical values, and its probability distribution specifies their probabilities.",
+        "A Type I error rejects a true H0 and has probability α under the test design; a Type II error fails to reject a false H0 and has probability β at a specified alternative."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because a random variable maps outcomes to numerical values, and its probability distribution specifies their probabilities. The alternative involving A Type I error rejects a true H0 applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A random variable maps outcomes to numerical values, and its probability distribution specifies their probabilities.",
+      "misconceptionTargeted": "Using A Type I error rejects a true H0 instead of A random variable maps outcomes to numerical values when reasoning about A random variable maps outcomes to"
+    },
+    {
+      "id": "statistics-probability--hypothesis-testing--q1",
+      "sectionId": "hypothesis-testing",
+      "question": "Against which hypothesis H₀ does a hypothesis test evaluate the sample evidence?",
+      "options": [
+        "normal distribution",
+        "null hypothesis",
+        "standard deviation",
+        "z-score"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because a hypothesis test evaluates sample evidence against a null hypothesis H0 and a defined alternative Ha. The alternative involving standard deviation applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A hypothesis test evaluates sample evidence against a null hypothesis H0 and a defined alternative Ha.",
+      "misconceptionTargeted": "Using standard deviation instead of null hypothesis when reasoning about A hypothesis test evaluates sample evidence"
+    },
+    {
+      "id": "statistics-probability--hypothesis-testing--q2",
+      "sectionId": "hypothesis-testing",
+      "question": "Which statement correctly describes hypothesis testing and p-values?",
+      "options": [
+        "A test statistic measures discrepancy between the data and H0 in standard-error units.",
+        "The empirical 68–95–99.7 rule is an approximation for data that actually follow a normal distribution, not a universal law for every dataset.",
+        "The central limit theorem states that, under suitable conditions, the standardised sum or mean of many independent identically distributed random variables with finite variance approaches a normal distribution as sample size grows.",
+        "For sample mean X̄, the sampling distribution has mean μ and standard error σ/√n."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because a test statistic measures discrepancy between the data and H0 in standard-error units. The alternative involving The empirical 68 95 99 7 rule is applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A test statistic measures discrepancy between the data and H0 in standard-error units.",
+      "misconceptionTargeted": "Using The empirical 68 95 99 7 rule is instead of A test statistic measures discrepancy between the data when reasoning about A test statistic measures discrepancy between"
+    },
+    {
+      "id": "statistics-probability--hypothesis-testing--q3",
+      "sectionId": "hypothesis-testing",
+      "question": "Assuming H₀ and the model conditions are true, what measures the probability of a result at least as incompatible with H₀ as the observed result?",
+      "options": [
+        "central limit theorem",
+        "standardised sum",
+        "sample mean",
+        "p-value"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because the p-value is the probability, assuming H0 and all model conditions are true, of obtaining a result at least as incompatible with H0 as the observed result. The alternative involving central limit theorem applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The p-value is the probability, assuming H0 and all model conditions are true, of obtaining a result at least as incompatible with H0 as the observed result.",
+      "misconceptionTargeted": "Using central limit theorem instead of p value when reasoning about The p value is the probability"
+    },
+    {
+      "id": "statistics-probability--hypothesis-testing--q4",
+      "sectionId": "hypothesis-testing",
+      "question": "A student is applying hypothesis testing and p-values. Which statement is mathematically valid?",
+      "options": [
+        "How large n must be depends on skewness, tails, dependence, and the statistic being approximated.",
+        "The theorem justifies normal approximations for confidence intervals and hypothesis tests involving sums and means.",
+        "A Type I error rejects a true H0 and has probability α under the test design; a Type II error fails to reject a false H0 and has probability β at a specified alternative.",
+        "It does not rescue biased sampling, dependence, infinite-variance models, or a sample statistic dominated by rare extreme observations."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because a Type I error rejects a true H0 and has probability α under the test design; a Type II error fails to reject a false H0 and has probability β at a specified alternative. The alternative involving It does not rescue biased sampling dependence infinite applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A Type I error rejects a true H0 and has probability α under the test design; a Type II error fails to reject a false H0 and has probability β at a specified alternative.",
+      "misconceptionTargeted": "Using It does not rescue biased sampling dependence infinite instead of A Type I error rejects a true H0 when reasoning about A Type I error rejects a"
+    },
+    {
+      "id": "statistics-probability--hypothesis-testing--q5",
+      "sectionId": "hypothesis-testing",
+      "question": "What error occurs when a false H₀ is not rejected?",
+      "options": [
+        "law of large numbers",
+        "Type II error",
+        "normal approximation",
+        "mutually exclusive"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because a Type I error rejects a true H0 and has probability α under the test design; a Type II error fails to reject a false H0 and has probability β at a specified alternative. The alternative involving normal approximation applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A Type I error rejects a true H0 and has probability α under the test design; a Type II error fails to reject a false H0 and has probability β at a specified alternative.",
+      "misconceptionTargeted": "Using normal approximation instead of Type II error when reasoning about A Type I error rejects a"
+    },
+    {
+      "id": "statistics-probability--hypothesis-testing--q6",
+      "sectionId": "hypothesis-testing",
+      "question": "Which fact should guide the student's reasoning about hypothesis testing and p-values?",
+      "options": [
+        "A p-value is not the probability that H0 is true, not an effect size, and not proof of practical importance.",
+        "Abraham de Moivre proved an early special case for binomial trials, while Pierre-Simon Laplace extended it; later versions by Aleksandr Lyapunov and Jarl Lindeberg clarified broader conditions.",
+        "The theorem concerns a distribution of statistics across repeated samples, not the shape of one sample.",
+        "How large n must be depends on skewness, tails, dependence, and the statistic being approximated."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because a p-value is not the probability that H0 is true, not an effect size, and not proof of practical importance. The alternative involving Abraham de Moivre proved an early special case applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A p-value is not the probability that H0 is true, not an effect size, and not proof of practical importance.",
+      "misconceptionTargeted": "Using Abraham de Moivre proved an early special case instead of A p value is not the probability that when reasoning about A p value is not the"
+    },
+    {
+      "id": "statistics-probability--hypothesis-testing--q7",
+      "sectionId": "hypothesis-testing",
+      "question": "Which hypothesis is treated as the reference claim H₀ in a significance test?",
+      "options": [
+        "Kolmogorov axioms",
+        "conditional probability",
+        "independence",
+        "null hypothesis"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because a hypothesis test evaluates sample evidence against a null hypothesis H0 and a defined alternative Ha. The alternative involving Kolmogorov axioms applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A hypothesis test evaluates sample evidence against a null hypothesis H0 and a defined alternative Ha.",
+      "misconceptionTargeted": "Using Kolmogorov axioms instead of null hypothesis when reasoning about A hypothesis test evaluates sample evidence"
+    },
+    {
+      "id": "statistics-probability--hypothesis-testing--q8",
+      "sectionId": "hypothesis-testing",
+      "question": "Which conclusion about hypothesis testing and p-values is supported by the mathematics?",
+      "options": [
+        "The law of large numbers instead describes convergence of the sample mean toward μ; it is related but not the same theorem.",
+        "Do not confuse mutually exclusive events with independent events.",
+        "A test statistic measures discrepancy between the data and H0 in standard-error units.",
+        "Conditional probabilities change the reference population, so write the conditioning event explicitly."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because a test statistic measures discrepancy between the data and H0 in standard-error units. The alternative involving Conditional probabilities change the reference population so write applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A test statistic measures discrepancy between the data and H0 in standard-error units.",
+      "misconceptionTargeted": "Using Conditional probabilities change the reference population so write instead of A test statistic measures discrepancy between the data when reasoning about A test statistic measures discrepancy between"
+    },
+    {
+      "id": "statistics-probability--clt--q1",
+      "sectionId": "clt",
+      "question": "Which theorem says that, under suitable conditions, a standardised sum or mean approaches a normal distribution as sample size grows?",
+      "options": [
+        "Bernoulli trial",
+        "Poisson distribution",
+        "normal distribution",
+        "central limit theorem"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because the central limit theorem states that, under suitable conditions, the standardised sum or mean of many independent identically distributed random variables with finite variance approaches a normal distribution as sample size grows. The alternative involving Bernoulli trial applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The central limit theorem states that, under suitable conditions, the standardised sum or mean of many independent identically distributed random variables with finite variance approaches a normal distribution as sample size grows.",
+      "misconceptionTargeted": "Using Bernoulli trial instead of central limit theorem when reasoning about The central limit theorem states that"
+    },
+    {
+      "id": "statistics-probability--clt--q2",
+      "sectionId": "clt",
+      "question": "Which statement correctly describes the central limit theorem?",
+      "options": [
+        "Probabilities must remain between zero and one, which provides a basic arithmetic check.",
+        "Match distributions to assumptions.",
+        "The central limit theorem states that, under suitable conditions, the standardised sum or mean of many independent identically distributed random variables with finite variance approaches a normal distribution as sample size grows.",
+        "Binomial trials need fixed n, two outcome categories, constant p, and independence."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because the central limit theorem states that, under suitable conditions, the standardised sum or mean of many independent identically distributed random variables with finite variance approaches a normal distribution as sample size grows. The alternative involving Binomial trials need fixed n two outcome categories applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The central limit theorem states that, under suitable conditions, the standardised sum or mean of many independent identically distributed random variables with finite variance approaches a normal distribution as sample size grows.",
+      "misconceptionTargeted": "Using Binomial trials need fixed n two outcome categories instead of The central limit theorem states that under suitable when reasoning about The central limit theorem states that"
+    },
+    {
+      "id": "statistics-probability--clt--q3",
+      "sectionId": "clt",
+      "question": "Which statistic X̄ has sampling-distribution mean μ and standard error σ/√n?",
+      "options": [
+        "sample space",
+        "sample mean",
+        "event",
+        "Kolmogorov axioms"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because for sample mean X̄, the sampling distribution has mean μ and standard error σ/√n. The alternative involving event applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "For sample mean X̄, the sampling distribution has mean μ and standard error σ/√n.",
+      "misconceptionTargeted": "Using event instead of sample mean when reasoning about For sample mean X the sampling"
+    },
+    {
+      "id": "statistics-probability--clt--q4",
+      "sectionId": "clt",
+      "question": "A student is applying the central limit theorem. Which statement is mathematically valid?",
+      "options": [
+        "For sample mean X̄, the sampling distribution has mean μ and standard error σ/√n.",
+        "A p-value is not the probability that H0 is true, not an effect size, and not proof of practical importance.",
+        "Responsible reporting includes confidence intervals, effect magnitude, assumptions, study design, and the possibility of selection or multiple-testing bias.",
+        "Do not confuse mutually exclusive events with independent events."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because for sample mean X̄, the sampling distribution has mean μ and standard error σ/√n. The alternative involving A p value is not the probability that applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "For sample mean X̄, the sampling distribution has mean μ and standard error σ/√n.",
+      "misconceptionTargeted": "Using A p value is not the probability that instead of For sample mean X the sampling distribution has when reasoning about For sample mean X the sampling"
+    },
+    {
+      "id": "statistics-probability--clt--q5",
+      "sectionId": "clt",
+      "question": "What is the quantity σ/√n called in the sampling distribution of X̄?",
+      "options": [
+        "independent events",
+        "prevalence",
+        "binomial assumptions",
+        "standard error"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because for sample mean X̄, the sampling distribution has mean μ and standard error σ/√n. The alternative involving independent events applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "For sample mean X̄, the sampling distribution has mean μ and standard error σ/√n.",
+      "misconceptionTargeted": "Using independent events instead of standard error when reasoning about For sample mean X the sampling"
+    },
+    {
+      "id": "statistics-probability--clt--q6",
+      "sectionId": "clt",
+      "question": "Which fact should guide the student's reasoning about the central limit theorem?",
+      "options": [
+        "According to the Kolmogorov axioms, the whole sample space has probability one and probabilities of disjoint events add.",
+        "Complements satisfy P(Ac) = 1 − P(A), while the general addition rule subtracts the overlap: P(A ∪ B) = P(A) + P(B) − P(A ∩ B).",
+        "The central limit theorem states that, under suitable conditions, the standardised sum or mean of many independent identically distributed random variables with finite variance approaches a normal distribution as sample size grows.",
+        "Conditional probability P(A|B) measures the probability of A after restricting attention to outcomes where B occurred."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because the central limit theorem states that, under suitable conditions, the standardised sum or mean of many independent identically distributed random variables with finite variance approaches a normal distribution as sample size grows. The alternative involving Conditional probability P A B measures the probability applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The central limit theorem states that, under suitable conditions, the standardised sum or mean of many independent identically distributed random variables with finite variance approaches a normal distribution as sample size grows.",
+      "misconceptionTargeted": "Using Conditional probability P A B measures the probability instead of The central limit theorem states that under suitable when reasoning about The central limit theorem states that"
+    },
+    {
+      "id": "statistics-probability--clt--q7",
+      "sectionId": "clt",
+      "question": "Which theorem describes convergence of the sample mean toward μ rather than convergence in distribution to a normal law?",
+      "options": [
+        "power",
+        "law of large numbers",
+        "effect size",
+        "central limit theorem"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because the law of large numbers instead describes convergence of the sample mean toward μ; it is related but not the same theorem. The alternative involving effect size applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The law of large numbers instead describes convergence of the sample mean toward μ; it is related but not the same theorem.",
+      "misconceptionTargeted": "Using effect size instead of law of large numbers when reasoning about The law of large numbers instead"
+    },
+    {
+      "id": "statistics-probability--clt--q8",
+      "sectionId": "clt",
+      "question": "Which conclusion about the central limit theorem is supported by the mathematics?",
+      "options": [
+        "The theorem justifies normal approximations for confidence intervals and hypothesis tests involving sums and means.",
+        "Never interpret p as P(H0|data).",
+        "Say “fail to reject H0,” not “accept H0,” when evidence is insufficient.",
+        "Statistical significance does not guarantee practical significance or causal identification."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because the theorem justifies normal approximations for confidence intervals and hypothesis tests involving sums and means. The alternative involving Never interpret p as P H0 data applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The theorem justifies normal approximations for confidence intervals and hypothesis tests involving sums and means.",
+      "misconceptionTargeted": "Using Never interpret p as P H0 data instead of The theorem justifies normal approximations for confidence intervals when reasoning about The theorem justifies normal approximations for"
+    },
+    {
+      "id": "statistics-probability--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "Which events cannot occur together but are not necessarily independent?",
+      "options": [
+        "mutually exclusive",
+        "statistical significance",
+        "sample space",
+        "event"
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because do not confuse mutually exclusive events with independent events. The alternative involving statistical significance applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Do not confuse mutually exclusive events with independent events.",
+      "misconceptionTargeted": "Using statistical significance instead of mutually exclusive when reasoning about Do not confuse mutually exclusive events"
+    },
+    {
+      "id": "statistics-probability--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "Which statement identifies a genuine issue students must watch for among common statistics and probability errors?",
+      "options": [
+        "It does not rescue biased sampling, dependence, infinite-variance models, or a sample statistic dominated by rare extreme observations.",
+        "Do not confuse mutually exclusive events with independent events.",
+        "Increasing n reduces standard error as 1/√n, so halving uncertainty requires approximately four times the sample size.",
+        "The law of large numbers instead describes convergence of the sample mean toward μ; it is related but not the same theorem."
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because do not confuse mutually exclusive events with independent events. The alternative involving Increasing n reduces standard error as 1/ n applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Do not confuse mutually exclusive events with independent events.",
+      "misconceptionTargeted": "Using Increasing n reduces standard error as 1/ n instead of Do not confuse mutually exclusive events with independent when reasoning about Do not confuse mutually exclusive events"
+    },
+    {
+      "id": "statistics-probability--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "In a Bayes calculation, which population rate should replace an unsupported assumption of equal prior probabilities?",
+      "options": [
+        "sampling distribution",
+        "standard error",
+        "prevalence",
+        "finite variance"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because in Bayes problems, include all alternative pathways in the denominator and use prevalence rather than assuming equal prior probabilities. The alternative involving finite variance applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "In Bayes problems, include all alternative pathways in the denominator and use prevalence rather than assuming equal prior probabilities.",
+      "misconceptionTargeted": "Using finite variance instead of prevalence when reasoning about In Bayes problems include all alternative"
+    },
+    {
+      "id": "statistics-probability--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "A student is checking work for common statistics and probability errors. Which statement is mathematically correct?",
+      "options": [
+        "Conditional probability P(A|B) measures the probability of A after restricting attention to outcomes where B occurred.",
+        "The multiplication rule is P(A ∩ B) = P(A|B)P(B).",
+        "Events are independent when P(A ∩ B) = P(A)P(B); independence is not the same as mutual exclusivity, because two nonempty mutually exclusive events cannot occur together and are therefore dependent.",
+        "A normal density gives probabilities as areas, so P(X = exact value) = 0 for a continuous variable."
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because a normal density gives probabilities as areas, so P(X = exact value) = 0 for a continuous variable. The alternative involving Conditional probability P A B measures the probability applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A normal density gives probabilities as areas, so P(X = exact value) = 0 for a continuous variable.",
+      "misconceptionTargeted": "Using Conditional probability P A B measures the probability instead of A normal density gives probabilities as areas so when reasoning about A normal density gives probabilities as"
+    },
+    {
+      "id": "statistics-probability--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "Which adjustment improves a normal approximation to discrete counts?",
+      "options": [
+        "continuity correction",
+        "Type II error",
+        "power",
+        "effect size"
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because according to de Moivre’s approximation, continuity corrections improve normal approximations to discrete counts. The alternative involving Type II error applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "According to de Moivre’s approximation, continuity corrections improve normal approximations to discrete counts.",
+      "misconceptionTargeted": "Using Type II error instead of continuity correction when reasoning about According to de Moivre s approximation"
+    },
+    {
+      "id": "statistics-probability--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "Which check would help a student avoid one of common statistics and probability errors?",
+      "options": [
+        "According to the Kolmogorov axioms, the whole sample space has probability one and probabilities of disjoint events add.",
+        "Statistical significance does not guarantee practical significance or causal identification.",
+        "Complements satisfy P(Ac) = 1 − P(A), while the general addition rule subtracts the overlap: P(A ∪ B) = P(A) + P(B) − P(A ∩ B).",
+        "Conditional probability P(A|B) measures the probability of A after restricting attention to outcomes where B occurred."
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because statistical significance does not guarantee practical significance or causal identification. The alternative involving Complements satisfy P Ac = 1 − P applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Statistical significance does not guarantee practical significance or causal identification.",
+      "misconceptionTargeted": "Using Complements satisfy P Ac = 1 − P instead of Statistical significance does not guarantee practical significance or when reasoning about Statistical significance does not guarantee practical"
+    },
+    {
+      "id": "statistics-probability--exam-traps--q7",
+      "sectionId": "exam-traps",
+      "question": "Which quantity s/√n must be distinguished from both the population standard deviation σ and sample standard deviation s?",
+      "options": [
+        "binomial distribution",
+        "Bernoulli trial",
+        "standard error",
+        "Poisson distribution"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because for the central limit theorem, distinguish the population standard deviation σ, sample standard deviation s, and standard error s/√n, and check whether independence, sample size, and tail behaviour support the approximation. The alternative involving Poisson distribution applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "For the central limit theorem, distinguish the population standard deviation σ, sample standard deviation s, and standard error s/√n, and check whether independence, sample size, and tail behaviour support the approximation.",
+      "misconceptionTargeted": "Using Poisson distribution instead of standard error when reasoning about For the central limit theorem distinguish"
+    },
+    {
+      "id": "statistics-probability--exam-traps--q8",
+      "sectionId": "exam-traps",
+      "question": "Which statement correctly resolves a misconception associated with common statistics and probability errors?",
+      "options": [
+        "For sample mean X̄, the sampling distribution has mean μ and standard error σ/√n.",
+        "The original population itself need not be normal.",
+        "Abraham de Moivre proved an early special case for binomial trials, while Pierre-Simon Laplace extended it; later versions by Aleksandr Lyapunov and Jarl Lindeberg clarified broader conditions.",
+        "Do not confuse mutually exclusive events with independent events."
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because do not confuse mutually exclusive events with independent events. The alternative involving For sample mean X the sampling distribution has applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Do not confuse mutually exclusive events with independent events.",
+      "misconceptionTargeted": "Using For sample mean X the sampling distribution has instead of Do not confuse mutually exclusive events with independent when reasoning about Do not confuse mutually exclusive events"
+    }
+  ]
+}

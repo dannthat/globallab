@@ -3,11 +3,15 @@ import react from '@vitejs/plugin-react'
 import type { IncomingMessage, ServerResponse } from 'node:http'
 import { defineConfig, loadEnv, type Plugin } from 'vite'
 
-const MAX_PERSONALIZATION_BODY_BYTES = 256 * 1024
-const PERSONALIZATION_TIMEOUT_MS = 25_000
+const MAX_PERSONALIZATION_BODY_BYTES = 16 * 1024 * 1024
+const PERSONALIZATION_TIMEOUT_MS = 30_000
 
 interface PersonalizationProxyRequest {
   prompt?: unknown
+  image?: {
+    mimeType?: unknown
+    data?: unknown
+  }
 }
 
 function sendJson(
@@ -78,9 +82,28 @@ function personalizationProxy(apiKey: string, model: string): Plugin {
     }
 
     const prompt = typeof body.prompt === 'string' ? body.prompt.trim() : ''
-    if (!prompt || prompt.length > 60_000) {
+    const parts: Array<Record<string, unknown>> = []
+
+    if (prompt) {
+      parts.push({ text: prompt })
+    }
+
+    if (
+      body.image &&
+      typeof body.image.data === 'string' &&
+      typeof body.image.mimeType === 'string'
+    ) {
+      parts.push({
+        inlineData: {
+          mimeType: body.image.mimeType,
+          data: body.image.data,
+        },
+      })
+    }
+
+    if (parts.length === 0) {
       sendJson(response, 400, {
-        error: 'The personalization prompt is empty or exceeds the safe context limit.',
+        error: 'The personalization request is empty.',
       })
       return
     }
@@ -97,10 +120,10 @@ function personalizationProxy(apiKey: string, model: string): Plugin {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              contents: [{ parts: [{ text: prompt }] }],
+              contents: [{ parts }],
               generationConfig: {
-                temperature: 0.45,
-                maxOutputTokens: 1400,
+                temperature: 0.2,
+                maxOutputTokens: 2000,
                 responseMimeType: 'application/json',
               },
             }),
@@ -174,7 +197,7 @@ function personalizationProxy(apiKey: string, model: string): Plugin {
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const apiKey = (env.GEMINI_API_KEY || '').trim()
+  const apiKey = (env.GEMINI_API_KEY || env.VITE_GEMINI_API_KEY || '').trim()
   const model = (env.GEMINI_MODEL || 'gemini-3.1-flash-lite').trim()
 
   return {

@@ -13,6 +13,32 @@ export interface LearningQuiz {
   evidence: string
 }
 
+export interface TopicQuizQuestion {
+  id: string
+  sectionId: string
+  question: string
+  options: [string, string, string, string]
+  correctIndex: number
+  explanation: string
+  sourceEvidence: string
+  misconceptionTargeted: string
+}
+
+export interface TopicQuizPool {
+  topicId: string
+  subjectId: string
+  questions: TopicQuizQuestion[]
+}
+
+export interface TopicMasteryRecord {
+  topicId: string
+  bestScore: number
+  totalQuestions: number
+  attemptsCount: number
+  lastAttemptAt: string
+  completedQuestionIds: string[]
+}
+
 export type PersonaPreset = 'neutral' | 'gaming' | 'sports' | 'music'
 
 // Retained so the unchanged V2 AnalogyCard remains available for reuse.

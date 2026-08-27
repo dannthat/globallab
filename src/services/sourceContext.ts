@@ -20,6 +20,8 @@ export const SOURCE_CONTEXT_LIMITS = {
   archiveEntryBytes: 8 * 1024 * 1024,
 } as const
 
+import type { ParsedMathSource } from './mathVisionParser'
+
 export interface SourceInlineData {
   mimeType: string
   data: string
@@ -29,6 +31,8 @@ export interface UserSourceContext {
   body: string
   anchor: SourceAnchor
   inlineData?: SourceInlineData
+  analysisType?: 'digital' | 'printed-ocr' | 'vision-latex'
+  parsedMath?: ParsedMathSource
 }
 
 export interface ExtractUserSourceContextInput {

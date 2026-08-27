@@ -1,0 +1,606 @@
+{
+  "topicId": "special-relativity",
+  "subjectId": "physics",
+  "questions": [
+    {
+      "id": "special-relativity--overview--q1",
+      "sectionId": "overview",
+      "question": "Which pair of laboratories forms inertial reference frames relative to each other?",
+      "options": [
+        "Two laboratories moving at constant relative velocity",
+        "A laboratory and a rocket firing its engine",
+        "Two laboratories rotating around each other",
+        "A laboratory and a falling object changing speed"
+      ],
+      "correctIndex": 0,
+      "explanation": "Inertial frames move with constant relative velocity and have no acceleration between them. Acceleration or rotation makes the listed frame non-inertial for this definition.",
+      "sourceEvidence": "Special relativity describes measurements made in inertial reference frames, which move at constant velocity relative to one another.",
+      "misconceptionTargeted": "Classifying an accelerating or rotating frame as inertial"
+    },
+    {
+      "id": "special-relativity--overview--q2",
+      "sectionId": "overview",
+      "question": "What does Einstein's first postulate say about inertial frames?",
+      "options": [
+        "One hidden frame has simpler laws",
+        "The laws of physics have the same form in every inertial frame",
+        "Only mechanical laws remain unchanged",
+        "Light defines an absolute stationary laboratory"
+      ],
+      "correctIndex": 1,
+      "explanation": "Every inertial observer expresses physical laws in the same form. The postulate rejects a privileged inertial frame rather than limiting equivalence to mechanics.",
+      "sourceEvidence": "Einstein’s first postulate states that the laws of physics have the same form in every inertial frame.",
+      "misconceptionTargeted": "Assuming one inertial frame is physically privileged"
+    },
+    {
+      "id": "special-relativity--overview--q3",
+      "sectionId": "overview",
+      "question": "Can an experiment performed entirely inside a sealed laboratory moving uniformly reveal its absolute speed?",
+      "options": [
+        "Yes, by measuring local gravity",
+        "Yes, by measuring its own clock rate",
+        "No, absolute rest cannot be identified internally",
+        "Only when the laboratory moves east"
+      ],
+      "correctIndex": 2,
+      "explanation": "Uniform motion has no internally detectable absolute rest standard. Local measurements can reveal relative motion or acceleration but not a preferred inertial state.",
+      "sourceEvidence": "No internal experiment performed in a uniformly moving laboratory can identify an absolute state of rest.",
+      "misconceptionTargeted": "Believing uniform absolute motion can be detected without an external reference"
+    },
+    {
+      "id": "special-relativity--overview--q4",
+      "sectionId": "overview",
+      "question": "How do two inertial observers moving relative to each other measure the speed of the same vacuum light pulse?",
+      "options": [
+        "The faster observer obtains a speed above c",
+        "They obtain speeds separated by their relative velocity",
+        "Only the source observer obtains c",
+        "Each obtains c"
+      ],
+      "correctIndex": 3,
+      "explanation": "The second postulate requires every inertial observer to measure vacuum light at c. Ordinary Galilean addition does not apply to the measured speed of light.",
+      "sourceEvidence": "The second postulate states that light in vacuum has the same speed c for every inertial observer, independent of the motion of the source or observer.",
+      "misconceptionTargeted": "Adding source or observer velocity directly to the speed of light"
+    },
+    {
+      "id": "special-relativity--overview--q5",
+      "sectionId": "overview",
+      "question": "Why must space and time transform together between inertial frames?",
+      "options": [
+        "To preserve the same measured light speed",
+        "To make all objects share one rest frame",
+        "To eliminate relative velocity",
+        "To make distant events simultaneous"
+      ],
+      "correctIndex": 0,
+      "explanation": "Lorentz transformations mix space and time so every inertial observer still measures light at c. They do not remove relative motion or create universal simultaneity.",
+      "sourceEvidence": "Space and time must therefore transform together through Lorentz transformations so that every inertial observer obtains the same light speed.",
+      "misconceptionTargeted": "Using a space-only Galilean transformation while demanding invariant light speed"
+    },
+    {
+      "id": "special-relativity--overview--q6",
+      "sectionId": "overview",
+      "question": "Two separated flashes are simultaneous in one inertial frame. What must another moving frame conclude?",
+      "options": [
+        "They must also be simultaneous",
+        "They need not be simultaneous",
+        "Their order must reverse in every case",
+        "Neither flash occurred"
+      ],
+      "correctIndex": 1,
+      "explanation": "Simultaneity of separated events depends on the observer's inertial frame. There is no universal time slice that all moving observers must share.",
+      "sourceEvidence": "Events that are simultaneous in one frame need not be simultaneous in another.",
+      "misconceptionTargeted": "Treating simultaneity of separated events as absolute"
+    },
+    {
+      "id": "special-relativity--overview--q7",
+      "sectionId": "overview",
+      "question": "Which interpretation of time dilation and length contraction is physically correct?",
+      "options": [
+        "They are camera distortions only",
+        "They are mechanical damage caused by speed",
+        "They are frame-dependent measurements rooted in simultaneity",
+        "They disappear after correcting clock calibration"
+      ],
+      "correctIndex": 2,
+      "explanation": "The effects follow from how inertial frames relate space and time measurements. They persist after optical delays and instrument errors are corrected.",
+      "sourceEvidence": "Relativity of simultaneity is the foundation from which time dilation and length contraction follow; they are not optical illusions or mechanical distortions.",
+      "misconceptionTargeted": "Dismissing relativistic measurements as visual or mechanical artifacts"
+    },
+    {
+      "id": "special-relativity--overview--q8",
+      "sectionId": "overview",
+      "question": "What geometric quantity do inertial observers agree on despite assigning different space and time components?",
+      "options": [
+        "Absolute distance",
+        "Absolute elapsed time",
+        "A universal simultaneity plane",
+        "The invariant spacetime interval"
+      ],
+      "correctIndex": 3,
+      "explanation": "Observers divide spacetime differently but calculate the same invariant interval between events. They generally disagree about the separate spatial and temporal components.",
+      "sourceEvidence": "Hermann Minkowski later expressed the theory geometrically as spacetime, in which different observers divide the same invariant interval into different spatial and temporal components.",
+      "misconceptionTargeted": "Expecting observers to agree on space and time separately instead of on the interval"
+    },
+    {
+      "id": "special-relativity--time-dilation--q1",
+      "sectionId": "time-dilation",
+      "question": "Which clock measures the proper time between two events?",
+      "options": [
+        "A single clock present at both events",
+        "A clock moving past both events",
+        "Any clock synchronized by radio",
+        "The fastest clock in the experiment"
+      ],
+      "correctIndex": 0,
+      "explanation": "Proper time is recorded by one clock that is physically present at both events. A clock that occupies different locations from the events measures a coordinate-time interval instead.",
+      "sourceEvidence": "Proper time Δτ is the interval measured by a single clock present at both events.",
+      "misconceptionTargeted": "Choosing proper time from convenience rather than one-clock event coincidence"
+    },
+    {
+      "id": "special-relativity--time-dilation--q2",
+      "sectionId": "time-dilation",
+      "question": "A moving clock records 3 seconds of proper time while γ = 2. What coordinate time does the observer measure?",
+      "options": [
+        "1.5 seconds",
+        "6 seconds",
+        "5 seconds",
+        "3 seconds"
+      ],
+      "correctIndex": 1,
+      "explanation": "Time dilation gives Δt = 2 times 3 seconds, which is 6 seconds. Dividing by the Lorentz factor would apply the relation in the wrong direction.",
+      "sourceEvidence": "An observer who sees that clock move measures a longer coordinate-time interval Δt = γΔτ.",
+      "misconceptionTargeted": "Dividing rather than multiplying proper time by the Lorentz factor"
+    },
+    {
+      "id": "special-relativity--time-dilation--q3",
+      "sectionId": "time-dilation",
+      "question": "Between the same departure and reunion events, which clock accumulates less proper time?",
+      "options": [
+        "The coordinate grid rather than a clock",
+        "Every clock accumulates identical proper time",
+        "The clock following the moving spacetime path",
+        "Whichever clock emits more light"
+      ],
+      "correctIndex": 2,
+      "explanation": "The moving clock follows a path that accumulates less proper time between the reunion events. Proper time depends on the spacetime path rather than brightness or a universal clock rate.",
+      "sourceEvidence": "Because γ is at least one, moving clocks accumulate less proper time between the same pair of reunion events.",
+      "misconceptionTargeted": "Assuming elapsed proper time is path-independent"
+    },
+    {
+      "id": "special-relativity--time-dilation--q4",
+      "sectionId": "time-dilation",
+      "question": "When is the reciprocal description of time dilation directly symmetric?",
+      "options": [
+        "Whenever either observer accelerates",
+        "Only for sound clocks",
+        "Only after the observers reunite",
+        "While both observers remain in equivalent inertial situations"
+      ],
+      "correctIndex": 3,
+      "explanation": "Each observer may regard the other inertial clock as moving while their situations remain equivalent. Acceleration or unequal spacetime paths breaks the simple reciprocal setup at reunion.",
+      "sourceEvidence": "The effect is reciprocal only while the observers remain in equivalent inertial situations.",
+      "misconceptionTargeted": "Extending inertial reciprocity unchanged through acceleration and reunion"
+    },
+    {
+      "id": "special-relativity--time-dilation--q5",
+      "sectionId": "time-dilation",
+      "question": "Why does a moving light clock tick more slowly in an observer's coordinates?",
+      "options": [
+        "Its light follows a longer diagonal path at the same speed c",
+        "Its mirrors become mechanically slower",
+        "Its light travels below c",
+        "Its pulse loses energy on each reflection"
+      ],
+      "correctIndex": 0,
+      "explanation": "The moving geometry lengthens the pulse path while both observers retain the same light speed. The explanation does not require slower light or a damaged clock.",
+      "sourceEvidence": "To an observer who sees the clock move sideways, the pulse follows a longer diagonal path.",
+      "misconceptionTargeted": "Explaining time dilation by changing the speed of light"
+    },
+    {
+      "id": "special-relativity--time-dilation--q6",
+      "sectionId": "time-dilation",
+      "question": "When does the Lorentz factor differ appreciably from one?",
+      "options": [
+        "At any walking speed",
+        "Only when v is a significant fraction of c",
+        "Only when an object is at rest",
+        "Whenever a clock is digital"
+      ],
+      "correctIndex": 1,
+      "explanation": "Relativistic time dilation becomes large only as speed approaches a substantial fraction of c. Ordinary speeds leave the Lorentz factor extremely close to one.",
+      "sourceEvidence": "The Lorentz factor becomes appreciable only when v is a significant fraction of c.",
+      "misconceptionTargeted": "Expecting large time dilation at ordinary terrestrial speeds"
+    },
+    {
+      "id": "special-relativity--time-dilation--q7",
+      "sectionId": "time-dilation",
+      "question": "Why do more fast atmospheric muons reach Earth than a nonrelativistic lifetime estimate predicts?",
+      "options": [
+        "Their charge stops decay",
+        "They travel faster than light",
+        "Earth observers measure their decay clocks as time-dilated",
+        "Gravity makes them immortal"
+      ],
+      "correctIndex": 2,
+      "explanation": "Earth observers measure moving muon lifetimes as dilated, allowing more muons to reach the surface. The explanation neither requires superluminal travel nor suspension of decay.",
+      "sourceEvidence": "Fast atmospheric muons reach Earth’s surface in far greater numbers than a nonrelativistic lifetime estimate predicts, because Earth observers measure their decays as slowed; in the muon frame, the atmosphere is length-contracted.",
+      "misconceptionTargeted": "Explaining atmospheric muon survival without relativistic time dilation"
+    },
+    {
+      "id": "special-relativity--time-dilation--q8",
+      "sectionId": "time-dilation",
+      "question": "Why must navigation satellite timing systems include relativistic corrections?",
+      "options": [
+        "The speed of light varies with satellite direction",
+        "Satellites cannot transmit radio waves",
+        "Atomic clocks stop in orbit",
+        "Their clocks accumulate measurable relativistic offsets"
+      ],
+      "correctIndex": 3,
+      "explanation": "Motion and gravity shift satellite clock readings enough to affect calculated positions. The corrections address clock rates rather than failed radio transmission or variable vacuum light speed.",
+      "sourceEvidence": "Atomic clocks flown on aircraft and clocks aboard navigation satellites accumulate relativistic offsets that must be included alongside gravitational corrections for accurate positioning.",
+      "misconceptionTargeted": "Treating relativistic clock offsets as too small to matter in navigation"
+    },
+    {
+      "id": "special-relativity--length-contraction--q1",
+      "sectionId": "length-contraction",
+      "question": "In which frame is an object's proper length measured?",
+      "options": [
+        "The object's rest frame",
+        "Any frame in which it moves",
+        "The frame with the shortest ruler",
+        "A photon rest frame"
+      ],
+      "correctIndex": 0,
+      "explanation": "Proper length is defined in the frame where the object is at rest. A moving observer measures a contracted length rather than the proper length.",
+      "sourceEvidence": "Proper length L0 is measured in the rest frame of an object by recording its endpoints.",
+      "misconceptionTargeted": "Calling a moving-frame length the proper length"
+    },
+    {
+      "id": "special-relativity--length-contraction--q2",
+      "sectionId": "length-contraction",
+      "question": "A rod has proper length 12 metres and moves with γ = 3 parallel to its length. What length is measured?",
+      "options": [
+        "9 metres",
+        "4 metres",
+        "12 metres",
+        "36 metres"
+      ],
+      "correctIndex": 1,
+      "explanation": "Length contraction gives 12 metres divided by 3, which is 4 metres. Multiplying by the Lorentz factor reverses the contraction relation.",
+      "sourceEvidence": "An observer who sees the object moving parallel to its length measures L = L0/γ.",
+      "misconceptionTargeted": "Multiplying proper length by the Lorentz factor"
+    },
+    {
+      "id": "special-relativity--length-contraction--q3",
+      "sectionId": "length-contraction",
+      "question": "Which dimensions of a moving rectangular box contract?",
+      "options": [
+        "All three dimensions equally",
+        "Only dimensions perpendicular to motion",
+        "Only the dimension parallel to motion",
+        "No dimensions in any frame"
+      ],
+      "correctIndex": 2,
+      "explanation": "Lorentz contraction affects the longitudinal dimension parallel to relative motion. Transverse dimensions are unchanged rather than shrinking isotropically.",
+      "sourceEvidence": "Contraction occurs only along the direction of relative motion; transverse dimensions are unchanged.",
+      "misconceptionTargeted": "Applying length contraction to transverse dimensions"
+    },
+    {
+      "id": "special-relativity--length-contraction--q4",
+      "sectionId": "length-contraction",
+      "question": "What physically happens to a fast rod because of length contraction?",
+      "options": [
+        "It is permanently crushed",
+        "It is heated until shorter",
+        "Its atoms lose invariant mass",
+        "Different frames make different valid length measurements"
+      ],
+      "correctIndex": 3,
+      "explanation": "Length contraction describes frame-dependent coordinate measurements of the same intact object. It is not mechanical compression, heating, or mass loss.",
+      "sourceEvidence": "It is a difference between valid frame-dependent measurements, not damage to the object.",
+      "misconceptionTargeted": "Interpreting length contraction as physical damage"
+    },
+    {
+      "id": "special-relativity--length-contraction--q5",
+      "sectionId": "length-contraction",
+      "question": "What measurement procedure is required to find the length of a moving object?",
+      "options": [
+        "Record both endpoints simultaneously in the observer's frame",
+        "Record the front now and the back much later",
+        "Photograph it without correcting light travel time",
+        "Use the object's wristwatch at one endpoint"
+      ],
+      "correctIndex": 0,
+      "explanation": "A spatial length joins endpoint positions taken at the same observer time. Using endpoint events at different times mixes motion into the measured separation.",
+      "sourceEvidence": "Measuring a moving length requires recording both endpoint positions simultaneously in the observer’s frame.",
+      "misconceptionTargeted": "Measuring moving endpoints at different observer times"
+    },
+    {
+      "id": "special-relativity--length-contraction--q6",
+      "sectionId": "length-contraction",
+      "question": "Why does another inertial frame disagree with the endpoint pair used for a moving-length measurement?",
+      "options": [
+        "Rulers have different materials",
+        "Simultaneity is frame-dependent",
+        "The endpoints cease to exist",
+        "Light has different speeds in the frames"
+      ],
+      "correctIndex": 1,
+      "explanation": "A pair of separated events simultaneous in one frame is generally not simultaneous in another. The disagreement follows from spacetime coordinates rather than ruler construction or changing light speed.",
+      "sourceEvidence": "Because simultaneity is frame-dependent, another frame does not regard those endpoint measurements as simultaneous.",
+      "misconceptionTargeted": "Ignoring relativity of simultaneity in length measurement"
+    },
+    {
+      "id": "special-relativity--length-contraction--q7",
+      "sectionId": "length-contraction",
+      "question": "Why may a photograph of a relativistic object not show the simple calculated contracted shape?",
+      "options": [
+        "Photons travel instantaneously",
+        "Cameras eliminate Lorentz contraction",
+        "Photographs include unequal light-travel times from different points",
+        "The object always rotates physically"
+      ],
+      "correctIndex": 2,
+      "explanation": "A photograph collects light emitted from different positions at different times, adding optical timing effects. The coordinate length formula assumes simultaneous endpoint positions rather than raw arrival times at a camera.",
+      "sourceEvidence": "Photographs also include light-travel-time effects and do not directly display the simple contracted shape calculated from simultaneous coordinates.",
+      "misconceptionTargeted": "Equating a photographic appearance with a simultaneous-coordinate length"
+    },
+    {
+      "id": "special-relativity--length-contraction--q8",
+      "sectionId": "length-contraction",
+      "question": "How does the muon describe reaching Earth within its short proper lifetime?",
+      "options": [
+        "Earth moves faster than light",
+        "The atmosphere has zero thickness in every frame",
+        "The muon's proper lifetime increases in its own frame",
+        "The atmosphere is length-contracted"
+      ],
+      "correctIndex": 3,
+      "explanation": "In the muon frame the atmosphere has a reduced longitudinal thickness, so Earth arrives sooner. The muon's own proper lifetime remains ordinary and no object exceeds c.",
+      "sourceEvidence": "In Earth’s frame, muon lifetimes are dilated; in each muon’s frame, the atmosphere’s thickness is contracted, so the surface is reached within the muon’s ordinary proper lifetime.",
+      "misconceptionTargeted": "Using time dilation for the muon clock in the muon's own rest frame"
+    },
+    {
+      "id": "special-relativity--mass-energy--q1",
+      "sectionId": "mass-energy",
+      "question": "What energy does a particle of invariant mass m possess in its rest frame?",
+      "options": [
+        "E0 = mc²",
+        "E0 = mv",
+        "E0 = hf for every massive particle",
+        "E0 = 0"
+      ],
+      "correctIndex": 0,
+      "explanation": "Invariant mass corresponds to rest energy through E0 = mc². A massive particle retains rest energy even when its momentum is zero.",
+      "sourceEvidence": "A particle of invariant mass m has rest energy E0 = mc².",
+      "misconceptionTargeted": "Assuming a stationary massive particle has zero total energy"
+    },
+    {
+      "id": "special-relativity--mass-energy--q2",
+      "sectionId": "mass-energy",
+      "question": "What happens to a particle's invariant mass as its speed increases?",
+      "options": [
+        "It increases by γ",
+        "It remains invariant",
+        "It decreases to zero",
+        "It becomes its kinetic energy"
+      ],
+      "correctIndex": 1,
+      "explanation": "Modern relativistic treatment keeps the particle's invariant mass fixed across frames. Motion increases total energy and momentum rather than the invariant mass.",
+      "sourceEvidence": "The relation means mass is one form of energy, not that an object’s invariant mass simply increases with speed.",
+      "misconceptionTargeted": "Using the obsolete idea that invariant mass grows with speed"
+    },
+    {
+      "id": "special-relativity--mass-energy--q3",
+      "sectionId": "mass-energy",
+      "question": "Which expression gives the total energy of a moving massive particle?",
+      "options": [
+        "E = mc²/γ",
+        "E = mv²",
+        "E = γmc²",
+        "E = pc only"
+      ],
+      "correctIndex": 2,
+      "explanation": "A moving massive particle has total energy γmc². The expression pc alone is the massless limit, while the other formulas omit the relativistic factor.",
+      "sourceEvidence": "Modern treatments keep m invariant and describe a moving particle with total energy E = γmc² and momentum p = γmv.",
+      "misconceptionTargeted": "Confusing rest energy, classical kinetic energy, and relativistic total energy"
+    },
+    {
+      "id": "special-relativity--mass-energy--q4",
+      "sectionId": "mass-energy",
+      "question": "A particle moves with γ = 3. What is its kinetic energy in units of mc²?",
+      "options": [
+        "1 mc²",
+        "4 mc²",
+        "3 mc²",
+        "2 mc²"
+      ],
+      "correctIndex": 3,
+      "explanation": "Relativistic kinetic energy is γ minus one times mc², giving 2 mc². Using γmc² would give total energy and include the rest energy.",
+      "sourceEvidence": "Kinetic energy is the difference K = (γ − 1)mc².",
+      "misconceptionTargeted": "Reporting total energy as kinetic energy"
+    },
+    {
+      "id": "special-relativity--mass-energy--q5",
+      "sectionId": "mass-energy",
+      "question": "Which relation connects a particle's total energy, momentum, and invariant mass?",
+      "options": [
+        "E² = (pc)² + (mc²)²",
+        "E = p + mc",
+        "E² = pc + m²",
+        "E = mv²/2 at every speed"
+      ],
+      "correctIndex": 0,
+      "explanation": "The energy-momentum invariant combines the momentum term and rest-energy term in quadrature. Classical kinetic energy is only a low-speed approximation and cannot replace the invariant relation.",
+      "sourceEvidence": "Energy and momentum satisfy E² = (pc)² + (mc²)².",
+      "misconceptionTargeted": "Using a classical energy formula at relativistic speed"
+    },
+    {
+      "id": "special-relativity--mass-energy--q6",
+      "sectionId": "mass-energy",
+      "question": "What energy-momentum relation applies to a photon?",
+      "options": [
+        "E = 0 because its invariant mass is zero",
+        "E = pc",
+        "E = γmc² with nonzero m",
+        "E = p/c"
+      ],
+      "correctIndex": 1,
+      "explanation": "Setting invariant mass to zero leaves E = pc for a photon. Zero invariant mass does not mean zero energy or momentum.",
+      "sourceEvidence": "For a massless particle, this reduces to E = pc; photons have zero invariant mass but carry energy and momentum.",
+      "misconceptionTargeted": "Concluding that a massless photon has no energy or momentum"
+    },
+    {
+      "id": "special-relativity--mass-energy--q7",
+      "sectionId": "mass-energy",
+      "question": "Why can a bound composite system have a mass different from the sum of its isolated component masses?",
+      "options": [
+        "Its components become massless",
+        "Invariant mass is never conserved",
+        "Internal kinetic and binding energies contribute to the system invariant mass",
+        "Only electric charge determines composite mass"
+      ],
+      "correctIndex": 2,
+      "explanation": "The system's internal energy contributes to its invariant mass as a whole. Adding isolated rest masses alone can omit binding and internal kinetic energy.",
+      "sourceEvidence": "The invariant mass of a composite system can include internal kinetic and binding energies, so it need not equal the sum of isolated component masses.",
+      "misconceptionTargeted": "Adding component rest masses while ignoring internal energy"
+    },
+    {
+      "id": "special-relativity--mass-energy--q8",
+      "sectionId": "mass-energy",
+      "question": "In nuclear fission, where can a decrease in final rest mass appear?",
+      "options": [
+        "Only as missing charge",
+        "As an absolute loss of energy",
+        "As reduced light speed",
+        "As kinetic energy or radiation"
+      ],
+      "correctIndex": 3,
+      "explanation": "A reduction in system rest mass is released as other forms of energy such as motion or radiation. Mass-energy equivalence preserves total energy rather than destroying it.",
+      "sourceEvidence": "A decrease in system mass appears as kinetic energy or radiation; an increase requires supplied energy.",
+      "misconceptionTargeted": "Treating mass difference in a reaction as destroyed energy"
+    },
+    {
+      "id": "special-relativity--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "What should be identified before selecting a relativity formula?",
+      "options": [
+        "The two events and the reference frame",
+        "Only the largest speed",
+        "The observer with the newest clock",
+        "An absolute rest frame"
+      ],
+      "correctIndex": 0,
+      "explanation": "Relativistic quantities are defined by particular events and frames, so both must be labelled first. Choosing a formula from speed alone often reverses proper and coordinate quantities.",
+      "sourceEvidence": "Always identify the two events and the frame before choosing a formula.",
+      "misconceptionTargeted": "Applying a relativity formula before defining its events and frame"
+    },
+    {
+      "id": "special-relativity--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "Which description correctly pairs the proper quantities with their frames?",
+      "options": [
+        "Proper time is always the larger interval, and proper length uses any moving frame",
+        "Proper time uses one clock at both events, and proper length uses the object rest frame",
+        "Proper time uses two synchronized clocks, and proper length is the shortest measurement",
+        "Both proper quantities belong to an absolute rest frame"
+      ],
+      "correctIndex": 1,
+      "explanation": "One co-located clock defines proper time while the object rest frame defines proper length. Proper does not mean largest, smallest, or measured in a preferred universal frame.",
+      "sourceEvidence": "Proper time is measured by one clock present at both events; proper length is measured in the object’s rest frame.",
+      "misconceptionTargeted": "Defining proper quantities by magnitude rather than measurement conditions"
+    },
+    {
+      "id": "special-relativity--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "How are a moving clock and a moving length measured relative to their proper quantities?",
+      "options": [
+        "Both are multiplied by γ",
+        "Both are divided by γ",
+        "The clock interval is dilated and the longitudinal length is contracted",
+        "The clock interval is contracted and the length is dilated"
+      ],
+      "correctIndex": 2,
+      "explanation": "Coordinate time exceeds proper time while moving longitudinal length is less than proper length. Applying the Lorentz factor in the same direction to both quantities ignores their definitions.",
+      "sourceEvidence": "A moving clock is time-dilated, while a moving length is contracted along motion.",
+      "misconceptionTargeted": "Applying the Lorentz factor in the wrong direction"
+    },
+    {
+      "id": "special-relativity--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "After correcting all light-travel delays, what can still differ between inertial frames?",
+      "options": [
+        "The vacuum speed of light",
+        "The occurrence of a single local event",
+        "The laws of physics",
+        "Whether separated events are simultaneous"
+      ],
+      "correctIndex": 3,
+      "explanation": "Relativity of simultaneity is a coordinate effect that remains after signal delays are removed. It is not an illusion caused by photons taking time to reach an observer.",
+      "sourceEvidence": "Simultaneity itself is frame-dependent after such delays are corrected.",
+      "misconceptionTargeted": "Reducing relativity of simultaneity to signal delay"
+    },
+    {
+      "id": "special-relativity--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "Why does reciprocal inertial time dilation not create a contradiction when travellers reunite?",
+      "options": [
+        "Reunion generally involves acceleration or unequal spacetime paths",
+        "One observer was absolutely stationary",
+        "One clock secretly ran incorrectly",
+        "Time dilation stops before reunion"
+      ],
+      "correctIndex": 0,
+      "explanation": "A reunion comparison includes the full spacetime paths, which need not remain inertially equivalent. No preferred stationary frame or faulty clock is required to resolve the elapsed-time difference.",
+      "sourceEvidence": "Apparent reciprocity in time dilation does not create a contradiction when observers reunite, because reunion generally requires acceleration or unequal spacetime paths.",
+      "misconceptionTargeted": "Applying reciprocal inertial symmetry to unequal reunion paths"
+    },
+    {
+      "id": "special-relativity--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "Which mass concept should be used in modern relativity?",
+      "options": [
+        "Relativistic mass that grows with speed",
+        "Invariant mass",
+        "Optical mass",
+        "Coordinate mass that changes by direction"
+      ],
+      "correctIndex": 1,
+      "explanation": "Invariant mass provides a frame-independent property while energy and momentum transform. Calling increased total energy increased mass obscures the modern invariant definition.",
+      "sourceEvidence": "Use invariant mass rather than “relativistic mass.”",
+      "misconceptionTargeted": "Treating speed-dependent relativistic mass as the particle invariant"
+    },
+    {
+      "id": "special-relativity--exam-traps--q7",
+      "sectionId": "exam-traps",
+      "question": "Why can no massive object be accelerated to c?",
+      "options": [
+        "Its charge vanishes",
+        "Its proper time becomes negative",
+        "The Lorentz factor and required energy diverge",
+        "Light pushes it backward"
+      ],
+      "correctIndex": 2,
+      "explanation": "As speed approaches c, γ grows without bound and so does the required energy. The barrier is energetic and geometric rather than caused by charge or a reverse force from light.",
+      "sourceEvidence": "Massive objects cannot reach c because γ and required energy diverge as v approaches c.",
+      "misconceptionTargeted": "Assuming finite energy can accelerate a massive object to light speed"
+    },
+    {
+      "id": "special-relativity--exam-traps--q8",
+      "sectionId": "exam-traps",
+      "question": "Which statement about a photon is valid?",
+      "options": [
+        "It has a rest frame moving at c",
+        "It travels below c when observed from a fast rocket",
+        "It accumulates ordinary proper time like a massive clock",
+        "It travels at c in vacuum but has no valid rest frame"
+      ],
+      "correctIndex": 3,
+      "explanation": "Every inertial observer measures a vacuum photon at c, and no Lorentz frame can move alongside it. Assigning a photon rest frame violates the structure of inertial Lorentz transformations.",
+      "sourceEvidence": "Photons always travel at c in vacuum and have zero proper time along a lightlike path, but there is no valid photon rest frame.",
+      "misconceptionTargeted": "Inventing a photon rest frame"
+    }
+  ]
+}

@@ -588,6 +588,15 @@
   font-size: 18px;
 }
 
+.ubr-provider-badge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #9e9488;
+  margin-top: -10px;
+  margin-bottom: 14px;
+}
+
 .ubr-lens-loading,
 .ubr-lens-error {
   display: flex;
@@ -693,6 +702,10 @@
 
 [data-theme='dark'] .ubr-lens-heading {
   border-color: rgb(255 255 255 / 9%);
+}
+
+[data-theme='dark'] .ubr-provider-badge {
+  color: #7a7468;
 }
 
 [data-theme='dark'] .ubr-lens-loading {
@@ -865,3 +878,173 @@
   border-radius: 50%;
   animation: ubr-spin 0.9s linear infinite;
 }
+
+.ubr-handwriting-card {
+  margin: 16px 0;
+  padding: 18px;
+  border-radius: 10px;
+  background: var(--ubr-paper-mat-alt, #e9e1d3);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+[data-theme='dark'] .ubr-handwriting-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.ubr-handwriting-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: var(--theme-text-primary, #1e293b);
+}
+
+.ubr-handwriting-copy {
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: var(--theme-text-muted, #64748b);
+  margin: 0;
+}
+
+.ubr-handwriting-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ubr-handwriting-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: #ffffff;
+  color: #1e293b;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.ubr-handwriting-input:focus {
+  border-color: var(--subject-color, #0d8267);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--subject-color, #0d8267) 20%, transparent);
+}
+
+[data-theme='dark'] .ubr-handwriting-input {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.4);
+  color: #f1f5f9;
+}
+
+.ubr-handwriting-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+
+.ubr-handwriting-cancel {
+  padding: 7px 14px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--theme-text-muted, #64748b);
+  border: none;
+  cursor: pointer;
+}
+
+.ubr-handwriting-submit {
+  padding: 7px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  background: var(--subject-color, #0d8267);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.ubr-handwriting-submit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ubr-detected-formula-strip {
+  margin: 12px 0 16px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: var(--ubr-paper-mat-alt, #e9e1d3);
+  border: 1px solid color-mix(in srgb, var(--subject-color, #0d8267) 30%, transparent);
+}
+
+[data-theme='dark'] .ubr-detected-formula-strip {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.ubr-detected-formula-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+}
+
+.ubr-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 4px;
+}
+
+.ubr-badge-vision {
+  background: color-mix(in srgb, var(--subject-color, #0d8267) 22%, transparent);
+  color: var(--subject-color, #0d8267);
+  border: 1px solid color-mix(in srgb, var(--subject-color, #0d8267) 40%, transparent);
+}
+
+[data-theme='dark'] .ubr-badge-vision {
+  background: rgba(13, 130, 103, 0.3);
+  color: #34d399;
+}
+
+.ubr-detected-formula-math {
+  margin: 8px 0;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+  overflow-x: auto;
+  text-align: center;
+}
+
+[data-theme='dark'] .ubr-detected-formula-math {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.ubr-detected-formula-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+  font-size: 0.86rem;
+}
+
+[data-theme='dark'] .ubr-detected-formula-steps {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.ubr-detected-step-line {
+  padding: 2px 4px;
+  overflow-x: auto;
+}
+

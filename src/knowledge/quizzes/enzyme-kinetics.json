@@ -1,0 +1,606 @@
+{
+  "topicId": "enzyme-kinetics",
+  "subjectId": "biology",
+  "questions": [
+    {
+      "id": "enzyme-kinetics--overview--q1",
+      "sectionId": "overview",
+      "question": "How does an enzyme increase the rate of a biochemical reaction?",
+      "options": [
+        "It lowers the activation energy",
+        "It makes the reaction’s ΔG more negative",
+        "It shifts equilibrium toward products",
+        "It raises the energy of the transition state"
+      ],
+      "correctIndex": 0,
+      "explanation": "An enzyme provides a pathway with a lower activation-energy barrier. Changing ΔG is not required to accelerate how quickly equilibrium is reached.",
+      "sourceEvidence": "Enzymes are biological catalysts, usually proteins, that speed biochemical reactions by lowering activation energy without being consumed.",
+      "misconceptionTargeted": "Changing ΔG is not required to accelerate how quickly equilibrium is reached"
+    },
+    {
+      "id": "enzyme-kinetics--overview--q2",
+      "sectionId": "overview",
+      "question": "What happens to an enzyme after it catalyzes a reaction?",
+      "options": [
+        "It is permanently consumed as a reactant",
+        "It remains available for another catalytic cycle",
+        "It becomes part of every product molecule",
+        "It is converted completely into ATP"
+      ],
+      "correctIndex": 1,
+      "explanation": "A catalyst emerges from the reaction cycle without being consumed. Treating the enzyme as a stoichiometric reactant prevents repeated catalysis.",
+      "sourceEvidence": "Enzymes are biological catalysts, usually proteins, that speed biochemical reactions by lowering activation energy without being consumed.",
+      "misconceptionTargeted": "Treating the enzyme as a stoichiometric reactant prevents repeated catalysis"
+    },
+    {
+      "id": "enzyme-kinetics--overview--q3",
+      "sectionId": "overview",
+      "question": "What does an enzyme stabilize to help reactants become products?",
+      "options": [
+        "The equilibrium constant",
+        "The final product only",
+        "The transition state",
+        "The cell membrane"
+      ],
+      "correctIndex": 2,
+      "explanation": "Transition-state stabilization reduces the energetic barrier to reaction. Stabilizing only the final product would alter thermodynamics rather than explain catalysis.",
+      "sourceEvidence": "They stabilize the transition state and help reactants reach it more readily, but they do not change a reaction’s overall free-energy change (ΔG), equilibrium position, or thermodynamic favourability.",
+      "misconceptionTargeted": "Stabilizing only the final product would alter thermodynamics rather than explain catalysis"
+    },
+    {
+      "id": "enzyme-kinetics--overview--q4",
+      "sectionId": "overview",
+      "question": "Which reaction property is unchanged by adding an enzyme?",
+      "options": [
+        "The reaction rate",
+        "The activation-energy barrier",
+        "The time needed to approach equilibrium",
+        "The overall free-energy change"
+      ],
+      "correctIndex": 3,
+      "explanation": "Catalysis changes the pathway and rate but not the reaction’s ΔG. Assuming a faster reaction has a different ΔG confuses kinetics with thermodynamics.",
+      "sourceEvidence": "They stabilize the transition state and help reactants reach it more readily, but they do not change a reaction’s overall free-energy change (ΔG), equilibrium position, or thermodynamic favourability.",
+      "misconceptionTargeted": "Assuming a faster reaction has a different ΔG confuses kinetics with thermodynamics"
+    },
+    {
+      "id": "enzyme-kinetics--overview--q5",
+      "sectionId": "overview",
+      "question": "A reversible reaction reaches equilibrium with and without an enzyme. How do the final equilibrium positions compare?",
+      "options": [
+        "They are the same",
+        "The enzyme always favors products",
+        "The enzyme always favors reactants",
+        "The enzyme prevents equilibrium"
+      ],
+      "correctIndex": 0,
+      "explanation": "An enzyme speeds both directions without changing the equilibrium position. Equating faster product formation with a shifted equilibrium confuses rate with final composition.",
+      "sourceEvidence": "They stabilize the transition state and help reactants reach it more readily, but they do not change a reaction’s overall free-energy change (ΔG), equilibrium position, or thermodynamic favourability.",
+      "misconceptionTargeted": "Equating faster product formation with a shifted equilibrium confuses rate with final composition"
+    },
+    {
+      "id": "enzyme-kinetics--overview--q6",
+      "sectionId": "overview",
+      "question": "Which change could directly alter enzyme activity?",
+      "options": [
+        "Changing the spelling of the enzyme name",
+        "Changing pH",
+        "Moving an unrelated chromosome",
+        "Replacing water with a vacuum while keeping all chemistry unchanged"
+      ],
+      "correctIndex": 1,
+      "explanation": "Enzyme activity responds to pH along with temperature, substrate, inhibitors, and allosteric signals. Treating enzyme activity as fixed ignores its chemical and regulatory environment.",
+      "sourceEvidence": "Enzyme activity is controlled by substrate concentration, inhibitors, temperature, pH, and allosteric signals.",
+      "misconceptionTargeted": "Treating enzyme activity as fixed ignores its chemical and regulatory environment"
+    },
+    {
+      "id": "enzyme-kinetics--overview--q7",
+      "sectionId": "overview",
+      "question": "A reaction is thermodynamically unfavorable before an enzyme is added. What does the enzyme do to that favorability?",
+      "options": [
+        "It guarantees a spontaneous reaction",
+        "It reverses the sign of ΔG",
+        "It leaves the thermodynamic favorability unchanged",
+        "It eliminates the equilibrium constant"
+      ],
+      "correctIndex": 2,
+      "explanation": "Enzymes lower kinetic barriers without changing thermodynamic favorability. Assuming catalysis can make any unfavorable reaction favorable confuses activation energy with ΔG.",
+      "sourceEvidence": "They stabilize the transition state and help reactants reach it more readily, but they do not change a reaction’s overall free-energy change (ΔG), equilibrium position, or thermodynamic favourability.",
+      "misconceptionTargeted": "Assuming catalysis can make any unfavorable reaction favorable confuses activation energy with ΔG"
+    },
+    {
+      "id": "enzyme-kinetics--enzyme-substrate--q1",
+      "sectionId": "enzyme-substrate",
+      "question": "Where does a substrate bind to begin an enzyme-catalyzed reaction?",
+      "options": [
+        "The active site",
+        "The product-release site of another enzyme",
+        "The phospholipid tail",
+        "The DNA promoter"
+      ],
+      "correctIndex": 0,
+      "explanation": "Substrate binding at the active site forms the enzyme–substrate complex. Placing substrate binding at an unrelated regulatory structure misses the catalytic site.",
+      "sourceEvidence": "A substrate binds the enzyme’s active site to form an enzyme–substrate complex.",
+      "misconceptionTargeted": "Placing substrate binding at an unrelated regulatory structure misses the catalytic site"
+    },
+    {
+      "id": "enzyme-kinetics--enzyme-substrate--q2",
+      "sectionId": "enzyme-substrate",
+      "question": "What does induced fit describe?",
+      "options": [
+        "The substrate permanently consumes the enzyme",
+        "Substrate binding causes a catalytic shape adjustment in the enzyme",
+        "The product forces equilibrium to change",
+        "The enzyme unfolds completely at normal conditions"
+      ],
+      "correctIndex": 1,
+      "explanation": "A small binding-induced conformational change positions catalytic groups effectively. Treating induced fit as complete denaturation confuses a functional adjustment with loss of structure.",
+      "sourceEvidence": "In the induced-fit model, binding causes a small shape change that positions catalytic groups and stabilizes the transition state.",
+      "misconceptionTargeted": "Treating induced fit as complete denaturation confuses a functional adjustment with loss of structure"
+    },
+    {
+      "id": "enzyme-kinetics--enzyme-substrate--q3",
+      "sectionId": "enzyme-substrate",
+      "question": "Why can one enzyme molecule catalyze repeated reactions?",
+      "options": [
+        "Each product becomes a replacement enzyme",
+        "The enzyme is rebuilt from ATP after every reaction",
+        "Product release leaves the enzyme unchanged",
+        "The substrate remains permanently bound"
+      ],
+      "correctIndex": 2,
+      "explanation": "After product leaves, the original enzyme can bind another substrate. Assuming permanent substrate binding would prevent catalytic turnover.",
+      "sourceEvidence": "Product is then released, leaving the enzyme unchanged and ready for another cycle.",
+      "misconceptionTargeted": "Assuming permanent substrate binding would prevent catalytic turnover"
+    },
+    {
+      "id": "enzyme-kinetics--enzyme-substrate--q4",
+      "sectionId": "enzyme-substrate",
+      "question": "Why does reaction velocity level off at high substrate concentration?",
+      "options": [
+        "The reaction’s ΔG becomes zero",
+        "All substrate molecules stop moving",
+        "Km rises without limit",
+        "Nearly all active sites are occupied"
+      ],
+      "correctIndex": 3,
+      "explanation": "Active-site saturation prevents added substrate from increasing turnover beyond Vmax. Blaming the plateau on a changed equilibrium ignores the finite enzyme concentration.",
+      "sourceEvidence": "As substrate concentration rises, reaction velocity increases until nearly all active sites are occupied and the enzyme approaches Vmax.",
+      "misconceptionTargeted": "Blaming the plateau on a changed equilibrium ignores the finite enzyme concentration"
+    },
+    {
+      "id": "enzyme-kinetics--enzyme-substrate--q5",
+      "sectionId": "enzyme-substrate",
+      "question": "At what substrate concentration is velocity equal to half Vmax?",
+      "options": [
+        "At [S] = Km",
+        "At [S] = 0",
+        "At [S] = 2Km only",
+        "Only at infinite substrate concentration"
+      ],
+      "correctIndex": 0,
+      "explanation": "Km is defined as the substrate concentration that gives half-maximal velocity. Placing half Vmax at infinite substrate confuses the midpoint with saturation.",
+      "sourceEvidence": "The Michaelis constant Km is the substrate concentration at half Vmax; a lower Km generally indicates higher apparent substrate affinity.",
+      "misconceptionTargeted": "Placing half Vmax at infinite substrate confuses the midpoint with saturation"
+    },
+    {
+      "id": "enzyme-kinetics--enzyme-substrate--q6",
+      "sectionId": "enzyme-substrate",
+      "question": "Enzyme A has Km = 2 μM and enzyme B has Km = 20 μM for the same substrate. Which generally has higher apparent affinity?",
+      "options": [
+        "Enzyme B",
+        "Enzyme A",
+        "They must have identical affinity",
+        "Affinity cannot ever relate to Km"
+      ],
+      "correctIndex": 1,
+      "explanation": "The lower Km of enzyme A generally indicates higher apparent substrate affinity. Treating higher Km as stronger affinity reverses the usual interpretation.",
+      "sourceEvidence": "The Michaelis constant Km is the substrate concentration at half Vmax; a lower Km generally indicates higher apparent substrate affinity.",
+      "misconceptionTargeted": "Treating higher Km as stronger affinity reverses the usual interpretation"
+    },
+    {
+      "id": "enzyme-kinetics--enzyme-substrate--q7",
+      "sectionId": "enzyme-substrate",
+      "question": "For an enzyme with Vmax = 80 units and Km = 10 μM, what is the velocity at [S] = 10 μM?",
+      "options": [
+        "20 units",
+        "80 units",
+        "40 units",
+        "160 units"
+      ],
+      "correctIndex": 2,
+      "explanation": "When substrate concentration equals Km, velocity is half of Vmax. Using Vmax at Km ignores the definition of the Michaelis constant.",
+      "sourceEvidence": "The Michaelis constant Km is the substrate concentration at half Vmax; a lower Km generally indicates higher apparent substrate affinity.",
+      "misconceptionTargeted": "Using Vmax at Km ignores the definition of the Michaelis constant"
+    },
+    {
+      "id": "enzyme-kinetics--inhibition--q1",
+      "sectionId": "inhibition",
+      "question": "Where does a competitive inhibitor bind?",
+      "options": [
+        "At the enzyme’s active site",
+        "At a separate allosteric site only",
+        "To the product after it leaves",
+        "Inside the substrate molecule"
+      ],
+      "correctIndex": 0,
+      "explanation": "Competitive inhibitors occupy the same active site sought by substrate. Placing a competitive inhibitor only at an allosteric site confuses the inhibition classes.",
+      "sourceEvidence": "Competitive inhibitors bind directly to the enzyme's active site, competing with the substrate.",
+      "misconceptionTargeted": "Placing a competitive inhibitor only at an allosteric site confuses the inhibition classes"
+    },
+    {
+      "id": "enzyme-kinetics--inhibition--q2",
+      "sectionId": "inhibition",
+      "question": "Why can a competitive inhibitor often fit into the active site?",
+      "options": [
+        "It permanently unfolds the enzyme",
+        "Its structure resembles the substrate",
+        "It contains every amino acid in the enzyme",
+        "It raises Vmax before binding"
+      ],
+      "correctIndex": 1,
+      "explanation": "Structural similarity lets the inhibitor compete for the substrate-binding pocket. Attributing binding to denaturation ignores molecular recognition at an intact active site.",
+      "sourceEvidence": "They are structurally similar to the substrate and block it from binding.",
+      "misconceptionTargeted": "Attributing binding to denaturation ignores molecular recognition at an intact active site"
+    },
+    {
+      "id": "enzyme-kinetics--inhibition--q3",
+      "sectionId": "inhibition",
+      "question": "What intervention can reduce the effect of a reversible competitive inhibitor?",
+      "options": [
+        "Remove all substrate",
+        "Lower enzyme concentration to zero",
+        "Increase substrate concentration",
+        "Add more allosteric inhibitor"
+      ],
+      "correctIndex": 2,
+      "explanation": "More substrate raises the chance that substrate rather than inhibitor occupies the active site. Assuming added substrate cannot help ignores direct competition for one site.",
+      "sourceEvidence": "Crucially, competitive inhibition is reversible and can be overcome by increasing substrate concentration — more substrate molecules outcompete the inhibitor for active site access.",
+      "misconceptionTargeted": "Assuming added substrate cannot help ignores direct competition for one site"
+    },
+    {
+      "id": "enzyme-kinetics--inhibition--q4",
+      "sectionId": "inhibition",
+      "question": "How does ideal competitive inhibition change Michaelis–Menten parameters?",
+      "options": [
+        "Km is unchanged while Vmax decreases",
+        "Both Km and Vmax increase",
+        "Both Km and Vmax become zero",
+        "Km increases while Vmax is unchanged"
+      ],
+      "correctIndex": 3,
+      "explanation": "Competition lowers apparent affinity but sufficient substrate can still reach the original Vmax. Lowering Vmax describes non-competitive behavior rather than pure competition.",
+      "sourceEvidence": "Vmax is unchanged; Km increases.",
+      "misconceptionTargeted": "Lowering Vmax describes non-competitive behavior rather than pure competition"
+    },
+    {
+      "id": "enzyme-kinetics--inhibition--q5",
+      "sectionId": "inhibition",
+      "question": "How does an allosteric inhibitor reduce enzyme activity?",
+      "options": [
+        "It binds elsewhere and changes the active-site geometry",
+        "It occupies the active site without changing shape",
+        "It removes substrate from the cell",
+        "It converts the enzyme into product"
+      ],
+      "correctIndex": 0,
+      "explanation": "Binding at a regulatory site changes enzyme conformation and indirectly alters catalysis. Requiring direct active-site occupation confuses allosteric with competitive inhibition.",
+      "sourceEvidence": "Allosteric inhibitors bind to a separate regulatory site (the allosteric site), causing a conformational change in the enzyme's overall shape.",
+      "misconceptionTargeted": "Requiring direct active-site occupation confuses allosteric with competitive inhibition"
+    },
+    {
+      "id": "enzyme-kinetics--inhibition--q6",
+      "sectionId": "inhibition",
+      "question": "Why does adding more substrate fail to restore the original rate under allosteric inhibition?",
+      "options": [
+        "No substrate can ever bind any enzyme",
+        "The enzyme’s functional capacity has been reduced",
+        "The inhibitor is consumed as substrate",
+        "Km must always fall to zero"
+      ],
+      "correctIndex": 1,
+      "explanation": "Allosteric inhibition lowers Vmax by changing the enzyme rather than merely competing for occupancy. Treating the problem as simple active-site competition predicts an incorrect substrate rescue.",
+      "sourceEvidence": "Allosteric inhibition cannot be overcome simply by adding more substrate — Vmax decreases.",
+      "misconceptionTargeted": "Treating the problem as simple active-site competition predicts an incorrect substrate rescue"
+    },
+    {
+      "id": "enzyme-kinetics--inhibition--q7",
+      "sectionId": "inhibition",
+      "question": "Why are substrate-mimicking molecules useful as some medicines?",
+      "options": [
+        "They guarantee activation of every enzyme",
+        "They convert receptors into DNA",
+        "They can competitively block a chosen enzyme’s active site",
+        "They make all reactions thermodynamically favorable"
+      ],
+      "correctIndex": 2,
+      "explanation": "A substrate-like drug can occupy the target active site and reduce its catalysis. Assuming mimicry activates every enzyme ignores selective competitive inhibition.",
+      "sourceEvidence": "Clinically, this distinction determines drug design: many pharmaceuticals, including ACE inhibitors for blood pressure and statins for cholesterol, are competitive inhibitors designed to mimic the natural substrate and block a specific enzyme.",
+      "misconceptionTargeted": "Assuming mimicry activates every enzyme ignores selective competitive inhibition"
+    },
+    {
+      "id": "enzyme-kinetics--allosteric-regulation--q1",
+      "sectionId": "allosteric-regulation",
+      "question": "Why can unregulated pathway activity harm a cell?",
+      "options": [
+        "It can waste ATP, drain precursors, and accumulate toxic intermediates",
+        "It guarantees perfect homeostasis",
+        "It prevents any product from forming",
+        "It makes every enzyme thermodynamically favorable"
+      ],
+      "correctIndex": 0,
+      "explanation": "Excess pathway output consumes resources and can allow harmful intermediates to build up. Treating maximum production as always beneficial ignores cellular resource limits.",
+      "sourceEvidence": "Metabolic pathways produce products that are used elsewhere — building too much of a product depletes precursor molecules, wastes ATP, and can cause toxic accumulation of intermediates.",
+      "misconceptionTargeted": "Treating maximum production as always beneficial ignores cellular resource limits"
+    },
+    {
+      "id": "enzyme-kinetics--allosteric-regulation--q2",
+      "sectionId": "allosteric-regulation",
+      "question": "What happens when the end product of a feedback-regulated pathway accumulates?",
+      "options": [
+        "It activates every pathway enzyme permanently",
+        "It inhibits an early pathway enzyme",
+        "It is converted back into DNA",
+        "It forces all substrate through the last reaction"
+      ],
+      "correctIndex": 1,
+      "explanation": "Accumulated end product slows further production by acting on an earlier step. Inhibiting only the final product itself would not efficiently reduce upstream resource use.",
+      "sourceEvidence": "Cells use feedback inhibition as their primary regulatory strategy: when the end product of a pathway accumulates, it inhibits an early enzyme in that pathway, slowing production.",
+      "misconceptionTargeted": "Inhibiting only the final product itself would not efficiently reduce upstream resource use"
+    },
+    {
+      "id": "enzyme-kinetics--allosteric-regulation--q3",
+      "sectionId": "allosteric-regulation",
+      "question": "How does feedback inhibition match pathway output to demand?",
+      "options": [
+        "High product always accelerates production",
+        "Product level has no effect on pathway rate",
+        "High product slows production and falling product relieves inhibition",
+        "Every pathway remains fully active at all times"
+      ],
+      "correctIndex": 2,
+      "explanation": "The end product provides an internal signal that adjusts its own production rate. Positive acceleration by excess product would amplify waste rather than restore balance.",
+      "sourceEvidence": "This creates an elegant self-regulating system where output is continuously matched to demand without external instruction.",
+      "misconceptionTargeted": "Positive acceleration by excess product would amplify waste rather than restore balance"
+    },
+    {
+      "id": "enzyme-kinetics--allosteric-regulation--q4",
+      "sectionId": "allosteric-regulation",
+      "question": "Why might a cell rapidly alter enzyme regulation after nutrients become scarce?",
+      "options": [
+        "To make all equilibrium constants equal",
+        "To consume more scarce precursors",
+        "To remove every allosteric site",
+        "To redirect metabolic flow toward current needs"
+      ],
+      "correctIndex": 3,
+      "explanation": "Regulatory signals let the cell reallocate pathway activity as conditions change. Keeping all pathways fixed would ignore changing energy and nutrient availability.",
+      "sourceEvidence": "Regulation also allows cells to redirect metabolic flow in response to environmental conditions — rapidly increasing or decreasing the rate of specific pathways based on energy state, nutrient availability, or signalling molecules.",
+      "misconceptionTargeted": "Keeping all pathways fixed would ignore changing energy and nutrient availability"
+    },
+    {
+      "id": "enzyme-kinetics--allosteric-regulation--q5",
+      "sectionId": "allosteric-regulation",
+      "question": "Where does an allosteric regulator bind?",
+      "options": [
+        "At a site away from the active site",
+        "Only in the active site",
+        "To the product after excretion",
+        "Inside the DNA template"
+      ],
+      "correctIndex": 0,
+      "explanation": "An allosteric site transmits a conformational effect from a separate location. Defining every regulator as an active-site competitor erases allosteric control.",
+      "sourceEvidence": "Allosteric regulators bind away from the active site and change enzyme conformation.",
+      "misconceptionTargeted": "Defining every regulator as an active-site competitor erases allosteric control"
+    },
+    {
+      "id": "enzyme-kinetics--allosteric-regulation--q6",
+      "sectionId": "allosteric-regulation",
+      "question": "What curve shape often indicates cooperative binding in a multisubunit enzyme?",
+      "options": [
+        "A perfectly horizontal line",
+        "A sigmoidal curve",
+        "A linear decrease to negative velocity",
+        "A rectangular step with no transition"
+      ],
+      "correctIndex": 1,
+      "explanation": "Cooperative allosteric enzymes commonly show an S-shaped rate response. Expecting every enzyme to show a hyperbolic curve ignores subunit cooperation.",
+      "sourceEvidence": "Multisubunit allosteric enzymes often show cooperative binding and a sigmoidal rate curve.",
+      "misconceptionTargeted": "Expecting every enzyme to show a hyperbolic curve ignores subunit cooperation"
+    },
+    {
+      "id": "enzyme-kinetics--allosteric-regulation--q7",
+      "sectionId": "allosteric-regulation",
+      "question": "A pathway’s end product suddenly rises far above demand. Which response best conserves resources?",
+      "options": [
+        "Increase every pathway step",
+        "Degrade all cellular ATP",
+        "Reduce activity of an early enzyme in the pathway",
+        "Duplicate the entire genome"
+      ],
+      "correctIndex": 2,
+      "explanation": "Early feedback inhibition limits both further product and unnecessary use of precursors. Regulating only after all intermediates are made fails to prevent upstream waste.",
+      "sourceEvidence": "Cells use feedback inhibition as their primary regulatory strategy: when the end product of a pathway accumulates, it inhibits an early enzyme in that pathway, slowing production.",
+      "misconceptionTargeted": "Regulating only after all intermediates are made fails to prevent upstream waste"
+    },
+    {
+      "id": "enzyme-kinetics--temperature-ph--q1",
+      "sectionId": "temperature-ph",
+      "question": "Why can a change in enzyme shape alter reaction rate?",
+      "options": [
+        "Catalysis depends on precise three-dimensional geometry",
+        "Every enzyme works equally in any shape",
+        "Shape changes always make ΔG negative",
+        "Only the enzyme’s mass matters"
+      ],
+      "correctIndex": 0,
+      "explanation": "The active site and catalytic groups must occupy specific three-dimensional positions. Treating shape as irrelevant ignores the structural basis of enzyme function.",
+      "sourceEvidence": "Enzymes are proteins whose function depends entirely on their three-dimensional shape.",
+      "misconceptionTargeted": "Treating shape as irrelevant ignores the structural basis of enzyme function"
+    },
+    {
+      "id": "enzyme-kinetics--temperature-ph--q2",
+      "sectionId": "temperature-ph",
+      "question": "Which forces help maintain an enzyme’s folded structure?",
+      "options": [
+        "Only permanent peptide-bond cleavage",
+        "Hydrogen bonds, ionic bonds, hydrophobic interactions, and van der Waals forces",
+        "Only gravity and atmospheric pressure",
+        "DNA base pairing alone"
+      ],
+      "correctIndex": 1,
+      "explanation": "Several non-covalent interactions collectively stabilize the functional fold. Attributing folding to one unrelated force ignores the network of molecular interactions.",
+      "sourceEvidence": "That shape is maintained by multiple non-covalent interactions: hydrogen bonds, ionic bonds, hydrophobic interactions, and van der Waals forces.",
+      "misconceptionTargeted": "Attributing folding to one unrelated force ignores the network of molecular interactions"
+    },
+    {
+      "id": "enzyme-kinetics--temperature-ph--q3",
+      "sectionId": "temperature-ph",
+      "question": "Why can heating above an enzyme’s optimum cause denaturation?",
+      "options": [
+        "Heat always creates more active sites",
+        "The enzyme is consumed as fuel",
+        "Molecular motion disrupts shape-stabilizing interactions",
+        "The substrate becomes DNA"
+      ],
+      "correctIndex": 2,
+      "explanation": "Excess kinetic energy can overcome the non-covalent forces maintaining the fold. Assuming more heat always speeds catalysis ignores structural damage above the optimum.",
+      "sourceEvidence": "At temperatures above the enzyme's optimum, the kinetic energy of the molecules exceeds what these bonds can withstand.",
+      "misconceptionTargeted": "Assuming more heat always speeds catalysis ignores structural damage above the optimum"
+    },
+    {
+      "id": "enzyme-kinetics--temperature-ph--q4",
+      "sectionId": "temperature-ph",
+      "question": "What directly makes a denatured enzyme unable to bind substrate effectively?",
+      "options": [
+        "An increase in substrate concentration",
+        "A lower Km with an unchanged site",
+        "Formation of more identical active sites",
+        "Loss of the active site’s precise geometry"
+      ],
+      "correctIndex": 3,
+      "explanation": "Unfolding distorts the shape and chemical arrangement of the active site. Calling denaturation substrate depletion confuses enzyme structure with reactant supply.",
+      "sourceEvidence": "The bonds break, the polypeptide chain unfolds, and the precise geometry of the active site is lost.",
+      "misconceptionTargeted": "Calling denaturation substrate depletion confuses enzyme structure with reactant supply"
+    },
+    {
+      "id": "enzyme-kinetics--temperature-ph--q5",
+      "sectionId": "temperature-ph",
+      "question": "Why does cooling a heat-denatured enzyme usually fail to restore activity?",
+      "options": [
+        "The chain may misfold or aggregate into another stable form",
+        "Cooling removes every amino acid",
+        "The enzyme’s DNA has left the nucleus",
+        "The equilibrium constant becomes infinite"
+      ],
+      "correctIndex": 0,
+      "explanation": "After unfolding, alternative nonfunctional conformations can persist even when temperature falls. Assuming cooling automatically retraces folding ignores irreversible misfolding and aggregation.",
+      "sourceEvidence": "Denaturation is typically irreversible because the original folded state was not the only thermodynamically accessible conformation — the unfolded chain can misfold into a different stable but non-functional structure, or aggregate with other denatured proteins.",
+      "misconceptionTargeted": "Assuming cooling automatically retraces folding ignores irreversible misfolding and aggregation"
+    },
+    {
+      "id": "enzyme-kinetics--temperature-ph--q6",
+      "sectionId": "temperature-ph",
+      "question": "How can an extreme pH reduce enzyme activity?",
+      "options": [
+        "It changes every amino acid into glucose",
+        "It changes side-chain protonation and charge",
+        "It raises substrate concentration automatically",
+        "It makes all inhibitors competitive"
+      ],
+      "correctIndex": 1,
+      "explanation": "Altered charges can disrupt binding, catalysis, and the protein fold. Treating pH as only a temperature effect ignores acid-base changes in amino-acid side chains.",
+      "sourceEvidence": "Changing pH alters the protonation and charge of amino-acid side chains, which can disrupt substrate binding, catalysis, or protein structure.",
+      "misconceptionTargeted": "Treating pH as only a temperature effect ignores acid-base changes in amino-acid side chains"
+    },
+    {
+      "id": "enzyme-kinetics--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "Which statement correctly describes enzyme reuse?",
+      "options": [
+        "An enzyme can catalyze repeated cycles without being consumed",
+        "An enzyme is used up after one substrate",
+        "Every reaction converts enzyme into product",
+        "Enzymes must be rebuilt after each collision"
+      ],
+      "correctIndex": 0,
+      "explanation": "Catalytic turnover returns the enzyme to a usable state. Treating enzymes as consumed reactants confuses catalysts with substrates.",
+      "sourceEvidence": "Enzymes are not consumed and can catalyse repeated reaction cycles.",
+      "misconceptionTargeted": "Treating enzymes as consumed reactants confuses catalysts with substrates"
+    },
+    {
+      "id": "enzyme-kinetics--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "What changes when an enzyme is added to a reversible reaction?",
+      "options": [
+        "ΔG becomes negative and equilibrium shifts",
+        "Activation energy decreases but ΔG and equilibrium stay the same",
+        "Reaction direction permanently reverses",
+        "The products gain a different free energy"
+      ],
+      "correctIndex": 1,
+      "explanation": "Enzymes affect reaction kinetics without changing thermodynamic endpoints. A faster rate does not imply a new ΔG or equilibrium position.",
+      "sourceEvidence": "They lower activation energy but do not alter ΔG, equilibrium, or reaction direction.",
+      "misconceptionTargeted": "A faster rate does not imply a new ΔG or equilibrium position"
+    },
+    {
+      "id": "enzyme-kinetics--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "Which parameter pattern identifies competitive inhibition?",
+      "options": [
+        "Unchanged Km with lower Vmax",
+        "Lower Km with higher Vmax",
+        "Higher apparent Km with unchanged Vmax",
+        "Both values fixed at zero"
+      ],
+      "correctIndex": 2,
+      "explanation": "Competition can be overcome at high substrate, preserving Vmax while raising apparent Km. A reduced Vmax is characteristic of non-competitive rather than pure competitive inhibition.",
+      "sourceEvidence": "Competitive inhibition can be overcome with more substrate: apparent Km rises and Vmax stays the same.",
+      "misconceptionTargeted": "A reduced Vmax is characteristic of non-competitive rather than pure competitive inhibition"
+    },
+    {
+      "id": "enzyme-kinetics--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "Which parameter pattern identifies pure non-competitive inhibition?",
+      "options": [
+        "Higher Km with unchanged Vmax",
+        "Higher Vmax with lower Km",
+        "Both Vmax and Km double",
+        "Lower Vmax with unchanged Km"
+      ],
+      "correctIndex": 3,
+      "explanation": "Pure non-competitive inhibition reduces catalytic capacity without changing Km. Using the competitive pattern incorrectly predicts rescue by more substrate.",
+      "sourceEvidence": "Pure non-competitive inhibition cannot be overcome this way: Vmax falls and Km is unchanged.",
+      "misconceptionTargeted": "Using the competitive pattern incorrectly predicts rescue by more substrate"
+    },
+    {
+      "id": "enzyme-kinetics--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "Two enzymes act on the same substrate; one has the lower Km. What does that usually indicate?",
+      "options": [
+        "Higher apparent substrate affinity",
+        "Lower apparent substrate affinity",
+        "A guaranteed higher Vmax",
+        "Irreversible denaturation"
+      ],
+      "correctIndex": 0,
+      "explanation": "Less substrate is needed to reach half Vmax when Km is lower. Interpreting lower Km as weaker affinity reverses the usual relationship.",
+      "sourceEvidence": "Lower Km usually means higher apparent affinity.",
+      "misconceptionTargeted": "Interpreting lower Km as weaker affinity reverses the usual relationship"
+    },
+    {
+      "id": "enzyme-kinetics--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "An enzyme is heated far above its optimum and then cooled. Why may activity remain low?",
+      "options": [
+        "Cooling always removes the active site",
+        "The original fold may have been irreversibly lost",
+        "The reaction’s ΔG has permanently reversed",
+        "All substrate becomes a competitive inhibitor"
+      ],
+      "correctIndex": 1,
+      "explanation": "Heat can produce persistent misfolding or aggregation that cooling does not undo. Assuming cooling guarantees recovery ignores irreversible denaturation.",
+      "sourceEvidence": "Heating above the optimum can irreversibly denature an enzyme; cooling usually does not restore the original fold.",
+      "misconceptionTargeted": "Assuming cooling guarantees recovery ignores irreversible denaturation"
+    }
+  ]
+}

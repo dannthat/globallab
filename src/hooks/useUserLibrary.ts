@@ -339,8 +339,13 @@ export function useUserLibrary() {
   }, [])
 
   const removeBook = useCallback(async (id: string) => {
+    // Delete the raw file from IndexedDB before removing metadata from state.
+    // If anything interrupts between the two operations, the book stays
+    // visible in the library (still pointing to its stored file) so the
+    // student can try again — rather than leaving orphaned bytes in
+    // IndexedDB with no UI path to clean them up.
+    await deleteFile(id).catch(() => {/* Best effort — proceed regardless. */})
     setBooks((previous) => previous.filter((book) => book.id !== id))
-    await deleteFile(id).catch(() => {/* Keep the UI responsive if IndexedDB cleanup fails. */})
   }, [])
 
   const clearError = useCallback(() => setUploadError(null), [])

@@ -50,6 +50,12 @@ function readLearnerModel() {
 beforeEach(() => {
   window.localStorage.clear()
   seedProfile()
+  // Guard against jsdom crash on getComputedStyle with complex CSS custom properties
+  const nativeGetComputedStyle = window.getComputedStyle.bind(window)
+  const safeStub = { getPropertyValue: () => '', length: 0 } as unknown as CSSStyleDeclaration
+  vi.spyOn(window, 'getComputedStyle').mockImplementation((elt, pseudo) => {
+    try { return nativeGetComputedStyle(elt, pseudo) } catch { return safeStub }
+  })
   vi.stubGlobal(
     'fetch',
     vi.fn().mockResolvedValue({
@@ -72,7 +78,7 @@ describe('curated textbook learner-model integration', () => {
     const section = await openFirstSection(user)
 
     await user.click(
-      within(section).getByRole('button', { name: 'Learn your way' }),
+      within(section).getByRole('button', { name: /Connect this to|Learn your way/i }),
     )
     await within(section).findByLabelText('Personalized learning companion')
 

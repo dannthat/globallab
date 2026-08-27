@@ -1,0 +1,606 @@
+{
+  "topicId": "chemical-bonding",
+  "subjectId": "chemistry",
+  "questions": [
+    {
+      "id": "chemical-bonding--overview--q1",
+      "sectionId": "overview",
+      "question": "What provides the stabilising attraction in an ionic solid?",
+      "options": [
+        "Attraction between oppositely charged ions throughout an extended lattice",
+        "Shared electron density confined between every pair of metal atoms",
+        "Rapid switching among separate resonance molecules",
+        "London dispersion forces between isolated ion pairs"
+      ],
+      "correctIndex": 0,
+      "explanation": "Ionic bonding is an electrostatic attraction distributed through an extended crystal lattice. Treating the solid as isolated ion pairs misses the many-ion nature of its stability.",
+      "sourceEvidence": "Ionic bonding is the attraction between oppositely charged ions in an extended lattice, commonly formed after substantial electron transfer.",
+      "misconceptionTargeted": "Treating an ionic crystal as independent molecule-like ion pairs."
+    },
+    {
+      "id": "chemical-bonding--overview--q2",
+      "sectionId": "overview",
+      "question": "How are electrons distributed in a covalent bond?",
+      "options": [
+        "They are completely transferred to form an extended ionic lattice",
+        "Their density is shared between the bonded nuclei",
+        "They are delocalised equally across every atom in a metal",
+        "They occupy no region between the nuclei"
+      ],
+      "correctIndex": 1,
+      "explanation": "A covalent bond involves electron density shared between nuclei. Complete transfer describes an idealised ionic limit rather than covalent bonding.",
+      "sourceEvidence": "Covalent bonding involves shared electron density between nuclei, while metallic bonding involves delocalised valence electrons distributed across many atomic centres.",
+      "misconceptionTargeted": "Confusing covalent electron sharing with complete electron transfer."
+    },
+    {
+      "id": "chemical-bonding--overview--q3",
+      "sectionId": "overview",
+      "question": "Which electron arrangement best describes metallic bonding?",
+      "options": [
+        "Localised lone pairs fixed on every atomic centre",
+        "Alternating complete transfers between neighboring atoms",
+        "Delocalised valence electrons spread across many atomic centres",
+        "One shared electron pair restricted to each pair of nuclei"
+      ],
+      "correctIndex": 2,
+      "explanation": "Metallic bonding distributes valence electrons across many atomic centres. Restricting each electron pair to two nuclei instead describes a localised covalent picture.",
+      "sourceEvidence": "Covalent bonding involves shared electron density between nuclei, while metallic bonding involves delocalised valence electrons distributed across many atomic centres.",
+      "misconceptionTargeted": "Modeling metallic bonding as a collection of localised two-atom covalent bonds."
+    },
+    {
+      "id": "chemical-bonding--overview--q4",
+      "sectionId": "overview",
+      "question": "Why is an electronegativity difference not a universal bond-type cutoff?",
+      "options": [
+        "Electronegativity applies only to metallic elements",
+        "Every bond has exactly equal ionic and covalent character",
+        "Only formal charge can indicate electron distribution",
+        "Bonding forms a continuum, and local structure and element identity also matter"
+      ],
+      "correctIndex": 3,
+      "explanation": "Electronegativity difference is a useful estimate rather than a rigid boundary. Real bonding character also depends on structure and the elements involved.",
+      "sourceEvidence": "Bonding is a continuum rather than three perfectly separated categories. Electronegativity difference helps estimate bond polarity, but local structure and the elements involved also matter.",
+      "misconceptionTargeted": "Assigning bond type from a rigid electronegativity threshold alone."
+    },
+    {
+      "id": "chemical-bonding--overview--q5",
+      "sectionId": "overview",
+      "question": "What distinguishes a polar covalent bond from an equal-sharing covalent bond?",
+      "options": [
+        "Its unequal electron sharing produces partial charges",
+        "Its electrons are absent from the internuclear region",
+        "It must occur only between a metal and a nonmetal",
+        "It consists of isolated full ions in a repeating lattice"
+      ],
+      "correctIndex": 0,
+      "explanation": "A polar covalent bond shares electron density unequally and develops partial charges. Partial charges do not mean that the bonded atoms have become isolated full ions.",
+      "sourceEvidence": "A polar covalent bond has unequal electron sharing and partial charges; an ionic solid is not a collection of isolated molecule pairs but a repeating crystal whose stability reflects attractions and repulsions across the entire lattice.",
+      "misconceptionTargeted": "Equating partial charges in a polar covalent bond with full ionic charges."
+    },
+    {
+      "id": "chemical-bonding--overview--q6",
+      "sectionId": "overview",
+      "question": "Which information can a Lewis structure track directly?",
+      "options": [
+        "Exact three-dimensional bond angles and orbital energies",
+        "Valence electrons, bonding pairs, lone pairs, and formal charge",
+        "Measured partial charges and magnetic behaviour",
+        "The complete excited-state molecular-orbital spectrum"
+      ],
+      "correctIndex": 1,
+      "explanation": "Lewis structures are electron-bookkeeping models for valence electrons, pairs, and formal charge. They do not directly provide a complete three-dimensional or orbital-energy description.",
+      "sourceEvidence": "Lewis structures track valence electrons, bonding pairs, lone pairs, and formal charge. They are useful bookkeeping models but do not directly show three-dimensional shape, orbital energies, or electron delocalisation.",
+      "misconceptionTargeted": "Assuming a Lewis structure directly displays exact shape and orbital energies."
+    },
+    {
+      "id": "chemical-bonding--overview--q7",
+      "sectionId": "overview",
+      "question": "What do multiple resonance structures represent?",
+      "options": [
+        "Separate molecules that rapidly interconvert at equilibrium",
+        "Different crystal phases with distinct atom positions",
+        "Alternative drawings of one delocalised electronic state",
+        "Proof that the molecule has no valid electron distribution"
+      ],
+      "correctIndex": 2,
+      "explanation": "Resonance drawings contribute to one delocalised electronic state. They are not snapshots of separate molecules switching back and forth.",
+      "sourceEvidence": "Resonance structures are alternative drawings of one delocalised electronic state, not molecules rapidly switching between forms.",
+      "misconceptionTargeted": "Interpreting resonance contributors as distinct, rapidly interconverting molecules."
+    },
+    {
+      "id": "chemical-bonding--overview--q8",
+      "sectionId": "overview",
+      "question": "How does increasing bond order generally affect a bond?",
+      "options": [
+        "It makes the bond weaker and longer",
+        "It changes formal charge but never bond length",
+        "It eliminates electron density between the nuclei",
+        "It makes the bond stronger and shorter"
+      ],
+      "correctIndex": 3,
+      "explanation": "Greater bond order generally corresponds to increased bond strength and reduced bond length. The trend reflects more bonding interaction between the nuclei.",
+      "sourceEvidence": "Bond order generally correlates with greater bond strength and shorter bond length.",
+      "misconceptionTargeted": "Believing that greater bond order produces a longer or weaker bond."
+    },
+    {
+      "id": "chemical-bonding--vsepr--q1",
+      "sectionId": "vsepr",
+      "question": "What principle does VSEPR use to predict molecular shape?",
+      "options": [
+        "Electron domains arrange around the central atom to minimise repulsion",
+        "Bonding electrons collapse into one side of the central atom",
+        "Only lone pairs determine the three-dimensional arrangement",
+        "Atomic mass fixes every molecular bond angle"
+      ],
+      "correctIndex": 0,
+      "explanation": "VSEPR spreads electron domains around a central atom to reduce their mutual repulsion. Both bonding domains and lone pairs participate in that arrangement.",
+      "sourceEvidence": "Valence-shell electron-pair repulsion theory predicts molecular shape by arranging electron domains around a central atom to minimise repulsion.",
+      "misconceptionTargeted": "Ignoring bonding domains when applying electron-pair repulsion."
+    },
+    {
+      "id": "chemical-bonding--vsepr--q2",
+      "sectionId": "vsepr",
+      "question": "When counting VSEPR electron domains, how is a triple bond treated?",
+      "options": [
+        "As three bonding domains",
+        "As one bonding domain",
+        "As two bonding domains and one lone pair",
+        "As no domain because its electrons are shared"
+      ],
+      "correctIndex": 1,
+      "explanation": "A single, double, or triple bond each occupies one directional bonding domain. Counting individual bond components would overcount the domain geometry.",
+      "sourceEvidence": "Each single, double, or triple bond counts as one bonding domain, and each lone pair counts as one domain.",
+      "misconceptionTargeted": "Counting a multiple bond as multiple VSEPR electron domains."
+    },
+    {
+      "id": "chemical-bonding--vsepr--q3",
+      "sectionId": "vsepr",
+      "question": "Which electron-domain geometry corresponds to five domains around a central atom?",
+      "options": [
+        "Tetrahedral",
+        "Octahedral",
+        "Trigonal bipyramidal",
+        "Trigonal planar"
+      ],
+      "correctIndex": 2,
+      "explanation": "Five electron domains adopt a trigonal-bipyramidal arrangement. Tetrahedral and octahedral geometries correspond to four and six domains, respectively.",
+      "sourceEvidence": "Two, three, four, five, and six domains adopt linear, trigonal-planar, tetrahedral, trigonal-bipyramidal, and octahedral electron-domain geometries.",
+      "misconceptionTargeted": "Matching five electron domains to tetrahedral or octahedral geometry."
+    },
+    {
+      "id": "chemical-bonding--vsepr--q4",
+      "sectionId": "vsepr",
+      "question": "Why can electron-domain geometry and molecular geometry have different names?",
+      "options": [
+        "Molecular geometry counts multiple bonds as separate domains",
+        "Electron-domain geometry ignores bonding pairs",
+        "Electron-domain geometry applies only to diatomic molecules",
+        "Molecular geometry names atom positions and omits lone pairs"
+      ],
+      "correctIndex": 3,
+      "explanation": "Electron-domain geometry includes every bond and lone pair around the central atom. Molecular geometry describes only the positions of atoms, so hidden lone pairs can change its name.",
+      "sourceEvidence": "Molecular geometry names atomic positions and omits lone pairs from the shape name.",
+      "misconceptionTargeted": "Using electron-domain and molecular-geometry labels interchangeably when lone pairs are present."
+    },
+    {
+      "id": "chemical-bonding--vsepr--q5",
+      "sectionId": "vsepr",
+      "question": "CH4, NH3, and H2O each have four central electron domains. Why do their molecular shapes differ?",
+      "options": [
+        "They have different numbers of central lone pairs",
+        "A multiple bond is counted as three domains in NH3",
+        "Hydrogen changes from positive to negative charge across the series",
+        "Their electron-domain geometries are linear, planar, and octahedral"
+      ],
+      "correctIndex": 0,
+      "explanation": "The three molecules share tetrahedral electron geometry but contain zero, one, and two central lone pairs. Omitting lone pairs from the molecular-shape name gives tetrahedral, trigonal-pyramidal, and bent shapes.",
+      "sourceEvidence": "Four domains give tetrahedral electron geometry, but CH4 is tetrahedral, NH3 is trigonal pyramidal, and H2O is bent because they contain zero, one, and two central lone pairs.",
+      "misconceptionTargeted": "Assuming equal electron-domain counts guarantee identical molecular shapes."
+    },
+    {
+      "id": "chemical-bonding--vsepr--q6",
+      "sectionId": "vsepr",
+      "question": "Why are bond angles next to a lone pair often smaller than ideal?",
+      "options": [
+        "Lone pairs have no electron density and pull atoms inward",
+        "Lone pairs occupy more angular space than bonding pairs",
+        "Every lone pair creates an additional visible atom",
+        "Bonding pairs always repel more strongly than lone pairs"
+      ],
+      "correctIndex": 1,
+      "explanation": "Lone pairs occupy more angular space and repel neighboring bonding domains strongly. That extra repulsion compresses the angles between visible bonds.",
+      "sourceEvidence": "Lone pairs occupy more angular space than bonding pairs, so they compress adjacent bond angles below ideal values.",
+      "misconceptionTargeted": "Assuming lone pairs have less spatial influence than bonding pairs."
+    },
+    {
+      "id": "chemical-bonding--vsepr--q7",
+      "sectionId": "vsepr",
+      "question": "Where does a lone pair preferentially sit in a trigonal-bipyramidal arrangement?",
+      "options": [
+        "At an axial position with three 90-degree interactions",
+        "At the central atom with no directional domain",
+        "At an equatorial position with fewer 90-degree interactions",
+        "Between two axial positions as an extra seventh domain"
+      ],
+      "correctIndex": 2,
+      "explanation": "An equatorial site exposes a lone pair to fewer 90-degree interactions than an axial site. It therefore reduces repulsion more effectively.",
+      "sourceEvidence": "In trigonal-bipyramidal geometry, lone pairs prefer equatorial positions because these have fewer 90-degree interactions.",
+      "misconceptionTargeted": "Placing a trigonal-bipyramidal lone pair axially despite an available equatorial site."
+    },
+    {
+      "id": "chemical-bonding--vsepr--q8",
+      "sectionId": "vsepr",
+      "question": "For which class of structures should a VSEPR prediction be treated with particular caution?",
+      "options": [
+        "Many simple main-group molecules",
+        "Any molecule containing a single bond",
+        "Every molecule with exactly four electron domains",
+        "Transition-metal complexes dominated by ligand and orbital effects"
+      ],
+      "correctIndex": 3,
+      "explanation": "VSEPR works well for many main-group molecules but is less reliable for transition-metal complexes. Detailed ligand interactions and orbital energetics can dominate those structures.",
+      "sourceEvidence": "VSEPR is highly effective for many main-group molecules but less reliable for transition-metal complexes or cases where ligand interactions and detailed orbital energetics dominate.",
+      "misconceptionTargeted": "Applying main-group VSEPR rules uncritically to transition-metal complexes."
+    },
+    {
+      "id": "chemical-bonding--hybridisation--q1",
+      "sectionId": "hybridisation",
+      "question": "How does valence-bond theory describe a covalent bond?",
+      "options": [
+        "As overlap of half-filled atomic orbitals containing opposite-spin electrons",
+        "As complete removal of all valence orbitals from both atoms",
+        "As a lattice of full ions with no shared electron density",
+        "As a measured oscillation between separate resonance molecules"
+      ],
+      "correctIndex": 0,
+      "explanation": "Valence-bond theory forms a covalent bond through overlap of half-filled orbitals. The paired electrons in the overlap have opposite spins.",
+      "sourceEvidence": "Valence-bond theory describes a covalent bond as overlap between half-filled atomic orbitals containing opposite-spin electrons.",
+      "misconceptionTargeted": "Confusing orbital overlap in valence-bond theory with complete electron transfer."
+    },
+    {
+      "id": "chemical-bonding--hybridisation--q2",
+      "sectionId": "hybridisation",
+      "question": "What is hybridisation in the orbital model?",
+      "options": [
+        "A literal reaction an isolated atom completes before approaching another atom",
+        "A mathematical recombination that creates directional orbitals suited to bonding",
+        "The conversion of every sigma bond into a pi bond",
+        "A measurement of partial charge from electronegativity alone"
+      ],
+      "correctIndex": 1,
+      "explanation": "Hybridisation is a mathematical change of orbital basis used to describe directional bonding. It is not a directly observed preparatory rearrangement by an isolated atom.",
+      "sourceEvidence": "Hybridisation is a mathematical recombination of orbitals on one atom to produce directional hybrids suited to observed bonding.",
+      "misconceptionTargeted": "Treating hybridisation as a literal pre-bonding event performed by an isolated atom."
+    },
+    {
+      "id": "chemical-bonding--hybridisation--q3",
+      "sectionId": "hybridisation",
+      "question": "What results from mixing one s orbital with one p orbital?",
+      "options": [
+        "One sp³ hybrid",
+        "Three sp² hybrids",
+        "Two sp hybrids",
+        "Two unhybridised s orbitals"
+      ],
+      "correctIndex": 2,
+      "explanation": "One s orbital and one p orbital recombine into two equivalent sp hybrids. The number of output orbitals equals the number mixed.",
+      "sourceEvidence": "Mixing one s and one p orbital produces two sp hybrids; adding two or three p orbitals produces three sp² or four sp³ hybrids.",
+      "misconceptionTargeted": "Confusing the number and type of hybrids produced by s-p orbital mixing."
+    },
+    {
+      "id": "chemical-bonding--hybridisation--q4",
+      "sectionId": "hybridisation",
+      "question": "Which hybridisation-to-geometry pairing is correct?",
+      "options": [
+        "sp is tetrahedral, sp² is linear, and sp³ is trigonal planar",
+        "sp is octahedral, sp² is tetrahedral, and sp³ is linear",
+        "All three hybridisations produce the same geometry",
+        "sp is linear, sp² is trigonal planar, and sp³ is tetrahedral"
+      ],
+      "correctIndex": 3,
+      "explanation": "Hybridisation correlates with local electron-domain geometry. The sp, sp², and sp³ models correspond to linear, trigonal-planar, and tetrahedral arrangements.",
+      "sourceEvidence": "Hybridisation correlates with electron-domain geometry: sp is linear, sp² is trigonal planar, and sp³ is tetrahedral.",
+      "misconceptionTargeted": "Mismatching sp, sp², and sp³ hybridisation with their domain geometries."
+    },
+    {
+      "id": "chemical-bonding--hybridisation--q5",
+      "sectionId": "hybridisation",
+      "question": "How does each carbon in ethene form its carbon-carbon double bond?",
+      "options": [
+        "It uses sp² hybrids for sigma bonding and one unhybridised p orbital for the pi bond",
+        "It uses sp³ hybrids for two perpendicular pi bonds",
+        "It uses only unhybridised s orbitals for both bond components",
+        "It transfers one electron completely to the other carbon"
+      ],
+      "correctIndex": 0,
+      "explanation": "Each ethene carbon uses sp² hybrids for its sigma framework and retains one p orbital. Sideways overlap of those p orbitals forms the pi component.",
+      "sourceEvidence": "In ethene, each carbon uses sp² hybrids for three sigma bonds and retains one unhybridised p orbital; sideways p overlap forms the pi bond.",
+      "misconceptionTargeted": "Assigning an ethene carbon sp³ hybridisation or omitting its unhybridised p orbital."
+    },
+    {
+      "id": "chemical-bonding--hybridisation--q6",
+      "sectionId": "hybridisation",
+      "question": "Why does each carbon in ethyne retain two unhybridised p orbitals?",
+      "options": [
+        "Its sp³ hybridisation leaves all three p orbitals unused",
+        "Its sp hybridisation uses only one s and one p orbital",
+        "Its carbon-carbon bond contains no sigma component",
+        "Its two p orbitals are converted into lone pairs"
+      ],
+      "correctIndex": 1,
+      "explanation": "The sp model mixes one s and one p orbital, leaving two p orbitals unhybridised. Their perpendicular sideways overlaps form the two pi bonds of the triple bond.",
+      "sourceEvidence": "In ethyne, sp hybridisation leaves two unhybridised p orbitals on each carbon, producing two mutually perpendicular pi bonds around the carbon-carbon sigma bond.",
+      "misconceptionTargeted": "Assuming a carbon-carbon triple bond contains three sigma bonds or uses sp³ carbon."
+    },
+    {
+      "id": "chemical-bonding--hybridisation--q7",
+      "sectionId": "hybridisation",
+      "question": "Why does a pi bond restrict rotation more than a sigma bond?",
+      "options": [
+        "Its density is spherical and independent of orbital alignment",
+        "It contains no electrons between the bonded atoms",
+        "Its density lies above and below the internuclear axis and requires aligned sideways overlap",
+        "It is always weaker because it is an ionic interaction"
+      ],
+      "correctIndex": 2,
+      "explanation": "Pi bonding depends on side-by-side p-orbital alignment above and below the bond axis. Rotation would disrupt that overlap, whereas axial sigma overlap generally permits rotation.",
+      "sourceEvidence": "Sigma bonds have electron density concentrated along the internuclear axis and generally permit rotation, while pi bonds have density above and below that axis and restrict rotation.",
+      "misconceptionTargeted": "Assuming sigma and pi bonds permit rotation equally."
+    },
+    {
+      "id": "chemical-bonding--hybridisation--q8",
+      "sectionId": "hybridisation",
+      "question": "When is molecular-orbital theory often more complete than a local hybridisation model?",
+      "options": [
+        "Only when counting VSEPR lone pairs in water",
+        "Whenever a molecule contains one sigma bond",
+        "Only for assigning formal charge in a Lewis structure",
+        "When describing delocalisation, magnetism, and excited states"
+      ],
+      "correctIndex": 3,
+      "explanation": "Molecular-orbital theory can treat electron delocalisation, magnetism, and excited states more fully. Hybridisation remains useful for describing local bonding geometry.",
+      "sourceEvidence": "Molecular-orbital theory often provides a more complete description of delocalisation, magnetism, and excited states, but hybridisation remains a powerful local geometry model.",
+      "misconceptionTargeted": "Treating hybridisation as a complete replacement for molecular-orbital descriptions."
+    },
+    {
+      "id": "chemical-bonding--polarity--q1",
+      "sectionId": "polarity",
+      "question": "What produces a bond dipole?",
+      "options": [
+        "Unequal attraction for shared electron density",
+        "Equal attraction for shared electron density",
+        "The absence of any electron density between nuclei",
+        "A compulsory transfer of a whole electron"
+      ],
+      "correctIndex": 0,
+      "explanation": "A bond dipole appears when bonded atoms attract the shared electrons unequally. This separation produces partial rather than necessarily full charges.",
+      "sourceEvidence": "A bond dipole results when bonded atoms attract shared electron density unequally.",
+      "misconceptionTargeted": "Assuming a bond dipole requires complete electron transfer."
+    },
+    {
+      "id": "chemical-bonding--polarity--q2",
+      "sectionId": "polarity",
+      "question": "In the chemistry convention, where does the bond-dipole arrow point?",
+      "options": [
+        "Toward the less electronegative atom",
+        "Toward the more electronegative atom",
+        "Always toward the atom with greater mass",
+        "Perpendicular to the bond regardless of atom identity"
+      ],
+      "correctIndex": 1,
+      "explanation": "The arrow points toward the atom that attracts shared density more strongly. A crossed tail marks the positive end.",
+      "sourceEvidence": "Chemistry convention draws a dipole arrow toward the more electronegative atom, often with a crossed tail at the positive end.",
+      "misconceptionTargeted": "Reversing the conventional bond-dipole arrow direction."
+    },
+    {
+      "id": "chemical-bonding--polarity--q3",
+      "sectionId": "polarity",
+      "question": "How is a molecule’s overall polarity determined?",
+      "options": [
+        "By selecting only its strongest bond dipole",
+        "By counting atoms without considering their positions",
+        "By adding all bond dipoles and lone-pair contributions as vectors",
+        "By assigning every covalent bond a full ionic charge"
+      ],
+      "correctIndex": 2,
+      "explanation": "Molecular polarity is a vector sum, so both magnitude and direction matter. Lone-pair contributions and three-dimensional geometry must be included.",
+      "sourceEvidence": "Molecular polarity is the vector sum of all bond dipoles and lone-pair contributions.",
+      "misconceptionTargeted": "Predicting molecular polarity from one bond without vector addition."
+    },
+    {
+      "id": "chemical-bonding--polarity--q4",
+      "sectionId": "polarity",
+      "question": "Why can CO2 and CCl4 have zero net dipole despite containing polar bonds?",
+      "options": [
+        "Every bond in each molecule is nonpolar",
+        "Their lone pairs convert all bonds into metallic bonds",
+        "Their atoms exchange full electrons until all dipoles disappear",
+        "Their symmetric geometries make the bond-dipole vectors cancel"
+      ],
+      "correctIndex": 3,
+      "explanation": "Symmetry arranges equal bond-dipole vectors so their sum is zero. Polar bonds therefore do not automatically make the entire molecule polar.",
+      "sourceEvidence": "A molecule can contain polar bonds yet have zero net dipole if symmetry cancels them, as in linear CO2 or tetrahedral CCl4.",
+      "misconceptionTargeted": "Assuming any polar bond guarantees a polar molecule."
+    },
+    {
+      "id": "chemical-bonding--polarity--q5",
+      "sectionId": "polarity",
+      "question": "Why do H2O and NH3 retain nonzero molecular dipoles?",
+      "options": [
+        "Their bent and trigonal-pyramidal geometries prevent bond vectors from cancelling",
+        "Their bonds are perfectly symmetric and cancel",
+        "They contain only nonpolar bonds",
+        "They are extended ionic lattices rather than molecules"
+      ],
+      "correctIndex": 0,
+      "explanation": "The asymmetric bent and trigonal-pyramidal shapes leave an uncompensated vector sum. Their individual bond dipoles therefore combine into a net molecular dipole.",
+      "sourceEvidence": "Bent H2O and trigonal-pyramidal NH3 retain nonzero dipoles because their bond vectors do not cancel.",
+      "misconceptionTargeted": "Ignoring molecular shape when adding the bond dipoles of H2O or NH3."
+    },
+    {
+      "id": "chemical-bonding--polarity--q6",
+      "sectionId": "polarity",
+      "question": "What must be established before predicting whether bond dipoles cancel?",
+      "options": [
+        "Only the total number of electrons",
+        "The molecule’s three-dimensional geometry",
+        "The boiling point of the pure substance",
+        "Whether the name contains a metal symbol"
+      ],
+      "correctIndex": 1,
+      "explanation": "Dipoles are vectors whose directions depend on the molecule’s geometry. A two-dimensional formula alone cannot establish whether those vectors cancel.",
+      "sourceEvidence": "Geometry must therefore be determined before polarity is predicted.",
+      "misconceptionTargeted": "Predicting net polarity before determining molecular geometry."
+    },
+    {
+      "id": "chemical-bonding--polarity--q7",
+      "sectionId": "polarity",
+      "question": "Which structural feature can enable especially strong hydrogen bonding?",
+      "options": [
+        "Any carbon-carbon single bond",
+        "A perfectly symmetric nonpolar geometry alone",
+        "A suitable O–H, N–H, or F–H group",
+        "Only a metal-metal bond with delocalised electrons"
+      ],
+      "correctIndex": 2,
+      "explanation": "Suitable bonds to oxygen, nitrogen, or fluorine can support especially strong hydrogen bonds. Ordinary dipole-dipole attraction does not automatically have this specific strength and geometry.",
+      "sourceEvidence": "Polar molecules can exhibit dipole-dipole attractions; molecules containing suitable O–H, N–H, or F–H groups can form especially strong hydrogen bonds.",
+      "misconceptionTargeted": "Assuming every polar molecule forms hydrogen bonds equally strongly."
+    },
+    {
+      "id": "chemical-bonding--polarity--q8",
+      "sectionId": "polarity",
+      "question": "Why do nonpolar substances still attract one another?",
+      "options": [
+        "They all contain permanent full ionic charges",
+        "Their bond dipoles always add to a large permanent vector",
+        "They form covalent bonds between separate molecules during boiling",
+        "Instantaneous electron fluctuations create London dispersion forces"
+      ],
+      "correctIndex": 3,
+      "explanation": "Instantaneous fluctuations produce temporary attractions even in nonpolar substances. These London dispersion forces grow with polarisability and contact surface area.",
+      "sourceEvidence": "Nonpolar substances still experience London dispersion forces from instantaneous electron fluctuations, whose strength grows with polarisability and contact surface area.",
+      "misconceptionTargeted": "Believing that nonpolar molecules have no intermolecular attractions."
+    },
+    {
+      "id": "chemical-bonding--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "Why is a rigid electronegativity cutoff unreliable for assigning bond type?",
+      "options": [
+        "Real bonding character forms a continuum rather than an absolute boundary",
+        "Electronegativity is unrelated to electron distribution",
+        "Every metal-nonmetal bond is fully covalent",
+        "Bond type depends only on molecular mass"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bonding can mix ionic and covalent character, so one numerical cutoff is not universal. The local structure and elements must also be considered.",
+      "sourceEvidence": "Do not decide bond type from a rigid electronegativity cutoff or call every metal–nonmetal bond completely ionic.",
+      "misconceptionTargeted": "Classifying every metal-nonmetal bond as completely ionic from a fixed cutoff."
+    },
+    {
+      "id": "chemical-bonding--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "Why should formal charge not be reported as a measured partial charge?",
+      "options": [
+        "Formal charge directly measures electron density in every molecule",
+        "Formal charge is a Lewis-structure bookkeeping assignment",
+        "Partial charge can exist only in ionic crystals",
+        "The two quantities are always numerically identical"
+      ],
+      "correctIndex": 1,
+      "explanation": "Formal charge follows an electron-bookkeeping convention for a Lewis structure. Measured partial charge describes an unequal distribution of actual electron density.",
+      "sourceEvidence": "Use formal charge for Lewis-structure bookkeeping, but remember that formal charge is not the same as measured partial charge.",
+      "misconceptionTargeted": "Equating formal-charge bookkeeping with measured partial charge."
+    },
+    {
+      "id": "chemical-bonding--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "Which interpretation of resonance forms is correct?",
+      "options": [
+        "They are separate molecules rapidly reaching equilibrium",
+        "They show atoms changing positions between drawings",
+        "They are contributors to one delocalised electron distribution",
+        "They prove that no Lewis representation is useful"
+      ],
+      "correctIndex": 2,
+      "explanation": "Resonance contributors describe one delocalised electronic state. The molecule does not jump between independent structures.",
+      "sourceEvidence": "Resonance forms are not separate equilibrating molecules; the actual electron density is delocalised across the contributing structures.",
+      "misconceptionTargeted": "Treating resonance contributors as separate equilibrating molecules."
+    },
+    {
+      "id": "chemical-bonding--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "How should a multiple bond be counted in a VSEPR domain total?",
+      "options": [
+        "As one domain for each bond line",
+        "As a lone pair plus one bond",
+        "It should be omitted from the count",
+        "As one electron domain"
+      ],
+      "correctIndex": 3,
+      "explanation": "VSEPR counts the direction occupied by a bond, not its individual sigma and pi components. A multiple bond therefore contributes one domain.",
+      "sourceEvidence": "For VSEPR, count electron domains around the central atom, treating any multiple bond as one domain.",
+      "misconceptionTargeted": "Counting double or triple bonds as multiple VSEPR domains."
+    },
+    {
+      "id": "chemical-bonding--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "Where should a trigonal-bipyramidal lone pair be placed when an equatorial site is available?",
+      "options": [
+        "In an equatorial site to reduce 90-degree interactions",
+        "In an axial site to maximise 90-degree interactions",
+        "Outside the electron-domain count",
+        "At either site because all interactions are identical"
+      ],
+      "correctIndex": 0,
+      "explanation": "An equatorial lone pair has fewer 90-degree interactions and is energetically preferred. An axial placement creates unnecessary repulsion.",
+      "sourceEvidence": "Do not place trigonal-bipyramidal lone pairs axially when an equatorial location is available, and do not force VSEPR predictions onto transition-metal complexes without qualification.",
+      "misconceptionTargeted": "Placing a trigonal-bipyramidal lone pair in an axial position by default."
+    },
+    {
+      "id": "chemical-bonding--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "A molecule contains polar bonds. What additional step is needed before calling the molecule polar?",
+      "options": [
+        "Count only the number of polar bonds",
+        "Add the bond dipoles as vectors using the three-dimensional geometry",
+        "Assume the largest dipole determines the whole molecule",
+        "Replace every partial charge with a full ionic charge"
+      ],
+      "correctIndex": 1,
+      "explanation": "Polar bonds may cancel when arranged symmetrically. The molecular geometry and vector sum determine whether a net dipole remains.",
+      "sourceEvidence": "A polar bond does not guarantee a polar molecule. Draw the three-dimensional geometry and add dipoles as vectors.",
+      "misconceptionTargeted": "Inferring molecular polarity from the presence of a polar bond alone."
+    },
+    {
+      "id": "chemical-bonding--exam-traps--q7",
+      "sectionId": "exam-traps",
+      "question": "When assigning hybridisation, how should pi bonds be treated?",
+      "options": [
+        "Each pi bond is counted as an extra hybrid orbital",
+        "Every pi bond forces sp³ hybridisation",
+        "Pi bonds are ignored as extra domains when hybridisation follows local domain geometry",
+        "A pi bond replaces the sigma bond in a multiple bond"
+      ],
+      "correctIndex": 2,
+      "explanation": "Hybridisation follows the local electron-domain geometry and does not add a hybrid orbital for each pi bond. Unhybridised p orbitals form the pi components.",
+      "sourceEvidence": "Hybridisation follows local domain geometry and does not count pi bonds as extra hybrid orbitals.",
+      "misconceptionTargeted": "Counting pi bonds as additional hybrid orbitals when assigning hybridisation."
+    },
+    {
+      "id": "chemical-bonding--exam-traps--q8",
+      "sectionId": "exam-traps",
+      "question": "What usually happens to covalent molecules during boiling?",
+      "options": [
+        "Their internal covalent bonds are all broken",
+        "Their nuclei and electrons separate completely",
+        "Every molecule becomes an extended ionic lattice",
+        "Intermolecular attractions are overcome while internal covalent bonds remain"
+      ],
+      "correctIndex": 3,
+      "explanation": "Boiling separates molecules by overcoming intermolecular attractions. It does not normally break the intramolecular covalent bonds that hold each molecule together.",
+      "sourceEvidence": "Always distinguish intramolecular bonds from intermolecular forces; boiling usually separates molecules without breaking their internal covalent bonds.",
+      "misconceptionTargeted": "Confusing intermolecular-force disruption during boiling with covalent-bond breaking."
+    }
+  ]
+}

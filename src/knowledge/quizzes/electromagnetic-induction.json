@@ -1,0 +1,606 @@
+{
+  "topicId": "electromagnetic-induction",
+  "subjectId": "physics",
+  "questions": [
+    {
+      "id": "electromagnetic-induction--overview--q1",
+      "sectionId": "overview",
+      "question": "In ΦB = BA cos θ, between which directions is θ measured?",
+      "options": [
+        "The magnetic field and the surface normal",
+        "The magnetic field and the surface plane",
+        "Two edges of the loop",
+        "The current and the loop radius"
+      ],
+      "correctIndex": 0,
+      "explanation": "Magnetic flux is a dot product between the field and the oriented area vector normal to the surface. Using the plane angle directly interchanges the maximum and zero-flux orientations.",
+      "sourceEvidence": "For a uniform field crossing a flat area, ΦB = BA cos θ, where θ is the angle between the magnetic field and the surface normal.",
+      "misconceptionTargeted": "Using the angle to the surface plane instead of its normal"
+    },
+    {
+      "id": "electromagnetic-induction--overview--q2",
+      "sectionId": "overview",
+      "question": "Which loop orientation gives the greatest magnetic flux magnitude in a uniform field?",
+      "options": [
+        "The field lies in the loop plane",
+        "The field is perpendicular to the loop plane",
+        "The loop has zero area",
+        "The field is absent"
+      ],
+      "correctIndex": 1,
+      "explanation": "A field perpendicular to the plane is parallel to the area normal and gives cos θ equal to one. A field in the plane is perpendicular to the normal and gives zero flux.",
+      "sourceEvidence": "Flux is greatest when the field is perpendicular to the surface, zero when it lies in the plane, and signed according to the chosen normal direction.",
+      "misconceptionTargeted": "Reversing the maximum and zero magnetic-flux orientations"
+    },
+    {
+      "id": "electromagnetic-induction--overview--q3",
+      "sectionId": "overview",
+      "question": "What happens to the sign of magnetic flux if the chosen surface normal is reversed?",
+      "options": [
+        "It becomes zero",
+        "It doubles",
+        "It reverses",
+        "It becomes unsigned"
+      ],
+      "correctIndex": 2,
+      "explanation": "Reversing the oriented normal reverses the dot product and therefore the signed flux. The physical field magnitude is unchanged, but flux includes orientation.",
+      "sourceEvidence": "Flux is greatest when the field is perpendicular to the surface, zero when it lies in the plane, and signed according to the chosen normal direction.",
+      "misconceptionTargeted": "Treating magnetic flux as an unsigned amount independent of orientation"
+    },
+    {
+      "id": "electromagnetic-induction--overview--q4",
+      "sectionId": "overview",
+      "question": "How is magnetic flux found for a curved surface in a nonuniform field?",
+      "options": [
+        "Use BA regardless of orientation",
+        "Multiply one field value by total perimeter",
+        "Add only field magnitudes without direction",
+        "Integrate B · dA over infinitesimal vector areas"
+      ],
+      "correctIndex": 3,
+      "explanation": "The surface integral sums the local field-area dot product over small oriented elements. One field value or scalar magnitude cannot represent spatial variation and orientation.",
+      "sourceEvidence": "For a nonuniform field or curved surface, the area is divided into infinitesimal vector elements and the dot product is integrated.",
+      "misconceptionTargeted": "Using BA for a curved surface with a nonuniform field"
+    },
+    {
+      "id": "electromagnetic-induction--overview--q5",
+      "sectionId": "overview",
+      "question": "What is the SI unit of magnetic flux?",
+      "options": [
+        "Weber",
+        "Tesla per metre",
+        "Ampere",
+        "Volt per coulomb"
+      ],
+      "correctIndex": 0,
+      "explanation": "Magnetic flux is measured in webers, equivalent to tesla metre squared. Tesla alone measures field strength, while amperes and volts per coulomb describe other quantities.",
+      "sourceEvidence": "Magnetic flux has the SI unit weber, equal to tesla metre squared.",
+      "misconceptionTargeted": "Confusing magnetic flux units with magnetic field or current units"
+    },
+    {
+      "id": "electromagnetic-induction--overview--q6",
+      "sectionId": "overview",
+      "question": "Why is net magnetic flux through every closed surface zero?",
+      "options": [
+        "Magnetic fields never pass through surfaces",
+        "Magnetic field lines form closed loops and isolated monopoles have not been observed",
+        "Every magnetic field is uniform",
+        "Closed surfaces destroy magnetic fields"
+      ],
+      "correctIndex": 1,
+      "explanation": "Closed magnetic field lines enter and leave a closed surface with zero net total in the absence of monopoles. Zero net flux does not mean the field is absent from the surface.",
+      "sourceEvidence": "Unlike electric field lines, magnetic field lines form closed loops; Gauss’s law for magnetism states that the net magnetic flux through any closed surface is zero because isolated magnetic monopoles have not been observed.",
+      "misconceptionTargeted": "Interpreting zero closed-surface magnetic flux as zero magnetic field"
+    },
+    {
+      "id": "electromagnetic-induction--overview--q7",
+      "sectionId": "overview",
+      "question": "Which change can alter flux through a conducting loop?",
+      "options": [
+        "Changing circuit resistance while geometry and field stay fixed",
+        "Changing wire colour only",
+        "Changing field strength, loop area, or orientation",
+        "Moving the entire setup together without changing field linkage"
+      ],
+      "correctIndex": 2,
+      "explanation": "Flux depends on magnetic field magnitude, linked area, and their relative orientation. Wire colour and resistance do not directly change the geometric field-area linkage.",
+      "sourceEvidence": "Flux can change because field magnitude changes, the loop area changes, or the orientation changes.",
+      "misconceptionTargeted": "Assuming magnetic flux can change only when field magnitude changes"
+    },
+    {
+      "id": "electromagnetic-induction--overview--q8",
+      "sectionId": "overview",
+      "question": "Why can a coil rotating in a steady magnetic field generate a changing electrical response?",
+      "options": [
+        "Rotation creates magnetic monopoles",
+        "The steady field automatically creates constant current",
+        "Its resistance becomes zero each turn",
+        "Its orientation makes the linked flux vary periodically"
+      ],
+      "correctIndex": 3,
+      "explanation": "Rotation changes the angle between the field and area normal, producing periodic flux even with constant B. Induction depends on changing linkage rather than merely the presence of a steady field.",
+      "sourceEvidence": "A rotating coil in a steady magnetic field therefore experiences a periodic flux even though B is constant.",
+      "misconceptionTargeted": "Assuming a constant magnetic field always means constant flux"
+    },
+    {
+      "id": "electromagnetic-induction--faraday--q1",
+      "sectionId": "faraday",
+      "question": "What magnitude determines the induced emf around a conducting loop?",
+      "options": [
+        "The time rate of change of magnetic flux",
+        "The magnetic flux alone",
+        "The loop resistance alone",
+        "The total charge already in the wire"
+      ],
+      "correctIndex": 0,
+      "explanation": "Faraday's law makes emf proportional to how rapidly magnetic flux changes. A large but constant flux produces no sustained induced emf.",
+      "sourceEvidence": "Faraday’s law states that the induced electromotive force around a closed conducting path equals the negative time rate of change of magnetic flux through it.",
+      "misconceptionTargeted": "Equating induced emf with magnetic flux rather than its rate of change"
+    },
+    {
+      "id": "electromagnetic-induction--faraday--q2",
+      "sectionId": "faraday",
+      "question": "A coil is changed from 50 identical turns to 100 turns with the same flux change per turn. What happens to induced emf?",
+      "options": [
+        "It halves",
+        "It doubles",
+        "It stays unchanged",
+        "It quadruples"
+      ],
+      "correctIndex": 1,
+      "explanation": "Flux linkage and induced emf scale directly with the number of identical turns. The dependence on turns is linear rather than inverse or quadratic.",
+      "sourceEvidence": "For a coil with N identical turns, the flux linkage is NΦB and the induced emf scales with N.",
+      "misconceptionTargeted": "Ignoring or squaring the number of coil turns in Faraday's law"
+    },
+    {
+      "id": "electromagnetic-induction--faraday--q3",
+      "sectionId": "faraday",
+      "question": "Who discovered electromagnetic induction experimentally in 1831?",
+      "options": [
+        "Nikola Tesla",
+        "Heinrich Lenz",
+        "Michael Faraday",
+        "Charles-Augustin de Coulomb"
+      ],
+      "correctIndex": 2,
+      "explanation": "Michael Faraday demonstrated that changing magnetic linkage can create an electrical effect. Lenz later stated the direction rule, while Tesla and Coulomb made different contributions.",
+      "sourceEvidence": "Michael Faraday discovered electromagnetic induction experimentally in 1831, connecting changing magnetism to an electric effect without requiring direct contact.",
+      "misconceptionTargeted": "Attributing Faraday's induction discovery to Lenz or Tesla"
+    },
+    {
+      "id": "electromagnetic-induction--faraday--q4",
+      "sectionId": "faraday",
+      "question": "Which pair can each produce an induced emf?",
+      "options": [
+        "Uniform temperature and constant resistance",
+        "A constant flux and a stationary conductor only",
+        "A static electric charge and an open plastic loop",
+        "A changing magnetic field and conductor motion through a field"
+      ],
+      "correctIndex": 3,
+      "explanation": "Transformer emf comes from a changing field while motional emf comes from conductor motion through a field. A fully static magnetic linkage lacks the flux change needed for induction.",
+      "sourceEvidence": "An emf can arise from a changing magnetic field or from motion of a conductor through a field.",
+      "misconceptionTargeted": "Restricting induction to changing field magnitude and overlooking motional emf"
+    },
+    {
+      "id": "electromagnetic-induction--faraday--q5",
+      "sectionId": "faraday",
+      "question": "A rod moving perpendicular to uniform B doubles its speed while B and length stay fixed. How does Bℓv change?",
+      "options": [
+        "It doubles",
+        "It stays fixed",
+        "It halves",
+        "It quadruples"
+      ],
+      "correctIndex": 0,
+      "explanation": "Motional emf is directly proportional to rod speed, so doubling speed doubles the magnitude. The speed dependence is linear rather than squared.",
+      "sourceEvidence": "In motional emf, magnetic forces separate charge along a moving rod; for a rod of length ℓ moving perpendicular to a uniform B, the magnitude is Bℓv.",
+      "misconceptionTargeted": "Treating motional emf as independent of speed or proportional to speed squared"
+    },
+    {
+      "id": "electromagnetic-induction--faraday--q6",
+      "sectionId": "faraday",
+      "question": "A flux-changing loop is cut so its conducting path is open. What remains possible?",
+      "options": [
+        "A current independent of resistance",
+        "An induced emf but no sustained loop current",
+        "No induced emf under any condition",
+        "Infinite current"
+      ],
+      "correctIndex": 1,
+      "explanation": "Changing flux can establish emf, but a continuous current requires a closed conducting path. Emf and current are distinct, and opening the path prevents sustained charge circulation.",
+      "sourceEvidence": "Induced emf drives current only when the path is closed, and the current magnitude also depends on circuit resistance and inductive effects.",
+      "misconceptionTargeted": "Treating induced emf and induced current as identical quantities"
+    },
+    {
+      "id": "electromagnetic-induction--faraday--q7",
+      "sectionId": "faraday",
+      "question": "Which modification can increase the induced emf of a rotating coil?",
+      "options": [
+        "Reduce every flux change rate to zero",
+        "Open the circuit while changing nothing else",
+        "Increase its number of turns",
+        "Hold its flux perfectly constant"
+      ],
+      "correctIndex": 2,
+      "explanation": "More turns increase total flux linkage and therefore induced emf for the same change per turn. A constant linkage has zero time derivative regardless of circuit openness.",
+      "sourceEvidence": "Increasing the rate of change, field strength, loop area, or number of turns can increase the induced emf.",
+      "misconceptionTargeted": "Assuming induced emf cannot be increased by coil design or flux-change rate"
+    },
+    {
+      "id": "electromagnetic-induction--faraday--q8",
+      "sectionId": "faraday",
+      "question": "What energy conversion occurs in an electric generator?",
+      "options": [
+        "Magnetic flux becomes energy without an input",
+        "Electrical energy becomes mass with no work",
+        "Thermal energy becomes charge creation only",
+        "Mechanical work becomes alternating electrical energy"
+      ],
+      "correctIndex": 3,
+      "explanation": "Continuous mechanical rotation changes flux and transfers mechanical work into alternating electrical output. The generator converts supplied energy rather than creating energy from magnetic flux.",
+      "sourceEvidence": "Electric generators exploit continuous rotation to convert mechanical work into alternating electrical energy, while microphones and guitar pickups use small motions to induce signals that encode sound.",
+      "misconceptionTargeted": "Believing a generator creates electrical energy without mechanical work"
+    },
+    {
+      "id": "electromagnetic-induction--lenz--q1",
+      "sectionId": "lenz",
+      "question": "Inward magnetic flux through a loop is increasing. Which direction must the induced magnetic field point?",
+      "options": [
+        "Outward",
+        "Inward",
+        "Tangentially in the plane",
+        "It must be zero"
+      ],
+      "correctIndex": 0,
+      "explanation": "The induced field points outward to oppose the increase in inward flux. Matching the inward direction would reinforce rather than resist the change.",
+      "sourceEvidence": "If inward flux is increasing, the induced field points outward; if inward flux is decreasing, the induced field points inward to resist the decrease.",
+      "misconceptionTargeted": "Opposing the original field direction without first checking whether its flux is increasing or decreasing"
+    },
+    {
+      "id": "electromagnetic-induction--lenz--q2",
+      "sectionId": "lenz",
+      "question": "Inward magnetic flux through a loop is decreasing. Which direction must the induced magnetic field point?",
+      "options": [
+        "Outward",
+        "Inward",
+        "It alternates randomly",
+        "It is always perpendicular to the loop normal"
+      ],
+      "correctIndex": 1,
+      "explanation": "An inward induced field attempts to preserve the inward flux that is being lost. Lenz's law opposes the decrease rather than always opposing the original field.",
+      "sourceEvidence": "If inward flux is increasing, the induced field points outward; if inward flux is decreasing, the induced field points inward to resist the decrease.",
+      "misconceptionTargeted": "Assuming induced field always points opposite the existing magnetic field"
+    },
+    {
+      "id": "electromagnetic-induction--lenz--q3",
+      "sectionId": "lenz",
+      "question": "Why does Faraday's law carry a negative sign?",
+      "options": [
+        "It proves flux is never positive",
+        "It makes every emf numerically negative",
+        "It encodes the Lenz-law direction required by energy conservation",
+        "It removes the need for a direction rule"
+      ],
+      "correctIndex": 2,
+      "explanation": "The negative sign states that the induced response opposes the initiating flux change. It is a directional convention rather than a claim that every reported emf magnitude is negative.",
+      "sourceEvidence": "The negative sign in Faraday’s law encodes Lenz’s law and enforces conservation of energy.",
+      "misconceptionTargeted": "Interpreting Faraday's negative sign as a universally negative emf magnitude"
+    },
+    {
+      "id": "electromagnetic-induction--lenz--q4",
+      "sectionId": "lenz",
+      "question": "Why must work be done to push a magnet into a conducting coil?",
+      "options": [
+        "The circuit resistance becomes negative",
+        "The coil creates energy and accelerates the magnet inward",
+        "The magnet loses all field strength",
+        "The induced magnetic response opposes the changing flux"
+      ],
+      "correctIndex": 3,
+      "explanation": "The induced current produces a magnetic response that resists the magnet's approach, so external work supplies the resulting energy. A reinforcing response would violate energy conservation by amplifying motion without input.",
+      "sourceEvidence": "Instead, pushing a magnet into a conducting coil requires work against the coil’s induced magnetic response, and that work becomes electrical energy and eventually thermal energy.",
+      "misconceptionTargeted": "Ignoring the mechanical work required by Lenz-law opposition"
+    },
+    {
+      "id": "electromagnetic-induction--lenz--q5",
+      "sectionId": "lenz",
+      "question": "What produces back-emf in an inductor or motor winding?",
+      "options": [
+        "A changing current",
+        "A perfectly steady current forever",
+        "A disconnected unmagnetised wire",
+        "A constant charge at rest"
+      ],
+      "correctIndex": 0,
+      "explanation": "Changing current changes magnetic flux and creates an emf that opposes that current change. A settled steady direct current has no continuing self-induced emf from a changing linkage.",
+      "sourceEvidence": "Back-emf appears whenever a changing current produces an induced emf opposing that current’s change.",
+      "misconceptionTargeted": "Assuming back-emf requires a steady current rather than a current change"
+    },
+    {
+      "id": "electromagnetic-induction--lenz--q6",
+      "sectionId": "lenz",
+      "question": "What effect does motor rotation have on current during normal operation?",
+      "options": [
+        "It removes every resistance",
+        "It generates back-emf that reduces net current",
+        "It forces current to become infinite",
+        "It eliminates magnetic flux"
+      ],
+      "correctIndex": 1,
+      "explanation": "Rotating armature conductors generate a counter-emf that reduces the voltage available to drive current. Normal rotation limits current rather than making it unlimited or eliminating the operating field.",
+      "sourceEvidence": "In a motor, rotation of the armature generates a back-emf that reduces the net current during normal operation.",
+      "misconceptionTargeted": "Ignoring the current-limiting role of motor back-emf"
+    },
+    {
+      "id": "electromagnetic-induction--lenz--q7",
+      "sectionId": "lenz",
+      "question": "Why can an electric motor draw a large current at startup?",
+      "options": [
+        "The supply voltage is always zero",
+        "Back-emf is initially infinite",
+        "Back-emf is initially small",
+        "The windings have infinite resistance"
+      ],
+      "correctIndex": 2,
+      "explanation": "Before the armature gains speed, little motional back-emf exists to oppose the applied voltage. Large startup current comes from weak counter-emf rather than infinite resistance or zero supply.",
+      "sourceEvidence": "At startup, back-emf is initially small, so the current can be large.",
+      "misconceptionTargeted": "Expecting normal-operating back-emf before the motor begins rotating"
+    },
+    {
+      "id": "electromagnetic-induction--lenz--q8",
+      "sectionId": "lenz",
+      "question": "How does an ideal inductor respond after a direct current has become steady?",
+      "options": [
+        "It reverses the steady current periodically",
+        "It blocks the direct current forever",
+        "It destroys its magnetic energy instantly",
+        "It no longer opposes the unchanged current through self-induction"
+      ],
+      "correctIndex": 3,
+      "explanation": "Self-induced emf opposes changes, so it falls away when direct current stops changing. An inductor resists rapid transitions rather than acting as a permanent open circuit to steady direct current.",
+      "sourceEvidence": "Inductors similarly oppose rapid current changes, storing energy in their magnetic field rather than blocking steady direct current indefinitely.",
+      "misconceptionTargeted": "Treating an inductor as permanently blocking steady direct current"
+    },
+    {
+      "id": "electromagnetic-induction--transformers--q1",
+      "sectionId": "transformers",
+      "question": "How does a transformer transfer energy between electrically separate coils?",
+      "options": [
+        "Changing primary flux links the secondary through mutual induction",
+        "Charges jump directly across the insulation",
+        "A steady primary current creates sustained secondary emf",
+        "The core creates electrical energy"
+      ],
+      "correctIndex": 0,
+      "explanation": "Alternating primary current changes shared-core flux and induces emf in the linked secondary coil. The transfer uses electromagnetic coupling rather than charge crossing or energy creation.",
+      "sourceEvidence": "A transformer transfers alternating electrical energy between circuits through mutual induction.",
+      "misconceptionTargeted": "Assuming transformer coils require direct electrical contact"
+    },
+    {
+      "id": "electromagnetic-induction--transformers--q2",
+      "sectionId": "transformers",
+      "question": "Why can steady direct current not sustain transformer action?",
+      "options": [
+        "It makes flux change infinitely fast",
+        "It produces steady flux after switching",
+        "It reverses the turns ratio",
+        "It forces secondary resistance to zero"
+      ],
+      "correctIndex": 1,
+      "explanation": "After the switching transient, steady current gives steady flux and therefore no continuing induced secondary emf. A transformer needs changing flux rather than current merely being present.",
+      "sourceEvidence": "Direct current creates only a brief transient during switching and cannot sustain transformer action because steady current produces steady flux.",
+      "misconceptionTargeted": "Expecting a transformer to operate continuously from steady direct current"
+    },
+    {
+      "id": "electromagnetic-induction--transformers--q3",
+      "sectionId": "transformers",
+      "question": "An ideal transformer has 100 primary turns, 400 secondary turns, and 12 volts on the primary. What is the secondary voltage?",
+      "options": [
+        "3 volts",
+        "12 volts",
+        "48 volts",
+        "400 volts"
+      ],
+      "correctIndex": 2,
+      "explanation": "The turns ratio is four, so the secondary voltage is four times 12 volts, or 48 volts. Using the inverse ratio would describe a step-down arrangement instead.",
+      "sourceEvidence": "For an ideal transformer, the voltage ratio equals the turns ratio: Vs/Vp = Ns/Np.",
+      "misconceptionTargeted": "Inverting the primary-to-secondary turns ratio"
+    },
+    {
+      "id": "electromagnetic-induction--transformers--q4",
+      "sectionId": "transformers",
+      "question": "What happens to current in an ideal step-up transformer?",
+      "options": [
+        "It becomes zero regardless of power",
+        "It increases by the same factor as voltage",
+        "It remains unchanged for every load",
+        "It decreases as voltage increases"
+      ],
+      "correctIndex": 3,
+      "explanation": "Approximate power conservation requires current to fall when voltage rises. Increasing both voltage and current would imply unexplained power amplification.",
+      "sourceEvidence": "Conservation of power gives VpIp = VsIs, so a step-up transformer increases voltage while decreasing current, and a step-down transformer does the reverse.",
+      "misconceptionTargeted": "Assuming a step-up transformer amplifies both voltage and current"
+    },
+    {
+      "id": "electromagnetic-induction--transformers--q5",
+      "sectionId": "transformers",
+      "question": "Which process causes energy loss in a real transformer?",
+      "options": [
+        "Eddy currents in the core",
+        "Ideal power conservation",
+        "Mutual induction itself",
+        "The algebraic turns ratio"
+      ],
+      "correctIndex": 0,
+      "explanation": "Eddy currents dissipate energy as heating and are among several real transformer losses. Ideal equations and mutual induction describe transfer rather than a specific dissipative mechanism.",
+      "sourceEvidence": "Real transformers lose energy through winding resistance, eddy currents, hysteresis, and incomplete flux linkage, although laminated cores and suitable magnetic materials reduce these losses.",
+      "misconceptionTargeted": "Treating a real transformer as perfectly efficient"
+    },
+    {
+      "id": "electromagnetic-induction--transformers--q6",
+      "sectionId": "transformers",
+      "question": "For fixed transmitted power, why does raising grid voltage reduce line loss?",
+      "options": [
+        "It raises resistance to infinity",
+        "It lowers current",
+        "It eliminates all charge motion",
+        "It increases current proportionally"
+      ],
+      "correctIndex": 1,
+      "explanation": "Power equals voltage times current, so higher voltage allows the same power at lower current. Resistive heating depends on current squared and is not removed by creating infinite resistance.",
+      "sourceEvidence": "For a fixed delivered power P = VI, raising V lowers I; because line heating is I²R, the loss falls with the square of current.",
+      "misconceptionTargeted": "Assuming high-voltage transmission reduces losses by increasing current"
+    },
+    {
+      "id": "electromagnetic-induction--transformers--q7",
+      "sectionId": "transformers",
+      "question": "If transmission current is reduced by a factor of ten at fixed line resistance, how does I²R heating change?",
+      "options": [
+        "It becomes one tenth",
+        "It stays unchanged",
+        "It becomes one hundredth",
+        "It becomes one hundred times larger"
+      ],
+      "correctIndex": 2,
+      "explanation": "Squaring a one-tenth current gives one hundredth of the original resistive loss. A linear one-tenth result overlooks the square in I²R.",
+      "sourceEvidence": "For a fixed delivered power P = VI, raising V lowers I; because line heating is I²R, the loss falls with the square of current.",
+      "misconceptionTargeted": "Treating resistive line heating as directly proportional to current rather than current squared"
+    },
+    {
+      "id": "electromagnetic-induction--transformers--q8",
+      "sectionId": "transformers",
+      "question": "Which pioneers helped develop practical alternating-current systems for long-distance distribution?",
+      "options": [
+        "Thomas Young and Christiaan Huygens",
+        "Werner Heisenberg and Max Planck",
+        "Robert Millikan and Louis de Broglie",
+        "Nikola Tesla and George Westinghouse"
+      ],
+      "correctIndex": 3,
+      "explanation": "Tesla, Westinghouse, and collaborators advanced practical alternating-current distribution. The other pairs are associated with quantum theory or wave optics.",
+      "sourceEvidence": "Nikola Tesla, George Westinghouse, and others developed practical alternating-current systems that made efficient long-distance distribution possible.",
+      "misconceptionTargeted": "Attributing alternating-current distribution development to unrelated physicists"
+    },
+    {
+      "id": "electromagnetic-induction--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "Which angle should be used in ΦB = BA cos θ?",
+      "options": [
+        "The angle from B to the area normal",
+        "The angle from B to the surface plane without conversion",
+        "The angle between voltage and current",
+        "The coil's geographic bearing"
+      ],
+      "correctIndex": 0,
+      "explanation": "The area vector is normal to the surface, and magnetic flux uses its angle with B. Using the plane angle directly reverses the zero and maximum cases.",
+      "sourceEvidence": "Use the angle between B and the area normal in ΦB = BA cos θ, not the angle between B and the plane.",
+      "misconceptionTargeted": "Using the surface-plane angle in the cosine flux formula"
+    },
+    {
+      "id": "electromagnetic-induction--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "Which situation induces the larger emf?",
+      "options": [
+        "A large flux held perfectly constant",
+        "A small flux changing rapidly",
+        "Any field parallel to an unchanging loop plane",
+        "A stationary loop with unchanging linkage"
+      ],
+      "correctIndex": 1,
+      "explanation": "Induced emf depends on flux-change rate, so a rapid small change can exceed a large constant linkage. Flux magnitude alone does not produce emf when its time derivative is zero.",
+      "sourceEvidence": "A large constant flux does not induce emf, while a small but rapidly changing flux can.",
+      "misconceptionTargeted": "Comparing induction by flux amount instead of flux-change rate"
+    },
+    {
+      "id": "electromagnetic-induction--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "What does Lenz's law always oppose?",
+      "options": [
+        "All current in the circuit",
+        "The original magnetic field in every case",
+        "The change in magnetic flux",
+        "The loop area"
+      ],
+      "correctIndex": 2,
+      "explanation": "The induced response resists the specific increase or decrease in linked flux. When an existing flux decreases, the induced field may point in the same direction as that field.",
+      "sourceEvidence": "Lenz’s law opposes the change in flux, not always the original field.",
+      "misconceptionTargeted": "Opposing the original field direction instead of the flux change"
+    },
+    {
+      "id": "electromagnetic-induction--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "After deciding whether signed flux increases or decreases, which rule determines induced-current direction?",
+      "options": [
+        "The ideal-gas law",
+        "The inverse-square law",
+        "The left-hand scalar rule",
+        "The right-hand grip rule"
+      ],
+      "correctIndex": 3,
+      "explanation": "The right-hand grip rule converts the required induced magnetic-field direction into current direction. Magnitude formulas alone do not supply the loop-current orientation.",
+      "sourceEvidence": "Determine whether the signed flux is increasing or decreasing before selecting the induced field direction, then use the right-hand grip rule to infer current.",
+      "misconceptionTargeted": "Choosing current direction before determining the induced magnetic field"
+    },
+    {
+      "id": "electromagnetic-induction--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "After applying Lenz's law verbally to choose direction, should another minus sign be added?",
+      "options": [
+        "No, that would count the direction reversal twice",
+        "Yes, every induction answer needs two minus signs",
+        "Only for constant flux",
+        "Only for an open circuit"
+      ],
+      "correctIndex": 0,
+      "explanation": "The Faraday negative sign and the verbal Lenz rule encode the same directional reversal. Applying both independently a second time reverses the answer back incorrectly.",
+      "sourceEvidence": "The negative sign in Faraday’s law gives direction; do not attach an extra negative after already applying Lenz’s law verbally.",
+      "misconceptionTargeted": "Double-counting the negative direction in Faraday and Lenz reasoning"
+    },
+    {
+      "id": "electromagnetic-induction--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "Under what operation do standard transformer equations apply?",
+      "options": [
+        "Steady direct current after transients",
+        "Alternating operation",
+        "A disconnected secondary with no changing flux",
+        "Static charge on both coils"
+      ],
+      "correctIndex": 1,
+      "explanation": "The turns-ratio transformer model requires changing flux produced by alternating operation. Steady direct current supplies only a switching transient and no sustained transformation.",
+      "sourceEvidence": "Transformer equations assume alternating operation and, for power equality, ideal efficiency.",
+      "misconceptionTargeted": "Applying transformer turns ratios to steady direct-current operation"
+    },
+    {
+      "id": "electromagnetic-induction--exam-traps--q7",
+      "sectionId": "exam-traps",
+      "question": "Does an ideal step-up transformer amplify power?",
+      "options": [
+        "Yes, it creates energy in the core",
+        "Yes, voltage and current both rise",
+        "No, higher voltage is paired with lower current",
+        "No, because output voltage must fall"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ideal power remains conserved as the transformer trades increased voltage for decreased current. Calling it a power amplifier violates energy conservation.",
+      "sourceEvidence": "A step-up transformer raises voltage but lowers current; it does not amplify power.",
+      "misconceptionTargeted": "Assuming a step-up transformer creates additional electrical power"
+    },
+    {
+      "id": "electromagnetic-induction--exam-traps--q8",
+      "sectionId": "exam-traps",
+      "question": "A loop has an induced emf but is open. Why is there no sustained current?",
+      "options": [
+        "The induced emf must be zero",
+        "Emf and current are always identical",
+        "Open circuits have infinite magnetic flux",
+        "Current requires a closed circuit and depends on impedance"
+      ],
+      "correctIndex": 3,
+      "explanation": "Emf can exist across an interruption, but continuous charge flow needs a closed path and finite impedance. Inferring current directly from emf without circuit conditions confuses cause with response.",
+      "sourceEvidence": "In induction problems, distinguish emf from current: current additionally requires a closed circuit and depends on impedance.",
+      "misconceptionTargeted": "Treating induced emf as proof of induced current in an open circuit"
+    }
+  ]
+}

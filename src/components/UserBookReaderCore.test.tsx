@@ -20,6 +20,10 @@ vi.mock('../services/sourceContext', () => ({
 }))
 vi.mock('../services/localOcr', () => ({
   recognizeLocalImage: mocks.recognizeLocalImage,
+  prewarmLocalOcr: vi.fn().mockResolvedValue(undefined),
+}))
+vi.mock('../services/mathVisionParser', () => ({
+  parseMathVision: vi.fn().mockRejectedValue(new Error('vision unconfigured')),
 }))
 vi.mock('../services/learningCompanionService', () => ({
   createLearningCompanion: mocks.createLearningCompanion,

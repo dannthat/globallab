@@ -1,0 +1,606 @@
+{
+  "topicId": "wave-mechanics",
+  "subjectId": "physics",
+  "questions": [
+    {
+      "id": "wave-mechanics--overview--q1",
+      "sectionId": "overview",
+      "question": "A pulse travels along a stretched rope. What moves from one end of the rope to the other?",
+      "options": [
+        "Energy and momentum carried by the disturbance",
+        "The rope material as a whole",
+        "Every rope particle at the pulse speed",
+        "A permanent displacement of all particles"
+      ],
+      "correctIndex": 0,
+      "explanation": "The disturbance transfers energy and momentum while rope particles oscillate locally. The medium does not undergo net transport with the travelling pattern.",
+      "sourceEvidence": "A wave is a disturbance that transfers energy and momentum without requiring a net transport of matter.",
+      "misconceptionTargeted": "Confusing propagation of a wave pattern with bulk transport of the medium"
+    },
+    {
+      "id": "wave-mechanics--overview--q2",
+      "sectionId": "overview",
+      "question": "Which wave can propagate through an empty vacuum?",
+      "options": [
+        "A sound wave",
+        "An electromagnetic wave",
+        "A water surface wave",
+        "A compression wave in a spring"
+      ],
+      "correctIndex": 1,
+      "explanation": "Electric and magnetic field oscillations can travel without a material medium. Sound, water waves, and spring compressions require matter whose particles respond.",
+      "sourceEvidence": "Electromagnetic waves are oscillations of electric and magnetic fields and can cross a vacuum.",
+      "misconceptionTargeted": "Assuming every wave requires a material medium"
+    },
+    {
+      "id": "wave-mechanics--overview--q3",
+      "sectionId": "overview",
+      "question": "How does a pulse differ from a periodic wave?",
+      "options": [
+        "A pulse has no speed",
+        "A pulse carries matter, while a periodic wave does not",
+        "A pulse is one disturbance, while a periodic wave repeats",
+        "A periodic wave can only exist in a vacuum"
+      ],
+      "correctIndex": 2,
+      "explanation": "A pulse occurs once while a periodic wave reproduces its pattern in time and space. The distinction is repetition rather than matter transport, speed, or medium type.",
+      "sourceEvidence": "A pulse is a single disturbance, whereas a periodic wave repeats in time and space.",
+      "misconceptionTargeted": "Defining pulse versus periodic behaviour by medium or transport rather than repetition"
+    },
+    {
+      "id": "wave-mechanics--overview--q4",
+      "sectionId": "overview",
+      "question": "Which quantity is the maximum displacement of a medium particle from equilibrium?",
+      "options": [
+        "Wavelength",
+        "Frequency",
+        "Phase speed",
+        "Amplitude"
+      ],
+      "correctIndex": 3,
+      "explanation": "Amplitude measures the greatest displacement away from equilibrium. Wavelength is a spatial separation and frequency is a cycle rate.",
+      "sourceEvidence": "Amplitude measures the maximum displacement from equilibrium, wavelength is the distance between equal-phase points, and frequency counts cycles per second.",
+      "misconceptionTargeted": "Confusing amplitude with wavelength or frequency"
+    },
+    {
+      "id": "wave-mechanics--overview--q5",
+      "sectionId": "overview",
+      "question": "A periodic wave has a period of 0.25 seconds. What is its frequency?",
+      "options": [
+        "4 hertz",
+        "2 hertz",
+        "0.25 hertz",
+        "8 hertz"
+      ],
+      "correctIndex": 0,
+      "explanation": "Frequency is the reciprocal of period, so one divided by 0.25 seconds is 4 hertz. Multiplying by the period instead of taking its reciprocal gives the wrong cycle rate.",
+      "sourceEvidence": "The period is the time per cycle, so f = 1/T.",
+      "misconceptionTargeted": "Treating period and frequency as directly proportional"
+    },
+    {
+      "id": "wave-mechanics--overview--q6",
+      "sectionId": "overview",
+      "question": "A source doubles its frequency while the wave remains in the same medium. What happens to wavelength?",
+      "options": [
+        "It doubles",
+        "It halves",
+        "It stays fixed while speed doubles",
+        "It quadruples"
+      ],
+      "correctIndex": 1,
+      "explanation": "The medium keeps the wave speed essentially fixed, so v = fλ requires wavelength to halve. Source frequency does not normally set a new speed in the unchanged medium.",
+      "sourceEvidence": "Wave speed is set mainly by the medium, not by the source frequency; changing frequency in one medium therefore changes wavelength.",
+      "misconceptionTargeted": "Assuming frequency changes wave speed instead of wavelength in one medium"
+    },
+    {
+      "id": "wave-mechanics--overview--q7",
+      "sectionId": "overview",
+      "question": "In which direction do particles oscillate in a longitudinal wave?",
+      "options": [
+        "Only upward",
+        "Perpendicular to propagation",
+        "Parallel to propagation",
+        "In no direction"
+      ],
+      "correctIndex": 2,
+      "explanation": "Longitudinal oscillations lie parallel to the direction in which the wave travels. Perpendicular oscillation defines a transverse wave instead.",
+      "sourceEvidence": "For a transverse wave, oscillations are perpendicular to the direction of propagation; for a longitudinal wave, they are parallel.",
+      "misconceptionTargeted": "Swapping transverse and longitudinal particle motion"
+    },
+    {
+      "id": "wave-mechanics--overview--q8",
+      "sectionId": "overview",
+      "question": "Which scientist formalised the secondary-wavelet construction used to explain diffraction?",
+      "options": [
+        "Werner Heisenberg",
+        "Albert Einstein",
+        "Michael Faraday",
+        "Christiaan Huygens"
+      ],
+      "correctIndex": 3,
+      "explanation": "Christiaan Huygens described each wavefront point as a source of secondary wavelets. The other scientists are associated with relativity, induction, or quantum uncertainty.",
+      "sourceEvidence": "Christiaan Huygens formalised a wavefront construction in 1678, treating every point on a wavefront as a source of secondary wavelets.",
+      "misconceptionTargeted": "Attributing Huygens wavefront construction to another physicist"
+    },
+    {
+      "id": "wave-mechanics--superposition--q1",
+      "sectionId": "superposition",
+      "question": "Two pulses overlap on a linear string. How is the instantaneous resultant displacement found?",
+      "options": [
+        "Add their displacements algebraically",
+        "Multiply their displacements",
+        "Keep only the larger displacement",
+        "Average their speeds"
+      ],
+      "correctIndex": 0,
+      "explanation": "Linear superposition makes the resultant displacement the signed sum of the individual displacements. Multiplication, maximum selection, and speed averaging do not describe wave overlap.",
+      "sourceEvidence": "The superposition principle states that when waves overlap in a linear medium, the resultant displacement equals the algebraic sum of the individual displacements.",
+      "misconceptionTargeted": "Adding wave magnitudes without respecting signed displacement"
+    },
+    {
+      "id": "wave-mechanics--superposition--q2",
+      "sectionId": "superposition",
+      "question": "What happens to two ideal pulses after they overlap and separate?",
+      "options": [
+        "They permanently merge",
+        "Each continues with its original form",
+        "They vanish",
+        "They exchange frequencies"
+      ],
+      "correctIndex": 1,
+      "explanation": "Ideal linear waves pass through overlap and then continue without permanent alteration. Temporary superposition does not make them merge, disappear, or swap frequencies.",
+      "sourceEvidence": "The waves do not permanently alter one another; after overlap, each continues with its original form in an ideal medium.",
+      "misconceptionTargeted": "Believing interference permanently changes the component waves"
+    },
+    {
+      "id": "wave-mechanics--superposition--q3",
+      "sectionId": "superposition",
+      "question": "When do two equal waves produce maximum constructive interference?",
+      "options": [
+        "Their frequencies are unrelated",
+        "A crest meets a trough half a cycle out of phase",
+        "A crest meets a crest in phase",
+        "Their amplitudes are both zero"
+      ],
+      "correctIndex": 2,
+      "explanation": "In-phase crests add to produce the largest resultant amplitude. A crest meeting a trough is the condition for cancellation rather than reinforcement.",
+      "sourceEvidence": "Constructive interference occurs where waves arrive in phase, so crest meets crest and their amplitudes add.",
+      "misconceptionTargeted": "Reversing the phase conditions for constructive and destructive interference"
+    },
+    {
+      "id": "wave-mechanics--superposition--q4",
+      "sectionId": "superposition",
+      "question": "Two equal-amplitude waves arrive half a cycle out of phase. What is the result?",
+      "options": [
+        "A permanent standing wave everywhere",
+        "Maximum constructive interference",
+        "A doubled frequency",
+        "Complete destructive interference"
+      ],
+      "correctIndex": 3,
+      "explanation": "Equal opposite displacements subtract to zero when the waves are half a cycle out of phase. Phase opposition changes resultant amplitude rather than doubling frequency automatically.",
+      "sourceEvidence": "Destructive interference occurs where waves arrive half a cycle out of phase, so crest meets trough and amplitudes subtract.",
+      "misconceptionTargeted": "Treating half-cycle phase difference as reinforcement"
+    },
+    {
+      "id": "wave-mechanics--superposition--q5",
+      "sectionId": "superposition",
+      "question": "Which path difference produces destructive interference for equal coherent sources?",
+      "options": [
+        "(m + 1/2)λ",
+        "mλ",
+        "2mλ only",
+        "λ/4 for every order"
+      ],
+      "correctIndex": 0,
+      "explanation": "A half-integer multiple of wavelength makes the arrivals opposite in phase. An integer multiple returns the waves to the same phase and produces constructive interference.",
+      "sourceEvidence": "For coherent sources with a constant phase difference, a path difference mλ produces constructive interference, while a path difference (m + 1/2)λ produces destructive interference.",
+      "misconceptionTargeted": "Swapping the integer and half-integer path-difference conditions"
+    },
+    {
+      "id": "wave-mechanics--superposition--q6",
+      "sectionId": "superposition",
+      "question": "What forms when two equal-frequency waves travel in opposite directions?",
+      "options": [
+        "A single accelerating particle",
+        "A standing wave",
+        "A direct current",
+        "A nonperiodic pulse only"
+      ],
+      "correctIndex": 1,
+      "explanation": "Oppositely travelling waves of the same frequency superpose into a standing-wave pattern. The result is neither charge flow nor a particle trajectory.",
+      "sourceEvidence": "Two equal-frequency waves travelling in opposite directions form a standing wave.",
+      "misconceptionTargeted": "Assuming oppositely travelling waves simply cancel everywhere"
+    },
+    {
+      "id": "wave-mechanics--superposition--q7",
+      "sectionId": "superposition",
+      "question": "Which statement correctly identifies nodes and antinodes in a standing wave?",
+      "options": [
+        "Nodes have maximum amplitude and antinodes stay still",
+        "Both move with the wave speed",
+        "Nodes stay at zero displacement and antinodes have maximum amplitude",
+        "Both always have zero displacement"
+      ],
+      "correctIndex": 2,
+      "explanation": "Nodes are fixed cancellation points while antinodes undergo the largest oscillations. Reversing their roles misidentifies the defining features of the standing pattern.",
+      "sourceEvidence": "Nodes remain at zero displacement and antinodes oscillate with maximum amplitude.",
+      "misconceptionTargeted": "Reversing the definitions of nodes and antinodes"
+    },
+    {
+      "id": "wave-mechanics--superposition--q8",
+      "sectionId": "superposition",
+      "question": "Why does a string fixed at both ends support discrete harmonics?",
+      "options": [
+        "The string absorbs all nonzero amplitudes",
+        "Every frequency travels at a different speed",
+        "The endpoints must be antinodes",
+        "Only an integer number of half-wavelengths can fit its length"
+      ],
+      "correctIndex": 3,
+      "explanation": "Fixed boundaries require nodes at both ends, allowing only lengths containing integer half-wavelengths. The endpoints are nodes rather than antinodes, and the selection is a boundary condition.",
+      "sourceEvidence": "A string fixed at both ends supports only wavelengths that fit an integer number of half-wavelengths into its length, producing discrete harmonics.",
+      "misconceptionTargeted": "Ignoring the fixed-end boundary condition when selecting standing-wave modes"
+    },
+    {
+      "id": "wave-mechanics--diffraction--q1",
+      "sectionId": "diffraction",
+      "question": "What is diffraction?",
+      "options": [
+        "The spreading and bending of a wave at an edge or aperture",
+        "The permanent transfer of medium particles",
+        "The conversion of every wave into particles",
+        "The increase of wave speed with amplitude"
+      ],
+      "correctIndex": 0,
+      "explanation": "Diffraction describes how a wave spreads after encountering an opening or boundary edge. It is not bulk matter transport, a universal conversion, or an amplitude-speed rule.",
+      "sourceEvidence": "Diffraction is the spreading and bending of a wave as it passes an edge or aperture.",
+      "misconceptionTargeted": "Confusing diffraction with reflection or matter transport"
+    },
+    {
+      "id": "wave-mechanics--diffraction--q2",
+      "sectionId": "diffraction",
+      "question": "When is diffraction most pronounced?",
+      "options": [
+        "When an opening is infinitely wider than the wavelength",
+        "When an opening is comparable to the wavelength",
+        "Only when amplitude is zero",
+        "Only for waves in a vacuum"
+      ],
+      "correctIndex": 1,
+      "explanation": "An aperture comparable in size to the wavelength produces substantial spreading. A very large opening relative to wavelength gives much less noticeable diffraction.",
+      "sourceEvidence": "The effect is most pronounced when the opening or obstacle has a size comparable to the wavelength.",
+      "misconceptionTargeted": "Assuming diffraction is strongest through the widest opening"
+    },
+    {
+      "id": "wave-mechanics--diffraction--q3",
+      "sectionId": "diffraction",
+      "question": "How does Huygens' principle model a wavefront after an aperture?",
+      "options": [
+        "Wave energy becomes stationary",
+        "Only the centre point continues",
+        "Each exposed point launches a secondary wavelet",
+        "The aperture creates new matter particles"
+      ],
+      "correctIndex": 2,
+      "explanation": "Secondary wavelets from each exposed point combine to form the next wavefront. Restricting propagation to one ray cannot explain the observed spreading.",
+      "sourceEvidence": "Huygens’ principle explains the spreading by treating every exposed point on a wavefront as a source of secondary wavelets whose envelope forms the next wavefront.",
+      "misconceptionTargeted": "Replacing Huygens wavelets with a single undeviated ray"
+    },
+    {
+      "id": "wave-mechanics--diffraction--q4",
+      "sectionId": "diffraction",
+      "question": "For a single slit of width a, what does a sin θ = mλ locate for nonzero integer m?",
+      "options": [
+        "Bright maxima",
+        "The source frequency",
+        "The wave speed",
+        "Dark minima"
+      ],
+      "correctIndex": 3,
+      "explanation": "The single-slit relation identifies angles where contributions across the slit cancel. It does not locate double-slit bright fringes or determine wave kinematics.",
+      "sourceEvidence": "Dark minima occur when a sin θ = mλ for nonzero integer m.",
+      "misconceptionTargeted": "Using the single-slit minimum formula as a bright-fringe condition"
+    },
+    {
+      "id": "wave-mechanics--diffraction--q5",
+      "sectionId": "diffraction",
+      "question": "What happens to the central diffraction maximum when a single slit becomes narrower?",
+      "options": [
+        "It becomes wider",
+        "It becomes narrower",
+        "It keeps the same width",
+        "It disappears for every wavelength"
+      ],
+      "correctIndex": 0,
+      "explanation": "A narrower slit requires a larger angle to reach the first cancellation minimum, widening the centre. Geometric intuition that a narrower opening must create a narrower wave pattern fails for diffraction.",
+      "sourceEvidence": "A narrower slit produces a wider central maximum because a larger angle is needed to establish the required path difference.",
+      "misconceptionTargeted": "Assuming a narrower slit creates a narrower diffraction pattern"
+    },
+    {
+      "id": "wave-mechanics--diffraction--q6",
+      "sectionId": "diffraction",
+      "question": "At fixed slit width, how does increasing wavelength affect the diffraction pattern?",
+      "options": [
+        "It narrows the pattern",
+        "It broadens the pattern",
+        "It removes all minima",
+        "It changes only amplitude"
+      ],
+      "correctIndex": 1,
+      "explanation": "A larger wavelength requires larger minimum angles and therefore broadens the diffraction pattern. Wavelength changes angular structure rather than only the wave amplitude.",
+      "sourceEvidence": "Increasing wavelength has the same broadening effect.",
+      "misconceptionTargeted": "Predicting that longer wavelength reduces diffraction"
+    },
+    {
+      "id": "wave-mechanics--diffraction--q7",
+      "sectionId": "diffraction",
+      "question": "Which change improves the diffraction-limited angular resolution of a telescope?",
+      "options": [
+        "Reduce the aperture diameter",
+        "Use a longer wavelength at the same diameter",
+        "Use a larger mirror diameter",
+        "Increase image brightness only"
+      ],
+      "correctIndex": 2,
+      "explanation": "Increasing aperture diameter reduces the Rayleigh angle and separates finer details. Longer wavelength or smaller diameter makes the diffraction limit worse.",
+      "sourceEvidence": "Larger telescope mirrors and shorter wavelengths therefore reveal finer structure.",
+      "misconceptionTargeted": "Confusing brightness with diffraction-limited resolution"
+    },
+    {
+      "id": "wave-mechanics--diffraction--q8",
+      "sectionId": "diffraction",
+      "question": "If both wavelength λ and aperture diameter D double, what happens to the Rayleigh angular limit 1.22λ/D?",
+      "options": [
+        "It doubles",
+        "It halves",
+        "It becomes four times larger",
+        "It stays unchanged"
+      ],
+      "correctIndex": 3,
+      "explanation": "Doubling numerator and denominator leaves their ratio and the angular limit unchanged. Changing only one factor would alter resolution, but equal scaling cancels.",
+      "sourceEvidence": "The Rayleigh criterion gives an angular resolution of approximately 1.22λ/D for a circular aperture of diameter D.",
+      "misconceptionTargeted": "Scaling wavelength or aperture without considering their ratio"
+    },
+    {
+      "id": "wave-mechanics--double-slit--q1",
+      "sectionId": "double-slit",
+      "question": "Whose double-slit experiment supplied decisive evidence for the wave behaviour of light?",
+      "options": [
+        "Thomas Young",
+        "Michael Faraday",
+        "Robert Millikan",
+        "Heinrich Lenz"
+      ],
+      "correctIndex": 0,
+      "explanation": "Thomas Young used two slits to produce the characteristic interference pattern of light waves. The other scientists are linked to induction or photoelectric measurements.",
+      "sourceEvidence": "Thomas Young’s double-slit experiment provided decisive evidence for the wave behaviour of light.",
+      "misconceptionTargeted": "Attributing Young's double-slit result to another experimental physicist"
+    },
+    {
+      "id": "wave-mechanics--double-slit--q2",
+      "sectionId": "double-slit",
+      "question": "Why do the two narrow slits need a common monochromatic source?",
+      "options": [
+        "To make each slit emit a different random frequency",
+        "To act as coherent secondary sources",
+        "To prevent all overlap",
+        "To turn light into sound"
+      ],
+      "correctIndex": 1,
+      "explanation": "A common monochromatic source gives the slits a stable phase relationship needed for visible fringes. Random independent phases would average the interference away.",
+      "sourceEvidence": "A monochromatic source illuminates two narrow, closely spaced slits that act as coherent secondary sources.",
+      "misconceptionTargeted": "Assuming unrelated slit sources maintain a stable interference pattern"
+    },
+    {
+      "id": "wave-mechanics--double-slit--q3",
+      "sectionId": "double-slit",
+      "question": "What path difference produces a bright double-slit fringe?",
+      "options": [
+        "Exactly one quarter wavelength only",
+        "A half-integer multiple of wavelength",
+        "An integer multiple of wavelength",
+        "Any rapidly changing difference"
+      ],
+      "correctIndex": 2,
+      "explanation": "An integer number of wavelengths brings the two arrivals back into phase. A half-integer difference produces destructive rather than bright interference.",
+      "sourceEvidence": "Bright fringes occur where the path difference is an integer multiple of wavelength.",
+      "misconceptionTargeted": "Using the destructive half-integer condition for a bright fringe"
+    },
+    {
+      "id": "wave-mechanics--double-slit--q4",
+      "sectionId": "double-slit",
+      "question": "For slit separation d, which relation gives the angle of a bright fringe?",
+      "options": [
+        "v = d/θ",
+        "d cos θ = λ/2 for all fringes",
+        "a sin θ = mλ with a as single-slit width",
+        "d sin θ = mλ"
+      ],
+      "correctIndex": 3,
+      "explanation": "The double-slit bright-fringe condition equates d sin θ to an integer wavelength multiple. The single-slit width formula locates diffraction minima instead.",
+      "sourceEvidence": "For slit separation d and screen distance L much larger than d, the angle to a bright fringe satisfies d sin θ = mλ.",
+      "misconceptionTargeted": "Using single-slit width in place of double-slit separation"
+    },
+    {
+      "id": "wave-mechanics--double-slit--q5",
+      "sectionId": "double-slit",
+      "question": "If screen distance L doubles while λ and d remain fixed, what happens to adjacent-fringe spacing?",
+      "options": [
+        "It doubles",
+        "It stays fixed",
+        "It halves",
+        "It quadruples"
+      ],
+      "correctIndex": 0,
+      "explanation": "The small-angle spacing λL/d is directly proportional to screen distance. An inverse dependence on L would contradict the geometry of a more distant screen.",
+      "sourceEvidence": "At small angles, sin θ is approximately y/L, so adjacent bright fringes are separated by Δy ≈ λL/d.",
+      "misconceptionTargeted": "Treating fringe spacing as inversely proportional to screen distance"
+    },
+    {
+      "id": "wave-mechanics--double-slit--q6",
+      "sectionId": "double-slit",
+      "question": "How does increasing slit separation d affect the double-slit fringe pattern?",
+      "options": [
+        "It spreads the fringes farther apart",
+        "It compresses the fringes",
+        "It changes only their colour",
+        "It eliminates the central fringe"
+      ],
+      "correctIndex": 1,
+      "explanation": "Fringe spacing is inversely proportional to slit separation, so larger d brings fringes closer. Greater separation does not remove the zero-order fringe or change wavelength.",
+      "sourceEvidence": "Larger wavelength or screen distance increases fringe spacing, while greater slit separation compresses the pattern.",
+      "misconceptionTargeted": "Treating slit separation as directly proportional to fringe spacing"
+    },
+    {
+      "id": "wave-mechanics--double-slit--q7",
+      "sectionId": "double-slit",
+      "question": "What appears when photons are sent through a double slit one at a time for a long experiment?",
+      "options": [
+        "Only two illuminated bands",
+        "A continuous smear from each individual photon",
+        "Localised impacts that build an interference distribution",
+        "No detections until two photons overlap"
+      ],
+      "correctIndex": 2,
+      "explanation": "Each event is localised, but many events accumulate according to an interference probability distribution. The pattern does not require photons to collide or arrive in pairs.",
+      "sourceEvidence": "When electrons, neutrons, atoms, or photons are sent through the apparatus one at a time, individual detections appear as localised impacts but gradually build an interference distribution.",
+      "misconceptionTargeted": "Believing single-particle interference requires particles to collide with each other"
+    },
+    {
+      "id": "wave-mechanics--double-slit--q8",
+      "sectionId": "double-slit",
+      "question": "What happens when reliable which-path information is obtained in a double-slit experiment?",
+      "options": [
+        "The light speed changes",
+        "Fringe spacing doubles automatically",
+        "Every particle stops at the slit",
+        "Interference disappears"
+      ],
+      "correctIndex": 3,
+      "explanation": "Path information makes the alternatives distinguishable, preventing their amplitudes from producing the same interference terms. The effect concerns measurement context rather than particle speed or automatic geometric rescaling.",
+      "sourceEvidence": "Obtaining reliable which-path information removes the interference because the alternatives become distinguishable.",
+      "misconceptionTargeted": "Assuming path information can be acquired without affecting interference"
+    },
+    {
+      "id": "wave-mechanics--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "As a mechanical wave travels through a medium, what do the medium particles normally do?",
+      "options": [
+        "Oscillate locally around equilibrium",
+        "Travel with the wave across the entire medium",
+        "Remain permanently displaced",
+        "Move only in the propagation direction"
+      ],
+      "correctIndex": 0,
+      "explanation": "Medium particles oscillate around their local equilibrium positions while the pattern propagates. Following the wave across the medium would imply net matter transport that is not normally present.",
+      "sourceEvidence": "Particles of a mechanical medium oscillate around equilibrium; they do not normally travel with the wave.",
+      "misconceptionTargeted": "Confusing local particle oscillation with wave propagation"
+    },
+    {
+      "id": "wave-mechanics--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "A wave crosses into a new medium. Which quantity remains fixed by the source?",
+      "options": [
+        "Speed",
+        "Frequency",
+        "Wavelength",
+        "Impedance"
+      ],
+      "correctIndex": 1,
+      "explanation": "The source continues to set the oscillation frequency across the boundary. The new medium may change speed and wavelength together.",
+      "sourceEvidence": "Frequency is fixed by the source and remains unchanged at a boundary, while speed and wavelength may change.",
+      "misconceptionTargeted": "Changing frequency at a boundary instead of speed and wavelength"
+    },
+    {
+      "id": "wave-mechanics--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "In a linear medium, what does increasing wave amplitude not automatically increase?",
+      "options": [
+        "Energy transport",
+        "Maximum displacement",
+        "Wave speed",
+        "Oscillation size"
+      ],
+      "correctIndex": 2,
+      "explanation": "Linear wave speed is controlled mainly by medium properties rather than amplitude. Amplitude directly describes displacement and commonly affects transported energy.",
+      "sourceEvidence": "Amplitude is not wavelength, and increasing amplitude does not automatically increase wave speed in a linear medium.",
+      "misconceptionTargeted": "Equating larger amplitude with greater wave speed"
+    },
+    {
+      "id": "wave-mechanics--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "Which path difference gives complete destructive interference for equal amplitudes?",
+      "options": [
+        "Δr = mλ",
+        "Δr = 0 for every m",
+        "Δr = 2mλ",
+        "Δr = (m + 1/2)λ"
+      ],
+      "correctIndex": 3,
+      "explanation": "A half-integer wavelength difference makes equal waves arrive in opposite phase and cancel. An integer wavelength difference produces constructive alignment.",
+      "sourceEvidence": "Constructive interference occurs at Δr = mλ, while complete destructive interference for equal amplitudes occurs at Δr = (m + 1/2)λ.",
+      "misconceptionTargeted": "Swapping constructive and destructive path-difference formulas"
+    },
+    {
+      "id": "wave-mechanics--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "Which formula-feature pairing is correct?",
+      "options": [
+        "a sin θ = mλ locates single-slit dark minima",
+        "a sin θ = mλ locates double-slit bright maxima",
+        "d sin θ = mλ locates single-slit dark minima",
+        "d sin θ = mλ gives wave speed"
+      ],
+      "correctIndex": 0,
+      "explanation": "The aperture width a belongs to the single-slit cancellation condition for dark minima. Double-slit bright maxima use slit separation d instead.",
+      "sourceEvidence": "In single-slit diffraction, a sin θ = mλ identifies dark minima; in a double slit, d sin θ = mλ identifies bright maxima.",
+      "misconceptionTargeted": "Interchanging slit width and slit separation formulas"
+    },
+    {
+      "id": "wave-mechanics--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "When is the approximation y ≈ L sin θ appropriate?",
+      "options": [
+        "For every angle including ninety degrees",
+        "For small θ with a distant screen",
+        "Only when L equals the slit separation",
+        "Only for sound waves"
+      ],
+      "correctIndex": 1,
+      "explanation": "The screen-coordinate approximation follows from small-angle geometry and a screen distant relative to the slits. Using it at large angles treats an approximation as an identity.",
+      "sourceEvidence": "The relation y ≈ L sin θ is accurate only when θ is small and the screen is distant relative to the slit separation.",
+      "misconceptionTargeted": "Using a small-angle approximation outside its geometric range"
+    },
+    {
+      "id": "wave-mechanics--exam-traps--q7",
+      "sectionId": "exam-traps",
+      "question": "Which order labels the central double-slit fringe?",
+      "options": [
+        "m = -1",
+        "m = 1/2",
+        "m = 0",
+        "m = 1 only"
+      ],
+      "correctIndex": 2,
+      "explanation": "Zero path difference at the centre corresponds to order m = 0. Beginning the count at one omits the central maximum.",
+      "sourceEvidence": "Keep units consistent, convert nanometres before substitution, and include the central fringe as m = 0.",
+      "misconceptionTargeted": "Omitting the zero-order central fringe or failing to convert wavelength units"
+    },
+    {
+      "id": "wave-mechanics--exam-traps--q8",
+      "sectionId": "exam-traps",
+      "question": "Why do two unrelated light sources usually fail to produce a stable interference pattern?",
+      "options": [
+        "Their light cannot diffract",
+        "Their photons have no momentum",
+        "Their amplitudes are always zero",
+        "Their phase difference varies too rapidly"
+      ],
+      "correctIndex": 3,
+      "explanation": "Rapidly changing relative phase makes bright and dark contributions average to nearly uniform intensity. Interference requires coherence rather than zero momentum or an inability to diffract.",
+      "sourceEvidence": "Finally, an interference pattern requires coherence; unrelated sources with rapidly varying phase differences average to uniform intensity.",
+      "misconceptionTargeted": "Assuming any two overlapping sources produce stable fringes without coherence"
+    }
+  ]
+}

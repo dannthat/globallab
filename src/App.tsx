@@ -1,8 +1,9 @@
-import { BookOpen, FlaskConical, Moon, Pencil, ShieldCheck, Sun } from 'lucide-react'
+import { Moon, Pencil, Sun } from 'lucide-react'
 import { lazy, Suspense, useEffect, useState, type FormEvent } from 'react'
 import { flushSync } from 'react-dom'
 import { LearnerControlPanel } from './components/LearnerControlPanel'
-import { LibraryShelf } from './components/LibraryShelf'
+import { HomePage } from './components/HomePage'
+import { LibraryPage } from './components/LibraryPage'
 import { OnboardingFlow } from './components/OnboardingFlow'
 import { UserBookReader } from './components/UserBookReader'
 import {
@@ -63,18 +64,22 @@ interface SiteHeaderProps {
   profile: StudentProfile
   learnerModel: LearnerModelController
   isDark: boolean
+  isLibraryOpen: boolean
   onSaveProfile: (interest: string) => void
   onToggleDark: () => void
   onHome: () => void
+  onOpenLibrary: () => void
 }
 
 function SiteHeader({
   profile,
   learnerModel,
   isDark,
+  isLibraryOpen,
   onSaveProfile,
   onToggleDark,
   onHome,
+  onOpenLibrary,
 }: SiteHeaderProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [draft, setDraft] = useState(profile.interest)
@@ -103,75 +108,90 @@ function SiteHeader({
   return (
     <header className="site-header">
       <button type="button" className="brand" onClick={onHome} aria-label="Global Lab home">
-        <span className="brand-mark" aria-hidden="true">
-          <FlaskConical size={21} strokeWidth={2.2} />
-        </span>
-        <span>
-          <span className="brand-name">Global Lab</span>
-          <span className="brand-subtitle">Your STEM companion</span>
-        </span>
+        <span className="brand-name">GlobalLab</span>
       </button>
 
-      <div className="profile-menu">
+      <nav className="site-nav" aria-label="Main navigation">
         <button
           type="button"
-          className="profile-chip"
-          aria-expanded={isEditing}
-          onClick={() => setIsEditing((current) => !current)}
+          className="site-nav-link"
+          aria-current={!isLibraryOpen ? 'page' : undefined}
+          onClick={onHome}
         >
-          <span className="profile-chip-label">Your lens</span>
-          <span className="profile-chip-interest">{profile.interest}</span>
-          <Pencil size={12} aria-hidden="true" />
+          Home
         </button>
+        <button
+          type="button"
+          className="site-nav-link"
+          aria-current={isLibraryOpen ? 'page' : undefined}
+          onClick={onOpenLibrary}
+        >
+          Library
+        </button>
+      </nav>
 
-        {isEditing && (
-          <form className="profile-popover animate-reveal" onSubmit={saveInterest}>
-            <label className="field-label" htmlFor="edit-interest">
-              Update your interest
-            </label>
-            <input
-              id="edit-interest"
-              className="profile-input"
-              value={draft}
-              maxLength={60}
-              autoFocus
-              onChange={(event) => setDraft(event.target.value)}
-            />
-            <div className="profile-popover-actions">
-              <button type="button" onClick={() => setIsEditing(false)}>
-                Cancel
-              </button>
-              <button type="submit" disabled={!draft.trim()}>
-                Save
-              </button>
-            </div>
-          </form>
-        )}
+      <div className="site-header-right">
+        <div className="profile-menu">
+          <button
+            type="button"
+            className="lens-pill"
+            aria-expanded={isEditing}
+            onClick={() => setIsEditing((current) => !current)}
+          >
+            <span className="lens-pill__interest">{profile.interest}</span>
+            <span className="lens-pill__label">lens</span>
+            <Pencil size={11} aria-hidden="true" />
+          </button>
+
+          {isEditing && (
+            <form className="profile-popover animate-reveal" onSubmit={saveInterest}>
+              <label className="field-label" htmlFor="edit-interest">
+                Update your interest
+              </label>
+              <input
+                id="edit-interest"
+                className="profile-input"
+                value={draft}
+                maxLength={60}
+                autoFocus
+                onChange={(event) => setDraft(event.target.value)}
+              />
+              <div className="profile-popover-actions">
+                <button type="button" onClick={() => setIsEditing(false)}>
+                  Cancel
+                </button>
+                <button type="submit" disabled={!draft.trim()}>
+                  Save
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+
+        <LearnerControlPanel
+          approvedPresentation={learnerModel.approvedPresentation}
+          dueReviews={learnerModel.dueReviews}
+          evidenceCount={learnerModel.state.evidence.length}
+          onSetPreference={learnerModel.setExplicitPreference}
+          onClearPreference={learnerModel.clearPreference}
+          onExport={learnerModel.exportState}
+          onReset={resetLearningData}
+        />
+
+        <button
+          type='button'
+          className='site-theme-toggle'
+          onClick={onToggleDark}
+          aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          title={isDark ? 'Light mode' : 'Dark mode'}
+        >
+          {isDark ? (
+            <Sun size={17} aria-hidden='true' />
+          ) : (
+            <Moon size={17} aria-hidden='true' />
+          )}
+        </button>
       </div>
-
-      <LearnerControlPanel
-        approvedPresentation={learnerModel.approvedPresentation}
-        dueReviews={learnerModel.dueReviews}
-        evidenceCount={learnerModel.state.evidence.length}
-        onSetPreference={learnerModel.setExplicitPreference}
-        onClearPreference={learnerModel.clearPreference}
-        onExport={learnerModel.exportState}
-        onReset={resetLearningData}
-      />
-
-      <button
-        type='button'
-        className='site-theme-toggle'
-        onClick={onToggleDark}
-        aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-        title={isDark ? 'Light mode' : 'Dark mode'}
-      >
-        {isDark ? (
-          <Sun size={17} aria-hidden='true' />
-        ) : (
-          <Moon size={17} aria-hidden='true' />
-        )}
-      </button>
     </header>
   )
 }
@@ -289,6 +309,7 @@ function App() {
   const [activeSubject, setActiveSubject] = useState<Subject | null>(null)
   const [activeTopic, setActiveTopic] = useState<KnowledgeTopic | null>(null)
   const [activeUserBook, setActiveUserBook] = useState<UserBook | null>(null)
+  const [isLibraryOpen, setIsLibraryOpen] = useState(false)
 
   const {
     books,
@@ -319,6 +340,14 @@ function App() {
     setActiveTopic(null)
     setActiveSubject(null)
     setActiveUserBook(null)
+    setIsLibraryOpen(false)
+  }
+
+  const openLibrary = () => {
+    setIsLibraryOpen(true)
+    setActiveTopic(null)
+    setActiveSubject(null)
+    setActiveUserBook(null)
   }
 
   const selectSubject = (subject: Subject) => {
@@ -327,6 +356,7 @@ function App() {
       setActiveTopic(null)
       setActiveSubject(subject)
       setActiveUserBook(null)
+      setIsLibraryOpen(false)
     })
   }
 
@@ -335,6 +365,7 @@ function App() {
       setActiveSubject(null)
       setActiveTopic(null)
       setActiveUserBook(book)
+      setIsLibraryOpen(false)
     })
   }
 
@@ -379,77 +410,11 @@ function App() {
     )
   }
 
-  return (
-    <div className='app-shell gl-premium'>
-      <a className='skip-link' href='#main-content'>
-        Skip to content
-      </a>
-      {/* Header only on landing page */}
-      {!activeTopic && !activeSubject && (
-        <SiteHeader
-          profile={profile}
-          learnerModel={learnerModel}
-          isDark={isDark}
-          onSaveProfile={updateInterest}
-          onToggleDark={toggleDark}
-          onHome={goHome}
-        />
-      )}
-
-      {/* Landing — library shelf */}
-      {!activeSubject && (
-        <main className="library-page" id="main-content">
-          <section className="library-hero">
-            <div className="library-hero-copy">
-              <p className='library-eyebrow'>Personal learning library</p>
-              <h1 className='library-title' aria-label='Your STEM Library'>
-                <span className='sr-only'>Your STEM Library</span>
-                A library that learns <em>how you learn.</em>
-              </h1>
-              <p className='library-copy'>
-                Open a source-cited Global Lab textbook or place your own source
-                on the shelf. Every original stays intact. Your private learning
-                companion appears only when you ask for it.
-              </p>
-            </div>
-            <aside className='library-hero-ledger' aria-label='Library summary'>
-              <p className='library-ledger-label'>Your reading room</p>
-              <div className='library-ledger-stat'>
-                <BookOpen size={18} aria-hidden='true' />
-                <span>
-                  <strong>{subjects.filter((subject) => !subject.comingSoon).length}</strong>
-                  live Global Lab volume
-                </span>
-              </div>
-              <div className='library-ledger-stat'>
-                <ShieldCheck size={18} aria-hidden='true' />
-                <span>
-                  <strong>{books.length}</strong>
-                  {books.length === 1 ? ' source' : ' sources'} stored in this browser
-                </span>
-              </div>
-              <p className='library-ledger-note'>
-                Original text first. Personalization only on request.
-              </p>
-            </aside>
-          </section>
-          <LibraryShelf
-            subjects={subjects}
-            books={books}
-            isUploading={isUploading}
-            uploadError={uploadError}
-            uploadProgress={uploadProgress}
-            onSelect={selectSubject}
-            onUpload={(file) => void addBook(file)}
-            onSelectBook={selectUserBook}
-            onRemoveBook={removeBook}
-            onClearError={clearError}
-          />
-        </main>
-      )}
-
-      {/* Chapter TOC */}
-      {activeSubject && !activeTopic && (
+  // ── Kitabi reader (chapter TOC + section reader) ──
+  if (activeSubject && !activeTopic) {
+    return (
+      <div className='app-shell gl-premium'>
+        <a className='skip-link' href='#main-content'>Skip to content</a>
         <Suspense
           fallback={
             <main className='ubr-lazy-loading' id='main-content' role='status'>
@@ -467,10 +432,14 @@ function App() {
             onBack={() => transitionView(goHome)}
           />
         </Suspense>
-      )}
+      </div>
+    )
+  }
 
-      {/* Kitabi reader */}
-      {activeSubject && activeTopic && (
+  if (activeSubject && activeTopic) {
+    return (
+      <div className='app-shell gl-premium'>
+        <a className='skip-link' href='#main-content'>Skip to content</a>
         <ActiveKitabi
           key={activeSubject.id + ':' + activeTopic.id}
           topic={activeTopic}
@@ -485,17 +454,60 @@ function App() {
             transitionView(() => setActiveTopic(null))
           }
         />
+      </div>
+    )
+  }
+
+  // ── Home / Library ──
+  return (
+    <div className='app-shell gl-premium gl-home-shell'>
+      <a className='skip-link' href='#main-content'>
+        Skip to content
+      </a>
+      <SiteHeader
+        profile={profile}
+        learnerModel={learnerModel}
+        isDark={isDark}
+        isLibraryOpen={isLibraryOpen}
+        onSaveProfile={updateInterest}
+        onToggleDark={toggleDark}
+        onHome={goHome}
+        onOpenLibrary={openLibrary}
+      />
+
+      {isLibraryOpen ? (
+        <LibraryPage
+          subjects={subjects}
+          books={books}
+          isUploading={isUploading}
+          uploadProgress={uploadProgress}
+          uploadError={uploadError}
+          onSelectSubject={selectSubject}
+          onSelectBook={selectUserBook}
+          onUpload={(file) => void addBook(file)}
+          onRemoveBook={removeBook}
+          onClearError={clearError}
+          onBack={goHome}
+        />
+      ) : (
+        <HomePage
+          subjects={subjects}
+          books={books}
+          isUploading={isUploading}
+          uploadProgress={uploadProgress}
+          uploadError={uploadError}
+          activeSubjectId={activeSubject?.id ?? null}
+          onSelectSubject={selectSubject}
+          onSelectBook={selectUserBook}
+          onUpload={(file) => void addBook(file)}
+          onOpenLibrary={openLibrary}
+          onClearError={clearError}
+        />
       )}
 
-      {/* Footer only on landing */}
-      {!activeTopic && !activeSubject && (
-        <footer className="site-footer">
-          <div className="footer-mark" aria-hidden="true">
-            <FlaskConical size={15} />
-          </div>
-          <p>Read first. Personalize where it matters.</p>
-        </footer>
-      )}
+      <footer className="site-footer">
+        <p>Read first. Personalize where it matters.</p>
+      </footer>
     </div>
   )
 }

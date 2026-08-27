@@ -1,0 +1,606 @@
+{
+  "topicId": "dna-expression",
+  "subjectId": "biology",
+  "questions": [
+    {
+      "id": "dna-expression--overview--q1",
+      "sectionId": "overview",
+      "question": "What is accomplished by gene expression?",
+      "options": [
+        "Stored genetic information is used to make functional products",
+        "Proteins are converted back into DNA",
+        "Every gene is removed from the chromosome",
+        "RNA is stored without ever being used"
+      ],
+      "correctIndex": 0,
+      "explanation": "Gene expression connects inherited information with molecules that perform cellular functions. Treating expression as DNA destruction confuses using information with losing it.",
+      "sourceEvidence": "Gene expression turns stored genetic information into functional products.",
+      "misconceptionTargeted": "Treating expression as DNA destruction confuses using information with losing it"
+    },
+    {
+      "id": "dna-expression--overview--q2",
+      "sectionId": "overview",
+      "question": "What does transcription produce from a DNA gene?",
+      "options": [
+        "A completed polypeptide",
+        "A complementary RNA copy",
+        "A second cell membrane",
+        "A chain of glucose molecules"
+      ],
+      "correctIndex": 1,
+      "explanation": "Transcription copies the gene’s information into RNA. Calling the product a protein skips RNA synthesis entirely.",
+      "sourceEvidence": "Transcription converts a DNA gene into a complementary RNA copy in the nucleus.",
+      "misconceptionTargeted": "Calling the product a protein skips RNA synthesis entirely"
+    },
+    {
+      "id": "dna-expression--overview--q3",
+      "sectionId": "overview",
+      "question": "Where does transcription occur in a eukaryotic cell?",
+      "options": [
+        "At a ribosome in the cytoplasm",
+        "Inside the cell membrane",
+        "In the nucleus",
+        "In the extracellular fluid"
+      ],
+      "correctIndex": 2,
+      "explanation": "The DNA gene is transcribed into RNA within the nucleus. Placing transcription at the ribosome confuses it with translation.",
+      "sourceEvidence": "Transcription converts a DNA gene into a complementary RNA copy in the nucleus.",
+      "misconceptionTargeted": "Placing transcription at the ribosome confuses it with translation"
+    },
+    {
+      "id": "dna-expression--overview--q4",
+      "sectionId": "overview",
+      "question": "What information does a ribosome read during translation?",
+      "options": [
+        "The phospholipid sequence of the membrane",
+        "The amino-acid sequence of DNA",
+        "The ion gradient across the nucleus",
+        "The sequence of mature mRNA"
+      ],
+      "correctIndex": 3,
+      "explanation": "Translation uses processed messenger RNA as the ordered template for a polypeptide. Claiming ribosomes read DNA directly bypasses transcription and RNA processing.",
+      "sourceEvidence": "After RNA processing, translation uses the mature mRNA sequence at a ribosome to build a specific polypeptide from amino acids.",
+      "misconceptionTargeted": "Claiming ribosomes read DNA directly bypasses transcription and RNA processing"
+    },
+    {
+      "id": "dna-expression--overview--q5",
+      "sectionId": "overview",
+      "question": "Which sequence correctly represents the central dogma?",
+      "options": [
+        "DNA → RNA → protein",
+        "Protein → RNA → DNA",
+        "RNA → protein → DNA",
+        "DNA → protein → RNA"
+      ],
+      "correctIndex": 0,
+      "explanation": "The standard flow moves from stored DNA information through RNA to protein. Reversing the order incorrectly makes protein the template for routine gene expression.",
+      "sourceEvidence": "This directional flow of information is summarized by the central dogma: DNA → RNA → protein.",
+      "misconceptionTargeted": "Reversing the order incorrectly makes protein the template for routine gene expression"
+    },
+    {
+      "id": "dna-expression--overview--q6",
+      "sectionId": "overview",
+      "question": "A mature mRNA reaches a ribosome but translation is blocked. Which product will not be assembled?",
+      "options": [
+        "The original DNA gene",
+        "A specific polypeptide",
+        "The nuclear envelope",
+        "A phospholipid bilayer"
+      ],
+      "correctIndex": 1,
+      "explanation": "Ribosomal translation links amino acids into the polypeptide encoded by mRNA. Expecting transcription alone to build the protein ignores the ribosome’s role.",
+      "sourceEvidence": "After RNA processing, translation uses the mature mRNA sequence at a ribosome to build a specific polypeptide from amino acids.",
+      "misconceptionTargeted": "Expecting transcription alone to build the protein ignores the ribosome’s role"
+    },
+    {
+      "id": "dna-expression--overview--q7",
+      "sectionId": "overview",
+      "question": "Which event must occur between transcription and translation in a eukaryotic cell?",
+      "options": [
+        "DNA translation",
+        "Protein replication",
+        "RNA processing",
+        "Membrane depolarization"
+      ],
+      "correctIndex": 2,
+      "explanation": "The initial RNA copy is processed into mature mRNA before the ribosome uses it. Sending unprocessed pre-mRNA directly to translation skips essential eukaryotic processing.",
+      "sourceEvidence": "After RNA processing, translation uses the mature mRNA sequence at a ribosome to build a specific polypeptide from amino acids.",
+      "misconceptionTargeted": "Sending unprocessed pre-mRNA directly to translation skips essential eukaryotic processing"
+    },
+    {
+      "id": "dna-expression--transcription--q1",
+      "sectionId": "transcription",
+      "question": "What marks the site where RNA polymerase begins transcription?",
+      "options": [
+        "A promoter",
+        "A stop codon",
+        "An anticodon",
+        "A phospholipid tail"
+      ],
+      "correctIndex": 0,
+      "explanation": "RNA polymerase recognizes and binds a promoter before locally unwinding DNA. Calling the start site a stop codon confuses transcription control with translation termination.",
+      "sourceEvidence": "RNA polymerase binds a promoter, locally unwinds the DNA, and reads the template strand 3′→5′ while synthesizing complementary pre-mRNA 5′→3′.",
+      "misconceptionTargeted": "Calling the start site a stop codon confuses transcription control with translation termination"
+    },
+    {
+      "id": "dna-expression--transcription--q2",
+      "sectionId": "transcription",
+      "question": "In which direction does RNA polymerase read the DNA template strand?",
+      "options": [
+        "5′→3′",
+        "3′→5′",
+        "From the middle toward both ends",
+        "Without any fixed direction"
+      ],
+      "correctIndex": 1,
+      "explanation": "The enzyme moves along the template from the three-prime end toward the five-prime end. Using the RNA synthesis direction for template reading reverses the strand orientation.",
+      "sourceEvidence": "RNA polymerase binds a promoter, locally unwinds the DNA, and reads the template strand 3′→5′ while synthesizing complementary pre-mRNA 5′→3′.",
+      "misconceptionTargeted": "Using the RNA synthesis direction for template reading reverses the strand orientation"
+    },
+    {
+      "id": "dna-expression--transcription--q3",
+      "sectionId": "transcription",
+      "question": "In which direction is the new pre-mRNA strand synthesized?",
+      "options": [
+        "3′→5′",
+        "From both ends toward the promoter",
+        "5′→3′",
+        "In alternating directions"
+      ],
+      "correctIndex": 2,
+      "explanation": "RNA nucleotides are added so the transcript grows five-prime to three-prime. Making RNA grow three-prime to five-prime swaps reading direction with synthesis direction.",
+      "sourceEvidence": "RNA polymerase binds a promoter, locally unwinds the DNA, and reads the template strand 3′→5′ while synthesizing complementary pre-mRNA 5′→3′.",
+      "misconceptionTargeted": "Making RNA grow three-prime to five-prime swaps reading direction with synthesis direction"
+    },
+    {
+      "id": "dna-expression--transcription--q4",
+      "sectionId": "transcription",
+      "question": "If the DNA template contains adenine at one position, which RNA base is added opposite it?",
+      "options": [
+        "Thymine",
+        "Guanine",
+        "Cytosine",
+        "Uracil"
+      ],
+      "correctIndex": 3,
+      "explanation": "RNA uses uracil to pair with adenine on the DNA template. Choosing thymine applies DNA base composition to an RNA transcript.",
+      "sourceEvidence": "RNA uses uracil in place of thymine, so adenine in the DNA template pairs with uracil in RNA.",
+      "misconceptionTargeted": "Choosing thymine applies DNA base composition to an RNA transcript"
+    },
+    {
+      "id": "dna-expression--transcription--q5",
+      "sectionId": "transcription",
+      "question": "What tells RNA polymerase to stop extending a transcript?",
+      "options": [
+        "A termination signal",
+        "A start codon only",
+        "An incoming tRNA",
+        "The Na⁺ gradient"
+      ],
+      "correctIndex": 0,
+      "explanation": "Transcription proceeds until the polymerase encounters a termination signal. Using a translation stop codon as the general transcription stop signal mixes two processes.",
+      "sourceEvidence": "Synthesis continues until a termination signal is reached.",
+      "misconceptionTargeted": "Using a translation stop codon as the general transcription stop signal mixes two processes"
+    },
+    {
+      "id": "dna-expression--transcription--q6",
+      "sectionId": "transcription",
+      "question": "Why does the cell send mRNA copies to ribosomes instead of sending the DNA itself?",
+      "options": [
+        "DNA cannot contain genetic information",
+        "The original genome remains protected in the nucleus",
+        "mRNA is more permanent than DNA",
+        "Ribosomes are located inside every chromosome"
+      ],
+      "correctIndex": 1,
+      "explanation": "Disposable RNA copies carry working instructions while the DNA master remains protected. Moving DNA repeatedly into the cytoplasm would expose the permanent genome to avoidable damage.",
+      "sourceEvidence": "By transcribing a disposable mRNA copy, the cell preserves the original blueprint intact in the nucleus while sending working copies into the cytoplasm where protein synthesis happens.",
+      "misconceptionTargeted": "Moving DNA repeatedly into the cytoplasm would expose the permanent genome to avoidable damage"
+    },
+    {
+      "id": "dna-expression--transcription--q7",
+      "sectionId": "transcription",
+      "question": "How can one gene support rapid production of many copies of a protein?",
+      "options": [
+        "The DNA must be duplicated for every protein",
+        "One codon can encode an entire protein",
+        "Many mRNA copies can be transcribed from the same gene",
+        "Every ribosome rewrites the gene"
+      ],
+      "correctIndex": 2,
+      "explanation": "Thousands of transcripts can amplify output without duplicating the underlying DNA. Requiring genome duplication for each protein confuses expression with DNA replication.",
+      "sourceEvidence": "This separation also allows one gene to be transcribed into thousands of mRNA copies simultaneously, amplifying protein output without duplicating DNA.",
+      "misconceptionTargeted": "Requiring genome duplication for each protein confuses expression with DNA replication"
+    },
+    {
+      "id": "dna-expression--rna-processing--q1",
+      "sectionId": "rna-processing",
+      "question": "What is the initial eukaryotic RNA transcript called before processing?",
+      "options": [
+        "Pre-mRNA",
+        "Mature protein",
+        "Template DNA",
+        "Aminoacyl-tRNA"
+      ],
+      "correctIndex": 0,
+      "explanation": "The first transcript is pre-mRNA that still requires nuclear processing. Calling the first transcript mature mRNA skips capping, tailing, and splicing.",
+      "sourceEvidence": "In eukaryotic cells, the first transcript is pre-mRNA and must be processed before leaving the nucleus.",
+      "misconceptionTargeted": "Calling the first transcript mature mRNA skips capping, tailing, and splicing"
+    },
+    {
+      "id": "dna-expression--rna-processing--q2",
+      "sectionId": "rna-processing",
+      "question": "What are two functions of the modified 5′ cap?",
+      "options": [
+        "Remove introns and add amino acids",
+        "Protect the RNA and help ribosome recognition",
+        "Copy DNA and terminate translation",
+        "Pump RNA through the cell membrane"
+      ],
+      "correctIndex": 1,
+      "explanation": "The five-prime cap supports transcript protection and later ribosome binding. Assigning intron removal to the cap confuses it with the spliceosome.",
+      "sourceEvidence": "A modified 5′ cap protects the RNA and helps the ribosome recognize it.",
+      "misconceptionTargeted": "Assigning intron removal to the cap confuses it with the spliceosome"
+    },
+    {
+      "id": "dna-expression--rna-processing--q3",
+      "sectionId": "rna-processing",
+      "question": "What does the poly-A tail contribute to an mRNA molecule?",
+      "options": [
+        "A complementary DNA template",
+        "The first amino acid of the protein",
+        "Greater stability and assistance with nuclear export",
+        "A signal that removes every exon"
+      ],
+      "correctIndex": 2,
+      "explanation": "The three-prime poly-A tail helps protect and export the transcript. Treating the tail as a coding amino-acid sequence ignores its processing role.",
+      "sourceEvidence": "A poly-A tail added to the 3′ end improves stability and assists export.",
+      "misconceptionTargeted": "Treating the tail as a coding amino-acid sequence ignores its processing role"
+    },
+    {
+      "id": "dna-expression--rna-processing--q4",
+      "sectionId": "rna-processing",
+      "question": "What does the spliceosome do?",
+      "options": [
+        "Remove exons and join introns",
+        "Translate codons into amino acids",
+        "Replicate the DNA promoter",
+        "Remove introns and join exons"
+      ],
+      "correctIndex": 3,
+      "explanation": "Splicing excises non-coding introns and connects coding exons. Reversing introns and exons would discard the coding regions needed in mature mRNA.",
+      "sourceEvidence": "The spliceosome removes non-coding introns and joins coding exons to create mature mRNA.",
+      "misconceptionTargeted": "Reversing introns and exons would discard the coding regions needed in mature mRNA"
+    },
+    {
+      "id": "dna-expression--rna-processing--q5",
+      "sectionId": "rna-processing",
+      "question": "How can a single gene produce several related proteins?",
+      "options": [
+        "Its exons can be joined in different combinations",
+        "Its introns are translated in every possible order",
+        "Its DNA leaves the nucleus and folds directly",
+        "Its promoter becomes an amino acid"
+      ],
+      "correctIndex": 0,
+      "explanation": "Alternative splicing creates different mature transcripts from the same pre-mRNA. Requiring a different gene for every related isoform overlooks exon recombination.",
+      "sourceEvidence": "Alternative splicing can combine exons in different patterns, allowing one gene to produce several related proteins.",
+      "misconceptionTargeted": "Requiring a different gene for every related isoform overlooks exon recombination"
+    },
+    {
+      "id": "dna-expression--rna-processing--q6",
+      "sectionId": "rna-processing",
+      "question": "How does mature mRNA leave the nucleus?",
+      "options": [
+        "Through ATP synthase",
+        "Through a nuclear pore",
+        "By crossing the DNA template",
+        "Inside a sodium channel"
+      ],
+      "correctIndex": 1,
+      "explanation": "Processed mRNA passes through a nuclear pore into the cytoplasm. Sending mRNA through the plasma membrane confuses nuclear export with cell export.",
+      "sourceEvidence": "Once processing is complete, the mature mRNA exits the nucleus through a nuclear pore and enters the cytoplasm.",
+      "misconceptionTargeted": "Sending mRNA through the plasma membrane confuses nuclear export with cell export"
+    },
+    {
+      "id": "dna-expression--rna-processing--q7",
+      "sectionId": "rna-processing",
+      "question": "A mutation prevents addition of the poly-A tail. Which problem is most likely?",
+      "options": [
+        "The DNA template changes from 3′→5′ to 5′→3′",
+        "Every intron becomes an amino acid",
+        "The mRNA becomes less stable and exports less efficiently",
+        "The ribosome begins reading DNA directly"
+      ],
+      "correctIndex": 2,
+      "explanation": "Loss of the poly-A tail compromises transcript stability and export. Attributing promoter orientation to the tail confuses transcription with RNA processing.",
+      "sourceEvidence": "A poly-A tail added to the 3′ end improves stability and assists export.",
+      "misconceptionTargeted": "Attributing promoter orientation to the tail confuses transcription with RNA processing"
+    },
+    {
+      "id": "dna-expression--translation--q1",
+      "sectionId": "translation",
+      "question": "How many mRNA nucleotides make one codon?",
+      "options": [
+        "Three nucleotides",
+        "One nucleotide",
+        "Two nucleotides",
+        "Four nucleotides"
+      ],
+      "correctIndex": 0,
+      "explanation": "The ribosome partitions the mRNA sequence into three-base codons. Treating one nucleotide as one codon destroys the triplet reading frame.",
+      "sourceEvidence": "The ribosome reads the mRNA sequence in triplets called codons (e.g., AUG, GGC, UAC).",
+      "misconceptionTargeted": "Treating one nucleotide as one codon destroys the triplet reading frame"
+    },
+    {
+      "id": "dna-expression--translation--q2",
+      "sectionId": "translation",
+      "question": "Which anticodon pairs with the mRNA codon GGC?",
+      "options": [
+        "GGC",
+        "CCG",
+        "CCU",
+        "UAG"
+      ],
+      "correctIndex": 1,
+      "explanation": "Complementary base pairing matches GGC with the tRNA anticodon CCG. Copying the codon unchanged ignores complementarity between codon and anticodon.",
+      "sourceEvidence": "For example, the codon GGC is matched by a tRNA with anticodon CCG, which carries the amino acid glycine.",
+      "misconceptionTargeted": "Copying the codon unchanged ignores complementarity between codon and anticodon"
+    },
+    {
+      "id": "dna-expression--translation--q3",
+      "sectionId": "translation",
+      "question": "What happens when the correct tRNA enters the ribosome’s A site?",
+      "options": [
+        "Its DNA promoter binds the mRNA",
+        "It releases the completed protein immediately",
+        "Its anticodon hydrogen-bonds with the mRNA codon",
+        "It removes an intron from the transcript"
+      ],
+      "correctIndex": 2,
+      "explanation": "Codon–anticodon base pairing verifies that the correct tRNA has arrived. Assigning RNA splicing to the A site confuses nuclear processing with translation.",
+      "sourceEvidence": "When the correct tRNA enters the ribosome's A site, its anticodon forms hydrogen bonds with the mRNA codon, confirming the match.",
+      "misconceptionTargeted": "Assigning RNA splicing to the A site confuses nuclear processing with translation"
+    },
+    {
+      "id": "dna-expression--translation--q4",
+      "sectionId": "translation",
+      "question": "Which bond extends the growing polypeptide during translation?",
+      "options": [
+        "A phosphodiester bond between amino acids",
+        "A hydrogen bond to DNA",
+        "An ionic bond to the ribosome only",
+        "A peptide bond"
+      ],
+      "correctIndex": 3,
+      "explanation": "The ribosome catalyzes a peptide bond between the incoming amino acid and the chain. Using a nucleic-acid backbone bond for amino acids confuses proteins with RNA.",
+      "sourceEvidence": "The ribosome then catalyzes the formation of a peptide bond between the incoming amino acid and the growing polypeptide chain at the P site.",
+      "misconceptionTargeted": "Using a nucleic-acid backbone bond for amino acids confuses proteins with RNA"
+    },
+    {
+      "id": "dna-expression--translation--q5",
+      "sectionId": "translation",
+      "question": "What does translocation do during elongation?",
+      "options": [
+        "Moves the ribosome one codon along the mRNA",
+        "Moves the DNA out of the nucleus",
+        "Removes the poly-A tail",
+        "Shifts the reading frame by one nucleotide"
+      ],
+      "correctIndex": 0,
+      "explanation": "Each translocation advances the ribosome by one complete codon. Moving by one nucleotide would disrupt the established triplet reading frame.",
+      "sourceEvidence": "The ribosome shifts along the mRNA by one codon (translocation), and the cycle repeats.",
+      "misconceptionTargeted": "Moving by one nucleotide would disrupt the established triplet reading frame"
+    },
+    {
+      "id": "dna-expression--translation--q6",
+      "sectionId": "translation",
+      "question": "Which codon usually starts translation and which amino acid does it specify?",
+      "options": [
+        "UAA and glycine",
+        "AUG and methionine",
+        "GGC and methionine",
+        "UGA and tryptophan"
+      ],
+      "correctIndex": 1,
+      "explanation": "AUG serves as the usual start codon and encodes methionine. Using a stop codon as the start would terminate rather than initiate translation.",
+      "sourceEvidence": "Translation usually begins at AUG, which codes for methionine.",
+      "misconceptionTargeted": "Using a stop codon as the start would terminate rather than initiate translation"
+    },
+    {
+      "id": "dna-expression--translation--q7",
+      "sectionId": "translation",
+      "question": "Why does translation stop at UAA, UAG, or UGA?",
+      "options": [
+        "The codon binds a special DNA nucleotide",
+        "The ribosome adds three amino acids at once",
+        "No matching tRNA delivers an amino acid",
+        "The mRNA returns to the nucleus"
+      ],
+      "correctIndex": 2,
+      "explanation": "Stop codons lack matching aminoacyl-tRNAs and trigger release of the chain. Assigning an amino acid to a stop codon contradicts its termination function.",
+      "sourceEvidence": "The process is read continuously, codon by codon, until a stop codon (UAA, UAG, or UGA) is encountered — which has no matching tRNA, causing the chain to be released.",
+      "misconceptionTargeted": "Assigning an amino acid to a stop codon contradicts its termination function"
+    },
+    {
+      "id": "dna-expression--mutations--q1",
+      "sectionId": "mutations",
+      "question": "A base substitution changes a codon but not its amino acid. What type of mutation is this?",
+      "options": [
+        "Synonymous mutation",
+        "Missense mutation",
+        "Nonsense mutation",
+        "Frameshift mutation"
+      ],
+      "correctIndex": 0,
+      "explanation": "Codon degeneracy allows a different codon to specify the same amino acid. Calling the change missense incorrectly requires an amino-acid substitution.",
+      "sourceEvidence": "A point mutation (single nucleotide change) can result in: (1) a synonymous (silent) mutation, where a different codon still encodes the same amino acid due to codon degeneracy — protein is unchanged; (2) a missense mutation, where the new codon encodes a different amino acid — the protein may function normally, partially, or not at all depending on whether the amino acid change affects the protein's shape or active site; (3) a nonsense mutation, where the new codon is a stop codon — translation terminates early, usually producing a non-functional truncated protein.",
+      "misconceptionTargeted": "Calling the change missense incorrectly requires an amino-acid substitution"
+    },
+    {
+      "id": "dna-expression--mutations--q2",
+      "sectionId": "mutations",
+      "question": "A point mutation replaces one amino acid with another. How is it classified?",
+      "options": [
+        "Synonymous mutation",
+        "Missense mutation",
+        "Nonsense mutation",
+        "Frameshift mutation"
+      ],
+      "correctIndex": 1,
+      "explanation": "A missense mutation changes the encoded amino acid. Calling it synonymous ignores the altered protein sequence.",
+      "sourceEvidence": "A point mutation (single nucleotide change) can result in: (1) a synonymous (silent) mutation, where a different codon still encodes the same amino acid due to codon degeneracy — protein is unchanged; (2) a missense mutation, where the new codon encodes a different amino acid — the protein may function normally, partially, or not at all depending on whether the amino acid change affects the protein's shape or active site; (3) a nonsense mutation, where the new codon is a stop codon — translation terminates early, usually producing a non-functional truncated protein.",
+      "misconceptionTargeted": "Calling it synonymous ignores the altered protein sequence"
+    },
+    {
+      "id": "dna-expression--mutations--q3",
+      "sectionId": "mutations",
+      "question": "A substitution converts an amino-acid codon into UAG. What is the likely result?",
+      "options": [
+        "No possible change to translation",
+        "A frameshift of every downstream codon",
+        "Premature termination and a truncated protein",
+        "Removal of one intron only"
+      ],
+      "correctIndex": 2,
+      "explanation": "UAG is a stop codon, so a nonsense mutation ends translation early. Calling a single-base stop mutation a frameshift confuses termination with regrouping codons.",
+      "sourceEvidence": "A point mutation (single nucleotide change) can result in: (1) a synonymous (silent) mutation, where a different codon still encodes the same amino acid due to codon degeneracy — protein is unchanged; (2) a missense mutation, where the new codon encodes a different amino acid — the protein may function normally, partially, or not at all depending on whether the amino acid change affects the protein's shape or active site; (3) a nonsense mutation, where the new codon is a stop codon — translation terminates early, usually producing a non-functional truncated protein.",
+      "misconceptionTargeted": "Calling a single-base stop mutation a frameshift confuses termination with regrouping codons"
+    },
+    {
+      "id": "dna-expression--mutations--q4",
+      "sectionId": "mutations",
+      "question": "Why is a one-nucleotide deletion often more damaging than one base substitution?",
+      "options": [
+        "It always leaves the amino-acid sequence unchanged",
+        "It affects only the deleted nucleotide and nothing after it",
+        "It converts mRNA into DNA",
+        "It changes the grouping of every downstream codon"
+      ],
+      "correctIndex": 3,
+      "explanation": "A single-nucleotide deletion shifts the reading frame and scrambles subsequent codons. Limiting the effect to one codon ignores downstream regrouping.",
+      "sourceEvidence": "A frameshift mutation (insertion or deletion of a nucleotide) is typically the most damaging because it shifts the entire reading frame downstream, scrambling every subsequent codon.",
+      "misconceptionTargeted": "Limiting the effect to one codon ignores downstream regrouping"
+    },
+    {
+      "id": "dna-expression--mutations--q5",
+      "sectionId": "mutations",
+      "question": "Why can two missense mutations have very different effects on protein function?",
+      "options": [
+        "Their positions may differ in importance to folding or the active site",
+        "Every amino acid contributes identically",
+        "All missense mutations stop translation",
+        "Missense mutations never change protein sequence"
+      ],
+      "correctIndex": 0,
+      "explanation": "Mutation impact depends on both mutation type and the affected position. Assuming every substitution has the same effect ignores protein structure and functional sites.",
+      "sourceEvidence": "Not every mutation breaks a protein — the outcome depends entirely on the type of mutation and its position.",
+      "misconceptionTargeted": "Assuming every substitution has the same effect ignores protein structure and functional sites"
+    },
+    {
+      "id": "dna-expression--mutations--q6",
+      "sectionId": "mutations",
+      "question": "Which mutation can leave the final protein sequence unchanged?",
+      "options": [
+        "A nonsense mutation",
+        "A synonymous mutation",
+        "A one-nucleotide frameshift",
+        "A deletion that changes every later codon"
+      ],
+      "correctIndex": 1,
+      "explanation": "A synonymous codon change still specifies the same amino acid. Assuming every DNA change alters protein sequence ignores degeneracy of the code.",
+      "sourceEvidence": "A point mutation (single nucleotide change) can result in: (1) a synonymous (silent) mutation, where a different codon still encodes the same amino acid due to codon degeneracy — protein is unchanged; (2) a missense mutation, where the new codon encodes a different amino acid — the protein may function normally, partially, or not at all depending on whether the amino acid change affects the protein's shape or active site; (3) a nonsense mutation, where the new codon is a stop codon — translation terminates early, usually producing a non-functional truncated protein.",
+      "misconceptionTargeted": "Assuming every DNA change alters protein sequence ignores degeneracy of the code"
+    },
+    {
+      "id": "dna-expression--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "Which pair of directions correctly describes transcription?",
+      "options": [
+        "Template read 3′→5′ and RNA made 5′→3′",
+        "Template read 5′→3′ and RNA made 3′→5′",
+        "Both strands processed 3′→5′",
+        "Both strands processed without direction"
+      ],
+      "correctIndex": 0,
+      "explanation": "RNA polymerase reads and synthesizes in opposite directional orientations. Using the same direction for both actions confuses template travel with transcript growth.",
+      "sourceEvidence": "Keep direction clear: RNA polymerase reads the DNA template 3′→5′ but synthesizes RNA 5′→3′.",
+      "misconceptionTargeted": "Using the same direction for both actions confuses template travel with transcript growth"
+    },
+    {
+      "id": "dna-expression--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "Which base distinguishes standard RNA from DNA?",
+      "options": [
+        "Thymine replaces uracil in RNA",
+        "Uracil replaces thymine in RNA",
+        "RNA contains no adenine",
+        "DNA contains uracil instead of thymine"
+      ],
+      "correctIndex": 1,
+      "explanation": "RNA uses uracil where DNA uses thymine. Placing uracil in DNA reverses the nucleic-acid distinction.",
+      "sourceEvidence": "DNA uses thymine; RNA uses uracil.",
+      "misconceptionTargeted": "Placing uracil in DNA reverses the nucleic-acid distinction"
+    },
+    {
+      "id": "dna-expression--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "What template does a ribosome read during normal eukaryotic translation?",
+      "options": [
+        "Nuclear DNA directly",
+        "A phospholipid molecule",
+        "Mature mRNA",
+        "The promoter sequence while still in DNA"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ribosomes translate mRNA while DNA remains protected in the nucleus. Direct ribosomal reading of DNA skips transcription and nuclear export.",
+      "sourceEvidence": "Ribosomes never read DNA directly and DNA does not leave the nucleus.",
+      "misconceptionTargeted": "Direct ribosomal reading of DNA skips transcription and nuclear export"
+    },
+    {
+      "id": "dna-expression--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "Which sequences remain joined in mature mRNA after splicing?",
+      "options": [
+        "Introns",
+        "Promoters only",
+        "Anticodons",
+        "Exons"
+      ],
+      "correctIndex": 3,
+      "explanation": "The spliceosome removes introns and preserves joined exons. Keeping introns while deleting exons reverses the outcome of RNA splicing.",
+      "sourceEvidence": "Introns are removed, while exons remain in mature mRNA.",
+      "misconceptionTargeted": "Keeping introns while deleting exons reverses the outcome of RNA splicing"
+    },
+    {
+      "id": "dna-expression--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "How is a tRNA anticodon related to an mRNA codon?",
+      "options": [
+        "It is complementary to the codon",
+        "It is always identical to the codon",
+        "It is a DNA promoter",
+        "It contains four bases for every codon"
+      ],
+      "correctIndex": 0,
+      "explanation": "Complementary anticodon bases pair with the three-base mRNA codon. Copying the codon exactly ignores complementary base pairing.",
+      "sourceEvidence": "The tRNA anticodon is complementary to the codon; it is not the codon itself.",
+      "misconceptionTargeted": "Copying the codon exactly ignores complementary base pairing"
+    },
+    {
+      "id": "dna-expression--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "What does it mean that the genetic code is degenerate but unambiguous?",
+      "options": [
+        "Each codon can specify several amino acids",
+        "Several codons may specify one amino acid, but each codon has only one meaning",
+        "Every amino acid has exactly one codon",
+        "Stop codons specify all amino acids"
+      ],
+      "correctIndex": 1,
+      "explanation": "Degeneracy provides synonymous codons while unambiguity fixes one meaning for each codon. Letting one codon encode several amino acids violates the code’s unambiguous nature.",
+      "sourceEvidence": "The genetic code is degenerate but unambiguous: several codons can specify one amino acid, but each codon specifies only one.",
+      "misconceptionTargeted": "Letting one codon encode several amino acids violates the code’s unambiguous nature"
+    }
+  ]
+}

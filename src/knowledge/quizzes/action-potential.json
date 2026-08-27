@@ -1,0 +1,606 @@
+{
+  "topicId": "action-potential",
+  "subjectId": "biology",
+  "questions": [
+    {
+      "id": "action-potential--overview--q1",
+      "sectionId": "overview",
+      "question": "A neuron receives a stimulus that is too weak to trigger a full voltage change. Which property of an action potential explains why no smaller spike appears?",
+      "options": [
+        "It is all-or-nothing",
+        "It gradually loses amplitude",
+        "It is carried only by calcium",
+        "It always remains at resting voltage"
+      ],
+      "correctIndex": 0,
+      "explanation": "An action potential occurs as a complete voltage event rather than a partial spike. Treating an action potential as a graded response ignores its all-or-nothing behavior.",
+      "sourceEvidence": "An action potential is a rapid, all-or-nothing change in a neuron’s membrane voltage.",
+      "misconceptionTargeted": "Treating an action potential as a graded response ignores its all-or-nothing behavior"
+    },
+    {
+      "id": "action-potential--overview--q2",
+      "sectionId": "overview",
+      "question": "Why can an action potential travel a long distance along an axon without becoming progressively smaller?",
+      "options": [
+        "ATP molecules physically carry the voltage forward",
+        "Voltage-gated channels regenerate the membrane-voltage change",
+        "Neurotransmitters diffuse along the entire axon",
+        "The resting potential becomes increasingly positive"
+      ],
+      "correctIndex": 1,
+      "explanation": "Sequential voltage-gated channel activity restores the signal as it propagates. Assuming passive diffusion alone carries the signal predicts an amplitude loss that action potentials avoid.",
+      "sourceEvidence": "Voltage-gated ion channels first reverse and then restore the membrane potential, creating a signal that travels along the axon without losing amplitude.",
+      "misconceptionTargeted": "Assuming passive diffusion alone carries the signal predicts an amplitude loss that action potentials avoid"
+    },
+    {
+      "id": "action-potential--overview--q3",
+      "sectionId": "overview",
+      "question": "What conversion occurs when an action potential reaches the axon terminal?",
+      "options": [
+        "A chemical message becomes DNA",
+        "Mechanical energy becomes heat",
+        "An electrical signal becomes a chemical message",
+        "A protein gradient becomes an electrical signal"
+      ],
+      "correctIndex": 2,
+      "explanation": "Synaptic transmission changes the arriving electrical event into neurotransmitter signaling. Keeping the signal purely electrical overlooks the chemical step between cells.",
+      "sourceEvidence": "At the axon terminal, synaptic transmission converts the electrical signal into a chemical message that can influence another cell.",
+      "misconceptionTargeted": "Keeping the signal purely electrical overlooks the chemical step between cells"
+    },
+    {
+      "id": "action-potential--overview--q4",
+      "sectionId": "overview",
+      "question": "Which observation best identifies a recorded event as an action potential?",
+      "options": [
+        "Every event has a size proportional to stimulus strength",
+        "The voltage never changes from rest",
+        "Only the cell body shows a voltage change",
+        "Every successful event has the same characteristic size"
+      ],
+      "correctIndex": 3,
+      "explanation": "All successful action potentials follow the all-or-nothing pattern. Confusing spike amplitude with stimulus intensity describes a graded potential rather than an action potential.",
+      "sourceEvidence": "An action potential is a rapid, all-or-nothing change in a neuron’s membrane voltage.",
+      "misconceptionTargeted": "Confusing spike amplitude with stimulus intensity describes a graded potential rather than an action potential"
+    },
+    {
+      "id": "action-potential--overview--q5",
+      "sectionId": "overview",
+      "question": "A drug prevents voltage-gated ion channels from opening along an axon. What is the most direct consequence?",
+      "options": [
+        "The action potential cannot propagate normally",
+        "The axon produces more neurotransmitter at rest",
+        "The membrane becomes a phospholipid monolayer",
+        "The nucleus begins translating proteins"
+      ],
+      "correctIndex": 0,
+      "explanation": "Propagation depends on voltage-gated channels reversing and restoring membrane voltage. Attributing axonal propagation to neurotransmitter diffusion places the chemical step in the wrong location.",
+      "sourceEvidence": "Voltage-gated ion channels first reverse and then restore the membrane potential, creating a signal that travels along the axon without losing amplitude.",
+      "misconceptionTargeted": "Attributing axonal propagation to neurotransmitter diffusion places the chemical step in the wrong location"
+    },
+    {
+      "id": "action-potential--overview--q6",
+      "sectionId": "overview",
+      "question": "How does activity in one neuron gain the ability to influence a neighboring cell?",
+      "options": [
+        "The action potential crosses the synaptic gap unchanged",
+        "Synaptic transmission relays a chemical message at the terminal",
+        "The neighboring cell shares the same cytoplasm",
+        "The axon transfers its ion channels into the next cell"
+      ],
+      "correctIndex": 1,
+      "explanation": "The axon terminal initiates a chemical message that can act on another cell. Assuming the electrical spike directly jumps between ordinary neurons skips synaptic transmission.",
+      "sourceEvidence": "At the axon terminal, synaptic transmission converts the electrical signal into a chemical message that can influence another cell.",
+      "misconceptionTargeted": "Assuming the electrical spike directly jumps between ordinary neurons skips synaptic transmission"
+    },
+    {
+      "id": "action-potential--overview--q7",
+      "sectionId": "overview",
+      "question": "Two electrodes placed far apart on the same healthy axon record propagated action potentials. What should they show?",
+      "options": [
+        "A much smaller spike at the second electrode",
+        "A permanently positive membrane at the second electrode",
+        "Similar spike amplitudes at both locations",
+        "Chemical neurotransmitter release all along the axon"
+      ],
+      "correctIndex": 2,
+      "explanation": "Regenerative channel activity preserves action-potential amplitude along the axon. Expecting the spike to fade treats it like a passive voltage spread rather than a regenerated signal.",
+      "sourceEvidence": "Voltage-gated ion channels first reverse and then restore the membrane potential, creating a signal that travels along the axon without losing amplitude.",
+      "misconceptionTargeted": "Expecting the spike to fade treats it like a passive voltage spread rather than a regenerated signal"
+    },
+    {
+      "id": "action-potential--resting-potential--q1",
+      "sectionId": "resting-potential",
+      "question": "At a resting membrane potential of −70 mV, how is the inside of the neuron charged relative to the outside?",
+      "options": [
+        "The inside is 70 mV more negative",
+        "The inside is 70 mV more positive",
+        "Both sides have identical charge",
+        "The outside contains no charged ions"
+      ],
+      "correctIndex": 0,
+      "explanation": "A negative membrane potential means the interior is negative relative to the exterior. Reading the minus sign as a positive interior reverses the voltage convention.",
+      "sourceEvidence": "The resting membrane potential of approximately −70 mV (inside negative relative to outside) exists because of two factors: the selective permeability of the membrane and the activity of the Na⁺/K⁺ ATPase pump.",
+      "misconceptionTargeted": "Reading the minus sign as a positive interior reverses the voltage convention"
+    },
+    {
+      "id": "action-potential--resting-potential--q2",
+      "sectionId": "resting-potential",
+      "question": "Which ion has the greater resting permeability across the neuronal membrane?",
+      "options": [
+        "Na⁺",
+        "K⁺",
+        "Ca²⁺",
+        "Cl⁻ only"
+      ],
+      "correctIndex": 1,
+      "explanation": "Open potassium leak channels make the resting membrane more permeable to K⁺ than Na⁺. Assuming all ions cross equally ignores selective membrane permeability.",
+      "sourceEvidence": "At rest, the membrane is more permeable to K⁺ than Na⁺.",
+      "misconceptionTargeted": "Assuming all ions cross equally ignores selective membrane permeability"
+    },
+    {
+      "id": "action-potential--resting-potential--q3",
+      "sectionId": "resting-potential",
+      "question": "Why does K⁺ leakage help make the neuronal interior negative?",
+      "options": [
+        "Negative charge leaves while proteins move outside",
+        "K⁺ entry neutralizes every internal protein",
+        "Positive charge leaves while negative proteins remain inside",
+        "The pump converts K⁺ into electrons"
+      ],
+      "correctIndex": 2,
+      "explanation": "K⁺ efflux removes positive charge and leaves impermeant negative proteins behind. Claiming that K⁺ influx creates resting negativity reverses the leak direction.",
+      "sourceEvidence": "K⁺ ions leak out down their concentration gradient through open K⁺ leak channels, carrying positive charges out and leaving behind negatively charged proteins inside.",
+      "misconceptionTargeted": "Claiming that K⁺ influx creates resting negativity reverses the leak direction"
+    },
+    {
+      "id": "action-potential--resting-potential--q4",
+      "sectionId": "resting-potential",
+      "question": "One complete Na⁺/K⁺ ATPase cycle moves which combination of ions?",
+      "options": [
+        "2 Na⁺ out and 3 K⁺ in",
+        "3 Na⁺ in and 2 K⁺ out",
+        "Equal numbers of Na⁺ and K⁺ outward",
+        "3 Na⁺ out and 2 K⁺ in"
+      ],
+      "correctIndex": 3,
+      "explanation": "The pump exports three sodium ions while importing two potassium ions. Reversing the pump stoichiometry destroys the gradients it normally maintains.",
+      "sourceEvidence": "The Na⁺/K⁺ pump continuously restores the gradients — moving 3 Na⁺ out for every 2 K⁺ in — and contributes to the net negative interior.",
+      "misconceptionTargeted": "Reversing the pump stoichiometry destroys the gradients it normally maintains"
+    },
+    {
+      "id": "action-potential--resting-potential--q5",
+      "sectionId": "resting-potential",
+      "question": "What is the net movement of positive charge during one Na⁺/K⁺ pump cycle?",
+      "options": [
+        "One positive charge moves outward",
+        "One positive charge moves inward",
+        "Five positive charges move outward",
+        "There is no net charge movement"
+      ],
+      "correctIndex": 0,
+      "explanation": "Exporting three positive ions and importing two gives a net outward movement of one positive charge. Calling the pump electrically neutral ignores the unequal three-to-two exchange.",
+      "sourceEvidence": "The Na⁺/K⁺ pump continuously restores the gradients — moving 3 Na⁺ out for every 2 K⁺ in — and contributes to the net negative interior.",
+      "misconceptionTargeted": "Calling the pump electrically neutral ignores the unequal three-to-two exchange"
+    },
+    {
+      "id": "action-potential--resting-potential--q6",
+      "sectionId": "resting-potential",
+      "question": "Why is the resting potential useful even before a neuron fires?",
+      "options": [
+        "It permanently locks every ion channel",
+        "It stores electrical potential energy",
+        "It synthesizes neurotransmitter from DNA",
+        "It removes all concentration gradients"
+      ],
+      "correctIndex": 1,
+      "explanation": "The separated charges across the membrane store energy that can drive a rapid signal. Describing rest as an inactive zero-energy state overlooks the stored electrochemical energy.",
+      "sourceEvidence": "This stored electrical potential is critical because it represents potential energy.",
+      "misconceptionTargeted": "Describing rest as an inactive zero-energy state overlooks the stored electrochemical energy"
+    },
+    {
+      "id": "action-potential--resting-potential--q7",
+      "sectionId": "resting-potential",
+      "question": "If ion permeability changes rapidly after stimulation, what can the neuron do with its resting potential?",
+      "options": [
+        "Stop all ion movement permanently",
+        "Translate mRNA inside the membrane",
+        "Generate a fast signal along the axon",
+        "Turn the axon terminal into a nucleus"
+      ],
+      "correctIndex": 2,
+      "explanation": "Changes in permeability release stored electrical potential into a traveling signal. Treating permeability changes as unrelated to voltage misses the mechanism of electrical signaling.",
+      "sourceEvidence": "When a neuron is stimulated, rapid changes to ion permeability can use this potential energy to generate a fast electrical signal that travels the length of the axon.",
+      "misconceptionTargeted": "Treating permeability changes as unrelated to voltage misses the mechanism of electrical signaling"
+    },
+    {
+      "id": "action-potential--depolarization--q1",
+      "sectionId": "depolarization",
+      "question": "A stimulus raises a neuron from −70 mV to −60 mV and then stops. What is the expected response?",
+      "options": [
+        "The membrane returns to rest without a full action potential",
+        "A full action potential must occur",
+        "The neuron remains permanently at −60 mV",
+        "The spike amplitude doubles"
+      ],
+      "correctIndex": 0,
+      "explanation": "A membrane voltage of −60 mV remains below the approximate −55 mV threshold. Assuming every depolarization triggers a spike ignores the threshold requirement.",
+      "sourceEvidence": "Below the threshold potential (approximately −55 mV), Na⁺ channels do not open sufficiently and the membrane returns to rest.",
+      "misconceptionTargeted": "Assuming every depolarization triggers a spike ignores the threshold requirement"
+    },
+    {
+      "id": "action-potential--depolarization--q2",
+      "sectionId": "depolarization",
+      "question": "A second stimulus pushes the same neuron to −50 mV. What happens next?",
+      "options": [
+        "Only a half-sized action potential occurs",
+        "Positive feedback produces a full action potential",
+        "All sodium channels remain closed",
+        "The membrane immediately settles at −80 mV"
+      ],
+      "correctIndex": 1,
+      "explanation": "Crossing −55 mV recruits self-amplifying Na⁺ entry and a complete spike. Making spike size proportional to the amount above threshold violates all-or-nothing signaling.",
+      "sourceEvidence": "Once threshold is reached, positive feedback takes over: Na⁺ entry depolarizes the membrane further, which opens more Na⁺ channels, which allows more Na⁺ in — creating a self-amplifying cascade that always produces the same magnitude signal regardless of how much above threshold the original stimulus was.",
+      "misconceptionTargeted": "Making spike size proportional to the amount above threshold violates all-or-nothing signaling"
+    },
+    {
+      "id": "action-potential--depolarization--q3",
+      "sectionId": "depolarization",
+      "question": "What creates positive feedback during the rising phase of an action potential?",
+      "options": [
+        "K⁺ entry closes every sodium channel",
+        "ATP directly raises the membrane voltage",
+        "Na⁺ entry opens still more voltage-gated Na⁺ channels",
+        "Neurotransmitter leaves through leak channels"
+      ],
+      "correctIndex": 2,
+      "explanation": "Incoming Na⁺ depolarizes the membrane and recruits additional Na⁺ channels. Attributing the rising phase to K⁺ efflux reverses the relevant ion movement.",
+      "sourceEvidence": "Once threshold is reached, positive feedback takes over: Na⁺ entry depolarizes the membrane further, which opens more Na⁺ channels, which allows more Na⁺ in — creating a self-amplifying cascade that always produces the same magnitude signal regardless of how much above threshold the original stimulus was.",
+      "misconceptionTargeted": "Attributing the rising phase to K⁺ efflux reverses the relevant ion movement"
+    },
+    {
+      "id": "action-potential--depolarization--q4",
+      "sectionId": "depolarization",
+      "question": "How does a neuron usually represent a stronger stimulus?",
+      "options": [
+        "It makes each action potential taller",
+        "It changes every spike into a graded potential",
+        "It lowers the number of spikes to zero",
+        "It fires action potentials more frequently"
+      ],
+      "correctIndex": 3,
+      "explanation": "Stimulus intensity is encoded by firing frequency rather than individual spike size. Using amplitude as the intensity code contradicts the fixed magnitude of action potentials.",
+      "sourceEvidence": "Signal strength is therefore not encoded in the size of individual action potentials but in their frequency.",
+      "misconceptionTargeted": "Using amplitude as the intensity code contradicts the fixed magnitude of action potentials"
+    },
+    {
+      "id": "action-potential--depolarization--q5",
+      "sectionId": "depolarization",
+      "question": "A sensory neuron changes from 5 spikes per second to 50 spikes per second. What has most likely changed?",
+      "options": [
+        "The encoded stimulus intensity has increased",
+        "Each spike now travels backward",
+        "The resting potential has become zero",
+        "The neuron has lost all voltage-gated channels"
+      ],
+      "correctIndex": 0,
+      "explanation": "A higher action-potential frequency is interpreted as a stronger stimulus. Interpreting the change as larger individual spikes confuses frequency with amplitude.",
+      "sourceEvidence": "A weak stimulus might cause 5 action potentials per second; a stronger stimulus causes 50.",
+      "misconceptionTargeted": "Interpreting the change as larger individual spikes confuses frequency with amplitude"
+    },
+    {
+      "id": "action-potential--depolarization--q6",
+      "sectionId": "depolarization",
+      "question": "What does rate coding mean in neuronal signaling?",
+      "options": [
+        "Information is carried only by axon diameter",
+        "Information about intensity is carried by spike frequency",
+        "Every stimulus changes the spike amplitude",
+        "Only inhibitory signals can encode intensity"
+      ],
+      "correctIndex": 1,
+      "explanation": "Rate coding uses the number of action potentials per unit time as an intensity signal. Defining rate coding by spike height mistakes amplitude for firing rate.",
+      "sourceEvidence": "The nervous system interprets frequency as intensity — a code called rate coding.",
+      "misconceptionTargeted": "Defining rate coding by spike height mistakes amplitude for firing rate"
+    },
+    {
+      "id": "action-potential--depolarization--q7",
+      "sectionId": "depolarization",
+      "question": "Why do voltage-gated Na⁺ channels give the action potential an all-or-nothing character?",
+      "options": [
+        "They continuously leak at the same rate",
+        "They release neurotransmitter directly into the nucleus",
+        "Their threshold-dependent opening recruits a complete regenerative response",
+        "They keep membrane voltage fixed at −70 mV"
+      ],
+      "correctIndex": 2,
+      "explanation": "Threshold activation of Na⁺ channels initiates the self-amplifying depolarization. Calling the response gradual ignores the regenerative recruitment of sodium channels.",
+      "sourceEvidence": "An action potential is all-or-nothing because of the voltage-gated Na⁺ channels involved.",
+      "misconceptionTargeted": "Calling the response gradual ignores the regenerative recruitment of sodium channels"
+    },
+    {
+      "id": "action-potential--repolarization--q1",
+      "sectionId": "repolarization",
+      "question": "Which channel changes initiate repolarization near the peak of an action potential?",
+      "options": [
+        "Na⁺ channels inactivate while voltage-gated K⁺ channels open",
+        "Na⁺ channels open while K⁺ channels close",
+        "Both ion types stop moving permanently",
+        "Ca²⁺ channels replace every potassium channel"
+      ],
+      "correctIndex": 0,
+      "explanation": "Sodium-channel inactivation ends inward current while potassium channels create outward current. Reversing the channel states would continue depolarization instead of repolarizing the membrane.",
+      "sourceEvidence": "Near the action-potential peak, Na⁺ channels inactivate and voltage-gated K⁺ channels open.",
+      "misconceptionTargeted": "Reversing the channel states would continue depolarization instead of repolarizing the membrane"
+    },
+    {
+      "id": "action-potential--repolarization--q2",
+      "sectionId": "repolarization",
+      "question": "What ion movement directly drives the membrane back toward a negative voltage?",
+      "options": [
+        "Na⁺ enters the neuron",
+        "K⁺ leaves the neuron",
+        "K⁺ enters the neuron",
+        "Proteins leave through sodium channels"
+      ],
+      "correctIndex": 1,
+      "explanation": "Outward movement of positive K⁺ charge makes the interior more negative again. Assigning repolarization to Na⁺ influx confuses the falling phase with depolarization.",
+      "sourceEvidence": "K⁺ flows out, returning the membrane toward a negative voltage.",
+      "misconceptionTargeted": "Assigning repolarization to Na⁺ influx confuses the falling phase with depolarization"
+    },
+    {
+      "id": "action-potential--repolarization--q3",
+      "sectionId": "repolarization",
+      "question": "Why does membrane voltage briefly reach about −80 mV after a spike?",
+      "options": [
+        "Na⁺ channels remain fully open",
+        "All ions reach equal concentrations",
+        "Voltage-gated K⁺ channels close slowly",
+        "The membrane loses every leak channel"
+      ],
+      "correctIndex": 2,
+      "explanation": "Continued K⁺ efflux after rest is crossed produces temporary hyperpolarization. Blaming hyperpolarization on prolonged Na⁺ entry predicts movement in the wrong voltage direction.",
+      "sourceEvidence": "Because K⁺ channels close slowly, the potential briefly falls below rest to about −80 mV, a phase called hyperpolarization, before leak channels and the Na⁺/K⁺ pump restore resting conditions.",
+      "misconceptionTargeted": "Blaming hyperpolarization on prolonged Na⁺ entry predicts movement in the wrong voltage direction"
+    },
+    {
+      "id": "action-potential--repolarization--q4",
+      "sectionId": "repolarization",
+      "question": "Can any stimulus trigger a second action potential during the absolute refractory period?",
+      "options": [
+        "Yes, if the stimulus is twice as strong",
+        "Yes, because K⁺ channels create another rising phase",
+        "No, because all ATP has been consumed",
+        "No, inactivated Na⁺ channels cannot reopen yet"
+      ],
+      "correctIndex": 3,
+      "explanation": "Sodium-channel inactivation prevents another spike regardless of stimulus strength. Treating the absolute period like the relative period incorrectly makes it surmountable.",
+      "sourceEvidence": "During the absolute refractory period, inactivated Na⁺ channels cannot reopen, so another action potential cannot begin.",
+      "misconceptionTargeted": "Treating the absolute period like the relative period incorrectly makes it surmountable"
+    },
+    {
+      "id": "action-potential--repolarization--q5",
+      "sectionId": "repolarization",
+      "question": "Why might a very strong stimulus trigger a spike during the relative refractory period when a weak one cannot?",
+      "options": [
+        "The hyperpolarized membrane is farther from threshold",
+        "Every Na⁺ channel has been permanently removed",
+        "The resting voltage is already above threshold",
+        "Neurotransmitters cannot bind during this period"
+      ],
+      "correctIndex": 0,
+      "explanation": "Hyperpolarization increases the depolarization needed to reach threshold. Claiming no stimulus can work confuses the relative refractory period with the absolute period.",
+      "sourceEvidence": "The relative refractory period during hyperpolarization requires a stronger stimulus.",
+      "misconceptionTargeted": "Claiming no stimulus can work confuses the relative refractory period with the absolute period"
+    },
+    {
+      "id": "action-potential--repolarization--q6",
+      "sectionId": "repolarization",
+      "question": "How do refractory periods support one-way propagation along an axon?",
+      "options": [
+        "They make the next axon segment permanently inactive",
+        "The membrane just behind the spike cannot immediately fire again",
+        "They force neurotransmitter to flow through the axon",
+        "They increase spike amplitude toward the cell body"
+      ],
+      "correctIndex": 1,
+      "explanation": "Recently activated membrane is refractory while the membrane ahead remains excitable. Assuming both directions are equally excitable ignores the temporary inactivation behind the wave.",
+      "sourceEvidence": "These periods limit firing frequency and ensure that propagation moves forward rather than backward.",
+      "misconceptionTargeted": "Assuming both directions are equally excitable ignores the temporary inactivation behind the wave"
+    },
+    {
+      "id": "action-potential--repolarization--q7",
+      "sectionId": "repolarization",
+      "question": "What sets an upper limit on how rapidly a neuron can fire repeated action potentials?",
+      "options": [
+        "The height of each action potential",
+        "The number of ribosomes in the axon",
+        "The time required to pass through refractory periods",
+        "The width of the synaptic cleft alone"
+      ],
+      "correctIndex": 2,
+      "explanation": "Absolute and relative refractory periods restrict how soon another spike can occur. Attributing the firing limit to spike amplitude ignores channel recovery time.",
+      "sourceEvidence": "These periods limit firing frequency and ensure that propagation moves forward rather than backward.",
+      "misconceptionTargeted": "Attributing the firing limit to spike amplitude ignores channel recovery time"
+    },
+    {
+      "id": "action-potential--synaptic-transmission--q1",
+      "sectionId": "synaptic-transmission",
+      "question": "What is the first channel event at an axon terminal after an action potential arrives?",
+      "options": [
+        "Voltage-gated Ca²⁺ channels open",
+        "Voltage-gated K⁺ channels release neurotransmitter",
+        "Aquaporins pump sodium outward",
+        "Postsynaptic receptors enter the nucleus"
+      ],
+      "correctIndex": 0,
+      "explanation": "Terminal depolarization opens voltage-gated calcium channels. Starting with vesicle fusion before calcium entry reverses the causal sequence.",
+      "sourceEvidence": "When an action potential reaches the axon terminal, it triggers voltage-gated Ca²⁺ channels to open.",
+      "misconceptionTargeted": "Starting with vesicle fusion before calcium entry reverses the causal sequence"
+    },
+    {
+      "id": "action-potential--synaptic-transmission--q2",
+      "sectionId": "synaptic-transmission",
+      "question": "How does Ca²⁺ entry lead to neurotransmitter release?",
+      "options": [
+        "It carries neurotransmitter through potassium channels",
+        "It triggers synaptic vesicles to fuse with the presynaptic membrane",
+        "It converts neurotransmitter into ATP",
+        "It closes the synaptic cleft"
+      ],
+      "correctIndex": 1,
+      "explanation": "Calcium stimulates vesicle fusion and exocytosis at the presynaptic terminal. Treating calcium itself as the neurotransmitter cargo confuses trigger with message.",
+      "sourceEvidence": "Calcium ions flood into the terminal, causing synaptic vesicles (membrane-bound packages of neurotransmitter) to fuse with the presynaptic membrane and release their neurotransmitter molecules into the synaptic cleft by exocytosis.",
+      "misconceptionTargeted": "Treating calcium itself as the neurotransmitter cargo confuses trigger with message"
+    },
+    {
+      "id": "action-potential--synaptic-transmission--q3",
+      "sectionId": "synaptic-transmission",
+      "question": "After exocytosis, where do neurotransmitter molecules bind?",
+      "options": [
+        "Ribosomes inside the presynaptic nucleus",
+        "Leak channels along the myelin sheath",
+        "Receptors on the postsynaptic membrane",
+        "ATP synthase in the mitochondrial matrix"
+      ],
+      "correctIndex": 2,
+      "explanation": "Neurotransmitters cross the cleft and bind receptors on the receiving cell. Placing the receptors on the presynaptic release membrane reverses sender and receiver.",
+      "sourceEvidence": "The neurotransmitters diffuse across the narrow cleft (20–40 nm) and bind to receptors on the postsynaptic membrane.",
+      "misconceptionTargeted": "Placing the receptors on the presynaptic release membrane reverses sender and receiver"
+    },
+    {
+      "id": "action-potential--synaptic-transmission--q4",
+      "sectionId": "synaptic-transmission",
+      "question": "What opposite effects do EPSPs and IPSPs have on a postsynaptic neuron?",
+      "options": [
+        "Both always trigger an action potential",
+        "EPSPs move it away while IPSPs move it toward threshold",
+        "Both permanently block sodium channels",
+        "EPSPs move it toward threshold while IPSPs move it away"
+      ],
+      "correctIndex": 3,
+      "explanation": "Excitatory potentials favor threshold while inhibitory potentials oppose it. Swapping EPSP and IPSP effects reverses excitation and inhibition.",
+      "sourceEvidence": "Whether the postsynaptic neuron fires depends on summation: excitatory inputs (EPSPs) bring the membrane toward threshold; inhibitory inputs (IPSPs) move it away.",
+      "misconceptionTargeted": "Swapping EPSP and IPSP effects reverses excitation and inhibition"
+    },
+    {
+      "id": "action-potential--synaptic-transmission--q5",
+      "sectionId": "synaptic-transmission",
+      "question": "Several different presynaptic neurons fire at the same moment. What process combines their effects?",
+      "options": [
+        "Spatial summation",
+        "Temporal summation",
+        "Saltatory conduction",
+        "Hyperpolarization only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Spatial summation integrates inputs arriving simultaneously from multiple synapses. Calling this temporal summation ignores that the inputs come from different synapses.",
+      "sourceEvidence": "The postsynaptic neuron integrates all incoming signals simultaneously — spatial summation (multiple synapses firing at once) and temporal summation (repeated signals from one synapse in quick succession) — and fires only if the net effect reaches threshold.",
+      "misconceptionTargeted": "Calling this temporal summation ignores that the inputs come from different synapses"
+    },
+    {
+      "id": "action-potential--synaptic-transmission--q6",
+      "sectionId": "synaptic-transmission",
+      "question": "One presynaptic neuron fires repeatedly in rapid succession. What process can add those inputs together?",
+      "options": [
+        "Spatial summation",
+        "Temporal summation",
+        "Osmosis",
+        "Absolute refractoriness"
+      ],
+      "correctIndex": 1,
+      "explanation": "Temporal summation combines closely spaced signals from one synapse. Calling this spatial summation ignores the repeated timing at a single synapse.",
+      "sourceEvidence": "The postsynaptic neuron integrates all incoming signals simultaneously — spatial summation (multiple synapses firing at once) and temporal summation (repeated signals from one synapse in quick succession) — and fires only if the net effect reaches threshold.",
+      "misconceptionTargeted": "Calling this spatial summation ignores the repeated timing at a single synapse"
+    },
+    {
+      "id": "action-potential--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "Which sign correctly describes the inside of a resting neuron?",
+      "options": [
+        "Negative at about −70 mV relative to outside",
+        "Positive at about +70 mV relative to outside",
+        "Exactly 0 mV at all times",
+        "Positive only because K⁺ is present"
+      ],
+      "correctIndex": 0,
+      "explanation": "The resting voltage is negative inside relative to the extracellular side. Dropping the minus sign reverses the polarity of the resting membrane.",
+      "sourceEvidence": "The resting potential is about −70 mV inside, not positive.",
+      "misconceptionTargeted": "Dropping the minus sign reverses the polarity of the resting membrane"
+    },
+    {
+      "id": "action-potential--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "Which ion distribution is typical before an action potential?",
+      "options": [
+        "High Na⁺ inside and high K⁺ outside",
+        "High K⁺ inside and high Na⁺ outside",
+        "Equal Na⁺ and K⁺ on both sides",
+        "No K⁺ inside and no Na⁺ outside"
+      ],
+      "correctIndex": 1,
+      "explanation": "Resting neurons maintain potassium-rich cytoplasm and sodium-rich extracellular fluid. Reversing the gradients predicts the wrong directions for depolarizing and repolarizing currents.",
+      "sourceEvidence": "K⁺ concentration is high inside and Na⁺ concentration is high outside.",
+      "misconceptionTargeted": "Reversing the gradients predicts the wrong directions for depolarizing and repolarizing currents"
+    },
+    {
+      "id": "action-potential--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "A membrane changes from −70 mV to −60 mV. How should this change be described?",
+      "options": [
+        "Repolarization because the interior is more negative",
+        "Hyperpolarization because the voltage is closer to zero",
+        "Depolarization because the interior is less negative",
+        "No voltage change because both values are negative"
+      ],
+      "correctIndex": 2,
+      "explanation": "Moving toward zero from a negative resting value is depolarization. Assuming depolarization must make the inside positive overlooks subthreshold voltage changes.",
+      "sourceEvidence": "Depolarization means the interior becomes less negative.",
+      "misconceptionTargeted": "Assuming depolarization must make the inside positive overlooks subthreshold voltage changes"
+    },
+    {
+      "id": "action-potential--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "A stronger stimulus reaches a neuron that is already above threshold. What feature of its output normally increases?",
+      "options": [
+        "Action-potential amplitude",
+        "Resting-potential sign",
+        "Width of the synaptic cleft",
+        "Action-potential frequency"
+      ],
+      "correctIndex": 3,
+      "explanation": "Stronger stimuli are encoded by more frequent fixed-size spikes. Making each spike taller violates the all-or-nothing principle.",
+      "sourceEvidence": "Once threshold is crossed, action potentials are all-or-nothing; stronger stimuli increase frequency, not amplitude.",
+      "misconceptionTargeted": "Making each spike taller violates the all-or-nothing principle"
+    },
+    {
+      "id": "action-potential--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "How does myelin increase conduction speed?",
+      "options": [
+        "It supports saltatory conduction between nodes of Ranvier",
+        "It releases neurotransmitter along every internode",
+        "It removes all refractory periods",
+        "It makes action potentials larger at each node"
+      ],
+      "correctIndex": 0,
+      "explanation": "Myelin allows excitation to advance efficiently from node to node. Describing myelin as a neurotransmitter source confuses insulation with synaptic release.",
+      "sourceEvidence": "Myelin speeds conduction through saltatory conduction between nodes of Ranvier.",
+      "misconceptionTargeted": "Describing myelin as a neurotransmitter source confuses insulation with synaptic release"
+    },
+    {
+      "id": "action-potential--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "Which description correctly assigns the direction of chemical synaptic signaling?",
+      "options": [
+        "Neurotransmitter leaves the postsynaptic cell and binds the presynaptic cell",
+        "Neurotransmitter leaves the presynaptic cell and binds the postsynaptic cell",
+        "The action potential carries receptors across the cleft",
+        "The two cells exchange their membranes"
+      ],
+      "correctIndex": 1,
+      "explanation": "The presynaptic terminal releases the signal and the postsynaptic membrane receives it. Reversing pre and postsynaptic roles swaps the sender with the receiver.",
+      "sourceEvidence": "Neurotransmitters leave the presynaptic cell and bind receptors on the postsynaptic cell.",
+      "misconceptionTargeted": "Reversing pre and postsynaptic roles swaps the sender with the receiver"
+    }
+  ]
+}

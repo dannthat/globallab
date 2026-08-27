@@ -1,4 +1,5 @@
 import {
+  BrainCircuit,
   BookOpen,
   ChevronLeft,
   ChevronRight,
@@ -6,6 +7,8 @@ import {
   X,
 } from 'lucide-react'
 import {
+  lazy,
+  Suspense,
   useCallback,
   useEffect,
   useMemo,
@@ -32,6 +35,13 @@ import { getSectionRewriteKey } from '../hooks/useLearnYourWay'
 import { RunningHeader } from './RunningHeader'
 import { SourcesFooter } from './SourcesFooter'
 import { TextbookSection } from './TextbookSection'
+
+const preloadTopicQuizModal = () => import('./TopicQuizModal')
+
+const TopicQuizModal = lazy(async () => {
+  const module = await preloadTopicQuizModal()
+  return { default: module.TopicQuizModal }
+})
 
 interface KitabiPageProps {
   topic: KnowledgeTopic
@@ -71,7 +81,7 @@ type PageTurn = {
   direction: 'next' | 'previous'
 }
 
-type ReaderOverlay = 'contents' | 'topic-switcher' | null
+type ReaderOverlay = 'contents' | 'topic-switcher' | 'mastery' | null
 
 interface TopicOption {
   topic: KnowledgeTopic
@@ -175,7 +185,7 @@ function PageTurnPreview({
         <>
           <p className="page-turn-preview-kicker">Next section</p>
           <h3>{section.heading}</h3>
-          <p className="page-turn-preview-copy">{previewText}…</p>
+          <p className="page-turn-preview-copy">{previewText}â€¦</p>
         </>
       ) : (
         <>
@@ -240,6 +250,12 @@ export function KitabiPage({
   const fallbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const reducedFadeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const quickTopicInputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    void preloadTopicQuizModal()
+      .then((module) => module.preloadTopicQuizPool(topic.id, subject.id))
+      .catch(() => undefined)
+  }, [subject.id, topic.id])
 
   const activeSection =
     topic.sections[visibleSectionIndex] ?? topic.sections[0]
@@ -599,7 +615,7 @@ export function KitabiPage({
 
   return (
     <div
-      className="kitabi-shell"
+      className="kitabi-shell ubr-reader-shell"
       style={{ '--subject-color': subjectColor } as CSSProperties}
     >
       <RunningHeader
@@ -613,8 +629,23 @@ export function KitabiPage({
         onBack={onBack}
       />
 
-      <div className="textbook-reader-wrap">
-        <div className="textbook-reader-stage">
+      <div className="ubr-reader-body tbp-reader-body">
+        {/* Left nav strip — vertical section dots */}
+        <nav className="tbp-left-strip" aria-label="Section navigation">
+          {topic.sections.map((sec, idx) => (
+            <button
+              key={sec.id}
+              type="button"
+              className={'tbp-left-dot' + (idx === visibleSectionIndex ? ' tbp-left-dot--active' : '')}
+              onClick={() => openSection(idx)}
+              aria-label={`Go to section: ${sec.heading}`}
+              title={sec.heading}
+              disabled={Boolean(pageTurn)}
+            />
+          ))}
+        </nav>
+
+        <div className="ubr-reader-stage">
           <main
             className={
               'textbook-reader-page' +
@@ -624,6 +655,13 @@ export function KitabiPage({
             aria-busy={Boolean(pageTurn)}
             data-section={activeSection?.id}
             data-turn-direction={pageTurn?.direction}
+            data-turn-phase={
+              pageTurn
+                ? visibleSectionIndex === pageTurn.toIndex
+                  ? 'arriving'
+                  : 'leaving'
+                : undefined
+            }
             onClick={handleBookClick}
           >
             {activeSection && (
@@ -703,12 +741,12 @@ export function KitabiPage({
           </main>
 
           <nav
-            className="textbook-bottom-nav textbook-bottom-nav--spread"
+            className="ubr-reader-nav"
             aria-label="Navigate textbook sections"
           >
             <button
               type="button"
-              className="textbook-nav-arrow"
+              className="ubr-nav-arrow"
               disabled={visibleSectionIndex === 0 || Boolean(pageTurn)}
               onClick={() => openSection(visibleSectionIndex - 1)}
               aria-label="Previous section"
@@ -717,7 +755,7 @@ export function KitabiPage({
             </button>
 
             <div
-              className="textbook-nav-progress"
+              className="ubr-nav-progress"
               style={
                 {
                   '--reader-progress': `${
@@ -728,7 +766,7 @@ export function KitabiPage({
             >
               <button
                 type="button"
-                className="textbook-nav-contents"
+                className="ubr-nav-contents"
                 aria-label="Open table of contents"
                 aria-expanded={activeOverlay === 'contents'}
                 aria-keyshortcuts="T"
@@ -741,16 +779,16 @@ export function KitabiPage({
               >
                 <BookOpen size={14} aria-hidden="true" />
               </button>
-              <span className="textbook-nav-label">Section</span>
-              <div className="textbook-nav-dots">
+              <span className="ubr-nav-label">Section</span>
+              <div className="ubr-nav-dots">
                 {topic.sections.map((section, index) => (
                   <button
                     key={section.id}
                     type="button"
                     className={
-                      'textbook-nav-dot' +
+                      'ubr-nav-dot' +
                       (index === visibleSectionIndex
-                        ? ' textbook-nav-dot-active'
+                        ? ' ubr-nav-dot--active'
                         : '')
                     }
                     disabled={Boolean(pageTurn)}
@@ -763,7 +801,7 @@ export function KitabiPage({
                   />
                 ))}
               </div>
-              <span className="textbook-nav-count" aria-live="polite">
+              <span className="ubr-nav-count" aria-live="polite">
                 {String(visibleSectionIndex + 1).padStart(2, '0')} /{' '}
                 {String(topic.sections.length).padStart(2, '0')}
               </span>
@@ -771,7 +809,7 @@ export function KitabiPage({
 
             <button
               type="button"
-              className="textbook-nav-arrow"
+              className="ubr-nav-arrow"
               disabled={
                 visibleSectionIndex === topic.sections.length - 1 ||
                 Boolean(pageTurn)
@@ -782,6 +820,23 @@ export function KitabiPage({
               <ChevronRight size={17} aria-hidden="true" />
             </button>
           </nav>
+
+          <button
+            type="button"
+            className="topic-mastery-trigger"
+            onClick={() => setActiveOverlay('mastery')}
+            aria-haspopup="dialog"
+            aria-label="Test Your Mastery"
+          >
+            <span className="topic-mastery-trigger-icon" aria-hidden="true">
+              <BrainCircuit size={18} />
+            </span>
+            <span>
+              <small>5-question topic check</small>
+              <strong>Test Your Mastery</strong>
+            </span>
+            <ChevronRight size={16} aria-hidden="true" />
+          </button>
         </div>
       </div>
 
@@ -935,18 +990,44 @@ export function KitabiPage({
               ))}
               {filteredTopicOptions.length === 0 && (
                 <p className="quick-topic-empty">
-                  No topic matches “{quickTopicQuery}”.
+                  No topic matches â€œ{quickTopicQuery}â€.
                 </p>
               )}
             </div>
 
             <footer>
-              <span><kbd>↑</kbd><kbd>↓</kbd> Navigate</span>
+              <span><kbd>â†‘</kbd><kbd>â†“</kbd> Navigate</span>
               <span><kbd>Enter</kbd> Open</span>
               <span>{TOPIC_OPTIONS.length} topics</span>
             </footer>
           </section>
         </div>
+      )}
+
+      {activeOverlay === 'mastery' && (
+        <Suspense
+          fallback={
+            <div className="topic-quiz-backdrop" role="presentation">
+              <section
+                className="topic-quiz-modal"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Test your mastery"
+              >
+                <div className="topic-quiz-empty" role="status">
+                  Opening your mastery checkâ€¦
+                </div>
+              </section>
+            </div>
+          }
+        >
+          <TopicQuizModal
+            topicId={topic.id}
+            topicTitle={topic.title}
+            subjectId={subject.id}
+            onClose={closeOverlay}
+          />
+        </Suspense>
       )}
     </div>
   )

@@ -1,0 +1,606 @@
+{
+  "topicId": "differential-equations",
+  "subjectId": "mathematics",
+  "questions": [
+    {
+      "id": "differential-equations--overview--q1",
+      "sectionId": "overview",
+      "question": "What kind of equation relates an unknown function to one or more of its derivatives?",
+      "options": [
+        "general solution",
+        "initial condition",
+        "existence",
+        "differential equation"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because a differential equation relates an unknown function to one or more of its derivatives. The alternative involving general solution applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A differential equation relates an unknown function to one or more of its derivatives.",
+      "misconceptionTargeted": "Using general solution instead of differential equation when reasoning about A differential equation relates an unknown"
+    },
+    {
+      "id": "differential-equations--overview--q2",
+      "sectionId": "overview",
+      "question": "Which statement correctly describes the meaning and classification of differential equations?",
+      "options": [
+        "Parameters carry units: an exponential rate constant has inverse-time units, while angular frequency is radians per unit time.",
+        "A good answer reports both the mathematical solution and what its domain and long-term behaviour mean.",
+        "An ordinary differential equation uses derivatives with respect to one independent variable, while a partial differential equation uses several.",
+        "A first-order equation is separable when it can be written dy/dx = g(x)h(y)."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because an ordinary differential equation uses derivatives with respect to one independent variable, while a partial differential equation uses several. The alternative involving A first order equation is separable when it applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "An ordinary differential equation uses derivatives with respect to one independent variable, while a partial differential equation uses several.",
+      "misconceptionTargeted": "Using A first order equation is separable when it instead of An ordinary differential equation uses derivatives with respect when reasoning about An ordinary differential equation uses derivatives"
+    },
+    {
+      "id": "differential-equations--overview--q3",
+      "sectionId": "overview",
+      "question": "An ordinary differential equation uses one independent variable. What type of equation uses derivatives with respect to several independent variables?",
+      "options": [
+        "uniqueness",
+        "partial differential equation",
+        "separable equation",
+        "implicit solution"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because an ordinary differential equation uses derivatives with respect to one independent variable, while a partial differential equation uses several. The alternative involving separable equation applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "An ordinary differential equation uses derivatives with respect to one independent variable, while a partial differential equation uses several.",
+      "misconceptionTargeted": "Using separable equation instead of partial differential equation when reasoning about An ordinary differential equation uses derivatives"
+    },
+    {
+      "id": "differential-equations--overview--q4",
+      "sectionId": "overview",
+      "question": "A student is applying the meaning and classification of differential equations. Which statement is mathematically valid?",
+      "options": [
+        "The order is the highest derivative present.",
+        "Models inherit assumptions.",
+        "Exponential growth does not include crowding, logistic carrying capacity need not remain constant, and Newton cooling assumes a suitable heat-transfer regime and known ambient conditions.",
+        "Parameters carry units: an exponential rate constant has inverse-time units, while angular frequency is radians per unit time."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because the order is the highest derivative present. The alternative involving Models inherit assumptions applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The order is the highest derivative present.",
+      "misconceptionTargeted": "Using Models inherit assumptions instead of The order is the highest derivative present when reasoning about The order is the highest derivative"
+    },
+    {
+      "id": "differential-equations--overview--q5",
+      "sectionId": "overview",
+      "question": "What type of solution contains arbitrary constants and therefore represents a family of functions?",
+      "options": [
+        "integration constant",
+        "equilibrium solution",
+        "interval of validity",
+        "general solution"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because a general solution usually contains arbitrary constants representing a family of functions. The alternative involving integration constant applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A general solution usually contains arbitrary constants representing a family of functions.",
+      "misconceptionTargeted": "Using integration constant instead of general solution when reasoning about A general solution usually contains arbitrary"
+    },
+    {
+      "id": "differential-equations--overview--q6",
+      "sectionId": "overview",
+      "question": "Which fact should guide the student's reasoning about the meaning and classification of differential equations?",
+      "options": [
+        "Do not add a second independent constant to a first-order general solution.",
+        "Distinguish homogeneous from particular solutions and apply the initial condition to their sum.",
+        "Leonhard Euler developed systematic methods for many differential equations, while later mathematicians established rigorous existence theory and numerical methods for equations without closed-form solutions.",
+        "Models inherit assumptions."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because leonhard Euler developed systematic methods for many differential equations, while later mathematicians established rigorous existence theory and numerical methods for equations without closed-form solutions. The alternative involving Models inherit assumptions applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Leonhard Euler developed systematic methods for many differential equations, while later mathematicians established rigorous existence theory and numerical methods for equations without closed-form solutions.",
+      "misconceptionTargeted": "Using Models inherit assumptions instead of Leonhard Euler developed systematic methods for many differential when reasoning about Leonhard Euler developed systematic methods for"
+    },
+    {
+      "id": "differential-equations--overview--q7",
+      "sectionId": "overview",
+      "question": "Which property, considered separately from existence, determines whether only one solution passes through a specified point?",
+      "options": [
+        "autonomous equation",
+        "uniqueness",
+        "phase line",
+        "stability"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because existence and uniqueness are separate questions: an equation may have no solution, one local solution, or multiple solutions through the same point if its conditions are not sufficiently regular. The alternative involving phase line applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Existence and uniqueness are separate questions: an equation may have no solution, one local solution, or multiple solutions through the same point if its conditions are not sufficiently regular.",
+      "misconceptionTargeted": "Using phase line instead of uniqueness when reasoning about Existence and uniqueness are separate questions"
+    },
+    {
+      "id": "differential-equations--overview--q8",
+      "sectionId": "overview",
+      "question": "Which conclusion about the meaning and classification of differential equations is supported by the mathematics?",
+      "options": [
+        "Leonhard Euler developed systematic methods for many differential equations, while later mathematicians established rigorous existence theory and numerical methods for equations without closed-form solutions.",
+        "Put a linear equation in y′ + Py = Q form before constructing μ.",
+        "The integrating factor has a positive exponent ∫Pdx, and the integration constant appears after integrating the product derivative.",
+        "Do not add a second independent constant to a first-order general solution."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because leonhard Euler developed systematic methods for many differential equations, while later mathematicians established rigorous existence theory and numerical methods for equations without closed-form solutions. The alternative involving Put a linear equation in y′ + Py applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Leonhard Euler developed systematic methods for many differential equations, while later mathematicians established rigorous existence theory and numerical methods for equations without closed-form solutions.",
+      "misconceptionTargeted": "Using Put a linear equation in y′ + Py instead of Leonhard Euler developed systematic methods for many differential when reasoning about Leonhard Euler developed systematic methods for"
+    },
+    {
+      "id": "differential-equations--separable--q1",
+      "sectionId": "separable",
+      "question": "What class of autonomous equation y′ = h(y) can be analysed without first finding an explicit solution?",
+      "options": [
+        "forced response",
+        "exponential growth",
+        "exponential decay",
+        "separable equation"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because autonomous separable equations y′ = h(y) can be analysed without explicit solution. The alternative involving forced response applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Autonomous separable equations y′ = h(y) can be analysed without explicit solution.",
+      "misconceptionTargeted": "Using forced response instead of separable equation when reasoning about Autonomous separable equations y′ = h"
+    },
+    {
+      "id": "differential-equations--separable--q2",
+      "sectionId": "separable",
+      "question": "Which statement correctly describes separable differential equations?",
+      "options": [
+        "Leonhard Euler developed systematic methods for many differential equations, while later mathematicians established rigorous existence theory and numerical methods for equations without closed-form solutions.",
+        "A first-order linear equation has standard form y′ + P(x)y = Q(x).",
+        "Initial conditions determine the integration constant and can also restrict the interval of validity, especially when logarithms, square roots, or finite-time blow-up appear.",
+        "Multiplying by the integrating factor μ(x) = e^{∫P(x)dx} turns the left side into the product derivative (μy)′."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because initial conditions determine the integration constant and can also restrict the interval of validity, especially when logarithms, square roots, or finite-time blow-up appear. The alternative involving Multiplying by the integrating factor μ x = applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Initial conditions determine the integration constant and can also restrict the interval of validity, especially when logarithms, square roots, or finite-time blow-up appear.",
+      "misconceptionTargeted": "Using Multiplying by the integrating factor μ x = instead of Initial conditions determine the integration constant and can when reasoning about Initial conditions determine the integration constant"
+    },
+    {
+      "id": "differential-equations--separable--q3",
+      "sectionId": "separable",
+      "question": "Which solutions can be lost if both sides of y′ = g(x)h(y) are divided by h(y) without first checking where h(y) = 0?",
+      "options": [
+        "per-capita rate",
+        "equilibrium solution",
+        "Newton’s law of cooling",
+        "logistic growth"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because dividing by h(y) can discard equilibrium solutions satisfying h(y) = 0. The alternative involving Newton s law of cooling applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Dividing by h(y) can discard equilibrium solutions satisfying h(y) = 0.",
+      "misconceptionTargeted": "Using Newton s law of cooling instead of equilibrium solution when reasoning about Dividing by h y can discard"
+    },
+    {
+      "id": "differential-equations--separable--q4",
+      "sectionId": "separable",
+      "question": "A student is applying separable differential equations. Which statement is mathematically valid?",
+      "options": [
+        "Initial conditions determine the integration constant and can also restrict the interval of validity, especially when logarithms, square roots, or finite-time blow-up appear.",
+        "Parameters carry units: an exponential rate constant has inverse-time units, while angular frequency is radians per unit time.",
+        "A good answer reports both the mathematical solution and what its domain and long-term behaviour mean.",
+        "A differential equation relates an unknown function to one or more of its derivatives."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because initial conditions determine the integration constant and can also restrict the interval of validity, especially when logarithms, square roots, or finite-time blow-up appear. The alternative involving Parameters carry units an exponential rate constant has applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Initial conditions determine the integration constant and can also restrict the interval of validity, especially when logarithms, square roots, or finite-time blow-up appear.",
+      "misconceptionTargeted": "Using Parameters carry units an exponential rate constant has instead of Initial conditions determine the integration constant and can when reasoning about Initial conditions determine the integration constant"
+    },
+    {
+      "id": "differential-equations--separable--q5",
+      "sectionId": "separable",
+      "question": "What one-dimensional diagram uses arrows to show whether solutions near an equilibrium increase or decrease?",
+      "options": [
+        "carrying capacity",
+        "simple harmonic motion",
+        "resonance",
+        "phase line"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because equilibria occur where h(y) = 0, and a phase line shows whether nearby solutions increase or decrease. The alternative involving carrying capacity applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Equilibria occur where h(y) = 0, and a phase line shows whether nearby solutions increase or decrease.",
+      "misconceptionTargeted": "Using carrying capacity instead of phase line when reasoning about Equilibria occur where h y ="
+    },
+    {
+      "id": "differential-equations--separable--q6",
+      "sectionId": "separable",
+      "question": "Which fact should guide the student's reasoning about separable differential equations?",
+      "options": [
+        "Position and acceleration are opposite in sign, while total energy alternates between kinetic and potential forms.",
+        "With damping and driving, the model becomes x″ + 2βx′ + ω0²x = F(t)/m, explaining transients, resonance, and steady forced response in mechanical, electrical, and acoustical systems.",
+        "Arrows toward an equilibrium indicate stability; arrows away indicate instability.",
+        "Verify solutions by substitution into the original differential equation, not only an algebraically transformed version."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because arrows toward an equilibrium indicate stability; arrows away indicate instability. The alternative involving Verify solutions by substitution into the original differential applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Arrows toward an equilibrium indicate stability; arrows away indicate instability.",
+      "misconceptionTargeted": "Using Verify solutions by substitution into the original differential instead of Arrows toward an equilibrium indicate stability arrows away when reasoning about Arrows toward an equilibrium indicate stability"
+    },
+    {
+      "id": "differential-equations--separable--q7",
+      "sectionId": "separable",
+      "question": "For an autonomous equation y′ = h(y), which equation class permits qualitative analysis through the sign of h(y)?",
+      "options": [
+        "solution verification",
+        "separable equation",
+        "model assumption",
+        "rate constant"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because autonomous separable equations y′ = h(y) can be analysed without explicit solution. The alternative involving model assumption applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Autonomous separable equations y′ = h(y) can be analysed without explicit solution.",
+      "misconceptionTargeted": "Using model assumption instead of separable equation when reasoning about Autonomous separable equations y′ = h"
+    },
+    {
+      "id": "differential-equations--separable--q8",
+      "sectionId": "separable",
+      "question": "Which conclusion about separable differential equations is supported by the mathematics?",
+      "options": [
+        "Initial conditions determine the integration constant and can also restrict the interval of validity, especially when logarithms, square roots, or finite-time blow-up appear.",
+        "Simple harmonic motion satisfies x″ + ω²x = 0 and has sinusoidal solutions.",
+        "Position and acceleration are opposite in sign, while total energy alternates between kinetic and potential forms.",
+        "With damping and driving, the model becomes x″ + 2βx′ + ω0²x = F(t)/m, explaining transients, resonance, and steady forced response in mechanical, electrical, and acoustical systems."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because initial conditions determine the integration constant and can also restrict the interval of validity, especially when logarithms, square roots, or finite-time blow-up appear. The alternative involving Simple harmonic motion satisfies x + ω²x = applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Initial conditions determine the integration constant and can also restrict the interval of validity, especially when logarithms, square roots, or finite-time blow-up appear.",
+      "misconceptionTargeted": "Using Simple harmonic motion satisfies x + ω²x = instead of Initial conditions determine the integration constant and can when reasoning about Initial conditions determine the integration constant"
+    },
+    {
+      "id": "differential-equations--linear-first-order--q1",
+      "sectionId": "linear-first-order",
+      "question": "Which type of first-order equation has the standard form y′ + P(x)y = Q(x)?",
+      "options": [
+        "stability",
+        "standard form",
+        "integrating factor",
+        "linear equation"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because a first-order linear equation has standard form y′ + P(x)y = Q(x). The alternative involving stability applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A first-order linear equation has standard form y′ + P(x)y = Q(x).",
+      "misconceptionTargeted": "Using stability instead of linear equation when reasoning about A first order linear equation has"
+    },
+    {
+      "id": "differential-equations--linear-first-order--q2",
+      "sectionId": "linear-first-order",
+      "question": "Which statement correctly describes first-order linear differential equations?",
+      "options": [
+        "Initial or boundary conditions select particular members and form an initial-value or boundary-value problem.",
+        "Existence and uniqueness are separate questions: an equation may have no solution, one local solution, or multiple solutions through the same point if its conditions are not sufficiently regular.",
+        "A first-order linear equation has standard form y′ + P(x)y = Q(x).",
+        "Differential equations express local laws of change and predict global behaviour."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because a first-order linear equation has standard form y′ + P(x)y = Q(x). The alternative involving Differential equations express local laws of change and applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A first-order linear equation has standard form y′ + P(x)y = Q(x).",
+      "misconceptionTargeted": "Using Differential equations express local laws of change and instead of A first order linear equation has standard form when reasoning about A first order linear equation has"
+    },
+    {
+      "id": "differential-equations--linear-first-order--q3",
+      "sectionId": "linear-first-order",
+      "question": "What multiplier μ(x) = e^{∫P(x)dx} converts y′ + P(x)y into the product derivative (μy)′?",
+      "options": [
+        "product derivative",
+        "integrating factor",
+        "homogeneous solution",
+        "particular solution"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because multiplying by the integrating factor μ(x) = e^{∫P(x)dx} turns the left side into the product derivative (μy)′. The alternative involving homogeneous solution applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Multiplying by the integrating factor μ(x) = e^{∫P(x)dx} turns the left side into the product derivative (μy)′.",
+      "misconceptionTargeted": "Using homogeneous solution instead of integrating factor when reasoning about Multiplying by the integrating factor μ"
+    },
+    {
+      "id": "differential-equations--linear-first-order--q4",
+      "sectionId": "linear-first-order",
+      "question": "A student is applying first-order linear differential equations. Which statement is mathematically valid?",
+      "options": [
+        "Multiplying by the integrating factor μ(x) = e^{∫P(x)dx} turns the left side into the product derivative (μy)′.",
+        "Put a linear equation in y′ + Py = Q form before constructing μ.",
+        "The integrating factor has a positive exponent ∫Pdx, and the integration constant appears after integrating the product derivative.",
+        "Do not add a second independent constant to a first-order general solution."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because multiplying by the integrating factor μ(x) = e^{∫P(x)dx} turns the left side into the product derivative (μy)′. The alternative involving Put a linear equation in y′ + Py applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Multiplying by the integrating factor μ(x) = e^{∫P(x)dx} turns the left side into the product derivative (μy)′.",
+      "misconceptionTargeted": "Using Put a linear equation in y′ + Py instead of Multiplying by the integrating factor μ x = when reasoning about Multiplying by the integrating factor μ"
+    },
+    {
+      "id": "differential-equations--linear-first-order--q5",
+      "sectionId": "linear-first-order",
+      "question": "In a first-order linear solution, what name is given to the homogeneous response Ch(x) that may decay over time?",
+      "options": [
+        "implicit solution",
+        "integration constant",
+        "equilibrium solution",
+        "transient"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because the solution separates naturally into a homogeneous transient Ch(x) and one particular forced response. The alternative involving implicit solution applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The solution separates naturally into a homogeneous transient Ch(x) and one particular forced response.",
+      "misconceptionTargeted": "Using implicit solution instead of transient when reasoning about The solution separates naturally into a"
+    },
+    {
+      "id": "differential-equations--linear-first-order--q6",
+      "sectionId": "linear-first-order",
+      "question": "Which fact should guide the student's reasoning about first-order linear differential equations?",
+      "options": [
+        "A first-order equation is separable when it can be written dy/dx = g(x)h(y).",
+        "Where division by h(y) is valid, rearrange to dy/h(y) = g(x)dx and integrate both sides.",
+        "The solution separates naturally into a homogeneous transient Ch(x) and one particular forced response.",
+        "The result may define y implicitly; solving explicitly is optional unless required."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because the solution separates naturally into a homogeneous transient Ch(x) and one particular forced response. The alternative involving The result may define y implicitly solving explicitly applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The solution separates naturally into a homogeneous transient Ch(x) and one particular forced response.",
+      "misconceptionTargeted": "Using The result may define y implicitly solving explicitly instead of The solution separates naturally into a homogeneous transient when reasoning about The solution separates naturally into a"
+    },
+    {
+      "id": "differential-equations--linear-first-order--q7",
+      "sectionId": "linear-first-order",
+      "question": "A first-order equation can be written as y′ + P(x)y = Q(x). How should this equation be classified?",
+      "options": [
+        "interval of validity",
+        "linear equation",
+        "autonomous equation",
+        "phase line"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because a first-order linear equation has standard form y′ + P(x)y = Q(x). The alternative involving autonomous equation applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A first-order linear equation has standard form y′ + P(x)y = Q(x).",
+      "misconceptionTargeted": "Using autonomous equation instead of linear equation when reasoning about A first order linear equation has"
+    },
+    {
+      "id": "differential-equations--linear-first-order--q8",
+      "sectionId": "linear-first-order",
+      "question": "Which conclusion about first-order linear differential equations is supported by the mathematics?",
+      "options": [
+        "A first-order linear equation has standard form y′ + P(x)y = Q(x).",
+        "Equilibria occur where h(y) = 0, and a phase line shows whether nearby solutions increase or decrease.",
+        "Arrows toward an equilibrium indicate stability; arrows away indicate instability.",
+        "This qualitative analysis often reveals long-term behaviour more clearly than a complicated formula."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because a first-order linear equation has standard form y′ + P(x)y = Q(x). The alternative involving Equilibria occur where h y = 0 and applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A first-order linear equation has standard form y′ + P(x)y = Q(x).",
+      "misconceptionTargeted": "Using Equilibria occur where h y = 0 and instead of A first order linear equation has standard form when reasoning about A first order linear equation has"
+    },
+    {
+      "id": "differential-equations--modelling--q1",
+      "sectionId": "modelling",
+      "question": "Along with exponential decay, which behaviour is modelled by y′ = ky and y = y₀e^{kt}?",
+      "options": [
+        "linear equation",
+        "exponential growth",
+        "standard form",
+        "integrating factor"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because exponential growth and decay follow y′ = ky, whose solution is y = y0e^{kt}. The alternative involving standard form applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Exponential growth and decay follow y′ = ky, whose solution is y = y0e^{kt}.",
+      "misconceptionTargeted": "Using standard form instead of exponential growth when reasoning about Exponential growth and decay follow y′"
+    },
+    {
+      "id": "differential-equations--modelling--q2",
+      "sectionId": "modelling",
+      "question": "Which statement correctly describes growth, decay, and oscillation models?",
+      "options": [
+        "The model assumes a constant per-capita rate and no resource limit, making it appropriate for short growth phases, radioactive decay, and first-order elimination but not indefinite biological population growth.",
+        "Arrows toward an equilibrium indicate stability; arrows away indicate instability.",
+        "This qualitative analysis often reveals long-term behaviour more clearly than a complicated formula.",
+        "A first-order linear equation has standard form y′ + P(x)y = Q(x)."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because the model assumes a constant per-capita rate and no resource limit, making it appropriate for short growth phases, radioactive decay, and first-order elimination but not indefinite biological population growth. The alternative involving Arrows toward an equilibrium indicate stability arrows away applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The model assumes a constant per-capita rate and no resource limit, making it appropriate for short growth phases, radioactive decay, and first-order elimination but not indefinite biological population growth.",
+      "misconceptionTargeted": "Using Arrows toward an equilibrium indicate stability arrows away instead of The model assumes a constant per capita rate when reasoning about The model assumes a constant per"
+    },
+    {
+      "id": "differential-equations--modelling--q3",
+      "sectionId": "modelling",
+      "question": "Which modelling law gives T′ = −k(T − Tenv) when the ambient temperature is constant?",
+      "options": [
+        "autonomous equation",
+        "phase line",
+        "stability",
+        "Newton’s law of cooling"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because newton’s law of cooling states T′ = −k(T − Tenv) for constant ambient temperature, so the temperature difference decays exponentially. The alternative involving autonomous equation applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Newton’s law of cooling states T′ = −k(T − Tenv) for constant ambient temperature, so the temperature difference decays exponentially.",
+      "misconceptionTargeted": "Using autonomous equation instead of Newton s law of cooling when reasoning about Newton s law of cooling states"
+    },
+    {
+      "id": "differential-equations--modelling--q4",
+      "sectionId": "modelling",
+      "question": "A student is applying growth, decay, and oscillation models. Which statement is mathematically valid?",
+      "options": [
+        "An ordinary differential equation uses derivatives with respect to one independent variable, while a partial differential equation uses several.",
+        "The order is the highest derivative present.",
+        "Logistic growth adds a carrying capacity K through P′ = rP(1 − P/K), producing near-exponential growth when P is small and slower growth near K.",
+        "A solution is a function that satisfies the equation on an interval, not merely a numerical value."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because logistic growth adds a carrying capacity K through P′ = rP(1 − P/K), producing near-exponential growth when P is small and slower growth near K. The alternative involving A solution is a function that satisfies the applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Logistic growth adds a carrying capacity K through P′ = rP(1 − P/K), producing near-exponential growth when P is small and slower growth near K.",
+      "misconceptionTargeted": "Using A solution is a function that satisfies the instead of Logistic growth adds a carrying capacity K through when reasoning about Logistic growth adds a carrying capacity"
+    },
+    {
+      "id": "differential-equations--modelling--q5",
+      "sectionId": "modelling",
+      "question": "In P′ = rP(1 − P/K), what does the parameter K represent?",
+      "options": [
+        "integration constant",
+        "carrying capacity",
+        "equilibrium solution",
+        "interval of validity"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because logistic growth adds a carrying capacity K through P′ = rP(1 − P/K), producing near-exponential growth when P is small and slower growth near K. The alternative involving equilibrium solution applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Logistic growth adds a carrying capacity K through P′ = rP(1 − P/K), producing near-exponential growth when P is small and slower growth near K.",
+      "misconceptionTargeted": "Using equilibrium solution instead of carrying capacity when reasoning about Logistic growth adds a carrying capacity"
+    },
+    {
+      "id": "differential-equations--modelling--q6",
+      "sectionId": "modelling",
+      "question": "Which fact should guide the student's reasoning about growth, decay, and oscillation models?",
+      "options": [
+        "Simple harmonic motion satisfies x″ + ω²x = 0 and has sinusoidal solutions.",
+        "The method works because μ′ = Pμ, which creates the missing product-rule term.",
+        "The equation must first be divided by the coefficient of y′, and the resulting P and Q must be continuous on the interval considered.",
+        "An initial value then produces one local solution on any interval meeting the regularity conditions."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because simple harmonic motion satisfies x″ + ω²x = 0 and has sinusoidal solutions. The alternative involving The method works because μ′ = Pμ which applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Simple harmonic motion satisfies x″ + ω²x = 0 and has sinusoidal solutions.",
+      "misconceptionTargeted": "Using The method works because μ′ = Pμ which instead of Simple harmonic motion satisfies x + ω²x = when reasoning about Simple harmonic motion satisfies x +"
+    },
+    {
+      "id": "differential-equations--modelling--q7",
+      "sectionId": "modelling",
+      "question": "In a damped, driven oscillator, what phenomenon can produce an unusually large response near a natural frequency?",
+      "options": [
+        "uniqueness",
+        "separable equation",
+        "implicit solution",
+        "resonance"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because with damping and driving, the model becomes x″ + 2βx′ + ω0²x = F(t)/m, explaining transients, resonance, and steady forced response in mechanical, electrical, and acoustical systems. The alternative involving uniqueness applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "With damping and driving, the model becomes x″ + 2βx′ + ω0²x = F(t)/m, explaining transients, resonance, and steady forced response in mechanical, electrical, and acoustical systems.",
+      "misconceptionTargeted": "Using uniqueness instead of resonance when reasoning about With damping and driving the model"
+    },
+    {
+      "id": "differential-equations--modelling--q8",
+      "sectionId": "modelling",
+      "question": "Which conclusion about growth, decay, and oscillation models is supported by the mathematics?",
+      "options": [
+        "The solution separates naturally into a homogeneous transient Ch(x) and one particular forced response.",
+        "In constant-coefficient equations y′ + ay = b, the transient Ce^(−ax) decays for a > 0 and the solution approaches equilibrium b/a.",
+        "Logistic growth adds a carrying capacity K through P′ = rP(1 − P/K), producing near-exponential growth when P is small and slower growth near K.",
+        "This structure models cooling, mixing tanks, resistor-capacitor circuits, drug infusion, and any linear system with proportional loss plus external input."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because logistic growth adds a carrying capacity K through P′ = rP(1 − P/K), producing near-exponential growth when P is small and slower growth near K. The alternative involving This structure models cooling mixing tanks resistor capacitor applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Logistic growth adds a carrying capacity K through P′ = rP(1 − P/K), producing near-exponential growth when P is small and slower growth near K.",
+      "misconceptionTargeted": "Using This structure models cooling mixing tanks resistor capacitor instead of Logistic growth adds a carrying capacity K through when reasoning about Logistic growth adds a carrying capacity"
+    },
+    {
+      "id": "differential-equations--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "Before dividing a separable equation by a factor that may be zero, which solutions must be recorded?",
+      "options": [
+        "autonomous equation",
+        "phase line",
+        "equilibrium solution",
+        "stability"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because when separating variables, record equilibrium solutions before dividing by a factor that may be zero, and use the initial condition only after obtaining the general relationship unless an equivalent definite-integral method is used. The alternative involving stability applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "When separating variables, record equilibrium solutions before dividing by a factor that may be zero, and use the initial condition only after obtaining the general relationship unless an equivalent definite-integral method is used.",
+      "misconceptionTargeted": "Using stability instead of equilibrium solution when reasoning about When separating variables record equilibrium solutions"
+    },
+    {
+      "id": "differential-equations--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "Which statement identifies a genuine issue students must watch for among common differential-equation errors?",
+      "options": [
+        "A differential equation relates an unknown function to one or more of its derivatives.",
+        "An ordinary differential equation uses derivatives with respect to one independent variable, while a partial differential equation uses several.",
+        "The order is the highest derivative present.",
+        "The integrating factor has a positive exponent ∫Pdx, and the integration constant appears after integrating the product derivative."
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because the integrating factor has a positive exponent ∫Pdx, and the integration constant appears after integrating the product derivative. The alternative involving A differential equation relates an unknown function to applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The integrating factor has a positive exponent ∫Pdx, and the integration constant appears after integrating the product derivative.",
+      "misconceptionTargeted": "Using A differential equation relates an unknown function to instead of The integrating factor has a positive exponent Pdx when reasoning about The integrating factor has a positive"
+    },
+    {
+      "id": "differential-equations--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "For which kind of first-order solution would adding a second independent constant be an error?",
+      "options": [
+        "general solution",
+        "integration constant",
+        "equilibrium solution",
+        "interval of validity"
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because do not add a second independent constant to a first-order general solution. The alternative involving integration constant applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Do not add a second independent constant to a first-order general solution.",
+      "misconceptionTargeted": "Using integration constant instead of general solution when reasoning about Do not add a second independent"
+    },
+    {
+      "id": "differential-equations--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "A student is checking work for common differential-equation errors. Which statement is mathematically correct?",
+      "options": [
+        "Existence and uniqueness are separate questions: an equation may have no solution, one local solution, or multiple solutions through the same point if its conditions are not sufficiently regular.",
+        "Distinguish homogeneous from particular solutions and apply the initial condition to their sum.",
+        "Differential equations express local laws of change and predict global behaviour.",
+        "Newton’s motion laws, radioactive decay, population growth, circuit dynamics, heat flow, and epidemics all take differential form."
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because distinguish homogeneous from particular solutions and apply the initial condition to their sum. The alternative involving Differential equations express local laws of change and applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Distinguish homogeneous from particular solutions and apply the initial condition to their sum.",
+      "misconceptionTargeted": "Using Differential equations express local laws of change and instead of Distinguish homogeneous from particular solutions and apply the when reasoning about Distinguish homogeneous from particular solutions and"
+    },
+    {
+      "id": "differential-equations--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "Which parameter in an exponential model must have inverse-time units?",
+      "options": [
+        "product derivative",
+        "homogeneous solution",
+        "rate constant",
+        "particular solution"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because parameters carry units: an exponential rate constant has inverse-time units, while angular frequency is radians per unit time. The alternative involving particular solution applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Parameters carry units: an exponential rate constant has inverse-time units, while angular frequency is radians per unit time.",
+      "misconceptionTargeted": "Using particular solution instead of rate constant when reasoning about Parameters carry units an exponential rate"
+    },
+    {
+      "id": "differential-equations--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "Which check would help a student avoid one of common differential-equation errors?",
+      "options": [
+        "Autonomous separable equations y′ = h(y) can be analysed without explicit solution.",
+        "Equilibria occur where h(y) = 0, and a phase line shows whether nearby solutions increase or decrease.",
+        "Arrows toward an equilibrium indicate stability; arrows away indicate instability.",
+        "When separating variables, record equilibrium solutions before dividing by a factor that may be zero, and use the initial condition only after obtaining the general relationship unless an equivalent definite-integral method is used."
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because when separating variables, record equilibrium solutions before dividing by a factor that may be zero, and use the initial condition only after obtaining the general relationship unless an equivalent definite-integral method is used. The alternative involving Autonomous separable equations y′ = h y can applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "When separating variables, record equilibrium solutions before dividing by a factor that may be zero, and use the initial condition only after obtaining the general relationship unless an equivalent definite-integral method is used.",
+      "misconceptionTargeted": "Using Autonomous separable equations y′ = h y can instead of When separating variables record equilibrium solutions before dividing when reasoning about When separating variables record equilibrium solutions"
+    },
+    {
+      "id": "differential-equations--exam-traps--q7",
+      "sectionId": "exam-traps",
+      "question": "Which multiplier uses the positive exponent ∫P dx when solving y′ + P(x)y = Q(x)?",
+      "options": [
+        "integrating factor",
+        "linear equation",
+        "standard form",
+        "product derivative"
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because the integrating factor has a positive exponent ∫Pdx, and the integration constant appears after integrating the product derivative. The alternative involving linear equation applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The integrating factor has a positive exponent ∫Pdx, and the integration constant appears after integrating the product derivative.",
+      "misconceptionTargeted": "Using linear equation instead of integrating factor when reasoning about The integrating factor has a positive"
+    },
+    {
+      "id": "differential-equations--exam-traps--q8",
+      "sectionId": "exam-traps",
+      "question": "Which statement correctly resolves a misconception associated with common differential-equation errors?",
+      "options": [
+        "An ordinary differential equation uses derivatives with respect to one independent variable, while a partial differential equation uses several.",
+        "Do not add a second independent constant to a first-order general solution.",
+        "The order is the highest derivative present.",
+        "A solution is a function that satisfies the equation on an interval, not merely a numerical value."
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because do not add a second independent constant to a first-order general solution. The alternative involving The order is the highest derivative present applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Do not add a second independent constant to a first-order general solution.",
+      "misconceptionTargeted": "Using The order is the highest derivative present instead of Do not add a second independent constant to when reasoning about Do not add a second independent"
+    }
+  ]
+}

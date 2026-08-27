@@ -1,0 +1,606 @@
+{
+  "topicId": "differentiation",
+  "subjectId": "mathematics",
+  "questions": [
+    {
+      "id": "differentiation--overview--q1",
+      "sectionId": "overview",
+      "question": "What describes the value approached by f(x) as x approaches a point, even if f is not defined there?",
+      "options": [
+        "removable discontinuity",
+        "jump discontinuity",
+        "vertical asymptote",
+        "limit"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because a limit describes the value approached by f(x) as x approaches a point, whether or not f is defined there. The alternative involving removable discontinuity applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "A limit describes the value approached by f(x) as x approaches a point, whether or not f is defined there.",
+      "misconceptionTargeted": "Using removable discontinuity instead of limit when reasoning about A limit describes the value approached"
+    },
+    {
+      "id": "differentiation--overview--q2",
+      "sectionId": "overview",
+      "question": "Which statement correctly describes limits and continuity?",
+      "options": [
+        "Differentiability implies continuity: if f′(a) exists, then f(x) approaches f(a).",
+        "The absolute-value function is continuous at zero but has left derivative −1 and right derivative +1, so it has a corner and is not differentiable there.",
+        "Removable discontinuities can be repaired by redefining one value, jump discontinuities have unequal one-sided limits, and infinite discontinuities occur near vertical asymptotes.",
+        "Vertical tangents, cusps, jumps, and unbounded local behaviour can likewise prevent a finite derivative."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because removable discontinuities can be repaired by redefining one value, jump discontinuities have unequal one-sided limits, and infinite discontinuities occur near vertical asymptotes. The alternative involving Vertical tangents cusps jumps and unbounded local behaviour applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Removable discontinuities can be repaired by redefining one value, jump discontinuities have unequal one-sided limits, and infinite discontinuities occur near vertical asymptotes.",
+      "misconceptionTargeted": "Using Vertical tangents cusps jumps and unbounded local behaviour instead of Removable discontinuities can be repaired by redefining one when reasoning about Removable discontinuities can be repaired by"
+    },
+    {
+      "id": "differentiation--overview--q3",
+      "sectionId": "overview",
+      "question": "Near which feature does a function exhibit an infinite discontinuity?",
+      "options": [
+        "one-sided limit",
+        "vertical asymptote",
+        "continuity",
+        "removable discontinuity"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because removable discontinuities can be repaired by redefining one value, jump discontinuities have unequal one-sided limits, and infinite discontinuities occur near vertical asymptotes. The alternative involving continuity applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Removable discontinuities can be repaired by redefining one value, jump discontinuities have unequal one-sided limits, and infinite discontinuities occur near vertical asymptotes.",
+      "misconceptionTargeted": "Using continuity instead of vertical asymptote when reasoning about Removable discontinuities can be repaired by"
+    },
+    {
+      "id": "differentiation--overview--q4",
+      "sectionId": "overview",
+      "question": "A student is applying limits and continuity. Which statement is mathematically valid?",
+      "options": [
+        "The Intermediate Value Theorem guarantees that a continuous function takes every intermediate output between two endpoint values, supporting root-finding and existence arguments.",
+        "Carry units through derivatives: if distance is metres and time seconds, dx/dt is metres per second, while dA/dt is square metres per second.",
+        "The derivative f′(a) is the limit of average rates of change over shrinking intervals.",
+        "The difference quotient [f(a + h) − f(a)]/h is the slope of a secant line through two curve points."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because the Intermediate Value Theorem guarantees that a continuous function takes every intermediate output between two endpoint values, supporting root-finding and existence arguments. The alternative involving Carry units through derivatives if distance is metres applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The Intermediate Value Theorem guarantees that a continuous function takes every intermediate output between two endpoint values, supporting root-finding and existence arguments.",
+      "misconceptionTargeted": "Using Carry units through derivatives if distance is metres instead of The Intermediate Value Theorem guarantees that a continuous when reasoning about The Intermediate Value Theorem guarantees that"
+    },
+    {
+      "id": "differentiation--overview--q5",
+      "sectionId": "overview",
+      "question": "Which idea do limits make mathematically precise?",
+      "options": [
+        "derivative",
+        "difference quotient",
+        "average rate of change",
+        "instantaneous change"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because limits make instantaneous change mathematically precise. The alternative involving derivative applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Limits make instantaneous change mathematically precise.",
+      "misconceptionTargeted": "Using derivative instead of instantaneous change when reasoning about Limits make instantaneous change mathematically precise"
+    },
+    {
+      "id": "differentiation--overview--q6",
+      "sectionId": "overview",
+      "question": "Which fact should guide the student's reasoning about limits and continuity?",
+      "options": [
+        "These methods model marginal cost, maximum area, minimum material, fluid filling, shadow motion, and motion tracked by geometry.",
+        "A limit of 0/0 is indeterminate, not automatically zero or nonexistent.",
+        "Later work by Augustin-Louis Cauchy and Karl Weierstrass gave limits rigorous definitions.",
+        "Simplify, factor, rationalise, or use an appropriate theorem before evaluating."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because later work by Augustin-Louis Cauchy and Karl Weierstrass gave limits rigorous definitions. The alternative involving Simplify factor rationalise or use an appropriate theorem applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Later work by Augustin-Louis Cauchy and Karl Weierstrass gave limits rigorous definitions.",
+      "misconceptionTargeted": "Using Simplify factor rationalise or use an appropriate theorem instead of Later work by Augustin Louis Cauchy and Karl when reasoning about Later work by Augustin Louis Cauchy"
+    },
+    {
+      "id": "differentiation--overview--q7",
+      "sectionId": "overview",
+      "question": "What separates the behaviour of a function as x approaches a point from the left and from the right?",
+      "options": [
+        "vertical asymptote",
+        "one-sided limit",
+        "Intermediate Value Theorem",
+        "instantaneous change"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because one-sided limits separate approach from the left and right; a two-sided limit exists only when both agree. The alternative involving Intermediate Value Theorem applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "One-sided limits separate approach from the left and right; a two-sided limit exists only when both agree.",
+      "misconceptionTargeted": "Using Intermediate Value Theorem instead of one sided limit when reasoning about One sided limits separate approach from"
+    },
+    {
+      "id": "differentiation--overview--q8",
+      "sectionId": "overview",
+      "question": "Which conclusion about limits and continuity is supported by the mathematics?",
+      "options": [
+        "Removable discontinuities can be repaired by redefining one value, jump discontinuities have unequal one-sided limits, and infinite discontinuities occur near vertical asymptotes.",
+        "The product rule is (fg)′ = f′g + fg′ because both factors change.",
+        "The quotient rule is (f/g)′ = (f′g − fg′)/g² where g is nonzero.",
+        "These rules are not obtained by differentiating the factors separately and multiplying or dividing; missing cross-effects makes those tempting shortcuts false."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because removable discontinuities can be repaired by redefining one value, jump discontinuities have unequal one-sided limits, and infinite discontinuities occur near vertical asymptotes. The alternative involving The product rule is fg ′ = f′g applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Removable discontinuities can be repaired by redefining one value, jump discontinuities have unequal one-sided limits, and infinite discontinuities occur near vertical asymptotes.",
+      "misconceptionTargeted": "Using The product rule is fg ′ = f′g instead of Removable discontinuities can be repaired by redefining one when reasoning about Removable discontinuities can be repaired by"
+    },
+    {
+      "id": "differentiation--first-principles--q1",
+      "sectionId": "first-principles",
+      "question": "What quantity f′(a) is defined as the limit of average rates of change over shrinking intervals?",
+      "options": [
+        "derivative",
+        "derivative function",
+        "chain factor",
+        "endpoint"
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because the derivative f′(a) is the limit of average rates of change over shrinking intervals. The alternative involving derivative function applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The derivative f′(a) is the limit of average rates of change over shrinking intervals.",
+      "misconceptionTargeted": "Using derivative function instead of derivative when reasoning about The derivative f′ a is the"
+    },
+    {
+      "id": "differentiation--first-principles--q2",
+      "sectionId": "first-principles",
+      "question": "Which statement correctly describes derivatives from first principles?",
+      "options": [
+        "The chain rule differentiates a composition: d[f(g(x))]/dx = f′(g(x))g′(x).",
+        "The difference quotient [f(a + h) − f(a)]/h is the slope of a secant line through two curve points.",
+        "It multiplies the outer sensitivity by the inner rate of change and extends through multiple nested layers.",
+        "Implicit differentiation applies the same rule when y depends on x without being isolated, while logarithmic differentiation simplifies products, quotients, or variable exponents before differentiation."
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because the difference quotient [f(a + h) − f(a)]/h is the slope of a secant line through two curve points. The alternative involving It multiplies the outer sensitivity by the inner applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The difference quotient [f(a + h) − f(a)]/h is the slope of a secant line through two curve points.",
+      "misconceptionTargeted": "Using It multiplies the outer sensitivity by the inner instead of The difference quotient f a + h − when reasoning about The difference quotient f a +"
+    },
+    {
+      "id": "differentiation--first-principles--q3",
+      "sectionId": "first-principles",
+      "question": "The difference quotient [f(a + h) − f(a)]/h gives the slope of which line through two points on the curve?",
+      "options": [
+        "related rates",
+        "indeterminate form",
+        "secant line",
+        "derivative function"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because the difference quotient [f(a + h) − f(a)]/h is the slope of a secant line through two curve points. The alternative involving derivative function applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The difference quotient [f(a + h) − f(a)]/h is the slope of a secant line through two curve points.",
+      "misconceptionTargeted": "Using derivative function instead of secant line when reasoning about The difference quotient f a +"
+    },
+    {
+      "id": "differentiation--first-principles--q4",
+      "sectionId": "first-principles",
+      "question": "A student is applying derivatives from first principles. Which statement is mathematically valid?",
+      "options": [
+        "A function is continuous at a when f(a) is defined, limx→a f(x) exists, and that limit equals f(a).",
+        "Polynomials are continuous everywhere, while rational functions are continuous wherever their denominators are nonzero.",
+        "Removable discontinuities can be repaired by redefining one value, jump discontinuities have unequal one-sided limits, and infinite discontinuities occur near vertical asymptotes.",
+        "As h approaches zero, if the quotient approaches a finite value, the secant slopes approach the tangent slope and define the instantaneous rate of change."
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because as h approaches zero, if the quotient approaches a finite value, the secant slopes approach the tangent slope and define the instantaneous rate of change. The alternative involving A function is continuous at a when f applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "As h approaches zero, if the quotient approaches a finite value, the secant slopes approach the tangent slope and define the instantaneous rate of change.",
+      "misconceptionTargeted": "Using A function is continuous at a when f instead of As h approaches zero if the quotient approaches when reasoning about As h approaches zero if the"
+    },
+    {
+      "id": "differentiation--first-principles--q5",
+      "sectionId": "first-principles",
+      "question": "Which property of f at a point guarantees continuity there?",
+      "options": [
+        "differentiability",
+        "limit",
+        "one-sided limit",
+        "continuity"
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because differentiability implies continuity: if f′(a) exists, then f(x) approaches f(a). The alternative involving limit applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Differentiability implies continuity: if f′(a) exists, then f(x) approaches f(a).",
+      "misconceptionTargeted": "Using limit instead of differentiability when reasoning about Differentiability implies continuity if f′ a"
+    },
+    {
+      "id": "differentiation--first-principles--q6",
+      "sectionId": "first-principles",
+      "question": "Which fact should guide the student's reasoning about derivatives from first principles?",
+      "options": [
+        "Endpoints and points where the derivative is undefined must also be checked on a closed interval.",
+        "The absolute-value function is continuous at zero but has left derivative −1 and right derivative +1, so it has a corner and is not differentiable there.",
+        "The first-derivative test classifies a critical point by sign changes: positive to negative gives a local maximum, while negative to positive gives a local minimum.",
+        "The second-derivative test uses concavity when f′ = 0 and f″ is nonzero."
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because the absolute-value function is continuous at zero but has left derivative −1 and right derivative +1, so it has a corner and is not differentiable there. The alternative involving The first derivative test classifies a critical point applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The absolute-value function is continuous at zero but has left derivative −1 and right derivative +1, so it has a corner and is not differentiable there.",
+      "misconceptionTargeted": "Using The first derivative test classifies a critical point instead of The absolute value function is continuous at zero when reasoning about The absolute value function is continuous"
+    },
+    {
+      "id": "differentiation--first-principles--q7",
+      "sectionId": "first-principles",
+      "question": "What does the limit of [f(a + h) − f(a)]/h represent when it exists?",
+      "options": [
+        "endpoint",
+        "units",
+        "derivative",
+        "limit"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because the derivative f′(a) is the limit of average rates of change over shrinking intervals. The alternative involving limit applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The derivative f′(a) is the limit of average rates of change over shrinking intervals.",
+      "misconceptionTargeted": "Using limit instead of derivative when reasoning about The derivative f′ a is the"
+    },
+    {
+      "id": "differentiation--first-principles--q8",
+      "sectionId": "first-principles",
+      "question": "Which conclusion about derivatives from first principles is supported by the mathematics?",
+      "options": [
+        "Later work by Augustin-Louis Cauchy and Karl Weierstrass gave limits rigorous definitions.",
+        "The Intermediate Value Theorem guarantees that a continuous function takes every intermediate output between two endpoint values, supporting root-finding and existence arguments.",
+        "Derivative rules compress repeated first-principles arguments.",
+        "The difference quotient [f(a + h) − f(a)]/h is the slope of a secant line through two curve points."
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because the difference quotient [f(a + h) − f(a)]/h is the slope of a secant line through two curve points. The alternative involving Later work by Augustin Louis Cauchy and Karl applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The difference quotient [f(a + h) − f(a)]/h is the slope of a secant line through two curve points.",
+      "misconceptionTargeted": "Using Later work by Augustin Louis Cauchy and Karl instead of The difference quotient f a + h − when reasoning about The difference quotient f a +"
+    },
+    {
+      "id": "differentiation--rules--q1",
+      "sectionId": "rules",
+      "question": "Which property gives (af + bg)′ = af′ + bg′?",
+      "options": [
+        "indeterminate form",
+        "derivative function",
+        "chain factor",
+        "linearity"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because linearity gives (af + bg)′ = af′ + bg′, and the power rule gives d(xn)/dx = nx^(n−1) for broad classes of exponents on appropriate domains. The alternative involving indeterminate form applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Linearity gives (af + bg)′ = af′ + bg′, and the power rule gives d(xn)/dx = nx^(n−1) for broad classes of exponents on appropriate domains.",
+      "misconceptionTargeted": "Using indeterminate form instead of linearity when reasoning about Linearity gives af + bg ′"
+    },
+    {
+      "id": "differentiation--rules--q2",
+      "sectionId": "rules",
+      "question": "Which statement correctly describes differentiation rules?",
+      "options": [
+        "Limits make instantaneous change mathematically precise.",
+        "Isaac Newton and Gottfried Wilhelm Leibniz developed calculus independently in the seventeenth century, linking tangent problems with accumulated area.",
+        "Linearity gives (af + bg)′ = af′ + bg′, and the power rule gives d(xn)/dx = nx^(n−1) for broad classes of exponents on appropriate domains.",
+        "Later work by Augustin-Louis Cauchy and Karl Weierstrass gave limits rigorous definitions."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because linearity gives (af + bg)′ = af′ + bg′, and the power rule gives d(xn)/dx = nx^(n−1) for broad classes of exponents on appropriate domains. The alternative involving Later work by Augustin Louis Cauchy and Karl applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Linearity gives (af + bg)′ = af′ + bg′, and the power rule gives d(xn)/dx = nx^(n−1) for broad classes of exponents on appropriate domains.",
+      "misconceptionTargeted": "Using Later work by Augustin Louis Cauchy and Karl instead of Linearity gives af + bg ′ = af′ when reasoning about Linearity gives af + bg ′"
+    },
+    {
+      "id": "differentiation--rules--q3",
+      "sectionId": "rules",
+      "question": "Which rule gives (fg)′ = f′g + fg′?",
+      "options": [
+        "second-derivative test",
+        "product rule",
+        "related rates",
+        "indeterminate form"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because the product rule is (fg)′ = f′g + fg′ because both factors change. The alternative involving related rates applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The product rule is (fg)′ = f′g + fg′ because both factors change.",
+      "misconceptionTargeted": "Using related rates instead of product rule when reasoning about The product rule is fg ′"
+    },
+    {
+      "id": "differentiation--rules--q4",
+      "sectionId": "rules",
+      "question": "A student is applying differentiation rules. Which statement is mathematically valid?",
+      "options": [
+        "The quotient rule is (f/g)′ = (f′g − fg′)/g² where g is nonzero.",
+        "Polynomials are continuous everywhere, while rational functions are continuous wherever their denominators are nonzero.",
+        "Removable discontinuities can be repaired by redefining one value, jump discontinuities have unequal one-sided limits, and infinite discontinuities occur near vertical asymptotes.",
+        "Limits make instantaneous change mathematically precise."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because the quotient rule is (f/g)′ = (f′g − fg′)/g² where g is nonzero. The alternative involving Polynomials are continuous everywhere while rational functions are applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The quotient rule is (f/g)′ = (f′g − fg′)/g² where g is nonzero.",
+      "misconceptionTargeted": "Using Polynomials are continuous everywhere while rational functions are instead of The quotient rule is f/g ′ = f′g when reasoning about The quotient rule is f/g ′"
+    },
+    {
+      "id": "differentiation--rules--q5",
+      "sectionId": "rules",
+      "question": "Which rule differentiates a composition as d[f(g(x))]/dx = f′(g(x))g′(x)?",
+      "options": [
+        "critical point",
+        "first-derivative test",
+        "second-derivative test",
+        "chain rule"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because the chain rule differentiates a composition: d[f(g(x))]/dx = f′(g(x))g′(x). The alternative involving critical point applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The chain rule differentiates a composition: d[f(g(x))]/dx = f′(g(x))g′(x).",
+      "misconceptionTargeted": "Using critical point instead of chain rule when reasoning about The chain rule differentiates a composition"
+    },
+    {
+      "id": "differentiation--rules--q6",
+      "sectionId": "rules",
+      "question": "Which fact should guide the student's reasoning about differentiation rules?",
+      "options": [
+        "One-sided limits separate approach from the left and right; a two-sided limit exists only when both agree.",
+        "A function is continuous at a when f(a) is defined, limx→a f(x) exists, and that limit equals f(a).",
+        "The chain rule differentiates a composition: d[f(g(x))]/dx = f′(g(x))g′(x).",
+        "Polynomials are continuous everywhere, while rational functions are continuous wherever their denominators are nonzero."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because the chain rule differentiates a composition: d[f(g(x))]/dx = f′(g(x))g′(x). The alternative involving Polynomials are continuous everywhere while rational functions are applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The chain rule differentiates a composition: d[f(g(x))]/dx = f′(g(x))g′(x).",
+      "misconceptionTargeted": "Using Polynomials are continuous everywhere while rational functions are instead of The chain rule differentiates a composition d f when reasoning about The chain rule differentiates a composition"
+    },
+    {
+      "id": "differentiation--rules--q7",
+      "sectionId": "rules",
+      "question": "Which method is used when y depends on x but is not isolated before differentiation?",
+      "options": [
+        "objective function",
+        "implicit differentiation",
+        "constraint",
+        "critical point"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because implicit differentiation applies the same rule when y depends on x without being isolated, while logarithmic differentiation simplifies products, quotients, or variable exponents before differentiation. The alternative involving constraint applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Implicit differentiation applies the same rule when y depends on x without being isolated, while logarithmic differentiation simplifies products, quotients, or variable exponents before differentiation.",
+      "misconceptionTargeted": "Using constraint instead of implicit differentiation when reasoning about Implicit differentiation applies the same rule"
+    },
+    {
+      "id": "differentiation--rules--q8",
+      "sectionId": "rules",
+      "question": "Which conclusion about differentiation rules is supported by the mathematics?",
+      "options": [
+        "Implicit differentiation applies the same rule when y depends on x without being isolated, while logarithmic differentiation simplifies products, quotients, or variable exponents before differentiation.",
+        "A limit describes the value approached by f(x) as x approaches a point, whether or not f is defined there.",
+        "The statement limx→a f(x) = L means values of f(x) can be made arbitrarily close to L by choosing x sufficiently close to, but not necessarily equal to, a.",
+        "One-sided limits separate approach from the left and right; a two-sided limit exists only when both agree."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because implicit differentiation applies the same rule when y depends on x without being isolated, while logarithmic differentiation simplifies products, quotients, or variable exponents before differentiation. The alternative involving A limit describes the value approached by f applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Implicit differentiation applies the same rule when y depends on x without being isolated, while logarithmic differentiation simplifies products, quotients, or variable exponents before differentiation.",
+      "misconceptionTargeted": "Using A limit describes the value approached by f instead of Implicit differentiation applies the same rule when y when reasoning about Implicit differentiation applies the same rule"
+    },
+    {
+      "id": "differentiation--applications--q1",
+      "sectionId": "applications",
+      "question": "Which process translates a practical goal into an objective function and constraints?",
+      "options": [
+        "quotient rule",
+        "chain rule",
+        "composition",
+        "optimisation"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because optimisation translates a goal into an objective function and constraints. The alternative involving quotient rule applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Optimisation translates a goal into an objective function and constraints.",
+      "misconceptionTargeted": "Using quotient rule instead of optimisation when reasoning about Optimisation translates a goal into an"
+    },
+    {
+      "id": "differentiation--applications--q2",
+      "sectionId": "applications",
+      "question": "Which statement correctly describes optimisation and related rates?",
+      "options": [
+        "One-sided limits separate approach from the left and right; a two-sided limit exists only when both agree.",
+        "A function is continuous at a when f(a) is defined, limx→a f(x) exists, and that limit equals f(a).",
+        "Optimisation translates a goal into an objective function and constraints.",
+        "Polynomials are continuous everywhere, while rational functions are continuous wherever their denominators are nonzero."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because optimisation translates a goal into an objective function and constraints. The alternative involving Polynomials are continuous everywhere while rational functions are applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Optimisation translates a goal into an objective function and constraints.",
+      "misconceptionTargeted": "Using Polynomials are continuous everywhere while rational functions are instead of Optimisation translates a goal into an objective function when reasoning about Optimisation translates a goal into an"
+    },
+    {
+      "id": "differentiation--applications--q3",
+      "sectionId": "applications",
+      "question": "In an optimisation model, what condition limits the allowable values of the decision variables?",
+      "options": [
+        "power rule",
+        "constraint",
+        "product rule",
+        "quotient rule"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because optimisation translates a goal into an objective function and constraints. The alternative involving product rule applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Optimisation translates a goal into an objective function and constraints.",
+      "misconceptionTargeted": "Using product rule instead of constraint when reasoning about Optimisation translates a goal into an"
+    },
+    {
+      "id": "differentiation--applications--q4",
+      "sectionId": "applications",
+      "question": "A student is applying optimisation and related rates. Which statement is mathematically valid?",
+      "options": [
+        "The first-derivative test classifies a critical point by sign changes: positive to negative gives a local maximum, while negative to positive gives a local minimum.",
+        "The chain rule differentiates a composition: d[f(g(x))]/dx = f′(g(x))g′(x).",
+        "It multiplies the outer sensitivity by the inner rate of change and extends through multiple nested layers.",
+        "Implicit differentiation applies the same rule when y depends on x without being isolated, while logarithmic differentiation simplifies products, quotients, or variable exponents before differentiation."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because the first-derivative test classifies a critical point by sign changes: positive to negative gives a local maximum, while negative to positive gives a local minimum. The alternative involving The chain rule differentiates a composition d f applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The first-derivative test classifies a critical point by sign changes: positive to negative gives a local maximum, while negative to positive gives a local minimum.",
+      "misconceptionTargeted": "Using The chain rule differentiates a composition d f instead of The first derivative test classifies a critical point when reasoning about The first derivative test classifies a"
+    },
+    {
+      "id": "differentiation--applications--q5",
+      "sectionId": "applications",
+      "question": "Which test classifies a critical point by checking how the sign of f′ changes around it?",
+      "options": [
+        "one-sided derivative",
+        "linearity",
+        "power rule",
+        "first-derivative test"
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because the first-derivative test classifies a critical point by sign changes: positive to negative gives a local maximum, while negative to positive gives a local minimum. The alternative involving one sided derivative applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The first-derivative test classifies a critical point by sign changes: positive to negative gives a local maximum, while negative to positive gives a local minimum.",
+      "misconceptionTargeted": "Using one sided derivative instead of first derivative test when reasoning about The first derivative test classifies a"
+    },
+    {
+      "id": "differentiation--applications--q6",
+      "sectionId": "applications",
+      "question": "Which fact should guide the student's reasoning about optimisation and related rates?",
+      "options": [
+        "Later work by Augustin-Louis Cauchy and Karl Weierstrass gave limits rigorous definitions.",
+        "The Intermediate Value Theorem guarantees that a continuous function takes every intermediate output between two endpoint values, supporting root-finding and existence arguments.",
+        "The second-derivative test uses concavity when f′ = 0 and f″ is nonzero.",
+        "The derivative f′(a) is the limit of average rates of change over shrinking intervals."
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because the second-derivative test uses concavity when f′ = 0 and f″ is nonzero. The alternative involving The derivative f′ a is the limit of applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The second-derivative test uses concavity when f′ = 0 and f″ is nonzero.",
+      "misconceptionTargeted": "Using The derivative f′ a is the limit of instead of The second derivative test uses concavity when f′ when reasoning about The second derivative test uses concavity"
+    },
+    {
+      "id": "differentiation--applications--q7",
+      "sectionId": "applications",
+      "question": "What method would a student use to maximise area subject to a fixed-perimeter condition?",
+      "options": [
+        "differentiability",
+        "optimisation",
+        "corner",
+        "one-sided derivative"
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because optimisation translates a goal into an objective function and constraints. The alternative involving corner applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Optimisation translates a goal into an objective function and constraints.",
+      "misconceptionTargeted": "Using corner instead of optimisation when reasoning about Optimisation translates a goal into an"
+    },
+    {
+      "id": "differentiation--applications--q8",
+      "sectionId": "applications",
+      "question": "Which conclusion about optimisation and related rates is supported by the mathematics?",
+      "options": [
+        "Optimisation translates a goal into an objective function and constraints.",
+        "Distinguish f′(x), the derivative function, from f′(a), its value at one point.",
+        "Apply rules to the correct structure.",
+        "The derivative of a product is not f′g′, the derivative of a quotient is not f′/g′, and a composite requires every chain factor."
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because optimisation translates a goal into an objective function and constraints. The alternative involving Distinguish f′ x the derivative function from f′ applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Optimisation translates a goal into an objective function and constraints.",
+      "misconceptionTargeted": "Using Distinguish f′ x the derivative function from f′ instead of Optimisation translates a goal into an objective function when reasoning about Optimisation translates a goal into an"
+    },
+    {
+      "id": "differentiation--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "Which property alone does not guarantee that a function is differentiable?",
+      "options": [
+        "removable discontinuity",
+        "jump discontinuity",
+        "continuity",
+        "vertical asymptote"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because continuity does not guarantee differentiability, and a graph can have a derivative of zero without crossing the axis. The alternative involving vertical asymptote applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Continuity does not guarantee differentiability, and a graph can have a derivative of zero without crossing the axis.",
+      "misconceptionTargeted": "Using vertical asymptote instead of continuity when reasoning about Continuity does not guarantee differentiability and"
+    },
+    {
+      "id": "differentiation--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "Which statement identifies a genuine issue students must watch for among common differentiation errors?",
+      "options": [
+        "A function is continuous at a when f(a) is defined, limx→a f(x) exists, and that limit equals f(a).",
+        "Polynomials are continuous everywhere, while rational functions are continuous wherever their denominators are nonzero.",
+        "Removable discontinuities can be repaired by redefining one value, jump discontinuities have unequal one-sided limits, and infinite discontinuities occur near vertical asymptotes.",
+        "Distinguish f′(x), the derivative function, from f′(a), its value at one point."
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because distinguish f′(x), the derivative function, from f′(a), its value at one point. The alternative involving A function is continuous at a when f applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Distinguish f′(x), the derivative function, from f′(a), its value at one point.",
+      "misconceptionTargeted": "Using A function is continuous at a when f instead of Distinguish f′ x the derivative function from f′ when reasoning about Distinguish f′ x the derivative function"
+    },
+    {
+      "id": "differentiation--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "What factor is commonly omitted when differentiating a composite function?",
+      "options": [
+        "chain factor",
+        "jump discontinuity",
+        "vertical asymptote",
+        "Intermediate Value Theorem"
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because the derivative of a product is not f′g′, the derivative of a quotient is not f′/g′, and a composite requires every chain factor. The alternative involving jump discontinuity applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The derivative of a product is not f′g′, the derivative of a quotient is not f′/g′, and a composite requires every chain factor.",
+      "misconceptionTargeted": "Using jump discontinuity instead of chain factor when reasoning about The derivative of a product is"
+    },
+    {
+      "id": "differentiation--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "A student is checking work for common differentiation errors. Which statement is mathematically correct?",
+      "options": [
+        "Linearity gives (af + bg)′ = af′ + bg′, and the power rule gives d(xn)/dx = nx^(n−1) for broad classes of exponents on appropriate domains.",
+        "For optimisation, include endpoints and domain restrictions, and prove classification rather than assuming every solution of f′ = 0 is an extremum.",
+        "Exponential, logarithmic, and trigonometric derivatives provide a core library from which composite expressions are built.",
+        "The product rule is (fg)′ = f′g + fg′ because both factors change."
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because for optimisation, include endpoints and domain restrictions, and prove classification rather than assuming every solution of f′ = 0 is an extremum. The alternative involving Exponential logarithmic and trigonometric derivatives provide a core applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "For optimisation, include endpoints and domain restrictions, and prove classification rather than assuming every solution of f′ = 0 is an extremum.",
+      "misconceptionTargeted": "Using Exponential logarithmic and trigonometric derivatives provide a core instead of For optimisation include endpoints and domain restrictions and when reasoning about For optimisation include endpoints and domain"
+    },
+    {
+      "id": "differentiation--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "What should be carried through a derivative so that dx/dt and dA/dt retain meaningful physical dimensions?",
+      "options": [
+        "Intermediate Value Theorem",
+        "instantaneous change",
+        "units",
+        "derivative"
+      ],
+      "correctIndex": 2,
+      "explanation": "The correct choice follows because carry units through derivatives: if distance is metres and time seconds, dx/dt is metres per second, while dA/dt is square metres per second. The alternative involving derivative applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Carry units through derivatives: if distance is metres and time seconds, dx/dt is metres per second, while dA/dt is square metres per second.",
+      "misconceptionTargeted": "Using derivative instead of units when reasoning about Carry units through derivatives if distance"
+    },
+    {
+      "id": "differentiation--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "Which check would help a student avoid one of common differentiation errors?",
+      "options": [
+        "Write an equation relating the variables, differentiate implicitly with respect to time, then substitute the instant-specific values.",
+        "Substituting fixed values before differentiating can erase the changing relationship.",
+        "These methods model marginal cost, maximum area, minimum material, fluid filling, shadow motion, and motion tracked by geometry.",
+        "Continuity does not guarantee differentiability, and a graph can have a derivative of zero without crossing the axis."
+      ],
+      "correctIndex": 3,
+      "explanation": "The correct choice follows because continuity does not guarantee differentiability, and a graph can have a derivative of zero without crossing the axis. The alternative involving Write an equation relating the variables differentiate implicitly applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Continuity does not guarantee differentiability, and a graph can have a derivative of zero without crossing the axis.",
+      "misconceptionTargeted": "Using Write an equation relating the variables differentiate implicitly instead of Continuity does not guarantee differentiability and a graph when reasoning about Continuity does not guarantee differentiability and"
+    },
+    {
+      "id": "differentiation--exam-traps--q7",
+      "sectionId": "exam-traps",
+      "question": "What does f′(x) denote, in contrast with the single numerical value f′(a)?",
+      "options": [
+        "derivative function",
+        "derivative",
+        "difference quotient",
+        "average rate of change"
+      ],
+      "correctIndex": 0,
+      "explanation": "The correct choice follows because distinguish f′(x), the derivative function, from f′(a), its value at one point. The alternative involving derivative applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "Distinguish f′(x), the derivative function, from f′(a), its value at one point.",
+      "misconceptionTargeted": "Using derivative instead of derivative function when reasoning about Distinguish f′ x the derivative function"
+    },
+    {
+      "id": "differentiation--exam-traps--q8",
+      "sectionId": "exam-traps",
+      "question": "Which statement correctly resolves a misconception associated with common differentiation errors?",
+      "options": [
+        "These methods model marginal cost, maximum area, minimum material, fluid filling, shadow motion, and motion tracked by geometry.",
+        "The derivative of a product is not f′g′, the derivative of a quotient is not f′/g′, and a composite requires every chain factor.",
+        "A limit describes the value approached by f(x) as x approaches a point, whether or not f is defined there.",
+        "The statement limx→a f(x) = L means values of f(x) can be made arbitrarily close to L by choosing x sufficiently close to, but not necessarily equal to, a."
+      ],
+      "correctIndex": 1,
+      "explanation": "The correct choice follows because the derivative of a product is not f′g′, the derivative of a quotient is not f′/g′, and a composite requires every chain factor. The alternative involving A limit describes the value approached by f applies a different definition or reverses the required relationship.",
+      "sourceEvidence": "The derivative of a product is not f′g′, the derivative of a quotient is not f′/g′, and a composite requires every chain factor.",
+      "misconceptionTargeted": "Using A limit describes the value approached by f instead of The derivative of a product is not f′g′ when reasoning about The derivative of a product is"
+    }
+  ]
+}

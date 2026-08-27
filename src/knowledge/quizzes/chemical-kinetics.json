@@ -1,0 +1,606 @@
+{
+  "topicId": "chemical-kinetics",
+  "subjectId": "chemistry",
+  "questions": [
+    {
+      "id": "chemical-kinetics--overview--q1",
+      "sectionId": "overview",
+      "question": "Which quantity measures how quickly composition changes with time?",
+      "options": [
+        "activation energy",
+        "reaction rate",
+        "transition state",
+        "reaction coordinate"
+      ],
+      "correctIndex": 1,
+      "explanation": "Reaction rate measures composition change per unit time. Stoichiometric normalisation lets different species report the same overall rate.",
+      "sourceEvidence": "Reaction rate measures composition change per unit time.",
+      "misconceptionTargeted": "Thinking activation energy or a pathway label measures concentration change per unit time."
+    },
+    {
+      "id": "chemical-kinetics--overview--q2",
+      "sectionId": "overview",
+      "question": "What conditions must a particle collision satisfy to produce a reaction?",
+      "options": [
+        "Collision theory requires reacting particles to collide with sufficient energy and suitable orientation.",
+        "On an Arrhenius plot of ln k versus 1/T, the slope is negative and equals −Ea/R.",
+        "Use kelvin, not Celsius, in exponential and logarithmic temperature relations.",
+        "A mechanism is acceptable only if its steps sum to the overall reaction and its derived rate law matches experiment."
+      ],
+      "correctIndex": 0,
+      "explanation": "Reacting particles must collide with enough energy and a suitable orientation. A collision that misses either requirement is not productive.",
+      "sourceEvidence": "Collision theory requires reacting particles to collide with sufficient energy and suitable orientation.",
+      "misconceptionTargeted": "Assuming every particle collision reacts, even without enough energy or the correct orientation."
+    },
+    {
+      "id": "chemical-kinetics--overview--q3",
+      "sectionId": "overview",
+      "question": "Why does raising temperature often increase reaction rate more strongly than merely increasing collision frequency?",
+      "options": [
+        "half-life",
+        "first-order reaction",
+        "linearised plot",
+        "activation barrier"
+      ],
+      "correctIndex": 3,
+      "explanation": "Higher temperature greatly increases the fraction of collisions above the activation barrier. It also raises collision frequency, but barrier crossing produces the stronger effect.",
+      "sourceEvidence": "Raising concentration or gas pressure increases collision frequency, while higher temperature both increases collision frequency and greatly enlarges the fraction of collisions above the activation barrier.",
+      "misconceptionTargeted": "Thinking heating only makes collisions more frequent, not more likely to cross the activation barrier."
+    },
+    {
+      "id": "chemical-kinetics--overview--q4",
+      "sectionId": "overview",
+      "question": "Why can grinding a solid reactant speed a heterogeneous reaction?",
+      "options": [
+        "The slowest kinetically influential step is often called rate-determining, but deriving an observed rate law can require pre-equilibrium or steady-state analysis rather than simply selecting the visually slowest step.",
+        "A proposed mechanism must reproduce the net stoichiometry and experimental rate law.",
+        "Greater surface area exposes more solid reactant, improving contact in heterogeneous reactions.",
+        "Observing an intermediate or isotope effect can provide additional evidence, but mechanisms remain models constrained by multiple measurements."
+      ],
+      "correctIndex": 2,
+      "explanation": "Grinding increases the solid’s exposed surface area. More exposed particles can contact the other reactant and participate in collisions.",
+      "sourceEvidence": "Greater surface area exposes more solid reactant, improving contact in heterogeneous reactions.",
+      "misconceptionTargeted": "Believing grinding a solid changes its equilibrium or chemistry rather than exposing more surface area."
+    },
+    {
+      "id": "chemical-kinetics--overview--q5",
+      "sectionId": "overview",
+      "question": "Which rate is calculated over a finite time interval?",
+      "options": [
+        "catalytic cycle",
+        "average rate",
+        "reaction mechanism",
+        "elementary step"
+      ],
+      "correctIndex": 1,
+      "explanation": "An average rate uses concentration change over a finite interval. An instantaneous rate instead uses the tangent slope at one time.",
+      "sourceEvidence": "An average rate uses a finite time interval; an instantaneous rate is the tangent slope of a concentration-time curve.",
+      "misconceptionTargeted": "Using a tangent at one instant when the question asks for an average over a finite interval."
+    },
+    {
+      "id": "chemical-kinetics--overview--q6",
+      "sectionId": "overview",
+      "question": "How does an instantaneous rate differ graphically from an average rate?",
+      "options": [
+        "An average rate uses a finite time interval; an instantaneous rate is the tangent slope of a concentration-time curve.",
+        "The Arrhenius equation k = Ae^(−Ea/RT) relates the rate constant to temperature.",
+        "A is the pre-exponential factor containing collision frequency and orientation effects.",
+        "Plotting ln k against 1/T gives a line with slope −Ea/R when Arrhenius behaviour holds."
+      ],
+      "correctIndex": 0,
+      "explanation": "The instantaneous rate is the tangent slope of a concentration-time curve. The average rate is a secant slope over a finite interval.",
+      "sourceEvidence": "An average rate uses a finite time interval; an instantaneous rate is the tangent slope of a concentration-time curve.",
+      "misconceptionTargeted": "Treating an instantaneous rate as a secant slope measured across a time interval."
+    },
+    {
+      "id": "chemical-kinetics--overview--q7",
+      "sectionId": "overview",
+      "question": "Which branch of chemistry addresses reaction pathway and timescale rather than favourability?",
+      "options": [
+        "Arrhenius equation",
+        "pre-exponential factor",
+        "catalyst",
+        "kinetics"
+      ],
+      "correctIndex": 3,
+      "explanation": "Kinetics explains how reactions proceed and how quickly they occur. Thermodynamics instead addresses energetic favourability and direction.",
+      "sourceEvidence": "Kinetics concerns pathway and timescale, not thermodynamic favourability: a reaction with negative ΔG may remain imperceptibly slow when its activation energy is large.",
+      "misconceptionTargeted": "Using thermodynamic favourability to answer a question about reaction speed or pathway."
+    },
+    {
+      "id": "chemical-kinetics--overview--q8",
+      "sectionId": "overview",
+      "question": "Why are concentration changes divided by stoichiometric coefficients when defining reaction rate?",
+      "options": [
+        "Zero-, first-, and second-order single-reactant forms are [A]t = [A]0 − kt, ln[A]t = ln[A]0 − kt, and 1/[A]t = 1/[A]0 + kt.",
+        "Half-life behaviour provides another diagnostic.",
+        "For aA → bB, the stoichiometrically normalised rate is −(1/a)d[A]/dt = (1/b)d[B]/dt, making one reaction rate independent of which species is monitored.",
+        "A first-order half-life is ln 2/k and does not depend on starting concentration, which explains exponential radioactive decay and many unimolecular processes."
+      ],
+      "correctIndex": 2,
+      "explanation": "Stoichiometric normalisation makes the reported reaction rate independent of the species monitored. It compensates for different consumption and formation ratios.",
+      "sourceEvidence": "For aA → bB, the stoichiometrically normalised rate is −(1/a)d[A]/dt = (1/b)d[B]/dt, making one reaction rate independent of which species is monitored.",
+      "misconceptionTargeted": "Reporting separate reaction rates for each species instead of normalising by stoichiometric coefficients."
+    },
+    {
+      "id": "chemical-kinetics--rate-laws--q1",
+      "sectionId": "rate-laws",
+      "question": "Which equation relates reaction rate to reactant concentrations and experimentally determined exponents?",
+      "options": [
+        "integrated rate law",
+        "half-life",
+        "rate law",
+        "first-order reaction"
+      ],
+      "correctIndex": 2,
+      "explanation": "A rate law expresses rate as a constant multiplied by concentration terms raised to reaction orders. Those exponents quantify the measured concentration dependence.",
+      "sourceEvidence": "A differential rate law relates rate to reactant concentrations: rate = k[A]^m[B]^n.",
+      "misconceptionTargeted": "Confusing a differential rate law with an integrated concentration-time equation."
+    },
+    {
+      "id": "chemical-kinetics--rate-laws--q2",
+      "sectionId": "rate-laws",
+      "question": "When may rate-law exponents be inferred from reaction stoichiometry?",
+      "options": [
+        "A proposed mechanism must reproduce the net stoichiometry and experimental rate law.",
+        "Observing an intermediate or isotope effect can provide additional evidence, but mechanisms remain models constrained by multiple measurements.",
+        "Homogeneous catalysts share a phase with reactants, heterogeneous catalysts act across a phase boundary, and enzymes provide highly selective biological catalysis.",
+        "The exponents are reaction orders determined experimentally and generally cannot be inferred from the overall balanced equation unless the reaction is a single elementary step."
+      ],
+      "correctIndex": 3,
+      "explanation": "They may be inferred directly only for a known single elementary step. For an overall reaction, the orders normally must be determined experimentally.",
+      "sourceEvidence": "The exponents are reaction orders determined experimentally and generally cannot be inferred from the overall balanced equation unless the reaction is a single elementary step.",
+      "misconceptionTargeted": "Copying coefficients from an overall balanced equation into the rate law as reaction orders."
+    },
+    {
+      "id": "chemical-kinetics--rate-laws--q3",
+      "sectionId": "rate-laws",
+      "question": "Which type of law connects reactant concentration directly to elapsed time?",
+      "options": [
+        "integrated rate law",
+        "reaction order",
+        "rate constant",
+        "initial-rate method"
+      ],
+      "correctIndex": 0,
+      "explanation": "An integrated rate law gives concentration as a function of time. Its mathematical form depends on the reaction order.",
+      "sourceEvidence": "Integrated rate laws connect concentration to time.",
+      "misconceptionTargeted": "Mistaking a rate constant or initial-rate method for the law that predicts concentration over time."
+    },
+    {
+      "id": "chemical-kinetics--rate-laws--q4",
+      "sectionId": "rate-laws",
+      "question": "How can half-life data help identify reaction order?",
+      "options": [
+        "Homogeneous catalysts share a phase with reactants, heterogeneous catalysts act across a phase boundary, and enzymes provide highly selective biological catalysis.",
+        "Half-life behaviour provides another diagnostic.",
+        "Catalysts stabilise transition states or reorganise the pathway through acid-base chemistry, redox cycling, surface adsorption, or molecular orientation.",
+        "Industrial catalysts make processes such as ammonia synthesis and exhaust-gas treatment practical by increasing rate and selectivity under achievable conditions."
+      ],
+      "correctIndex": 1,
+      "explanation": "Half-life changes differently with starting concentration for zero-, first-, and second-order reactions. A concentration-independent half-life is characteristic of first-order behaviour.",
+      "sourceEvidence": "Half-life behaviour provides another diagnostic.",
+      "misconceptionTargeted": "Assuming every reaction order has the same half-life dependence on starting concentration."
+    },
+    {
+      "id": "chemical-kinetics--rate-laws--q5",
+      "sectionId": "rate-laws",
+      "question": "Which plotting method can identify reaction order but may distort measurement errors?",
+      "options": [
+        "instantaneous rate",
+        "kinetics",
+        "linearised plot",
+        "rate law"
+      ],
+      "correctIndex": 2,
+      "explanation": "A linearised plot transforms concentration data to test a predicted straight-line form. Direct fitting is often preferred because transformation can distort errors.",
+      "sourceEvidence": "Linearised plots can identify order, although modern analysis often fits concentration data directly to avoid distorting measurement errors.",
+      "misconceptionTargeted": "Believing linearising kinetic data cannot change or distort experimental error."
+    },
+    {
+      "id": "chemical-kinetics--rate-laws--q6",
+      "sectionId": "rate-laws",
+      "question": "What information is obtained by integrating a differential rate law?",
+      "options": [
+        "Industrial catalysts make processes such as ammonia synthesis and exhaust-gas treatment practical by increasing rate and selectivity under achievable conditions.",
+        "Normalise rates by stoichiometric coefficients and keep disappearance signs negative before forming a positive reaction rate.",
+        "Do not infer reaction order from the overall equation.",
+        "Integrated rate laws connect concentration to time."
+      ],
+      "correctIndex": 3,
+      "explanation": "Integration connects concentration with time. The resulting equation can predict how much reactant remains at any time.",
+      "sourceEvidence": "Integrated rate laws connect concentration to time.",
+      "misconceptionTargeted": "Thinking integration preserves only rate dependence and does not produce a concentration-versus-time relation."
+    },
+    {
+      "id": "chemical-kinetics--rate-laws--q7",
+      "sectionId": "rate-laws",
+      "question": "What do the exponents m and n represent in rate = k[A]^m[B]^n?",
+      "options": [
+        "reaction order",
+        "activation barrier",
+        "surface area",
+        "average rate"
+      ],
+      "correctIndex": 0,
+      "explanation": "They are reaction orders determined from kinetic evidence. They are not generally the stoichiometric coefficients of the overall equation.",
+      "sourceEvidence": "The exponents are reaction orders determined experimentally and generally cannot be inferred from the overall balanced equation unless the reaction is a single elementary step.",
+      "misconceptionTargeted": "Treating the exponents in a rate law as activation energies or stoichiometric labels rather than reaction orders."
+    },
+    {
+      "id": "chemical-kinetics--rate-laws--q8",
+      "sectionId": "rate-laws",
+      "question": "Which equations are used to predict concentration as a reaction proceeds?",
+      "options": [
+        "Do not infer reaction order from the overall equation.",
+        "Integrated rate laws connect concentration to time.",
+        "Determine order from initial-rate ratios, integrated plots, or a validated elementary mechanism.",
+        "The units of k change with overall order, so a value without units is incomplete."
+      ],
+      "correctIndex": 1,
+      "explanation": "Integrated rate laws relate concentration to elapsed time. Different reaction orders produce different integrated forms.",
+      "sourceEvidence": "Integrated rate laws connect concentration to time.",
+      "misconceptionTargeted": "Using the differential rate law, rather than an integrated rate law, to predict concentration after elapsed time."
+    },
+    {
+      "id": "chemical-kinetics--activation-energy--q1",
+      "sectionId": "activation-energy",
+      "question": "What barrier must reactants overcome to reach the transition-state region?",
+      "options": [
+        "kinetics",
+        "activation energy",
+        "rate law",
+        "reaction order"
+      ],
+      "correctIndex": 1,
+      "explanation": "Activation energy is the minimum barrier associated with reaching the transition state. It is distinct from the overall reaction energy change.",
+      "sourceEvidence": "Activation energy Ea is the minimum energy barrier associated with reaching a transition-state region along a reaction pathway.",
+      "misconceptionTargeted": "Confusing the transition-state barrier with the overall energy released or absorbed by the reaction."
+    },
+    {
+      "id": "chemical-kinetics--activation-energy--q2",
+      "sectionId": "activation-energy",
+      "question": "Which equation describes the temperature dependence of the rate constant?",
+      "options": [
+        "The Arrhenius equation k = Ae^(−Ea/RT) relates the rate constant to temperature.",
+        "Treat “rate-determining step” as a kinetic model supported by derivation, not a shortcut label.",
+        "Reaction rate measures composition change per unit time.",
+        "For aA → bB, the stoichiometrically normalised rate is −(1/a)d[A]/dt = (1/b)d[B]/dt, making one reaction rate independent of which species is monitored."
+      ],
+      "correctIndex": 0,
+      "explanation": "The Arrhenius equation relates k to temperature through an exponential containing activation energy. This relationship explains why modest heating can strongly affect rate.",
+      "sourceEvidence": "The Arrhenius equation k = Ae^(−Ea/RT) relates the rate constant to temperature.",
+      "misconceptionTargeted": "Using a concentration-based rate law instead of the Arrhenius equation to describe how k changes with temperature."
+    },
+    {
+      "id": "chemical-kinetics--activation-energy--q3",
+      "sectionId": "activation-energy",
+      "question": "What does the pre-exponential factor A represent in the Arrhenius equation?",
+      "options": [
+        "surface area",
+        "average rate",
+        "instantaneous rate",
+        "pre-exponential factor"
+      ],
+      "correctIndex": 3,
+      "explanation": "The pre-exponential factor includes collision frequency and orientation effects. It sets the scale of the rate constant apart from the exponential barrier term.",
+      "sourceEvidence": "A is the pre-exponential factor containing collision frequency and orientation effects.",
+      "misconceptionTargeted": "Interpreting the Arrhenius pre-exponential factor as an energy barrier rather than collision frequency and orientation."
+    },
+    {
+      "id": "chemical-kinetics--activation-energy--q4",
+      "sectionId": "activation-energy",
+      "question": "Why can a modest temperature increase substantially raise a rate constant?",
+      "options": [
+        "An intermediate is formed in one step and consumed in another, so it cancels from the overall equation; a catalyst is consumed early and regenerated later.",
+        "The slowest kinetically influential step is often called rate-determining, but deriving an observed rate law can require pre-equilibrium or steady-state analysis rather than simply selecting the visually slowest step.",
+        "Because temperature appears in an exponential, modest heating can increase a rate constant substantially.",
+        "A proposed mechanism must reproduce the net stoichiometry and experimental rate law."
+      ],
+      "correctIndex": 2,
+      "explanation": "Temperature appears in the exponential term of the Arrhenius equation. A small temperature change can therefore greatly change the fraction able to cross the barrier.",
+      "sourceEvidence": "Because temperature appears in an exponential, modest heating can increase a rate constant substantially.",
+      "misconceptionTargeted": "Assuming a small temperature rise can only cause a similarly small change in the rate constant."
+    },
+    {
+      "id": "chemical-kinetics--activation-energy--q5",
+      "sectionId": "activation-energy",
+      "question": "How does a catalyst increase reaction rate without changing equilibrium?",
+      "options": [
+        "stoichiometric coefficient",
+        "catalyst",
+        "collision theory",
+        "activation barrier"
+      ],
+      "correctIndex": 1,
+      "explanation": "A catalyst provides an alternative mechanism with a lower activation barrier. It does not change reactant and product energies, ΔG°, or the equilibrium constant.",
+      "sourceEvidence": "A catalyst increases rate by providing an alternative mechanism with lower activation free energy; it does not alter the energies of reactants and products, ΔG°, or the equilibrium constant.",
+      "misconceptionTargeted": "Believing a catalyst speeds reaction by changing Gibbs energy or the equilibrium constant."
+    },
+    {
+      "id": "chemical-kinetics--activation-energy--q6",
+      "sectionId": "activation-energy",
+      "question": "What happens to a catalyst across forward and reverse reactions?",
+      "options": [
+        "Catalysts accelerate both forward and reverse processes and are regenerated over the catalytic cycle, although they may be deactivated by side reactions or poisoning.",
+        "Raising concentration or gas pressure increases collision frequency, while higher temperature both increases collision frequency and greatly enlarges the fraction of collisions above the activation barrier.",
+        "Greater surface area exposes more solid reactant, improving contact in heterogeneous reactions.",
+        "An average rate uses a finite time interval; an instantaneous rate is the tangent slope of a concentration-time curve."
+      ],
+      "correctIndex": 0,
+      "explanation": "A catalyst accelerates both directions and is regenerated over its cycle. Side reactions or poisoning can nevertheless deactivate it.",
+      "sourceEvidence": "Catalysts accelerate both forward and reverse processes and are regenerated over the catalytic cycle, although they may be deactivated by side reactions or poisoning.",
+      "misconceptionTargeted": "Thinking a catalyst is permanently consumed, speeds only the forward reaction, or shifts equilibrium."
+    },
+    {
+      "id": "chemical-kinetics--activation-energy--q7",
+      "sectionId": "activation-energy",
+      "question": "Which term names the minimum energy barrier on a reaction pathway?",
+      "options": [
+        "Arrhenius plot",
+        "reaction intermediate",
+        "reaction rate",
+        "activation energy"
+      ],
+      "correctIndex": 3,
+      "explanation": "Activation energy measures the barrier to the transition-state region. It is a kinetic quantity, not the reaction enthalpy.",
+      "sourceEvidence": "Activation energy Ea is the minimum energy barrier associated with reaching a transition-state region along a reaction pathway.",
+      "misconceptionTargeted": "Calling reaction rate or an Arrhenius plot the minimum energy barrier along the pathway."
+    },
+    {
+      "id": "chemical-kinetics--activation-energy--q8",
+      "sectionId": "activation-energy",
+      "question": "How is k related to temperature and activation energy in the Arrhenius model?",
+      "options": [
+        "Experimental rates may be followed through absorbance, pressure, conductivity, mass, or sampled concentration.",
+        "Kinetics concerns pathway and timescale, not thermodynamic favourability: a reaction with negative ΔG may remain imperceptibly slow when its activation energy is large.",
+        "The Arrhenius equation k = Ae^(−Ea/RT) relates the rate constant to temperature.",
+        "A differential rate law relates rate to reactant concentrations: rate = k[A]^m[B]^n."
+      ],
+      "correctIndex": 2,
+      "explanation": "The Arrhenius equation is k = Ae^(−Ea/RT). Increasing temperature makes the negative exponent less severe and generally increases k.",
+      "sourceEvidence": "The Arrhenius equation k = Ae^(−Ea/RT) relates the rate constant to temperature.",
+      "misconceptionTargeted": "Reversing the Arrhenius trend by expecting k to decrease when temperature rises or activation energy falls."
+    },
+    {
+      "id": "chemical-kinetics--mechanisms--q1",
+      "sectionId": "mechanisms",
+      "question": "What is a sequence of elementary steps that sums to the overall reaction called?",
+      "options": [
+        "reaction mechanism",
+        "reaction order",
+        "rate constant",
+        "initial-rate method"
+      ],
+      "correctIndex": 0,
+      "explanation": "A reaction mechanism specifies the elementary steps that produce the net equation. It must also be consistent with the observed rate law.",
+      "sourceEvidence": "A reaction mechanism is a sequence of elementary steps whose sum gives the overall reaction.",
+      "misconceptionTargeted": "Accepting a proposed mechanism because its steps sum correctly even though its predicted rate law disagrees with data."
+    },
+    {
+      "id": "chemical-kinetics--mechanisms--q2",
+      "sectionId": "mechanisms",
+      "question": "For which kind of process does molecularity directly determine the rate-law concentration factors?",
+      "options": [
+        "Do not infer reaction order from the overall equation.",
+        "The molecularity of an elementary step counts the reacting particles in that step, and its rate law follows directly from that step’s reactants.",
+        "Determine order from initial-rate ratios, integrated plots, or a validated elementary mechanism.",
+        "The units of k change with overall order, so a value without units is incomplete."
+      ],
+      "correctIndex": 1,
+      "explanation": "Molecularity applies to one elementary step and counts its reacting particles. The step’s rate law follows from those reactants.",
+      "sourceEvidence": "The molecularity of an elementary step counts the reacting particles in that step, and its rate law follows directly from that step’s reactants.",
+      "misconceptionTargeted": "Applying molecularity directly to a multistep overall reaction instead of to one elementary step."
+    },
+    {
+      "id": "chemical-kinetics--mechanisms--q3",
+      "sectionId": "mechanisms",
+      "question": "What does molecularity count?",
+      "options": [
+        "integrated rate law",
+        "half-life",
+        "molecularity",
+        "first-order reaction"
+      ],
+      "correctIndex": 2,
+      "explanation": "Molecularity counts the reacting particles in an elementary step. It is not a property assigned to a complex overall reaction.",
+      "sourceEvidence": "The molecularity of an elementary step counts the reacting particles in that step, and its rate law follows directly from that step’s reactants.",
+      "misconceptionTargeted": "Treating molecularity as a property of an overall reaction or allowing it to be fractional."
+    },
+    {
+      "id": "chemical-kinetics--mechanisms--q4",
+      "sectionId": "mechanisms",
+      "question": "Which observation can strengthen a proposed mechanism without proving it uniquely?",
+      "options": [
+        "For aA → bB, the stoichiometrically normalised rate is −(1/a)d[A]/dt = (1/b)d[B]/dt, making one reaction rate independent of which species is monitored.",
+        "Reactant concentration decreases and product concentration increases, so the negative sign keeps a disappearance-based reaction rate positive.",
+        "Collision theory requires reacting particles to collide with sufficient energy and suitable orientation.",
+        "Observing an intermediate or isotope effect can provide additional evidence, but mechanisms remain models constrained by multiple measurements."
+      ],
+      "correctIndex": 3,
+      "explanation": "Detecting an intermediate or isotope effect provides mechanistic evidence. A mechanism remains a model constrained by several measurements.",
+      "sourceEvidence": "Observing an intermediate or isotope effect can provide additional evidence, but mechanisms remain models constrained by multiple measurements.",
+      "misconceptionTargeted": "Believing detection of one intermediate or isotope effect uniquely proves a reaction mechanism."
+    },
+    {
+      "id": "chemical-kinetics--mechanisms--q5",
+      "sectionId": "mechanisms",
+      "question": "How does a catalyst differ from an intermediate in a multistep mechanism?",
+      "options": [
+        "catalyst",
+        "activation barrier",
+        "surface area",
+        "average rate"
+      ],
+      "correctIndex": 0,
+      "explanation": "An intermediate is produced in one step and consumed in another. A catalyst is consumed early but regenerated later.",
+      "sourceEvidence": "An intermediate is formed in one step and consumed in another, so it cancels from the overall equation; a catalyst is consumed early and regenerated later.",
+      "misconceptionTargeted": "Thinking an intermediate is regenerated like a catalyst, or that a catalyst is only consumed."
+    },
+    {
+      "id": "chemical-kinetics--mechanisms--q6",
+      "sectionId": "mechanisms",
+      "question": "How are homogeneous, heterogeneous, and enzyme catalysts distinguished?",
+      "options": [
+        "Overall order is m + n, and the units of k depend on that total order.",
+        "Homogeneous catalysts share a phase with reactants, heterogeneous catalysts act across a phase boundary, and enzymes provide highly selective biological catalysis.",
+        "Initial-rate experiments compare trials in which one concentration changes while others remain fixed.",
+        "If doubling [A] doubles rate, the reaction is first order in A; if rate quadruples, it is second order; if unchanged, zero order."
+      ],
+      "correctIndex": 1,
+      "explanation": "Homogeneous catalysts share the reactant phase, while heterogeneous catalysts act at a phase boundary. Enzymes are highly selective biological catalysts.",
+      "sourceEvidence": "Homogeneous catalysts share a phase with reactants, heterogeneous catalysts act across a phase boundary, and enzymes provide highly selective biological catalysis.",
+      "misconceptionTargeted": "Classifying catalysts by how much they speed a reaction rather than by phase relationship or biological selectivity."
+    },
+    {
+      "id": "chemical-kinetics--mechanisms--q7",
+      "sectionId": "mechanisms",
+      "question": "What must the elementary steps of a proposed reaction mechanism produce when added together?",
+      "options": [
+        "instantaneous rate",
+        "kinetics",
+        "reaction mechanism",
+        "rate law"
+      ],
+      "correctIndex": 2,
+      "explanation": "Their algebraic sum must reproduce the overall reaction. The mechanism must additionally predict the experimental rate law.",
+      "sourceEvidence": "A reaction mechanism is a sequence of elementary steps whose sum gives the overall reaction.",
+      "misconceptionTargeted": "Leaving intermediates in the net equation instead of cancelling species produced and consumed across steps."
+    },
+    {
+      "id": "chemical-kinetics--mechanisms--q8",
+      "sectionId": "mechanisms",
+      "question": "When does a step’s reactant molecularity directly give its rate law?",
+      "options": [
+        "Linearised plots can identify order, although modern analysis often fits concentration data directly to avoid distorting measurement errors.",
+        "Activation energy Ea is the minimum energy barrier associated with reaching a transition-state region along a reaction pathway.",
+        "Reactants may be thermodynamically capable of forming products yet require bond distortion and electron rearrangement before productive transformation occurs.",
+        "The molecularity of an elementary step counts the reacting particles in that step, and its rate law follows directly from that step’s reactants."
+      ],
+      "correctIndex": 3,
+      "explanation": "This direct relationship holds for an elementary step. It cannot usually be applied to the stoichiometry of an overall reaction.",
+      "sourceEvidence": "The molecularity of an elementary step counts the reacting particles in that step, and its rate law follows directly from that step’s reactants.",
+      "misconceptionTargeted": "Using overall stoichiometric coefficients as rate-law exponents without confirming a single elementary step."
+    },
+    {
+      "id": "chemical-kinetics--exam-traps--q1",
+      "sectionId": "exam-traps",
+      "question": "Which kinetic quantity must be obtained from data rather than copied from an overall balanced equation?",
+      "options": [
+        "reaction order",
+        "stoichiometric coefficient",
+        "collision theory",
+        "activation barrier"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reaction order is determined through kinetic experiments or a validated elementary mechanism. Overall stoichiometric coefficients do not usually provide it.",
+      "sourceEvidence": "Do not infer reaction order from the overall equation.",
+      "misconceptionTargeted": "Assuming reaction order is automatically the same as a coefficient in the balanced overall equation."
+    },
+    {
+      "id": "chemical-kinetics--exam-traps--q2",
+      "sectionId": "exam-traps",
+      "question": "Which quantities must not be confused with activation energy?",
+      "options": [
+        "A first-order half-life is ln 2/k and does not depend on starting concentration, which explains exponential radioactive decay and many unimolecular processes.",
+        "Distinguish activation energy from reaction enthalpy or Gibbs energy.",
+        "Zero-order half-life grows with initial concentration, while second-order half-life is inversely proportional to it.",
+        "Linearised plots can identify order, although modern analysis often fits concentration data directly to avoid distorting measurement errors."
+      ],
+      "correctIndex": 1,
+      "explanation": "Activation energy is different from reaction enthalpy and Gibbs energy. The barrier controls rate, while the overall energy differences describe thermodynamics.",
+      "sourceEvidence": "Distinguish activation energy from reaction enthalpy or Gibbs energy.",
+      "misconceptionTargeted": "Treating activation energy as interchangeable with reaction enthalpy or Gibbs energy."
+    },
+    {
+      "id": "chemical-kinetics--exam-traps--q3",
+      "sectionId": "exam-traps",
+      "question": "What equilibrium property remains unchanged when a catalyst is added?",
+      "options": [
+        "surface area",
+        "average rate",
+        "equilibrium composition",
+        "instantaneous rate"
+      ],
+      "correctIndex": 2,
+      "explanation": "A catalyst does not change equilibrium composition. It speeds both forward and reverse approaches to that same equilibrium.",
+      "sourceEvidence": "A catalyst lowers the barrier but changes neither ΔG° nor equilibrium composition.",
+      "misconceptionTargeted": "Believing a catalyst changes equilibrium composition rather than only how quickly equilibrium is reached."
+    },
+    {
+      "id": "chemical-kinetics--exam-traps--q4",
+      "sectionId": "exam-traps",
+      "question": "What is the slope of an Arrhenius plot of ln k against 1/T?",
+      "options": [
+        "An average rate uses a finite time interval; an instantaneous rate is the tangent slope of a concentration-time curve.",
+        "Experimental rates may be followed through absorbance, pressure, conductivity, mass, or sampled concentration.",
+        "Kinetics concerns pathway and timescale, not thermodynamic favourability: a reaction with negative ΔG may remain imperceptibly slow when its activation energy is large.",
+        "On an Arrhenius plot of ln k versus 1/T, the slope is negative and equals −Ea/R."
+      ],
+      "correctIndex": 3,
+      "explanation": "The slope is negative and equals −Ea/R. Using kelvin is required for this temperature relationship.",
+      "sourceEvidence": "On an Arrhenius plot of ln k versus 1/T, the slope is negative and equals −Ea/R.",
+      "misconceptionTargeted": "Reading the Arrhenius slope as positive Ea/R or using Celsius in the reciprocal-temperature axis."
+    },
+    {
+      "id": "chemical-kinetics--exam-traps--q5",
+      "sectionId": "exam-traps",
+      "question": "How does molecularity differ from reaction order?",
+      "options": [
+        "molecularity",
+        "kinetics",
+        "rate law",
+        "reaction order"
+      ],
+      "correctIndex": 0,
+      "explanation": "Molecularity is a positive-integer count defined only for an elementary step. Reaction order may be zero, fractional, or negative in a complex system.",
+      "sourceEvidence": "Molecularity applies only to an elementary step and is always a positive integer; reaction order can be zero, fractional, or negative in complex systems.",
+      "misconceptionTargeted": "Assuming molecularity and reaction order are interchangeable and can take the same non-integer values."
+    },
+    {
+      "id": "chemical-kinetics--exam-traps--q6",
+      "sectionId": "exam-traps",
+      "question": "Why must an acceptable mechanism match both stoichiometry and kinetics?",
+      "options": [
+        "A proposed mechanism must reproduce the net stoichiometry and experimental rate law.",
+        "Molecularity applies only to an elementary step and is always a positive integer; reaction order can be zero, fractional, or negative in complex systems.",
+        "Observing an intermediate or isotope effect can provide additional evidence, but mechanisms remain models constrained by multiple measurements.",
+        "Homogeneous catalysts share a phase with reactants, heterogeneous catalysts act across a phase boundary, and enzymes provide highly selective biological catalysis."
+      ],
+      "correctIndex": 1,
+      "explanation": "Its steps must sum to the observed overall reaction and derive the measured rate law. Satisfying only one condition does not validate the pathway.",
+      "sourceEvidence": "Molecularity applies only to an elementary step and is always a positive integer; reaction order can be zero, fractional, or negative in complex systems.",
+      "misconceptionTargeted": "Validating a mechanism from stoichiometry alone while ignoring whether it reproduces the experimental rate law."
+    },
+    {
+      "id": "chemical-kinetics--exam-traps--q7",
+      "sectionId": "exam-traps",
+      "question": "Which barrier should not be mistaken for a reaction’s enthalpy or Gibbs-energy change?",
+      "options": [
+        "rate constant",
+        "initial-rate method",
+        "activation energy",
+        "integrated rate law"
+      ],
+      "correctIndex": 2,
+      "explanation": "Activation energy describes the pathway barrier to the transition state. Enthalpy and Gibbs energy compare thermodynamic states instead.",
+      "sourceEvidence": "Distinguish activation energy from reaction enthalpy or Gibbs energy.",
+      "misconceptionTargeted": "Using a reaction's enthalpy or Gibbs-energy change as its transition-state activation barrier."
+    },
+    {
+      "id": "chemical-kinetics--exam-traps--q8",
+      "sectionId": "exam-traps",
+      "question": "What does a catalyst change, and what thermodynamic quantities does it leave unchanged?",
+      "options": [
+        "The slowest kinetically influential step is often called rate-determining, but deriving an observed rate law can require pre-equilibrium or steady-state analysis rather than simply selecting the visually slowest step.",
+        "A proposed mechanism must reproduce the net stoichiometry and experimental rate law.",
+        "Observing an intermediate or isotope effect can provide additional evidence, but mechanisms remain models constrained by multiple measurements.",
+        "A catalyst lowers the barrier but changes neither ΔG° nor equilibrium composition."
+      ],
+      "correctIndex": 3,
+      "explanation": "A catalyst lowers the kinetic barrier by offering another pathway. It leaves ΔG° and equilibrium composition unchanged.",
+      "sourceEvidence": "A catalyst lowers the barrier but changes neither ΔG° nor equilibrium composition.",
+      "misconceptionTargeted": "Thinking a catalyst changes standard Gibbs energy or equilibrium composition while lowering the barrier."
+    }
+  ]
+}
