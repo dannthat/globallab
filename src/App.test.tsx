@@ -136,6 +136,36 @@ describe('Global Lab V4', () => {
     expect(screen.getByRole('button', { name: /Biology/ })).toBeTruthy()
   })
 
+  it('features the last opened subject on the home reading-room hero', async () => {
+    seedProfile({ interest: 'gaming' })
+    const user = userEvent.setup()
+    const { unmount } = render(<App />)
+
+    expect(
+      screen.getByRole('heading', { level: 2, name: 'Biology' }),
+    ).toBeTruthy()
+    expect(
+      screen.getByRole('button', { name: /^Biology/ }).getAttribute('aria-current'),
+    ).toBe('page')
+
+    await user.click(screen.getByRole('button', { name: /^Physics/ }))
+    expect(
+      await screen.findByRole('heading', { level: 1, name: 'Physics' }),
+    ).toBeTruthy()
+    await user.click(screen.getByRole('button', { name: 'Back to library' }))
+
+    expect(
+      await screen.findByRole('heading', { level: 2, name: 'Physics' }),
+    ).toBeTruthy()
+    expect(window.localStorage.getItem('gl_recent_subject')).toBe('physics')
+
+    unmount()
+    render(<App />)
+    expect(
+      screen.getByRole('heading', { level: 2, name: 'Physics' }),
+    ).toBeTruthy()
+  })
+
   it('deletes learner memory and every persisted companion cache without deleting the profile', async () => {
     seedProfile({ interest: 'basketball' })
     window.localStorage.setItem(

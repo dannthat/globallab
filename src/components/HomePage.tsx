@@ -1,4 +1,4 @@
-import { Loader2, X } from 'lucide-react'
+import { ArrowRight, BookOpenText, Loader2, X } from 'lucide-react'
 import { useRef, type ChangeEvent } from 'react'
 import type { Subject, UserBook } from '../types'
 
@@ -60,6 +60,9 @@ export function HomePage({
 
   const availableSubjects = subjects.filter((s) => !s.comingSoon)
   const recentBooks = books.slice(0, 3)
+  const featuredTopic = activeSubject?.topics[0] ?? null
+  const chapterCount = activeSubject?.topics.length ?? 0
+  const volumeMapProgress = chapterCount > 0 ? 100 / chapterCount : 0
 
   const handleFile = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -96,18 +99,49 @@ export function HomePage({
           >
             <div className="gl-home-hero-card__pattern" aria-hidden="true" />
             <div className="gl-home-hero-card__content">
-              <p className="gl-home-hero-card__kicker">Currently studying</p>
-              <h2 className="gl-home-hero-card__title">{activeSubject.title}</h2>
-              <p className="gl-home-hero-card__topics">
-                {activeSubject.topics.length} topics
-              </p>
-              <button
-                type="button"
-                className="gl-home-hero-card__cta"
-                onClick={() => onSelectSubject(activeSubject)}
-              >
-                Continue reading →
-              </button>
+              <div className="gl-home-hero-card__topline">
+                <span>Currently studying</span>
+                <span>GlobalLab volume</span>
+              </div>
+
+              <div className="gl-home-hero-card__main">
+                <p className="gl-home-hero-card__kicker">Your active subject</p>
+                <h2 className="gl-home-hero-card__title">{activeSubject.title}</h2>
+                <p className="gl-home-hero-card__topics">
+                  {featuredTopic
+                    ? `Chapter 01 — ${featuredTopic.title}`
+                    : `${chapterCount} source-cited chapters`}
+                </p>
+                <button
+                  type="button"
+                  className="gl-home-hero-card__cta"
+                  onClick={() => onSelectSubject(activeSubject)}
+                >
+                  Continue reading
+                  <ArrowRight size={16} aria-hidden="true" />
+                </button>
+              </div>
+
+              <div className="gl-home-hero-card__footer">
+                <div className="gl-home-hero-card__progress-copy">
+                  <span>Volume map</span>
+                  <strong>{chapterCount > 0 ? `1 of ${chapterCount}` : 'Ready'}</strong>
+                </div>
+                <div
+                  className="gl-home-hero-card__progress"
+                  role="progressbar"
+                  aria-label="First chapter in this volume"
+                  aria-valuemin={0}
+                  aria-valuemax={chapterCount || 1}
+                  aria-valuenow={chapterCount > 0 ? 1 : 0}
+                >
+                  <span style={{ width: `${volumeMapProgress}%` }} />
+                </div>
+                <p className="gl-home-hero-card__provenance">
+                  <BookOpenText size={14} aria-hidden="true" />
+                  Original text stays cited. Personalization appears beside it.
+                </p>
+              </div>
             </div>
           </div>
         ) : (
@@ -195,7 +229,10 @@ export function HomePage({
             <button
               key={subject.id}
               type="button"
-              className="gl-home-row gl-home-row--subject"
+              className={`gl-home-row gl-home-row--subject${
+                activeSubject?.id === subject.id ? ' gl-home-row--active' : ''
+              }`}
+              aria-current={activeSubject?.id === subject.id ? 'page' : undefined}
               onClick={() => onSelectSubject(subject)}
             >
               <span

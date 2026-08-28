@@ -1,19 +1,12 @@
 import katex from 'katex'
 import {
-  ChevronDown,
-  ChevronUp,
   LoaderCircle,
-  Maximize2,
-  Minimize2,
   WandSparkles,
 } from 'lucide-react'
 import {
-  useCallback,
   useEffect,
   useRef,
   useState,
-  type KeyboardEvent,
-  type ReactNode,
 } from 'react'
 import type { KnowledgeSection, RewrittenSection, StudentProfile } from '../types'
 import type {
@@ -83,192 +76,6 @@ function extractOrderedConcepts(body: string) {
   }
 }
 
-interface ScrollablePageContentProps {
-  id: string
-  label: string
-  measureKey: string
-  side: 'left' | 'right'
-  children: ReactNode
-}
-
-function ScrollablePageContent({
-  id,
-  label,
-  measureKey,
-  side,
-  children,
-}: ScrollablePageContentProps) {
-  const viewportRef = useRef<HTMLDivElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
-  const [scrollState, setScrollState] = useState({
-    hasOverflow: false,
-    atEnd: false,
-  })
-
-  const measureScroll = useCallback(() => {
-    const viewport = viewportRef.current
-    const content = contentRef.current
-    if (!viewport || !content) return
-
-    const maxScroll = Math.max(0, viewport.scrollHeight - viewport.clientHeight)
-    const hasOverflow = content.scrollHeight > viewport.clientHeight + 4
-    const nextState = {
-      hasOverflow,
-      atEnd: hasOverflow && viewport.scrollTop >= maxScroll - 4,
-    }
-
-    setScrollState((current) =>
-      current.hasOverflow === nextState.hasOverflow &&
-      current.atEnd === nextState.atEnd
-        ? current
-        : nextState,
-    )
-  }, [])
-
-  useEffect(() => {
-    const viewport = viewportRef.current
-    const content = contentRef.current
-    if (!viewport || !content) return
-
-    measureScroll()
-    const animationFrame =
-      typeof window.requestAnimationFrame === 'function'
-        ? window.requestAnimationFrame(measureScroll)
-        : null
-    const resizeObserver =
-      typeof ResizeObserver === 'undefined'
-        ? null
-        : new ResizeObserver(measureScroll)
-    const mutationObserver =
-      typeof MutationObserver === 'undefined'
-        ? null
-        : new MutationObserver(measureScroll)
-
-    resizeObserver?.observe(viewport)
-    resizeObserver?.observe(content)
-    mutationObserver?.observe(content, {
-      attributes: true,
-      childList: true,
-      characterData: true,
-      subtree: true,
-    })
-    window.addEventListener('resize', measureScroll)
-
-    return () => {
-      if (animationFrame !== null) {
-        window.cancelAnimationFrame(animationFrame)
-      }
-      resizeObserver?.disconnect()
-      mutationObserver?.disconnect()
-      window.removeEventListener('resize', measureScroll)
-    }
-  }, [measureScroll])
-
-  useEffect(() => {
-    void measureKey
-    measureScroll()
-  }, [measureKey, measureScroll])
-
-  const moveThroughPage = () => {
-    const viewport = viewportRef.current
-    if (!viewport) return
-
-    const maxScroll = Math.max(0, viewport.scrollHeight - viewport.clientHeight)
-    const nextTop = scrollState.atEnd
-      ? 0
-      : Math.min(
-          maxScroll,
-          viewport.scrollTop + Math.max(180, viewport.clientHeight * 0.72),
-        )
-    const reduceMotion =
-      typeof window.matchMedia === 'function' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    viewport.scrollTo({
-      top: nextTop,
-      behavior: reduceMotion ? 'auto' : 'smooth',
-    })
-  }
-
-  const handlePageKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    const viewport = viewportRef.current
-    if (!viewport || !scrollState.hasOverflow) return
-
-    const maxScroll = Math.max(0, viewport.scrollHeight - viewport.clientHeight)
-    const pageStep = Math.max(180, viewport.clientHeight * 0.72)
-    let nextTop: number | null = null
-
-    if (event.key === 'PageDown') {
-      nextTop = Math.min(maxScroll, viewport.scrollTop + pageStep)
-    } else if (event.key === 'PageUp') {
-      nextTop = Math.max(0, viewport.scrollTop - pageStep)
-    } else if (event.key === 'Home') {
-      nextTop = 0
-    } else if (event.key === 'End') {
-      nextTop = maxScroll
-    }
-
-    if (nextTop === null) return
-    event.preventDefault()
-    const reduceMotion =
-      typeof window.matchMedia === 'function' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    viewport.scrollTo({
-      top: nextTop,
-      behavior: reduceMotion ? 'auto' : 'smooth',
-    })
-  }
-
-  return (
-    <>
-      <div
-        className={
-          `tbp-page-scroll tbp-page-scroll--${side}` +
-          (scrollState.hasOverflow ? ' tbp-page-scroll--overflowing' : '') +
-          (scrollState.atEnd ? ' tbp-page-scroll--at-end' : '')
-        }
-        id={id}
-        ref={viewportRef}
-        role={scrollState.hasOverflow ? 'region' : undefined}
-        aria-label={scrollState.hasOverflow ? label : undefined}
-        tabIndex={scrollState.hasOverflow ? 0 : -1}
-        onScroll={measureScroll}
-        onKeyDown={handlePageKeyDown}
-      >
-        <div className='tbp-page-scroll-flow' ref={contentRef}>
-          {children}
-        </div>
-      </div>
-
-      {scrollState.hasOverflow && (
-        <>
-          {!scrollState.atEnd && (
-            <div className='tbp-page-scroll-fade' aria-hidden='true' />
-          )}
-          <button
-            type='button'
-            className={`tbp-page-scroll-control tbp-page-scroll-control--${side}`}
-            aria-controls={id}
-            aria-label={
-              scrollState.atEnd
-                ? `Return to the top of ${label}`
-                : `Show more of ${label}`
-            }
-            onClick={moveThroughPage}
-          >
-            <span>{scrollState.atEnd ? 'Back to top' : 'More below'}</span>
-            {scrollState.atEnd ? (
-              <ChevronUp size={14} aria-hidden='true' />
-            ) : (
-              <ChevronDown size={14} aria-hidden='true' />
-            )}
-          </button>
-        </>
-      )}
-    </>
-  )
-}
-
 export function TextbookSection({
   topicId,
   section,
@@ -294,18 +101,6 @@ export function TextbookSection({
   const [selectedQuizOption, setSelectedQuizOption] = useState<string | null>(null)
   const [quizSubmitted, setQuizSubmitted] = useState(false)
   const [quizRevealed, setQuizRevealed] = useState(false)
-  const [companionViewOverride, setCompanionViewOverride] = useState<{
-    artifactKey: string
-    view: 'note' | 'page'
-  } | null>(null)
-  const companionArtifactKey = rewrite
-    ? [rewrite.generatedAt, rewrite.mode, rewrite.sectionId].join(':')
-    : ''
-  const defaultCompanionView = rewrite?.mode === 'analogy' ? 'note' : 'page'
-  const companionView =
-    companionViewOverride?.artifactKey === companionArtifactKey
-      ? companionViewOverride.view
-      : defaultCompanionView
   const canPersonalize = Boolean(profile)
   const orderedConcepts = extractOrderedConcepts(section.body)
   const sectionNumber = String(sectionIndex + 1).padStart(2, '0')
@@ -392,84 +187,6 @@ export function TextbookSection({
     </section>
   ) : null
 
-  const companionPanel = rewrite ? (
-    <aside
-      className={
-        'tbp-sticky-analogy ' +
-        `tbp-sticky-analogy--${companionView}`
-      }
-      aria-label='Personalized learning companion'
-    >
-      <div className='tbp-sticky-meta'>
-        <div>
-          <p className='tbp-sticky-kicker'>Learn your way</p>
-          <span>{rewrite.interest || 'source-grounded'} lens</span>
-        </div>
-        <button
-          type='button'
-          className='tbp-companion-view-toggle'
-          onClick={() =>
-            setCompanionViewOverride({
-              artifactKey: companionArtifactKey,
-              view: companionView === 'page' ? 'note' : 'page',
-            })
-          }
-          aria-label={
-            companionView === 'page'
-              ? 'Return to the scientific figure'
-              : 'Open this help as a full study sheet'
-          }
-        >
-          {companionView === 'page' ? (
-            <Minimize2 size={13} aria-hidden='true' />
-          ) : (
-            <Maximize2 size={13} aria-hidden='true' />
-          )}
-          {companionView === 'page' ? 'Show figure' : 'Study sheet'}
-        </button>
-      </div>
-      <LearningCompanion
-        sourceAnchor={rewrite.source}
-        interest={rewrite.interest}
-        mode={rewrite.mode}
-        title={rewrite.title}
-        content={rewrite.content}
-        limits={rewrite.analogyLimits}
-        isLoading={isLoading}
-        error={error}
-        quiz={companionQuiz}
-        onAction={onRefine}
-        onOutcome={(outcome) => onOutcome(rewrite.mode, outcome)}
-        onSelectQuizOption={setSelectedQuizOption}
-        onSubmitQuiz={(optionId) => {
-          const selected = Number.parseInt(optionId, 10)
-          const score =
-            rewrite.quiz && selected === rewrite.quiz.correctIndex ? 1 : 0
-          setSelectedQuizOption(optionId)
-          setQuizSubmitted(true)
-          setQuizRevealed(false)
-          onQuizResult(rewrite.mode, score, 1)
-        }}
-        onRevealQuiz={() => {
-          if (!quizSubmitted && !quizRevealed) {
-            onQuizResult(rewrite.mode, 0, 1)
-          }
-          setQuizRevealed(true)
-        }}
-        onRetry={() => onRefine(rewrite.mode)}
-        onDismiss={onClearRewrite}
-      />
-      {preferenceSuggestion && (
-        <PreferenceSuggestionCard
-          suggestion={preferenceSuggestion}
-          onApply={(suggestion) => onApplySuggestion(suggestion.id)}
-          onNotNow={(suggestion) => onDeferSuggestion(suggestion.id)}
-          onNeverSuggest={(suggestion) => onNeverSuggest(suggestion.id)}
-        />
-      )}
-    </aside>
-  ) : null
-
   // Parallax watermark on mouse move
   const surfaceRef = useRef<HTMLElement>(null)
   useEffect(() => {
@@ -490,6 +207,42 @@ export function TextbookSection({
     }
     return () => surface.removeEventListener('mousemove', handleMouseMove)
   }, [])
+
+  const learnYourWayBookmark = canPersonalize && !rewrite ? (
+    <SectionErrorBoundary
+      error={error}
+      neutralAnalogy={
+        section.presetAnalogies?.neutral ??
+        'Use the original explanation above as the neutral reference.'
+      }
+      onRetry={onLearnYourWay}
+    >
+      <button
+        type="button"
+        className="tbp-bookmark-strip gl-bookmark-pulse"
+        disabled={isLoading}
+        onClick={onLearnYourWay}
+      >
+        {isLoading ? (
+          <LoaderCircle
+            className="liyw-spinner"
+            size={14}
+            aria-hidden="true"
+          />
+        ) : (
+          <WandSparkles size={14} aria-hidden="true" />
+        )}
+        <span>
+          {isLoading
+            ? 'Creating…'
+            : profile?.interest &&
+                profile.interest.trim().toLowerCase() !== 'neutral'
+              ? `Connect this to ${profile.interest}`
+              : 'Learn your way'}
+        </span>
+      </button>
+    </SectionErrorBoundary>
+  ) : null
 
   return (
     <article
@@ -601,6 +354,9 @@ export function TextbookSection({
             onAskCompanion={askCompanion}
           />
 
+          {/* Keep personalization visible directly after the sacred source text. */}
+          {learnYourWayBookmark}
+
           {/* Visual field: diagram / equation / concept index */}
           <div className="tbp-reference-section">
             <header className="tbp-plate-heading">
@@ -683,42 +439,6 @@ export function TextbookSection({
           )}
         </div>
 
-        {/* Bookmark strip â€” personalization CTA */}
-        {canPersonalize && !rewrite && (
-          <SectionErrorBoundary
-            error={error}
-            neutralAnalogy={
-              section.presetAnalogies?.neutral ??
-              'Use the original explanation above as the neutral reference.'
-            }
-            onRetry={onLearnYourWay}
-          >
-            <button
-              type="button"
-              className="tbp-bookmark-strip gl-bookmark-pulse"
-              disabled={isLoading}
-              onClick={onLearnYourWay}
-            >
-              {isLoading ? (
-                <LoaderCircle
-                  className="liyw-spinner"
-                  size={14}
-                  aria-hidden="true"
-                />
-              ) : (
-                <WandSparkles size={14} aria-hidden="true" />
-              )}
-              <span>
-                {isLoading
-                  ? 'Creatingâ€¦'
-                  : profile?.interest &&
-                      profile.interest.trim().toLowerCase() !== 'neutral'
-                    ? `Connect this to ${profile.interest}`
-                    : 'Learn your way'}
-              </span>
-            </button>
-          </SectionErrorBoundary>
-        )}
       </section>
 
       {/* â”€â”€ Companion panel â€” slides in from right â”€â”€ */}

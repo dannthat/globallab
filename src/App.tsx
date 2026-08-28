@@ -24,6 +24,27 @@ const SUBJECT_COLORS: Record<string, string> = {
   mathematics: '#C87B1A',
 }
 
+const RECENT_SUBJECT_STORAGE_KEY = 'gl_recent_subject'
+
+function getInitialHomeSubjectId(): string | null {
+  const firstAvailableSubject = subjects.find((subject) => !subject.comingSoon)
+
+  if (typeof window === 'undefined') return firstAvailableSubject?.id ?? null
+
+  try {
+    const storedSubjectId = window.localStorage.getItem(RECENT_SUBJECT_STORAGE_KEY)
+    const storedSubjectIsAvailable = subjects.some(
+      (subject) => subject.id === storedSubjectId && !subject.comingSoon,
+    )
+
+    return storedSubjectIsAvailable
+      ? storedSubjectId
+      : firstAvailableSubject?.id ?? null
+  } catch {
+    return firstAvailableSubject?.id ?? null
+  }
+}
+
 const LazyKitabiPage = lazy(() =>
   import('./components/KitabiPage').then((module) => ({
     default: module.KitabiPage,
@@ -310,6 +331,9 @@ function App() {
   const [activeTopic, setActiveTopic] = useState<KnowledgeTopic | null>(null)
   const [activeUserBook, setActiveUserBook] = useState<UserBook | null>(null)
   const [isLibraryOpen, setIsLibraryOpen] = useState(false)
+  const [homeSubjectId, setHomeSubjectId] = useState<string | null>(
+    getInitialHomeSubjectId,
+  )
 
   const {
     books,
@@ -350,8 +374,18 @@ function App() {
     setActiveUserBook(null)
   }
 
+  const rememberSubject = (subject: Subject) => {
+    setHomeSubjectId(subject.id)
+    try {
+      window.localStorage.setItem(RECENT_SUBJECT_STORAGE_KEY, subject.id)
+    } catch {
+      // The visual fallback still works when storage is unavailable.
+    }
+  }
+
   const selectSubject = (subject: Subject) => {
     if (subject.comingSoon) return
+    rememberSubject(subject)
     transitionView(() => {
       setActiveTopic(null)
       setActiveSubject(subject)
@@ -374,6 +408,7 @@ function App() {
     subject: Subject,
   ) => {
     if (subject.comingSoon) return
+    rememberSubject(subject)
     transitionView(() => {
       setActiveUserBook(null)
       setActiveSubject(subject)
@@ -496,7 +531,7 @@ function App() {
           isUploading={isUploading}
           uploadProgress={uploadProgress}
           uploadError={uploadError}
-          activeSubjectId={activeSubject?.id ?? null}
+          activeSubjectId={homeSubjectId}
           onSelectSubject={selectSubject}
           onSelectBook={selectUserBook}
           onUpload={(file) => void addBook(file)}

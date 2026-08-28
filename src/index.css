@@ -3956,6 +3956,259 @@ html {
   }
 }
 
+/* ==================================================================
+   Reference fidelity pass — active-volume home + floating reader
+   ================================================================== */
+
+/* Home: one authored volume, with the source shelf kept secondary. */
+.gl-home-shell .gl-home {
+  box-sizing: border-box;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 352px);
+  gap: 24px;
+  width: min(1200px, calc(100% - 56px));
+  height: min(680px, calc(100dvh - 150px));
+  min-height: 520px;
+  margin: auto;
+  padding: 24px 0 28px;
+  overflow: visible;
+}
+
+.gl-home-shell .gl-home-hero,
+.gl-home-shell .gl-home-rows {
+  padding: 0;
+}
+
+.gl-home-shell .gl-home-hero-card {
+  min-height: 0;
+  border: 1px solid rgb(255 255 255 / 15%);
+  border-radius: 8px;
+  background:
+    linear-gradient(115deg, rgb(0 0 0 / 4%), rgb(0 0 0 / 20%)),
+    var(--hero-color, #0d6e52);
+  box-shadow:
+    0 2px 1px rgb(255 255 255 / 10%) inset,
+    0 3px 9px rgb(0 0 0 / 32%),
+    0 26px 64px rgb(0 0 0 / 42%);
+  transform-style: preserve-3d;
+}
+
+.gl-home-shell .gl-home-hero-card__pattern {
+  background-image:
+    radial-gradient(circle at 82% 22%, transparent 0 48px, rgb(255 255 255 / 7%) 49px 50px, transparent 51px),
+    radial-gradient(circle at 82% 22%, transparent 0 92px, rgb(255 255 255 / 5%) 93px 94px, transparent 95px),
+    radial-gradient(circle at 18% 82%, transparent 0 66px, rgb(255 255 255 / 4%) 67px 68px, transparent 69px),
+    var(--hero-pattern, none),
+    repeating-linear-gradient(0deg, rgb(255 255 255 / 1.8%) 0 1px, transparent 1px 5px),
+    repeating-linear-gradient(90deg, rgb(0 0 0 / 1.5%) 0 1px, transparent 1px 7px);
+  opacity: 0.95;
+}
+
+.gl-home-shell .gl-home-hero-card::before {
+  background:
+    radial-gradient(ellipse 72% 70% at 38% 2%, rgb(255 255 255 / 17%), transparent 68%),
+    linear-gradient(90deg, rgb(255 255 255 / 4%), transparent 24%);
+}
+
+.gl-home-shell .gl-home-hero-card::after {
+  background: linear-gradient(180deg, rgb(0 0 0 / 4%) 5%, rgb(0 0 0 / 12%) 48%, rgb(0 0 0 / 54%) 100%);
+}
+
+.gl-home-shell .gl-home-hero-card__content {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 22px;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  padding: 28px 32px 30px;
+}
+
+.gl-home-hero-card__topline,
+.gl-home-hero-card__progress-copy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font: 700 9px/1.3 var(--font-ui);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 58%);
+}
+
+.gl-home-hero-card__main {
+  align-self: center;
+  max-width: 640px;
+  padding: 18px 0 30px;
+}
+
+.gl-home-shell .gl-home-hero-card__kicker {
+  margin-bottom: 10px;
+  color: rgb(255 255 255 / 72%);
+}
+
+.gl-home-shell .gl-home-hero-card__title {
+  max-width: 10ch;
+  font-size: clamp(54px, 6.2vw, 90px);
+  font-weight: 650;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+  text-shadow: 0 2px 18px rgb(0 0 0 / 18%);
+}
+
+.gl-home-shell .gl-home-hero-card__topics {
+  max-width: 44ch;
+  margin: 16px 0 24px;
+  font: 500 14px/1.5 var(--font-ui);
+  color: rgb(255 255 255 / 72%);
+}
+
+.gl-home-shell .gl-home-hero-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 46px;
+  padding: 0 20px;
+  border: 1px solid rgb(255 255 255 / 44%);
+  border-radius: 5px;
+  color: #21170d;
+  background: #f7f1e5;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 74%) inset,
+    0 7px 22px rgb(0 0 0 / 24%);
+}
+
+.gl-home-shell .gl-home-hero-card__cta:hover {
+  color: #21170d;
+  background: #fffaf0;
+  transform: translateY(-1px);
+}
+
+.gl-home-hero-card__cta svg {
+  color: var(--gl-amber, #c97d2a);
+}
+
+.gl-home-hero-card__footer {
+  align-self: end;
+}
+
+.gl-home-hero-card__progress-copy strong {
+  color: rgb(255 255 255 / 82%);
+}
+
+.gl-home-hero-card__progress {
+  height: 3px;
+  margin-top: 9px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 16%);
+}
+
+.gl-home-hero-card__progress span {
+  display: block;
+  height: 100%;
+  min-width: 18px;
+  border-radius: inherit;
+  background: #ef9a43;
+  box-shadow: 0 0 12px rgb(239 154 67 / 48%);
+}
+
+.gl-home-hero-card__provenance {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 0;
+  font: 500 10.5px/1.35 var(--font-ui);
+  color: rgb(255 255 255 / 54%);
+}
+
+.gl-home-shell .gl-home-rows {
+  gap: 10px;
+  overflow: visible auto;
+  border-left: 0;
+}
+
+.gl-home-shell .gl-home-upload-btn {
+  justify-content: center;
+  min-height: 44px;
+  margin-bottom: 8px;
+  border: 1px solid rgb(255 255 255 / 11%);
+  border-radius: 5px;
+  background: linear-gradient(180deg, #d98a38, #bd6d22);
+  box-shadow: 0 8px 22px rgb(0 0 0 / 22%);
+}
+
+.gl-home-shell .gl-home-section {
+  gap: 7px;
+  margin-top: 2px;
+}
+
+.gl-home-shell .gl-home-section__label {
+  margin: 0 0 3px 1px;
+  color: rgb(232 220 200 / 48%);
+}
+
+.gl-home-shell .gl-home-row {
+  min-height: 64px;
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 5px;
+}
+
+.gl-home-shell .gl-home-row--active {
+  border-color: rgb(201 125 42 / 42%) !important;
+  background: rgb(201 125 42 / 10%) !important;
+  box-shadow:
+    0 0 0 1px rgb(201 125 42 / 8%) inset,
+    0 7px 22px rgb(0 0 0 / 24%);
+}
+
+@media (max-width: 900px) {
+  .gl-home-shell .gl-home {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 16px;
+    overflow-y: auto;
+  }
+
+  .gl-home-shell .gl-home-hero-card {
+    min-height: 480px;
+  }
+
+  .gl-home-shell .gl-home-rows {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid rgb(255 255 255 / 8%);
+  }
+
+}
+
+@media (max-width: 640px) {
+  .gl-home-shell .gl-home {
+    padding: 10px;
+  }
+
+  .gl-home-shell .gl-home-hero-card {
+    min-height: 430px;
+  }
+
+  .gl-home-shell .gl-home-hero-card__content {
+    padding: 22px 20px 24px;
+  }
+
+  .gl-home-shell .gl-home-hero-card__title {
+    font-size: clamp(48px, 17vw, 68px);
+  }
+
+  .gl-home-hero-card__provenance {
+    max-width: 34ch;
+  }
+
+}
+
 @media (max-width: 1023px) {
   .reader-toc-trigger {
     left: 8px;
@@ -18458,5 +18711,351 @@ body::after {
 
   .gl-premium .tbp-companion-panel.tbp-companion-panel--open {
     animation: none !important;
+  }
+}
+
+/* ==================================================================
+   Final floating-reader lock
+   Keep this at EOF: legacy reader layers above must not win this cascade.
+   ================================================================== */
+.app-shell.gl-premium .ubr-reader-stage {
+  padding: 0 24px 132px !important;
+  background:
+    radial-gradient(ellipse 58% 42% at 50% -9%, rgb(224 153 69 / 28%) 0%, transparent 62%),
+    radial-gradient(ellipse 82% 34% at 50% 2%, rgb(255 229 177 / 8%) 0%, transparent 72%),
+    #0a0907 !important;
+  background-attachment: fixed !important;
+}
+
+.app-shell.gl-premium .textbook-reader-page {
+  background: transparent !important;
+}
+
+.app-shell.gl-premium .tbp-article.tbp-article--new {
+  gap: 0 !important;
+  padding: 0 36px !important;
+}
+
+.app-shell.gl-premium .tbp-reading-surface {
+  flex: 0 1 760px !important;
+  width: min(100%, 760px) !important;
+  max-width: 760px !important;
+  margin: 32px auto 124px !important;
+  padding: 50px 60px 108px !important;
+  overflow: visible !important;
+  border-color: rgb(94 65 31 / 19%) !important;
+  background:
+    radial-gradient(ellipse 110% 42% at 50% -8%, rgb(255 254 248 / 92%) 0%, transparent 72%),
+    linear-gradient(90deg, rgb(95 67 31 / 2.4%), transparent 7%, transparent 93%, rgb(95 67 31 / 2.4%)),
+    #f5f0e4 !important;
+  box-shadow:
+    0 1px 1px rgb(255 255 255 / 62%) inset,
+    0 1px 2px rgb(0 0 0 / 28%),
+    0 8px 22px rgb(0 0 0 / 34%),
+    0 26px 70px rgb(0 0 0 / 46%),
+    0 54px 108px rgb(0 0 0 / 28%) !important;
+}
+
+.app-shell.gl-premium .tbp-reading-surface::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  display: block !important;
+  pointer-events: none !important;
+  opacity: 0.3 !important;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgb(58 35 13 / 15%) 0 0.45px, transparent 0.65px),
+    radial-gradient(circle at 70% 74%, rgb(255 255 255 / 55%) 0 0.5px, transparent 0.75px) !important;
+  background-size: 4px 4px, 5px 5px !important;
+}
+
+.app-shell.gl-premium .tbp-reading-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.app-shell.gl-premium
+  .tbp-article--new:has(.tbp-companion-panel--open)
+  .tbp-reading-surface {
+  flex: 0 1 clamp(600px, 48vw, 720px) !important;
+  width: clamp(600px, 48vw, 720px) !important;
+  max-width: 720px !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+.app-shell.gl-premium .tbp-companion-panel.tbp-companion-panel--open {
+  top: 76px !important;
+  flex: 0 0 272px !important;
+  width: 272px !important;
+  min-width: 272px !important;
+  max-width: 272px !important;
+  max-height: min(540px, calc(100dvh - 146px)) !important;
+  margin: 76px 0 88px -42px !important;
+  border-top-width: 4px !important;
+  border-radius: 2px 4px 4px 2px !important;
+  background:
+    linear-gradient(104deg, rgb(255 255 255 / 17%), transparent 26%),
+    #f8eecc !important;
+  box-shadow:
+    1px 2px 2px rgb(0 0 0 / 18%),
+    8px 12px 28px rgb(0 0 0 / 34%) !important;
+  transform: rotate(0.55deg) !important;
+}
+
+.app-shell.gl-premium .tbp-companion-panel .learning-companion__header {
+  padding: 14px 15px 11px !important;
+}
+
+.app-shell.gl-premium .tbp-companion-panel .learning-companion__header h2 {
+  margin-top: 5px !important;
+  font-size: 17px !important;
+}
+
+.app-shell.gl-premium .tbp-companion-panel .learning-companion__integrity {
+  margin: 0 15px !important;
+  padding: 7px 0 !important;
+  font-size: 9.5px !important;
+  line-height: 1.35 !important;
+  opacity: 0.72;
+}
+
+.app-shell.gl-premium .tbp-companion-panel .learning-companion__status,
+.app-shell.gl-premium .tbp-companion-panel .learning-companion__error,
+.app-shell.gl-premium .tbp-companion-panel .learning-companion__content {
+  padding: 12px 15px !important;
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+}
+
+.app-shell.gl-premium .tbp-companion-panel .learning-companion__limits {
+  margin: 0 15px !important;
+  padding: 8px 0 !important;
+  font-size: 9.5px !important;
+  line-height: 1.35 !important;
+}
+
+.app-shell.gl-premium .tbp-companion-panel .learning-companion__refinements {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+  padding: 9px 15px !important;
+}
+
+.app-shell.gl-premium .tbp-companion-panel .learning-companion__refinements button,
+.app-shell.gl-premium .tbp-companion-panel .learning-companion__outcomes button {
+  min-height: 27px !important;
+  padding: 4px 7px !important;
+  font-size: 9.5px !important;
+  line-height: 1.2 !important;
+}
+
+.app-shell.gl-premium .tbp-companion-panel .learning-companion__footer {
+  padding: 9px 15px 11px !important;
+}
+
+.app-shell.gl-premium .tbp-companion-panel .learning-companion__source {
+  font-size: 9px !important;
+  line-height: 1.3 !important;
+}
+
+.app-shell.gl-premium .tbp-reading-surface .tbp-bookmark-strip {
+  right: auto !important;
+  bottom: 0 !important;
+  left: 50% !important;
+  z-index: 5 !important;
+  width: min(300px, calc(100% - 56px)) !important;
+  min-height: 46px !important;
+  padding: 12px 20px !important;
+  border: 1px solid rgb(107 57 13 / 25%) !important;
+  border-top-color: rgb(255 255 255 / 26%) !important;
+  border-radius: 0 0 10px 10px !important;
+  color: #2b1908 !important;
+  background: linear-gradient(180deg, #e49a4d, #c87928) !important;
+  box-shadow:
+    0 1px rgb(255 255 255 / 26%) inset,
+    0 10px 18px rgb(55 28 6 / 22%) !important;
+  transform: translate(-50%, 48%) !important;
+}
+
+.app-shell.gl-premium .tbp-reading-surface .tbp-bookmark-strip:hover:not(:disabled) {
+  color: #211307 !important;
+  background: linear-gradient(180deg, #efa95e, #d58632) !important;
+}
+
+.app-shell.gl-premium .ubr-reader-nav {
+  bottom: 18px !important;
+  width: min(430px, calc(100vw - 48px)) !important;
+  min-height: 48px !important;
+  padding: 6px 8px !important;
+  border-color: rgb(255 211 158 / 28%) !important;
+  color: #241507 !important;
+  background: linear-gradient(180deg, rgb(225 146 61 / 98%), rgb(188 105 30 / 98%)) !important;
+  box-shadow:
+    0 2px 1px rgb(255 255 255 / 16%) inset,
+    0 14px 34px rgb(0 0 0 / 42%) !important;
+}
+
+.app-shell.gl-premium .ubr-reader-nav :where(
+  .ubr-nav-arrow,
+  .ubr-nav-contents,
+  .ubr-nav-label,
+  .ubr-nav-count
+) {
+  color: #2a1909 !important;
+}
+
+.app-shell.gl-premium .ubr-reader-nav .ubr-nav-arrow {
+  border-color: rgb(58 29 6 / 16%) !important;
+  background: rgb(66 33 7 / 12%) !important;
+}
+
+.app-shell.gl-premium .ubr-reader-nav .ubr-nav-dot {
+  background: rgb(50 27 8 / 32%) !important;
+}
+
+.app-shell.gl-premium .ubr-reader-nav .ubr-nav-dot--active {
+  background: #fff2d9 !important;
+  box-shadow: 0 0 9px rgb(255 242 217 / 52%) !important;
+}
+
+.app-shell.gl-premium .topic-mastery-trigger {
+  right: 22px !important;
+  bottom: 20px !important;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  width: 48px !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  padding: 4px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 38%) !important;
+}
+
+.app-shell.gl-premium .topic-mastery-trigger > span:nth-child(2),
+.app-shell.gl-premium .topic-mastery-trigger > svg {
+  display: none !important;
+}
+
+.app-shell.gl-premium .textbook-reader-page > .sources-footer {
+  width: min(760px, calc(100% - 48px)) !important;
+  margin-top: -88px !important;
+  margin-bottom: 104px !important;
+}
+
+@media (max-width: 900px) {
+  .app-shell.gl-premium .ubr-reader-stage {
+    padding: 0 12px 112px !important;
+  }
+
+  .app-shell.gl-premium .tbp-article.tbp-article--new {
+    padding: 0 !important;
+  }
+
+  .app-shell.gl-premium .tbp-reading-surface,
+  .app-shell.gl-premium
+    .tbp-article--new:has(.tbp-companion-panel--open)
+    .tbp-reading-surface {
+    flex: none !important;
+    width: min(100%, 720px) !important;
+    max-width: 720px !important;
+    margin: 18px auto 58px !important;
+    padding: 40px clamp(24px, 7vw, 48px) 88px !important;
+  }
+
+  .app-shell.gl-premium .tbp-companion-panel.tbp-companion-panel--open {
+    top: auto !important;
+    flex: none !important;
+    width: min(92%, 520px) !important;
+    min-width: 0 !important;
+    max-width: 520px !important;
+    max-height: none !important;
+    margin: -30px auto 72px !important;
+    transform: rotate(0.3deg) !important;
+  }
+
+  .app-shell.gl-premium .tbp-reading-surface .tbp-bookmark-strip {
+    right: 0 !important;
+    left: 0 !important;
+    width: auto !important;
+    border-right: 0 !important;
+    border-left: 0 !important;
+    border-radius: 0 !important;
+    transform: none !important;
+  }
+}
+
+/* The primary orange action follows the explanation; navigation stays quiet. */
+.app-shell.gl-premium .tbp-reading-surface .tbp-bookmark-strip {
+  position: relative !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  min-height: 48px !important;
+  margin: 26px 0 34px !important;
+  border-radius: 4px !important;
+  transform: none !important;
+}
+
+.app-shell.gl-premium .ubr-reader-nav {
+  border-color: rgb(255 255 255 / 11%) !important;
+  color: #e8dcc8 !important;
+  background: rgb(25 22 17 / 94%) !important;
+  box-shadow:
+    0 12px 34px rgb(0 0 0 / 42%),
+    inset 0 1px rgb(255 255 255 / 6%) !important;
+}
+
+.app-shell.gl-premium .ubr-reader-nav :where(
+  .ubr-nav-arrow,
+  .ubr-nav-contents,
+  .ubr-nav-label,
+  .ubr-nav-count
+) {
+  color: #e8dcc8 !important;
+}
+
+.app-shell.gl-premium .ubr-reader-nav .ubr-nav-arrow {
+  border-color: rgb(255 255 255 / 10%) !important;
+  background: rgb(255 255 255 / 4%) !important;
+}
+
+.app-shell.gl-premium .ubr-reader-nav .ubr-nav-dot {
+  background: rgb(232 220 200 / 30%) !important;
+}
+
+.app-shell.gl-premium .ubr-reader-nav .ubr-nav-dot--active {
+  background: var(--gl-amber, #c97d2a) !important;
+  box-shadow: 0 0 9px rgb(201 125 42 / 58%) !important;
+}
+
+@media (max-width: 900px) {
+  .app-shell.gl-premium .tbp-reading-surface .tbp-bookmark-strip {
+    width: 100% !important;
+    margin: 24px 0 30px !important;
+    border: 1px solid rgb(107 57 13 / 25%) !important;
+    border-radius: 4px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell.gl-premium .tbp-reading-surface,
+  .app-shell.gl-premium
+    .tbp-article--new:has(.tbp-companion-panel--open)
+    .tbp-reading-surface {
+    margin-top: 10px !important;
+    padding: 30px 22px 84px !important;
+  }
+
+  .app-shell.gl-premium .ubr-reader-nav {
+    bottom: 10px !important;
+    width: calc(100vw - 20px) !important;
+  }
+
+  .app-shell.gl-premium .topic-mastery-trigger {
+    right: 12px !important;
+    bottom: 70px !important;
   }
 }

@@ -153,7 +153,6 @@ export function PdfSpreadView({
   runCompanion,
   children,
 }: PdfSpreadViewProps) {
-  const [expandedPage, setExpandedPage] = useState<number | null>(null)
   const [pageInput, setPageInput] = useState(String(focusedPage))
   const [turnDirection, setTurnDirection] = useState<'forward' | 'backward' | 'none'>('none')
 
@@ -170,7 +169,6 @@ export function PdfSpreadView({
     setSpreadIndex(next)
     setFocusedPage(next * 2 + 1)
     setPageInput(String(next * 2 + 1))
-    setExpandedPage(null)
     setIsLensOpen(false)
   }, [spreadCount, spreadIndex, setSpreadIndex, setFocusedPage, setIsLensOpen])
 
@@ -180,7 +178,6 @@ export function PdfSpreadView({
     setSpreadIndex(Math.floor((next - 1) / 2))
     setFocusedPage(next)
     setPageInput(String(next))
-    setExpandedPage(next)
     setIsLensOpen(false)
   }, [focusedPage, totalPages, setSpreadIndex, setFocusedPage, setIsLensOpen])
 
@@ -191,27 +188,25 @@ export function PdfSpreadView({
 
       if (event.key === 'ArrowRight' || event.key === 'PageDown') {
         event.preventDefault()
-        if (expandedPage !== null) openPage(expandedPage + 1)
-        else openSpread(spreadIndex + 1)
+        openSpread(spreadIndex + 1)
       }
       if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
         event.preventDefault()
-        if (expandedPage !== null) openPage(expandedPage - 1)
-        else openSpread(spreadIndex - 1)
+        openSpread(spreadIndex - 1)
       }
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
-  }, [expandedPage, openPage, openSpread, spreadIndex])
+  }, [openSpread, spreadIndex])
 
   const commitPageJump = useCallback(() => {
     const requested = Number.parseInt(pageInput, 10)
     if (!Number.isFinite(requested)) {
-      setPageInput(String(expandedPage ?? focusedPage))
+      setPageInput(String(focusedPage))
       return
     }
     openPage(requested)
-  }, [expandedPage, focusedPage, openPage, pageInput])
+  }, [focusedPage, openPage, pageInput])
 
   const spreadMarkers = useMemo(
     () => buildSpreadMarkers(spreadCount, spreadIndex),
@@ -241,19 +236,14 @@ export function PdfSpreadView({
       </StateLeaf>
     )
   } else if (previewKind === 'pdf' && pdfDoc) {
-    spreadContent = expandedPage !== null ? (
+    spreadContent = isLensOpen ? (
       <PdfSourceLeaf
         document={pdfDoc}
-        pageNumber={expandedPage}
+        pageNumber={focusedPage}
         side="left"
         fileName={book.fileName}
         isFocused
-        isExpanded
-        onFocus={() => focusPage(expandedPage, setFocusedPage, setPageInput, setIsLensOpen)}
-        onToggleExpand={() => {
-          setExpandedPage(null)
-          setTurnDirection('none')
-        }}
+        onFocus={() => undefined}
       />
     ) : (
       <>
@@ -263,10 +253,9 @@ export function PdfSpreadView({
           side="left"
           fileName={book.fileName}
           isFocused={focusedPage === leftPage}
-          isExpanded={false}
           onFocus={() => focusPage(leftPage, setFocusedPage, setPageInput, setIsLensOpen)}
-          onToggleExpand={() => openPage(leftPage)}
         />
+        <div className="ubr-source-spine" aria-hidden="true" />
         {rightPage ? (
           <PdfSourceLeaf
             document={pdfDoc}
@@ -274,9 +263,7 @@ export function PdfSpreadView({
             side="right"
             fileName={book.fileName}
             isFocused={focusedPage === rightPage}
-            isExpanded={false}
             onFocus={() => focusPage(rightPage, setFocusedPage, setPageInput, setIsLensOpen)}
-            onToggleExpand={() => openPage(rightPage)}
           />
         ) : <EmptyLeaf fileName={book.fileName} />}
       </>
@@ -318,6 +305,10 @@ export function PdfSpreadView({
       </StateLeaf>
     )
   }
+
+  const sourceLayout = previewKind === 'pdf' && pdfDoc
+    ? isLensOpen ? 'companion' : 'book'
+    : 'single'
 
   return (
     <div className="ubr-reader-shell" style={{ '--subject-color': book.color } as CSSProperties}>
@@ -379,53 +370,61 @@ export function PdfSpreadView({
         </div>
       </header>
 
-      {/* â”€â”€ Reader body: source + optional companion â”€â”€ */}
-      <div className="ubr-reader-body">
+      {/* Reader body: a stable paper composition in both themes. */}
+      <div className={'ubr-reader-body' + (isLensOpen ? ' ubr-reader-body--lens-open' : '')}>
         <main className="ubr-reader-stage" id="main-content" aria-busy={isLoading}>
-          <article
-            key={`${book.id}-${expandedPage ?? `spread-${spreadIndex}`}`}
-            className={[
-              'ubr-source-spread',
-              expandedPage !== null ? 'ubr-source-spread--single' : '',
-              turnDirection !== 'none' ? `ubr-turn-${turnDirection}` : '',
-            ].filter(Boolean).join(' ')}
-          >
-            {spreadContent}
-          </article>
+          <div className={'ubr-reader-composition' + (isLensOpen ? ' ubr-reader-composition--lens-open' : '')}>
+            <article
+              key={`${book.id}-${sourceLayout}-${sourceLayout === 'book' ? spreadIndex : focusedPage}`}
+              className={[
+                'ubr-source-spread',
+                `ubr-source-spread--${sourceLayout}`,
+                turnDirection !== 'none' ? `ubr-turn-${turnDirection}` : '',
+              ].filter(Boolean).join(' ')}
+            >
+              {spreadContent}
+            </article>
+
+            {isLensOpen && children && (
+              <aside
+                id="ubr-lens-drawer"
+                className="ubr-companion-shell gl-companion-open"
+                aria-label={`Learn page ${focusedPage} your way`}
+              >
+                {children}
+              </aside>
+            )}
+          </div>
 
           {/* Bottom navigation */}
           <nav className="ubr-reader-nav" aria-label="Navigate source pages">
             <button
               type="button"
               className="ubr-nav-arrow"
-              disabled={isLoading || (expandedPage !== null ? expandedPage <= 1 : spreadIndex === 0)}
-              onClick={() => expandedPage !== null
-                ? openPage(expandedPage - 1)
-                : openSpread(spreadIndex - 1)}
-              aria-label={expandedPage !== null ? 'Previous source page' : 'Previous source spread'}
+              disabled={isLoading || spreadIndex === 0}
+              onClick={() => openSpread(spreadIndex - 1)}
+              aria-label="Previous source spread"
             >
               <ChevronLeft size={17} aria-hidden="true" />
             </button>
             <div className="ubr-nav-progress">
               <BookOpen size={14} aria-hidden="true" />
               <span className="ubr-nav-label">Source</span>
-              {expandedPage === null && (
-                <div className="ubr-nav-dots">
-                  {spreadMarkers.map((marker, index) => marker === 'gap' ? (
-                    <span key={`gap-${index}`} className="ubr-nav-gap" aria-hidden="true">â€¦</span>
-                  ) : (
-                    <button
-                      key={marker}
-                      type="button"
-                      className={'ubr-nav-dot' + (marker === spreadIndex ? ' ubr-nav-dot--active' : '')}
-                      disabled={isLoading}
-                      onClick={() => openSpread(marker)}
-                      aria-label={`Open spread ${marker + 1}`}
-                      aria-current={marker === spreadIndex ? 'page' : undefined}
-                    />
-                  ))}
-                </div>
-              )}
+              <div className="ubr-nav-dots">
+                {spreadMarkers.map((marker, index) => marker === 'gap' ? (
+                  <span key={`gap-${index}`} className="ubr-nav-gap" aria-hidden="true">â€¦</span>
+                ) : (
+                  <button
+                    key={marker}
+                    type="button"
+                    className={'ubr-nav-dot' + (marker === spreadIndex ? ' ubr-nav-dot--active' : '')}
+                    disabled={isLoading}
+                    onClick={() => openSpread(marker)}
+                    aria-label={`Open spread ${marker + 1}`}
+                    aria-current={marker === spreadIndex ? 'page' : undefined}
+                  />
+                ))}
+              </div>
               <form
                 className="ubr-page-jump"
                 onSubmit={(event) => {
@@ -448,38 +447,20 @@ export function PdfSpreadView({
                 />
                 <span>/ {totalPages}</span>
               </form>
-              <span className="ubr-nav-count">
-                {expandedPage !== null
-                  ? `Focused page ${expandedPage}`
-                  : `Spread ${spreadIndex + 1} of ${spreadCount}`}
-              </span>
+              <span className="ubr-nav-count">Spread {spreadIndex + 1} of {spreadCount}</span>
             </div>
             <button
               type="button"
               className="ubr-nav-arrow"
-              disabled={isLoading || (expandedPage !== null
-                ? expandedPage >= totalPages
-                : spreadIndex === spreadCount - 1)}
-              onClick={() => expandedPage !== null
-                ? openPage(expandedPage + 1)
-                : openSpread(spreadIndex + 1)}
-              aria-label={expandedPage !== null ? 'Next source page' : 'Next source spread'}
+              disabled={isLoading || spreadIndex === spreadCount - 1}
+              onClick={() => openSpread(spreadIndex + 1)}
+              aria-label="Next source spread"
             >
               <ChevronRight size={17} aria-hidden="true" />
             </button>
           </nav>
         </main>
 
-        {/* Companion panel â€” springs in from right */}
-        {isLensOpen && children && (
-          <aside
-            id="ubr-lens-drawer"
-            className="ubr-companion-shell gl-companion-open"
-            aria-label={`Learn page ${focusedPage} your way`}
-          >
-            {children}
-          </aside>
-        )}
       </div>
     </div>
   )

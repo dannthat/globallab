@@ -174,7 +174,7 @@ try {
       ],
     })
     await sleep(4_000)
-    await click('.gl-library-book-trigger--user')
+    await click('.gl-home-row--book, .gl-library-book-trigger--user')
     await sleep(3_000)
     if (view.includes('companion')) {
       await click('.ubr-learn-trigger')
@@ -228,6 +228,17 @@ try {
 
   const diagnostics = await evaluate(`(() => {
     const selectors = [
+      '.ubr-reader-shell',
+      '.ubr-reader-header',
+      '.ubr-reader-body',
+      '.ubr-reader-stage',
+      '.ubr-reader-composition',
+      '.ubr-source-spread',
+      '.ubr-source-leaf',
+      '.ubr-source-frame',
+      '.ubr-source-canvas',
+      '.ubr-companion-shell',
+      '.ubr-reader-nav',
       '.gl-library',
       '.gl-toc__spread',
       '.textbook-reader-wrap',
