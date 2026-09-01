@@ -10,7 +10,7 @@
         "Two laboratories moving at constant relative velocity",
         "A laboratory and a rocket firing its engine",
         "Two laboratories rotating around each other",
-        "A laboratory and a falling object changing speed"
+        "A laboratory and a rocket firing its boosters"
       ],
       "correctIndex": 0,
       "explanation": "Inertial frames move with constant relative velocity and have no acceleration between them. Acceleration or rotation makes the listed frame non-inertial for this definition.",
@@ -37,7 +37,7 @@
       "sectionId": "overview",
       "question": "Can an experiment performed entirely inside a sealed laboratory moving uniformly reveal its absolute speed?",
       "options": [
-        "Yes, by measuring local gravity",
+        "Yes, by detecting an absolute speed with internal light signals",
         "Yes, by measuring its own clock rate",
         "No, absolute rest cannot be identified internally",
         "Only when the laboratory moves east"
@@ -210,37 +210,37 @@
       "correctIndex": 1,
       "explanation": "Relativistic time dilation becomes large only as speed approaches a substantial fraction of c. Ordinary speeds leave the Lorentz factor extremely close to one.",
       "sourceEvidence": "The Lorentz factor becomes appreciable only when v is a significant fraction of c.",
-      "misconceptionTargeted": "Expecting large time dilation at ordinary terrestrial speeds"
+      "misconceptionTargeted": "Expecting large time dilation at ordinary speeds"
     },
     {
       "id": "special-relativity--time-dilation--q7",
       "sectionId": "time-dilation",
-      "question": "Why do more fast atmospheric muons reach Earth than a nonrelativistic lifetime estimate predicts?",
+      "question": "Why do unstable particles produced in accelerators survive far longer in the laboratory than their rest-frame lifetimes predict?",
       "options": [
-        "Their charge stops decay",
+        "Their charge prevents decay",
         "They travel faster than light",
-        "Earth observers measure their decay clocks as time-dilated",
-        "Gravity makes them immortal"
+        "Laboratory observers measure the moving particle's internal decay clock as time-dilated",
+        "Magnetic fields pause their decay"
       ],
       "correctIndex": 2,
-      "explanation": "Earth observers measure moving muon lifetimes as dilated, allowing more muons to reach the surface. The explanation neither requires superluminal travel nor suspension of decay.",
-      "sourceEvidence": "Fast atmospheric muons reach Earth’s surface in far greater numbers than a nonrelativistic lifetime estimate predicts, because Earth observers measure their decays as slowed; in the muon frame, the atmosphere is length-contracted.",
-      "misconceptionTargeted": "Explaining atmospheric muon survival without relativistic time dilation"
+      "explanation": "Laboratory observers measure the fast-moving particle's internal clock as running slower by the Lorentz factor, extending the observed lifetime. The explanation requires neither superluminal travel nor an external field halting decay.",
+      "sourceEvidence": "Time dilation has direct experimental evidence. Unstable particles produced in high-energy accelerators survive far longer in the laboratory than their rest-frame lifetimes would allow, because laboratory observers measure the moving particle's internal clock as time-dilated.",
+      "misconceptionTargeted": "Explaining extended particle lifetimes in the laboratory without relativistic time dilation"
     },
     {
       "id": "special-relativity--time-dilation--q8",
       "sectionId": "time-dilation",
-      "question": "Why must navigation satellite timing systems include relativistic corrections?",
+      "question": "Why must high-precision timing systems that track fast-moving particles include relativistic clock corrections?",
       "options": [
-        "The speed of light varies with satellite direction",
-        "Satellites cannot transmit radio waves",
-        "Atomic clocks stop in orbit",
-        "Their clocks accumulate measurable relativistic offsets"
+        "The speed of light varies inside accelerators",
+        "Particle detectors cannot send radio signals",
+        "Atomic clocks stop near particle beams",
+        "Moving clocks accumulate measurable relativistic offsets"
       ],
       "correctIndex": 3,
-      "explanation": "Motion and gravity shift satellite clock readings enough to affect calculated positions. The corrections address clock rates rather than failed radio transmission or variable vacuum light speed.",
-      "sourceEvidence": "Atomic clocks flown on aircraft and clocks aboard navigation satellites accumulate relativistic offsets that must be included alongside gravitational corrections for accurate positioning.",
-      "misconceptionTargeted": "Treating relativistic clock offsets as too small to matter in navigation"
+      "explanation": "Time dilation shifts the readings of moving clocks by measurable amounts. The corrections address clock rates rather than failed signal transmission or variable vacuum light speed.",
+      "sourceEvidence": "Atomic clocks transported on aircraft have accumulated measurable relativistic offsets consistent with special-relativistic predictions.",
+      "misconceptionTargeted": "Treating relativistic clock offsets as too small to matter in precision experiments"
     },
     {
       "id": "special-relativity--length-contraction--q1",
@@ -350,17 +350,17 @@
     {
       "id": "special-relativity--length-contraction--q8",
       "sectionId": "length-contraction",
-      "question": "How does the muon describe reaching Earth within its short proper lifetime?",
+      "question": "How does a fast particle explain reaching a distant detector within its short proper lifetime?",
       "options": [
-        "Earth moves faster than light",
-        "The atmosphere has zero thickness in every frame",
-        "The muon's proper lifetime increases in its own frame",
-        "The atmosphere is length-contracted"
+        "The detector moves faster than light",
+        "The separation has zero length in every frame",
+        "The particle's proper lifetime increases in its own frame",
+        "The distance to the detector is length-contracted in the particle's frame"
       ],
       "correctIndex": 3,
-      "explanation": "In the muon frame the atmosphere has a reduced longitudinal thickness, so Earth arrives sooner. The muon's own proper lifetime remains ordinary and no object exceeds c.",
-      "sourceEvidence": "In Earth’s frame, muon lifetimes are dilated; in each muon’s frame, the atmosphere’s thickness is contracted, so the surface is reached within the muon’s ordinary proper lifetime.",
-      "misconceptionTargeted": "Using time dilation for the muon clock in the muon's own rest frame"
+      "explanation": "In the particle's rest frame the laboratory distance to the detector is longitudinally contracted, so the detector arrives within the particle's ordinary proper lifetime. The particle's own proper lifetime remains unchanged and no object exceeds c.",
+      "sourceEvidence": "In the laboratory frame, a fast particle's internal clock is time-dilated; in the particle's rest frame, the distance to the target detector is length-contracted. Both frames predict the same collision events because Lorentz transformations preserve their causal relationships.",
+      "misconceptionTargeted": "Applying time dilation to the particle clock in the particle's own rest frame"
     },
     {
       "id": "special-relativity--mass-energy--q1",

@@ -1,4 +1,9 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import type { SimulationComponentProps } from '../../personalization/simulationProtocol'
+import {
+  publishSimulationState,
+  subscribeToTutorSimulationActions,
+} from '../../personalization/simulationProtocol'
 
 const PLOT = {
   left: 54,
@@ -59,7 +64,11 @@ function phaseAt(time: number, triggered: boolean) {
   return 'Resting restored'
 }
 
-export function ActionPotentialSim() {
+export function ActionPotentialSim({
+  simulationId = 'action-potential::standalone',
+  topicId = 'action-potential',
+  sectionId = 'overview',
+}: SimulationComponentProps = {}) {
   const titleId = useId()
   const descriptionId = useId()
   const stimulusId = useId()
@@ -128,6 +137,48 @@ export function ActionPotentialSim() {
     triggered && currentSample.time >= 0.65 && currentSample.time < 1.45
   const potassiumOpen =
     triggered && currentSample.time >= 1.25 && currentSample.time < 3.25
+
+  useEffect(
+    () =>
+      subscribeToTutorSimulationActions(simulationId, (action) => {
+        if (
+          action.type === 'set-simulation-control' &&
+          action.controlId === 'stimulus' &&
+          typeof action.value === 'number'
+        ) {
+          setStimulus(clamp(action.value, -80, 40))
+        }
+      }),
+    [simulationId],
+  )
+
+  useEffect(() => {
+    publishSimulationState({
+      simulationId,
+      topicId,
+      sectionId,
+      label: 'Neuron action potential',
+      controls: { stimulus },
+      outputs: {
+        triggered,
+        phase: currentPhase,
+        voltage: Number(currentSample.voltage.toFixed(1)),
+        sodiumOpen,
+        potassiumOpen,
+      },
+      updatedAt: new Date().toISOString(),
+    })
+  }, [
+    currentPhase,
+    currentSample.voltage,
+    potassiumOpen,
+    sectionId,
+    simulationId,
+    sodiumOpen,
+    stimulus,
+    topicId,
+    triggered,
+  ])
 
   const triggerPulse = () => {
     const reducedMotion =

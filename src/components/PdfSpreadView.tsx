@@ -127,7 +127,11 @@ export interface PdfSpreadViewProps {
   spreadIndex: number
   setSpreadIndex: (index: number) => void
   isCompanionLoading: boolean
-  runCompanion: () => Promise<void>
+  runCompanion: (
+    requestedMode?: never,
+    force?: boolean,
+    selectedText?: string,
+  ) => Promise<void>
   children?: ReactNode
 }
 
@@ -155,6 +159,12 @@ export function PdfSpreadView({
 }: PdfSpreadViewProps) {
   const [pageInput, setPageInput] = useState(String(focusedPage))
   const [turnDirection, setTurnDirection] = useState<'forward' | 'backward' | 'none'>('none')
+  const [sourceSelection, setSourceSelection] = useState<{
+    text: string
+    page: number
+    left: number
+    top: number
+  } | null>(null)
 
   const totalPages = previewKind === 'pdf'
     ? pdfDoc?.numPages ?? Math.max(1, book.pageCount)
@@ -162,6 +172,35 @@ export function PdfSpreadView({
   const spreadCount = Math.max(1, Math.ceil(totalPages / 2))
   const leftPage = spreadIndex * 2 + 1
   const rightPage = leftPage + 1 <= totalPages ? leftPage + 1 : null
+
+  const captureSourceSelection = useCallback(() => {
+    window.requestAnimationFrame(() => {
+      const selection = window.getSelection()
+      if (!selection || selection.isCollapsed || selection.rangeCount === 0) {
+        setSourceSelection(null)
+        return
+      }
+      const range = selection.getRangeAt(0)
+      const start = range.startContainer instanceof Element
+        ? range.startContainer
+        : range.startContainer.parentElement
+      const leaf = start?.closest<HTMLElement>('.ubr-source-leaf, .ubr-source-spread')
+      const text = selection.toString().replace(/\s+/g, ' ').trim().slice(0, 4_000)
+      if (!leaf || !text) {
+        setSourceSelection(null)
+        return
+      }
+      const rect = range.getBoundingClientRect()
+      const page = Number(leaf.dataset.sourcePage) || focusedPage
+      setFocusedPage(page)
+      setSourceSelection({
+        text,
+        page,
+        left: Math.max(86, Math.min(window.innerWidth - 86, rect.left + rect.width / 2)),
+        top: Math.max(68, Math.min(window.innerHeight - 74, rect.bottom + 10)),
+      })
+    })
+  }, [focusedPage, setFocusedPage])
 
   const openSpread = useCallback((requested: number) => {
     const next = Math.max(0, Math.min(requested, spreadCount - 1))
@@ -325,7 +364,7 @@ export function PdfSpreadView({
           </button>
         </div>
         <div className="ubr-reader-header__title" aria-current="page">
-          <span>Your source Â· {previewKind}</span>
+          <span>Your source · {previewKind}</span>
           <strong>{book.title}</strong>
         </div>
         <div className="ubr-reader-header__right">
@@ -373,7 +412,10 @@ export function PdfSpreadView({
       {/* Reader body: a stable paper composition in both themes. */}
       <div className={'ubr-reader-body' + (isLensOpen ? ' ubr-reader-body--lens-open' : '')}>
         <main className="ubr-reader-stage" id="main-content" aria-busy={isLoading}>
-          <div className={'ubr-reader-composition' + (isLensOpen ? ' ubr-reader-composition--lens-open' : '')}>
+          <div
+            className={'ubr-reader-composition' + (isLensOpen ? ' ubr-reader-composition--lens-open' : '')}
+            onMouseUp={captureSourceSelection}
+          >
             <article
               key={`${book.id}-${sourceLayout}-${sourceLayout === 'book' ? spreadIndex : focusedPage}`}
               className={[
@@ -412,7 +454,7 @@ export function PdfSpreadView({
               <span className="ubr-nav-label">Source</span>
               <div className="ubr-nav-dots">
                 {spreadMarkers.map((marker, index) => marker === 'gap' ? (
-                  <span key={`gap-${index}`} className="ubr-nav-gap" aria-hidden="true">â€¦</span>
+                  <span key={`gap-${index}`} className="ubr-nav-gap" aria-hidden="true">…</span>
                 ) : (
                   <button
                     key={marker}
@@ -447,7 +489,7 @@ export function PdfSpreadView({
                 />
                 <span>/ {totalPages}</span>
               </form>
-              <span className="ubr-nav-count">Spread {spreadIndex + 1} of {spreadCount}</span>
+              <span className="ubr-nav-count">{spreadIndex + 1} / {spreadCount}</span>
             </div>
             <button
               type="button"
@@ -460,6 +502,23 @@ export function PdfSpreadView({
             </button>
           </nav>
         </main>
+
+        {sourceSelection && !isLensOpen && <button
+          type={'button'}
+          className={'ubr-selection-koji'}
+          style={{ left: sourceSelection.left, top: sourceSelection.top }}
+          onMouseDown={(event) => event.preventDefault()}
+          onClick={() => {
+            const selectedText = sourceSelection.text
+            setSourceSelection(null)
+            window.getSelection()?.removeAllRanges()
+            void runCompanion(undefined, false, selectedText)
+          }}
+        >
+          <WandSparkles size={15} aria-hidden={true} />
+          Learn selection your way
+          <span>Page {sourceSelection.page}</span>
+        </button>}
 
       </div>
     </div>

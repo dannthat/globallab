@@ -1,7 +1,8 @@
-import { useId, useState, type CSSProperties } from 'react'
+import { useEffect, useId, useState, type CSSProperties } from 'react'
 import type { KnowledgeDiagram } from '../types'
 import { DiagramBlock } from './DiagramBlock'
 import { getSimulationRegistration } from './simulations'
+import { subscribeToTutorSimulationActions } from '../personalization/simulationProtocol'
 
 interface InteractiveDiagramBlockProps {
   topicId: string
@@ -22,6 +23,13 @@ export function InteractiveDiagramBlock({
   const interactivePanelId = useId()
   const [view, setView] = useState<DiagramView>('static')
   const registration = getSimulationRegistration(topicId, sectionId)
+
+  useEffect(() => {
+    if (!registration) return
+    return subscribeToTutorSimulationActions(registration.simulationId, (action) => {
+      if (action.type === 'open-simulation') setView('interactive')
+    })
+  }, [registration])
 
   if (!registration) {
     return diagram ? (
@@ -102,7 +110,13 @@ export function InteractiveDiagramBlock({
           id={interactivePanelId}
           hidden={view !== 'interactive'}
         >
-          {view === 'interactive' && <Simulation />}
+          {view === 'interactive' && (
+            <Simulation
+              simulationId={registration.simulationId}
+              topicId={topicId}
+              sectionId={sectionId}
+            />
+          )}
         </div>
       </div>
     </section>

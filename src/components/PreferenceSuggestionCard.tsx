@@ -42,6 +42,22 @@ export function PreferenceSuggestionCard({
         {countLabel(suggestion.distinctAnchorCount, 'source location')} and{' '}
         {countLabel(suggestion.successfulOutcomeCount, 'successful check')}.
       </p>
+      <details className="preference-suggestion-card__evidence-details">
+        <summary>View evidence</summary>
+        {suggestion.evidence?.length ? (
+          <ul>
+            {suggestion.evidence.map((citation) => (
+              <li key={citation.evidenceId}>
+                <strong>{citation.anchor.sourceTitle}</strong>
+                <span>{citation.anchor.anchorLabel}</span>
+                <code>{citation.evidenceId}</code>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Evidence IDs: {suggestion.evidenceIds.join(', ')}</p>
+        )}
+      </details>
 
       <div className="preference-suggestion-card__actions">
         <button

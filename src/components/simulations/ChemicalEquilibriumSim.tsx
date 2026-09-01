@@ -1,10 +1,19 @@
-import { useId, useMemo, useState } from 'react'
+import { useEffect, useId, useMemo, useState } from 'react'
+import type { SimulationComponentProps } from '../../personalization/simulationProtocol'
+import {
+  publishSimulationState,
+  subscribeToTutorSimulationActions,
+} from '../../personalization/simulationProtocol'
 
 function clamp(value: number, minimum: number, maximum: number) {
   return Math.min(maximum, Math.max(minimum, value))
 }
 
-export function ChemicalEquilibriumSim() {
+export function ChemicalEquilibriumSim({
+  simulationId = 'thermodynamics::gibbs',
+  topicId = 'thermodynamics',
+  sectionId = 'gibbs',
+}: SimulationComponentProps = {}) {
   const titleId = useId()
   const descriptionId = useId()
   const [increasedPressure, setIncreasedPressure] = useState(false)
@@ -65,6 +74,51 @@ export function ChemicalEquilibriumSim() {
       qRatio,
     }
   }, [addedReactant, increasedPressure, increasedTemperature])
+
+  useEffect(
+    () =>
+      subscribeToTutorSimulationActions(simulationId, (action) => {
+        if (action.type !== 'set-simulation-control' || typeof action.value !== 'boolean') {
+          return
+        }
+        if (action.controlId === 'increasedPressure') {
+          setIncreasedPressure(action.value)
+        } else if (action.controlId === 'increasedTemperature') {
+          setIncreasedTemperature(action.value)
+        } else if (action.controlId === 'addedReactant') {
+          setAddedReactant(action.value)
+        }
+      }),
+    [simulationId],
+  )
+
+  useEffect(() => {
+    publishSimulationState({
+      simulationId,
+      topicId,
+      sectionId,
+      label: 'Le Chatelier equilibrium reactor',
+      controls: { increasedPressure, increasedTemperature, addedReactant },
+      outputs: {
+        shift: model.shift,
+        relation: model.relation,
+        productPercent: model.productPercent,
+        reactantPercent: model.reactantPercent,
+      },
+      updatedAt: new Date().toISOString(),
+    })
+  }, [
+    addedReactant,
+    increasedPressure,
+    increasedTemperature,
+    model.productPercent,
+    model.reactantPercent,
+    model.relation,
+    model.shift,
+    sectionId,
+    simulationId,
+    topicId,
+  ])
 
   return (
     <section

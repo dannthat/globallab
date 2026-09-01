@@ -4,6 +4,7 @@ import { cleanup, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import type { MasteryRecord } from '../personalization/types'
+import type { StudentProfile } from '../types'
 import { LearnerControlPanel } from './LearnerControlPanel'
 
 const dueReview: MasteryRecord = {
@@ -110,5 +111,117 @@ describe('LearnerControlPanel', () => {
     await user.click(screen.getByRole('button', { name: 'Export' }))
     expect(current.onExport).toHaveBeenCalledOnce()
     expect(click).toHaveBeenCalledOnce()
+  })
+
+  it('deletes one source with confirmation and revokes a source-connection permission', async () => {
+    const user = userEvent.setup()
+    const current = props()
+    const onDeleteSourceData = vi.fn()
+    const onRevokeCrossSourcePermission = vi.fn()
+    render(
+      <LearnerControlPanel
+        {...current}
+        sourceData={[
+          {
+            sourceId: 'book',
+            sourceTitle: 'Biology notes',
+            sourceKind: 'upload',
+            evidenceCount: 7,
+          },
+        ]}
+        crossSourcePermissions={[
+          {
+            id: 'permission-1',
+            primaryAnchorKey: 'global::biology::respiration',
+            secondaryAnchorKey: 'upload::book::page-2',
+            primaryAnchor: {
+              sourceId: 'biology',
+              sourceKind: 'global-lab',
+              sourceTitle: 'Cell biology',
+              anchorId: 'respiration',
+              anchorLabel: 'Respiration',
+            },
+            secondaryAnchor: dueReview.anchor,
+            grantedAt: '2026-08-29T08:00:00.000Z',
+          },
+        ]}
+        onDeleteSourceData={onDeleteSourceData}
+        onRevokeCrossSourcePermission={onRevokeCrossSourcePermission}
+      />,
+    )
+
+    await user.click(screen.getByRole('button', { name: /Learning settings/ }))
+    await user.click(screen.getByRole('button', { name: 'Delete source data' }))
+    expect(onDeleteSourceData).not.toHaveBeenCalled()
+    await user.click(
+      screen.getByRole('button', {
+        name: 'Yes',
+      }),
+    )
+    expect(onDeleteSourceData).toHaveBeenCalledWith('book')
+
+    await user.click(screen.getByRole('button', { name: 'Revoke' }))
+    expect(onRevokeCrossSourcePermission).toHaveBeenCalledWith('permission-1')
+  })
+
+  it('lets the student edit every universal Koji starting default outside the reader', async () => {
+    const user = userEvent.setup()
+    const current = props()
+    const onUpdateStudentProfile = vi.fn()
+    const studentProfile: StudentProfile = {
+      interest: 'gaming',
+      gradeLevel: 'Grade 11',
+      preferredLanguage: 'English',
+      learningGoals: ['Understand difficult material'],
+      startingSupport: 'balanced',
+      stuckSupport: 'different-explanation',
+      onboardingVersion: 3,
+      createdAt: '2026-08-29T00:00:00.000Z',
+    }
+    render(
+      <LearnerControlPanel
+        {...current}
+        studentProfile={studentProfile}
+        onUpdateStudentProfile={onUpdateStudentProfile}
+      />,
+    )
+
+    await user.click(screen.getByRole('button', { name: /Learning settings/ }))
+    expect(screen.getByText('Koji starting defaults')).toBeTruthy()
+    await user.selectOptions(screen.getByLabelText('Response language'), 'Arabic')
+    expect(onUpdateStudentProfile).toHaveBeenCalledWith({
+      interest: 'gaming',
+      gradeLevel: 'Grade 11',
+      preferredLanguage: 'Arabic',
+      learningGoals: ['Understand difficult material'],
+      startingSupport: 'balanced',
+      stuckSupport: 'different-explanation',
+      onboardingVersion: 3,
+    })
+
+    await user.click(screen.getByRole('button', { name: 'Prepare for an exam' }))
+    expect(onUpdateStudentProfile).toHaveBeenLastCalledWith({
+      interest: 'gaming',
+      gradeLevel: 'Grade 11',
+      preferredLanguage: 'English',
+      learningGoals: ['Understand difficult material', 'Prepare for an exam'],
+      startingSupport: 'balanced',
+      stuckSupport: 'different-explanation',
+      onboardingVersion: 3,
+    })
+
+    const interest = screen.getByLabelText('Interest lens')
+    await user.clear(interest)
+    await user.type(interest, 'filmmaking')
+    await user.click(screen.getByRole('button', { name: 'Save lens' }))
+    expect(onUpdateStudentProfile).toHaveBeenLastCalledWith({
+      interest: 'filmmaking',
+      gradeLevel: 'Grade 11',
+      preferredLanguage: 'English',
+      learningGoals: ['Understand difficult material'],
+      startingSupport: 'balanced',
+      stuckSupport: 'different-explanation',
+      onboardingVersion: 3,
+    })
   })
 })

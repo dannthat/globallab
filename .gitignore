@@ -26,11 +26,38 @@ Thumbs.db
 # Editor-local files
 .idea/
 .agents/
+.augment/
+.claude/
+.codebuddy/
+.codewhale/
+.continue/
+.cursor/
+.factory/
+.gemini/
+.kilocode/
+.kiro/
+.opencode/
+.qoder/
+.roo/
+.trae/
+.warp/
+.windsurf/
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
 
-# Visual debug screenshots and scratch
+# Product briefs, prototypes, research, and generated deploy packages
+CODEX_BRIEF*.md
+HANDOFF_BRIEF*.md
+3d-book/
+design-system/
+redesign/
+reports/
+NETLIFY-*/
+globallab-netlify-deploy.zip
+siyavula_gr10_life_sciences_raw.txt
+
+# Visual debug screenshots and recovery scratch
 .visual-*
 .diagram-contact-sheet.*
 visual_overflow_*
@@ -38,4 +65,3 @@ antigravity-recovery/
 graphify-out/
 RECOVERED_ANTIGRAVITY_2_TRANSCRIPT.md
 peek-pdf.mjs
-

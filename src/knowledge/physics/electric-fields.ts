@@ -108,7 +108,7 @@ For a point charge with zero potential chosen at infinity, V = kq/r. The sign of
       presetAnalogies: {
         neutral: 'Potential resembles height on a landscape, while the field resembles the downhill slope. A charge’s sign determines whether lower electrical energy corresponds to lower or higher potential.',
         gaming: 'Potential is a scalar height map and the electric field is its downhill direction. Positive and negative characters respond oppositely to the same map.',
-        sports: 'A ball gains or loses gravitational energy across different court heights. Electric potential plays the map-like role, while charge determines how strongly it matters.',
+        sports: 'A player moving between different height positions on a course carries different stored energy. Electric potential plays the map-like role, while charge sign determines whether moving up or down the map is energetically favourable.',
         music: 'Voltage resembles a level difference that can drive signal flow. It measures available energy per unit charge, not the amount of charge itself.',
       },
     },

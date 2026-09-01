@@ -4,6 +4,7 @@ import './index.css'
 import './gl-transitions.css'
 import './userBookReader.css'
 import './premium.css'
+import './workspace.css'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(

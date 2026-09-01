@@ -102,4 +102,36 @@ describe('PreferenceSuggestionCard', () => {
       'This suggestion has already been answered.',
     )
   })
+
+  it('lets the student inspect the evidence behind the suggestion', async () => {
+    const user = userEvent.setup()
+    render(
+      <PreferenceSuggestionCard
+        suggestion={{
+          ...suggestion,
+          evidence: [
+            {
+              evidenceId: 'e1',
+              anchorKey: 'biology::respiration',
+              anchor: {
+                sourceId: 'biology',
+                sourceKind: 'global-lab',
+                sourceTitle: 'Cell biology',
+                anchorId: 'respiration',
+                anchorLabel: 'Cellular respiration',
+              },
+              occurredAt: '2026-08-29T08:00:00.000Z',
+            },
+          ],
+        }}
+        onApply={vi.fn()}
+        onNotNow={vi.fn()}
+        onNeverSuggest={vi.fn()}
+      />,
+    )
+    await user.click(screen.getByText('View evidence'))
+    expect(screen.getByText('Cell biology')).toBeTruthy()
+    expect(screen.getByText('Cellular respiration')).toBeTruthy()
+    expect(screen.getByText('e1')).toBeTruthy()
+  })
 })

@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { rewriteSection, type RewriteSectionOptions } from '../services/personaService'
+import { LEARNING_PROMPT_VERSION } from '../services/learningCompanionService'
 import type {
   KnowledgeSection,
   KnowledgeTopic,
@@ -15,6 +16,8 @@ import {
 } from '../personalization/types'
 
 export const LEARNING_COMPANION_CACHE_KEYS = [
+  'gl_learning_companions_v5',
+  'gl_learning_companions_v4',
   'gl_learning_companions_v3',
   'gl_learning_companions_v2',
   'gl_learning_companions_v1',
@@ -35,6 +38,7 @@ interface LearnOptions {
   approvedPresentation?: ApprovedPresentationPreferences
   excerpt?: RewriteSectionOptions['excerpt']
   source?: RewriteSectionOptions['source']
+  isUserSelection?: boolean
 }
 
 function normalizeInterestForCache(interest: string) {
@@ -57,6 +61,27 @@ function preferenceSignature(preferences: ApprovedPresentationPreferences) {
     preferences.examples?.value ?? 'minimal',
     preferences.practice?.value ?? 'explanation',
   ].join(':')
+}
+
+function studentProfileSignature(
+  profile: Pick<
+    StudentProfile,
+    | 'gradeLevel'
+    | 'preferredLanguage'
+    | 'learningGoals'
+    | 'startingSupport'
+    | 'stuckSupport'
+  >,
+) {
+  return [
+    profile.gradeLevel ?? 'unspecified',
+    profile.preferredLanguage ?? 'English',
+    [...(profile.learningGoals ?? [])].sort().join(','),
+    profile.startingSupport ?? 'balanced',
+    profile.stuckSupport ?? 'different-explanation',
+  ]
+    .map((part) => encodeURIComponent(part))
+    .join(':')
 }
 
 function sourceExcerptSignature(excerpt?: SourceExcerpt) {
@@ -107,14 +132,23 @@ export function getSectionRewriteKey(
 export function getSectionCompanionCacheKey(
   topicId: string,
   section: Pick<KnowledgeSection, 'id' | 'heading' | 'body'>,
-  profile: Pick<StudentProfile, 'interest' | 'gradeLevel'>,
+  profile: Pick<
+    StudentProfile,
+    | 'interest'
+    | 'gradeLevel'
+    | 'preferredLanguage'
+    | 'learningGoals'
+    | 'startingSupport'
+    | 'stuckSupport'
+  >,
   mode: PersonalizationMode,
   preferences: ApprovedPresentationPreferences,
   excerpt?: SourceExcerpt,
 ) {
   return [
     getSectionRewriteKey(topicId, section.id, profile.interest),
-    encodeURIComponent(profile.gradeLevel ?? 'unspecified'),
+    LEARNING_PROMPT_VERSION,
+    studentProfileSignature(profile),
     mode,
     preferenceSignature(preferences),
     textHash(section.heading + '\n' + section.body),
@@ -262,6 +296,7 @@ export function useLearnYourWay(
             mode,
             approvedPresentation: preferences,
             excerpt: options.excerpt,
+            isUserSelection: options.isUserSelection,
             source: options.source ?? {
               id: topic.id,
               title: topic.source.name,

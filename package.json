@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint src",
-    "test": "vitest run --pool=threads --maxWorkers=1",
+    "test": "node --max-old-space-size=8192 ./node_modules/vitest/vitest.mjs run --pool=forks --maxWorkers=1",
     "generate:quizzes": "node scripts/generate-quiz-pool.mjs",
     "preview": "vite preview"
   },

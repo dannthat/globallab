@@ -72,7 +72,7 @@ afterEach(() => {
 })
 
 describe('curated textbook learner-model integration', () => {
-  it('records refinements, helpful outcomes, and quiz results against the source', async () => {
+  it('records Still stuck refinements and helpful outcomes against the source', async () => {
     const user = userEvent.setup()
     render(<App />)
     const section = await openFirstSection(user)
@@ -82,30 +82,22 @@ describe('curated textbook learner-model integration', () => {
     )
     await within(section).findByLabelText('Personalized learning companion')
 
-    const simpler = within(section).getByRole('button', { name: 'Simpler' })
-    await user.click(simpler)
+    await user.click(within(section).getByRole('button', { name: 'Still stuck' }))
+    const composer = within(section).getByRole('textbox', { name: 'What exactly lost you?' })
+    await user.type(composer, 'I lost the thread where glucose becomes usable energy.')
+    await user.click(within(section).getByRole('button', { name: 'Send message to Koji' }))
+
     await waitFor(() => {
-      expect(
-        within(section)
-          .getByRole('button', { name: 'Simpler' })
-          .getAttribute('aria-pressed'),
-      ).toBe('true')
+      expect(within(section).getByRole('button', { name: 'Got it' })).toBeTruthy()
     })
-
-    await user.click(within(section).getByRole('button', { name: 'Helped' }))
-    await user.click(within(section).getByRole('button', { name: 'Test me' }))
-
-    const radios = await within(section).findAllByRole('radio')
-    await user.click(radios[0])
-    await user.click(within(section).getByRole('button', { name: 'Submit answer' }))
+    await user.click(within(section).getByRole('button', { name: 'Got it' }))
 
     await waitFor(() => {
       const model = readLearnerModel()
       expect(model.evidence.map((entry) => entry.kind)).toEqual([
-        'refinement',
         'helpful',
         'refinement',
-        'quiz',
+        'helpful',
       ])
       expect(model.evidence.every((entry) => entry.anchor.sourceKind === 'global-lab')).toBe(
         true,

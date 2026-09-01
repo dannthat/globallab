@@ -16,7 +16,10 @@ const view = requestedView.replace(/-dark$/, '')
 const isDark = themeArg === 'dark' || requestedView.endsWith('-dark')
 const isReaderView = view.startsWith('reader')
 const isAnalogyView = view.includes('analogy')
+const isTutorView = view.includes('tutor-')
 const isUploadView = view.startsWith('upload-')
+const isOnboardingView = view.startsWith('onboarding')
+const isSettingsView = view === 'settings'
 const isPhysicsView = view.includes('physics')
 const width = Number.parseInt(widthArg, 10)
 const height = Number.parseInt(heightArg, 10)
@@ -25,6 +28,7 @@ const chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
 const port = 9300 + Math.floor(Math.random() * 300)
 const profilePath = await mkdtemp(join(tmpdir(), 'globallab-cdp-'))
 const outputPath = resolve(output)
+let scrollAttempt = null
 
 const sleep = (milliseconds) =>
   new Promise((resolveSleep) => setTimeout(resolveSleep, milliseconds))
@@ -147,15 +151,26 @@ try {
   })
   await send('Page.navigate', { url: appUrl })
   await sleep(900)
-  await evaluate(`localStorage.setItem(
+  if (!isOnboardingView) await evaluate(`localStorage.setItem(
     'globallab_profile',
     JSON.stringify({
       interest: ${JSON.stringify(isPhysicsView ? 'gaming' : 'basketball')},
       gradeLevel: 'Grade 11',
+      preferredLanguage: 'English',
+      learningGoals: ['Understand difficult material'],
+      startingSupport: 'balanced',
+      stuckSupport: 'different-explanation',
+      onboardingVersion: 3,
       createdAt: new Date().toISOString()
     })
   ); localStorage.setItem('gl_dark', ${JSON.stringify(isDark ? '1' : '0')}); location.reload()`)
+  else await evaluate(`localStorage.clear(); location.reload()`)
   await sleep(4_000)
+
+  if (isSettingsView) {
+    await click('.learner-controls__trigger')
+    await sleep(700)
+  }
 
   if (isUploadView) {
     await send('DOM.enable')
@@ -174,9 +189,31 @@ try {
       ],
     })
     await sleep(4_000)
-    await click('.gl-home-row--book, .gl-library-book-trigger--user')
+    await click('.pm2-book-row, .pm-book-row, .gl-home-row--book, .gl-library-book-trigger--user')
     await sleep(3_000)
-    if (view.includes('companion')) {
+    if (view.includes('selection')) {
+      const selected = await evaluate(`(() => {
+        const code = document.querySelector('.ubr-raw-source code')
+        const node = code?.firstChild
+        if (!node || node.nodeType !== Node.TEXT_NODE) return ''
+        const value = node.textContent || ''
+        const start = value.search(/\S/)
+        const end = Math.min(value.length, start + 90)
+        if (start < 0 || end <= start) return ''
+        const range = document.createRange()
+        range.setStart(node, start)
+        range.setEnd(node, end)
+        const selection = window.getSelection()
+        selection.removeAllRanges()
+        selection.addRange(range)
+        code.closest('.ubr-reader-composition')?.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }))
+        return selection.toString()
+      })()`)
+      if (!selected.result.value) throw new Error('Could not select uploaded source text.')
+      await sleep(500)
+      await click('.ubr-selection-koji')
+      await sleep(2_500)
+    } else if (view.includes('companion')) {
       await click('.ubr-learn-trigger')
       await sleep(2_500)
     }
@@ -185,11 +222,13 @@ try {
   if (view.startsWith('toc') || isReaderView) {
     if (isPhysicsView) {
       await clickMatching(
-        '.gl-library-book-trigger:not(.gl-library-book-trigger--soon)',
+        '.pm2-subject-card:not(.pm2-subject-card--soon), .pm-subject-tile:not(.pm-subject-tile--soon), .gl-home-row--subject, .gl-library-book-trigger:not(.gl-library-book-trigger--soon)',
         'Physics',
       )
     } else {
-      await click('.gl-library-book-trigger:not(.gl-library-book-trigger--soon)')
+      await click(
+        '.pm2-subject-card:not(.pm2-subject-card--soon), .pm-subject-tile:not(.pm-subject-tile--soon), .gl-home-row--subject, .gl-library-book-trigger:not(.gl-library-book-trigger--soon)',
+      )
     }
     // Library selection intentionally waits for the physical book-lift motion
     // before the shared-element route transition begins.
@@ -203,9 +242,22 @@ try {
     }
     await sleep(3_000)
   }
-  if (isAnalogyView) {
-    await click('.tbp-learn-btn')
+  if (isAnalogyView || isTutorView) {
+    await click('.tbp-bookmark-strip, .tbp-learn-btn')
     await sleep(1_200)
+  }
+  if (isTutorView) {
+    const modeLabel = view.includes('teach')
+      ? 'Teach Koji'
+      : view.includes('what-if')
+        ? 'What-if world'
+        : view.includes('predict')
+          ? 'Predict and test'
+          : view.includes('cross-source')
+            ? 'Connect sources'
+            : 'Learn with Koji'
+    await clickMatching('.koji-mode-picker__grid button', modeLabel)
+    await sleep(1_500)
   }
   if (view.includes('scroll-control')) {
     await click('.tbp-page-scroll-control--left')
@@ -219,17 +271,35 @@ try {
     await sleep(500)
   }
   if (view.endsWith('-bottom')) {
-    await evaluate(`(() => {
-      const page = document.querySelector('.tbp-page-scroll--left')
-      if (page) page.scrollTop = page.scrollHeight
+    scrollAttempt = await evaluate(`(() => {
+      const page =
+        document.querySelector('.textbook-reader-page') ??
+        document.querySelector('.tbp-page-scroll--left') ??
+        document.querySelector('.ubr-reader-body')
+      if (!page) return null
+      const before = page.scrollTop
+      page.scrollTop = page.scrollHeight
+      return {
+        className: page.className,
+        before,
+        after: page.scrollTop,
+        clientHeight: page.clientHeight,
+        scrollHeight: page.scrollHeight,
+      }
     })()`)
-    await sleep(500)
+    await sleep(1_000)
   }
 
   const diagnostics = await evaluate(`(() => {
     const selectors = [
       '.ubr-reader-shell',
       '.ubr-reader-header',
+      '.ubr-reader-header__left',
+      '.ubr-reader-header__title',
+      '.ubr-reader-header__right',
+      '.ubr-learn-trigger',
+      '.site-theme-toggle',
+      '.ubr-remove-btn',
       '.ubr-reader-body',
       '.ubr-reader-stage',
       '.ubr-reader-composition',
@@ -246,6 +316,19 @@ try {
       '.textbook-reader-page',
       '.textbook-bottom-nav',
       '.tbp-article',
+      '.tbp-reading-surface',
+      '.tbp-reading-inner',
+      '.tbp-reference-section',
+      '.tbp-supporting-notes',
+      '.tbp-term-index',
+      '.tbp-companion-panel',
+      '.koji-tutor',
+      '.koji-v3__scroll',
+      '.koji-v3__composer',
+      '.koji-v3__footer',
+      '.koji-mode-picker',
+      '.koji-mode-workspace',
+      '.learner-controls__panel',
       '.textbook-page-left .tbp-page-scroll',
       '.textbook-page-right .tbp-page-scroll',
       '.tbp-page-scroll-control',
@@ -294,7 +377,10 @@ try {
       rectangles,
     }
   })()`)
-  process.stdout.write(JSON.stringify(diagnostics.result.value) + '\n')
+  process.stdout.write(JSON.stringify({
+    ...diagnostics.result.value,
+    scrollAttempt: scrollAttempt?.result?.value ?? null,
+  }) + '\n')
 
   await mkdir(dirname(outputPath), { recursive: true })
   const isJpeg = ['.jpg', '.jpeg'].includes(extname(outputPath).toLowerCase())

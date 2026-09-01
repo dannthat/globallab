@@ -1,4 +1,9 @@
-import { useId, useMemo, useState } from 'react'
+import { useEffect, useId, useMemo, useState } from 'react'
+import type { SimulationComponentProps } from '../../personalization/simulationProtocol'
+import {
+  publishSimulationState,
+  subscribeToTutorSimulationActions,
+} from '../../personalization/simulationProtocol'
 
 const PLOT = {
   left: 58,
@@ -11,6 +16,10 @@ function velocityAt(substrate: number, vmax: number, km: number) {
   return (vmax * substrate) / (km + substrate)
 }
 
+function clamp(value: number, minimum: number, maximum: number) {
+  return Math.min(maximum, Math.max(minimum, value))
+}
+
 function substrateX(substrate: number) {
   return PLOT.left + (substrate / 50) * (PLOT.right - PLOT.left)
 }
@@ -19,7 +28,11 @@ function velocityY(velocity: number) {
   return PLOT.bottom - (velocity / 100) * (PLOT.bottom - PLOT.top)
 }
 
-export function EnzymeKineticsSim() {
+export function EnzymeKineticsSim({
+  simulationId = 'enzyme-kinetics::standalone',
+  topicId = 'enzyme-kinetics',
+  sectionId = 'overview',
+}: SimulationComponentProps = {}) {
   const titleId = useId()
   const descriptionId = useId()
   const vmaxId = useId()
@@ -34,6 +47,53 @@ export function EnzymeKineticsSim() {
   const effectiveKm = competitive ? km * 2 : km
   const effectiveVmax = nonCompetitive ? vmax * 0.58 : vmax
   const velocity = velocityAt(substrate, effectiveVmax, effectiveKm)
+
+  useEffect(
+    () =>
+      subscribeToTutorSimulationActions(simulationId, (action) => {
+        if (action.type !== 'set-simulation-control') return
+        if (action.controlId === 'vmax' && typeof action.value === 'number') {
+          setVmax(clamp(action.value, 10, 100))
+        } else if (action.controlId === 'km' && typeof action.value === 'number') {
+          setKm(clamp(action.value, 1, 20))
+        } else if (action.controlId === 'substrate' && typeof action.value === 'number') {
+          setSubstrate(clamp(action.value, 0, 50))
+        } else if (action.controlId === 'competitive' && typeof action.value === 'boolean') {
+          setCompetitive(action.value)
+        } else if (action.controlId === 'nonCompetitive' && typeof action.value === 'boolean') {
+          setNonCompetitive(action.value)
+        }
+      }),
+    [simulationId],
+  )
+
+  useEffect(() => {
+    publishSimulationState({
+      simulationId,
+      topicId,
+      sectionId,
+      label: 'Michaelis–Menten enzyme kinetics',
+      controls: { vmax, km, substrate, competitive, nonCompetitive },
+      outputs: {
+        velocity: Number(velocity.toFixed(2)),
+        effectiveKm: Number(effectiveKm.toFixed(2)),
+        effectiveVmax: Number(effectiveVmax.toFixed(2)),
+      },
+      updatedAt: new Date().toISOString(),
+    })
+  }, [
+    competitive,
+    effectiveKm,
+    effectiveVmax,
+    km,
+    nonCompetitive,
+    sectionId,
+    simulationId,
+    substrate,
+    topicId,
+    velocity,
+    vmax,
+  ])
 
   const curvePath = useMemo(() => {
     return Array.from({ length: 101 }, (_, index) => {

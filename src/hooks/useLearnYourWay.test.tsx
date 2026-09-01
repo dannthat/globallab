@@ -170,8 +170,51 @@ describe('useLearnYourWay', () => {
       'analogy',
       {},
     )
+    const firstSelectionKey = getSectionCompanionCacheKey(
+      topic.id,
+      section,
+      profile,
+      'analogy',
+      {},
+      {
+        anchor: {
+          sourceId: topic.id,
+          sourceKind: 'global-lab',
+          sourceTitle: topic.title,
+          anchorId: section.id,
+          anchorLabel: section.heading,
+        },
+        text: 'Only this sentence is unclear.',
+      },
+    )
+    const secondSelectionKey = getSectionCompanionCacheKey(
+      topic.id,
+      section,
+      profile,
+      'analogy',
+      {},
+      {
+        anchor: {
+          sourceId: topic.id,
+          sourceKind: 'global-lab',
+          sourceTitle: topic.title,
+          anchorId: section.id,
+          anchorLabel: section.heading,
+        },
+        text: 'A different sentence is unclear.',
+      },
+    )
 
-    expect(new Set([analogyKey, simplerKey, approvedStepsKey, revisedSourceKey]).size).toBe(4)
+    expect(
+      new Set([
+        analogyKey,
+        simplerKey,
+        approvedStepsKey,
+        revisedSourceKey,
+        firstSelectionKey,
+        secondSelectionKey,
+      ]).size,
+    ).toBe(6)
   })
 
   it('invalidates an upload companion cache entry when its fingerprint or page changes', () => {
@@ -216,5 +259,35 @@ describe('useLearnYourWay', () => {
     })
 
     expect(new Set([originalKey, newFingerprintKey, newPageKey]).size).toBe(3)
+  })
+
+  it('invalidates a curated companion when explicit V3 defaults change', () => {
+    const topic = cellularRespiration
+    const section = topic.sections[0]
+    const baseProfile: Parameters<typeof getSectionCompanionCacheKey>[2] = {
+      interest: 'basketball',
+      gradeLevel: 'Grade 10',
+      preferredLanguage: 'English',
+      learningGoals: ['Understand difficult material'],
+      startingSupport: 'balanced',
+      stuckSupport: 'different-explanation',
+    }
+    const keyFor = (profile: Parameters<typeof getSectionCompanionCacheKey>[2]) => getSectionCompanionCacheKey(
+      topic.id,
+      section,
+      profile,
+      'analogy',
+      {},
+    )
+
+    const keys = [
+      keyFor(baseProfile),
+      keyFor({ ...baseProfile, preferredLanguage: 'Arabic' }),
+      keyFor({ ...baseProfile, learningGoals: ['Prepare for an exam'] }),
+      keyFor({ ...baseProfile, startingSupport: 'guided' }),
+      keyFor({ ...baseProfile, stuckSupport: 'hint' }),
+    ]
+
+    expect(new Set(keys).size).toBe(keys.length)
   })
 })

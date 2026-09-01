@@ -1,10 +1,13 @@
 import katex from 'katex'
 import { AlertCircle, Loader2, Sparkles } from 'lucide-react'
-import { LearningCompanion } from './LearningCompanion'
-import { PreferenceSuggestionCard } from './PreferenceSuggestionCard'
+import { useMemo, useState } from 'react'
+import { TutorConversation } from './TutorConversation'
+import { useTutorSession } from '../hooks/useTutorSession'
+import type { TutorContext } from '../personalization/tutorTypes'
 import type { UseCompanionSessionResult } from '../hooks/useCompanionSession'
 import type { StudentProfile, UserBook } from '../types'
 import type { useLearnerModel } from '../hooks/useLearnerModel'
+import { canUseCloudForUserSelection } from '../services/sourceContext'
 
 export interface CompanionPanelProps extends UseCompanionSessionResult {
   book: UserBook
@@ -24,22 +27,146 @@ export function CompanionPanel({
   companionMode,
   isCompanionLoading,
   lensError,
+  cloudTutorAllowed,
+  setCloudTutorAllowed,
   setIsLensOpen,
-  setSelectedQuizOption,
-  quizSubmitted,
-  setQuizSubmitted,
-  quizRevealed,
-  setQuizRevealed,
   handwritingPrompt,
   setHandwritingPrompt,
   isHandwritingPromptOpen,
   setIsHandwritingPromptOpen,
   localOcrStatus,
-  companionQuiz,
+  crossSourceCandidates,
   runCompanion,
   handleManualPromptSubmit,
 }: CompanionPanelProps) {
-  const { recordHelpful, recordQuiz, acceptSuggestion, notNow, neverSuggest, pendingSuggestions } = learnerModel
+  const {
+    approvedPresentation,
+    recordHelpful,
+    recordTutorAttempt,
+    recordTutorHint,
+    recordTeachKoji,
+    hasCrossSourcePermission,
+    setCrossSourcePermission,
+  } = learnerModel
+  const [activeCrossSource, setActiveCrossSource] = useState<
+    (typeof crossSourceCandidates)[number] | null
+  >(null)
+  const crossSourceAllowed = Boolean(
+    activeSourceContext &&
+    activeCrossSource &&
+    hasCrossSourcePermission(
+      activeSourceContext.anchor,
+      activeCrossSource.anchor,
+    ),
+  )
+  const selectionCloudAllowed = activeSourceContext
+    ? canUseCloudForUserSelection(activeSourceContext, cloudTutorAllowed)
+    : false
+  const tutorContext = useMemo<TutorContext | null>(() => {
+    if (!activeSourceContext) return null
+    return {
+      sessionId: [
+        activeSourceContext.anchor.anchorId,
+        activeArtifact?.id ?? 'focused',
+        crossSourceAllowed ? activeCrossSource?.anchor.anchorId : 'one-source',
+      ].join('::'),
+      entryPoint: 'upload',
+      objective: `Understand the focused extract from ${activeSourceContext.anchor.sourceTitle}`,
+      excerpt: {
+        anchor: activeSourceContext.anchor,
+        text: activeSourceContext.body,
+      },
+      scope: activeSourceContext.selectionOnly ? 'selection' : 'section',
+      student: {
+        interest: profile.interest,
+        gradeLevel: profile.gradeLevel,
+        preferredLanguage: profile.preferredLanguage,
+        learningGoals: profile.learningGoals,
+        startingSupport: profile.startingSupport,
+        stuckSupport: profile.stuckSupport,
+        approvedPresentation,
+      },
+      cloudAllowed: selectionCloudAllowed,
+      secondaryExcerpts:
+        crossSourceAllowed && activeCrossSource
+          ? [{
+              anchor: activeCrossSource.anchor,
+              text: activeCrossSource.body,
+            }]
+          : undefined,
+      crossSourcePermissionId:
+        crossSourceAllowed && activeCrossSource
+          ? `approved:${activeCrossSource.anchor.anchorId}`
+          : undefined,
+    }
+  }, [
+    activeArtifact?.id,
+    activeCrossSource,
+    activeSourceContext,
+    approvedPresentation,
+    crossSourceAllowed,
+    profile,
+    selectionCloudAllowed,
+  ])
+  const tutorMode = activeArtifact?.mode ?? companionMode
+  const tutorSession = useTutorSession({
+    context: tutorContext,
+    seed: activeArtifact,
+    onAttempt: (attempt) => {
+      if (!activeSourceContext) return
+      recordTutorAttempt(activeSourceContext.anchor, tutorMode, {
+        phase: attempt.phase,
+        activityKind: attempt.activityKind,
+        correct: attempt.correct,
+        independent: attempt.independent,
+        hintsUsed: attempt.hintsUsed,
+        revealed: attempt.revealed,
+        skillTag: attempt.skillTag,
+        misconceptionTags: attempt.misconceptionTags,
+        sessionId: attempt.sessionId,
+        turnId: attempt.turnId,
+        responseSummary: attempt.responseSummary,
+        coverage: attempt.coverage,
+      })
+    },
+    onHint: (phase, revealed) => {
+      if (!activeSourceContext) return
+      recordTutorHint(
+        activeSourceContext.anchor,
+        tutorMode,
+        { phase, revealed },
+        revealed,
+      )
+    },
+    onIntent: (intent) => {
+      if (!activeSourceContext) return
+      const modes: Partial<Record<typeof intent, typeof tutorMode>> = {
+        hint: 'simpler',
+        'explain-differently': 'simpler',
+        'show-visually': 'another-example',
+        'another-example': 'another-example',
+        'step-by-step': 'step-by-step',
+        'test-me': 'test-me',
+      }
+      const mode = modes[intent]
+      if (mode) learnerModel.recordRefinement(activeSourceContext.anchor, mode)
+    },
+    onTeachKojiCheck: (check, turn) => {
+      if (!activeSourceContext) return
+      recordTeachKoji(activeSourceContext.anchor, tutorMode, {
+        phase: turn.phase,
+        correct: check.coverage === 'complete',
+        independent: false,
+        skillTag: turn.skillTags[0] ?? activeSourceContext.anchor.anchorLabel,
+        misconceptionTags: turn.misconceptionTags,
+        sessionId: tutorContext?.sessionId,
+        turnId: turn.id,
+        coverage: check.coverage,
+        sourceQuotes: [check.evidenceQuote],
+        responseSummary: turn.message.slice(0, 500),
+      })
+    },
+  })
 
   return (
     <div className="lc-card ubr-companion-inner">
@@ -163,61 +290,68 @@ export function CompanionPanel({
               )}
             </div>
           )}
-          <LearningCompanion
+          {!activeArtifact && lensError && (
+            <div className='ubr-lens-error' role='alert'>
+              <AlertCircle size={16} aria-hidden='true' />
+              <p>{lensError}</p>
+              <button type='button' onClick={() => void runCompanion(companionMode, true)}>
+                Try again
+              </button>
+            </div>
+          )}
+          <TutorConversation
+            session={tutorSession}
             sourceAnchor={activeSourceContext.anchor}
             interest={profile.interest}
-            mode={activeArtifact?.mode ?? companionMode}
-            title={activeArtifact?.title ?? 'Personalized support from this source'}
-            content={activeArtifact?.content ?? null}
-            limits={activeArtifact?.limitations ?? ''}
-            isLoading={isCompanionLoading}
-            error={lensError}
-            quiz={companionQuiz}
-            onAction={(mode) => void runCompanion(mode)}
-            onOutcome={(outcome) => {
+            startingSupport={profile.startingSupport}
+            stuckSupport={profile.stuckSupport}
+            cloudAllowed={selectionCloudAllowed}
+            onCloudAllowedChange={activeSourceContext.selectionOnly
+              ? (allowed) => {
+                  setCloudTutorAllowed(allowed)
+                  void runCompanion(
+                    companionMode,
+                    true,
+                    activeSourceContext.body,
+                    allowed,
+                  )
+                }
+              : undefined}
+            onOutcome={(helpful) => {
               recordHelpful(
                 activeSourceContext.anchor,
-                activeArtifact?.mode ?? companionMode,
-                outcome === 'successful',
+                tutorMode,
+                helpful,
               )
             }}
-            onSelectQuizOption={setSelectedQuizOption}
-            onSubmitQuiz={(optionId) => {
-              const selected = Number.parseInt(optionId, 10)
-              const activeQuiz = activeArtifact?.quiz
-              const score = activeQuiz && selected === activeQuiz.correctIndex ? 1 : 0
-              setSelectedQuizOption(optionId)
-              setQuizSubmitted(true)
-              setQuizRevealed(false)
-              recordQuiz(
-                activeSourceContext.anchor,
-                score,
-                1,
-                activeArtifact?.mode ?? companionMode,
-              )
-            }}
-            onRevealQuiz={() => {
-              if (!quizSubmitted && !quizRevealed) {
-                recordQuiz(
-                  activeSourceContext.anchor,
-                  0,
-                  1,
-                  activeArtifact?.mode ?? companionMode,
-                )
-              }
-              setQuizRevealed(true)
-            }}
-            onRetry={() => void runCompanion(companionMode, true)}
             onDismiss={() => setIsLensOpen(false)}
+            crossSourceCandidates={crossSourceCandidates.map((candidate) => ({
+              anchor: candidate.anchor,
+              text: candidate.body,
+            }))}
+            activeCrossSource={
+              activeCrossSource
+                ? { anchor: activeCrossSource.anchor, text: activeCrossSource.body }
+                : null
+            }
+            crossSourceAllowed={crossSourceAllowed}
+            onCrossSourceChange={(excerpt) => {
+              setActiveCrossSource(
+                crossSourceCandidates.find(
+                  (candidate) =>
+                    candidate.anchor.anchorId === excerpt?.anchor.anchorId,
+                ) ?? null,
+              )
+            }}
+            onCrossSourceAllowedChange={(allowed) => {
+              if (!activeSourceContext || !activeCrossSource) return
+              setCrossSourcePermission(
+                activeSourceContext.anchor,
+                activeCrossSource.anchor,
+                allowed,
+              )
+            }}
           />
-          {pendingSuggestions[0] && (
-            <PreferenceSuggestionCard
-              suggestion={pendingSuggestions[0]}
-              onApply={(suggestion) => acceptSuggestion(suggestion.id)}
-              onNotNow={(suggestion) => notNow(suggestion.id)}
-              onNeverSuggest={(suggestion) => neverSuggest(suggestion.id)}
-            />
-          )}
         </>
       )}
     </div>

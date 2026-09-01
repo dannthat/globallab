@@ -5,6 +5,7 @@ import {
 } from 'lucide-react'
 import {
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -13,7 +14,19 @@ import type {
   LearningOutcome,
   PersonalizationMode,
   PreferenceSuggestion,
+  ApprovedPresentationPreferences,
+  SourceExcerpt,
 } from '../personalization/types'
+import type {
+  TutorAttemptTelemetry,
+  TutorContext,
+  TutorPhase,
+  TutorSimulationSnapshot,
+  TutorTurn,
+  TutorUnderstandingCheck,
+  TutorMachineState,
+} from '../personalization/tutorTypes'
+import { SIMULATION_STATE_EVENT } from '../personalization/simulationProtocol'
 import { CalloutBox } from './CalloutBox'
 import { InteractiveDiagramBlock } from './InteractiveDiagramBlock'
 import {
@@ -21,10 +34,10 @@ import {
   TextHighlightToolbar,
   usePersistentTextHighlights,
 } from './KitabiSection'
-import { LearningCompanion } from './LearningCompanion'
-import { PreferenceSuggestionCard } from './PreferenceSuggestionCard'
+import { TutorConversation } from './TutorConversation'
+import { useTutorSession } from '../hooks/useTutorSession'
 import { SectionErrorBoundary } from './SectionErrorBoundary'
-import { hasInteractiveSimulation } from './simulations'
+import { getSimulationRegistration, hasInteractiveSimulation } from './simulations'
 
 interface TextbookSectionProps {
   topicId?: string
@@ -38,10 +51,24 @@ interface TextbookSectionProps {
   sectionIndex: number
   totalSections: number
   error?: string | null
-  onLearnYourWay: () => void
+  onLearnYourWay: (excerpt?: string) => void
   onRefine: (mode: PersonalizationMode) => void
   onOutcome: (mode: PersonalizationMode, outcome: LearningOutcome) => void
   onQuizResult: (mode: PersonalizationMode, score: number, total: number) => void
+  approvedPresentation?: ApprovedPresentationPreferences
+  onTutorAttempt?: (attempt: TutorAttemptTelemetry) => void
+  onTutorHint?: (phase: TutorPhase, revealed: boolean) => void
+  onTutorIntent?: (mode: PersonalizationMode) => void
+  onTeachKojiCheck?: (check: TutorUnderstandingCheck, turn: TutorTurn) => void
+  onPredictionCycleComplete?: (
+    cycle: TutorMachineState['predictionCycle'],
+  ) => void
+  crossSourceCandidates?: SourceExcerpt[]
+  isCrossSourceAllowed?: (secondary: SourceExcerpt) => boolean
+  onCrossSourcePermissionChange?: (
+    secondary: SourceExcerpt,
+    allowed: boolean,
+  ) => void
   onClearRewrite: () => void
   preferenceSuggestion?: PreferenceSuggestion | null
   onApplySuggestion: (suggestionId: string) => void
@@ -89,18 +116,18 @@ export function TextbookSection({
   totalSections,
   error = null,
   onLearnYourWay,
-  onRefine,
   onOutcome,
-  onQuizResult,
   onClearRewrite,
-  preferenceSuggestion = null,
-  onApplySuggestion,
-  onDeferSuggestion,
-  onNeverSuggest,
+  approvedPresentation = {},
+  onTutorAttempt,
+  onTutorHint,
+  onTutorIntent,
+  onTeachKojiCheck,
+  onPredictionCycleComplete,
+  crossSourceCandidates = [],
+  isCrossSourceAllowed,
+  onCrossSourcePermissionChange,
 }: TextbookSectionProps) {
-  const [selectedQuizOption, setSelectedQuizOption] = useState<string | null>(null)
-  const [quizSubmitted, setQuizSubmitted] = useState(false)
-  const [quizRevealed, setQuizRevealed] = useState(false)
   const canPersonalize = Boolean(profile)
   const orderedConcepts = extractOrderedConcepts(section.body)
   const sectionNumber = String(sectionIndex + 1).padStart(2, '0')
@@ -114,6 +141,42 @@ export function TextbookSection({
   const hasInteractiveVisual = Boolean(
     topicId && hasInteractiveSimulation(topicId, section.id),
   )
+  const simulationRegistration = topicId
+    ? getSimulationRegistration(topicId, section.id)
+    : null
+  const [liveSimulation, setLiveSimulation] =
+    useState<TutorSimulationSnapshot | null>(null)
+  const [activeCrossSource, setActiveCrossSource] =
+    useState<SourceExcerpt | null>(null)
+  const crossSourceAllowed = Boolean(
+    activeCrossSource && isCrossSourceAllowed?.(activeCrossSource),
+  )
+  useEffect(() => {
+    if (!simulationRegistration || typeof window === 'undefined') return
+    const listener = (event: Event) => {
+      const snapshot = (event as CustomEvent<TutorSimulationSnapshot>).detail
+      if (snapshot?.simulationId === simulationRegistration.simulationId) {
+        setLiveSimulation(snapshot)
+      }
+    }
+    window.addEventListener(SIMULATION_STATE_EVENT, listener)
+    return () => window.removeEventListener(SIMULATION_STATE_EVENT, listener)
+  }, [simulationRegistration])
+  const tutorSimulation = useMemo<TutorSimulationSnapshot | undefined>(() => {
+    if (!simulationRegistration || !topicId) return undefined
+    if (liveSimulation?.simulationId === simulationRegistration.simulationId) {
+      return liveSimulation
+    }
+    return {
+      simulationId: simulationRegistration.simulationId,
+      topicId,
+      sectionId: section.id,
+      label: simulationRegistration.label,
+      controls: simulationRegistration.initialControls,
+      outputs: simulationRegistration.initialOutputs,
+      updatedAt: new Date(0).toISOString(),
+    }
+  }, [liveSimulation, section.id, simulationRegistration, topicId])
   const visualKind = hasInteractiveVisual
     ? 'Interactive lab'
     : section.diagram
@@ -131,43 +194,89 @@ export function TextbookSection({
   } = usePersistentTextHighlights({
     topicId: topicId ?? topicTitle,
     sectionId: section.id,
-    onAskCompanion: () => onLearnYourWay(),
+    onAskCompanion: (selectedText: string) => onLearnYourWay(selectedText),
   })
 
-  useEffect(() => {
-    // oxlint-disable-next-line react/set-state-in-effect -- A new immutable artifact starts a new quiz attempt.
-    setSelectedQuizOption(null)
-    setQuizSubmitted(false)
-    setQuizRevealed(false)
-  }, [rewrite?.generatedAt, rewrite?.mode])
-
-  const quiz = rewrite?.quiz
-  const quizOptions = quiz?.options.map((label, index) => ({
-    id: String(index),
-    label,
-  }))
-  const selectedQuizIndex =
-    selectedQuizOption === null ? -1 : Number.parseInt(selectedQuizOption, 10)
-  const quizScore =
-    quiz && selectedQuizIndex === quiz.correctIndex ? 1 : 0
-  const companionQuiz = quiz
-    ? {
-        question: quiz.question,
-        options: quizOptions ?? [],
-        selectedOptionId: selectedQuizOption,
-        submitted: quizSubmitted,
-        revealed: quizRevealed,
-        correctOptionId: String(quiz.correctIndex),
-        feedback:
-          quizSubmitted || quizRevealed
-            ? quiz.explanation + ' Source evidence: â€œ' + quiz.evidence + 'â€'
-            : null,
-        outcome:
-          quizSubmitted || quizRevealed
-            ? { score: quizScore, total: 1, ratio: quizScore }
-            : null,
+  const tutorContext = useMemo<TutorContext | null>(() => {
+    if (!rewrite || !profile) return null
+    return {
+      sessionId: [
+        rewrite.source.sourceId,
+        rewrite.source.sourceRevision ?? rewrite.source.sourceFingerprint ?? 'current',
+        rewrite.source.anchorId,
+        rewrite.scope ?? 'section',
+        rewrite.generatedAt,
+      ].join('::'),
+      entryPoint: rewrite.scope === 'selection' ? 'selection' : 'section',
+      objective:
+        rewrite.scope === 'selection'
+          ? `Understand the selected text from ${section.heading}`
+          : `Understand ${section.heading}`,
+      excerpt:
+        rewrite.excerpt ?? {
+          anchor: rewrite.source,
+          text: section.body,
+        },
+      scope: rewrite.scope ?? 'section',
+      topicTitle,
+      student: {
+        interest: profile.interest,
+        gradeLevel: profile.gradeLevel,
+        preferredLanguage: profile.preferredLanguage,
+        learningGoals: profile.learningGoals,
+        startingSupport: profile.startingSupport,
+        stuckSupport: profile.stuckSupport,
+        approvedPresentation,
+      },
+      cloudAllowed: true,
+      simulation: tutorSimulation,
+      secondaryExcerpts:
+        activeCrossSource && crossSourceAllowed ? [activeCrossSource] : undefined,
+      crossSourcePermissionId:
+        activeCrossSource && crossSourceAllowed
+          ? `approved:${activeCrossSource.anchor.anchorId}`
+          : undefined,
+    }
+  }, [
+    approvedPresentation,
+    activeCrossSource,
+    crossSourceAllowed,
+    profile,
+    rewrite,
+    section.body,
+    section.heading,
+    topicTitle,
+    tutorSimulation,
+  ])
+  const tutorSession = useTutorSession({
+    context: tutorContext,
+    seed: rewrite
+      ? {
+          id: `${rewrite.sectionId}::${rewrite.generatedAt}`,
+          title: rewrite.title,
+          content: rewrite.content,
+          limitations: rewrite.analogyLimits,
+          provider: rewrite.provider,
+          quiz: rewrite.quiz ?? undefined,
+        }
+      : null,
+    onAttempt: onTutorAttempt,
+    onHint: onTutorHint,
+    onIntent: (intent) => {
+      const mode: Partial<Record<typeof intent, PersonalizationMode>> = {
+        hint: 'simpler',
+        'explain-differently': 'simpler',
+        'show-visually': 'another-example',
+        'another-example': 'another-example',
+        'step-by-step': 'step-by-step',
+        'test-me': 'test-me',
       }
-    : null
+      const refinement = mode[intent]
+      if (refinement) onTutorIntent?.(refinement)
+    },
+    onTeachKojiCheck,
+    onPredictionCycleComplete,
+  })
 
   const equation = equationHtml ? (
     <section
@@ -221,7 +330,7 @@ export function TextbookSection({
         type="button"
         className="tbp-bookmark-strip gl-bookmark-pulse"
         disabled={isLoading}
-        onClick={onLearnYourWay}
+        onClick={() => onLearnYourWay()}
       >
         {isLoading ? (
           <LoaderCircle
@@ -257,7 +366,7 @@ export function TextbookSection({
         aria-labelledby={`${section.id}-heading`}
       >
         <div className="tbp-reading-inner">
-          {/* Watermark section number â€” parallax target */}
+          {/* Watermark section number — parallax target */}
           <span
             className="tbp-watermark"
             aria-hidden="true"
@@ -428,64 +537,41 @@ export function TextbookSection({
               )}
           </div>
 
-          {/* Preference suggestion (no companion open) */}
-          {preferenceSuggestion && !rewrite && (
-            <PreferenceSuggestionCard
-              suggestion={preferenceSuggestion}
-              onApply={(suggestion) => onApplySuggestion(suggestion.id)}
-              onNotNow={(suggestion) => onDeferSuggestion(suggestion.id)}
-              onNeverSuggest={(suggestion) => onNeverSuggest(suggestion.id)}
-            />
-          )}
         </div>
 
       </section>
 
-      {/* â”€â”€ Companion panel â€” slides in from right â”€â”€ */}
+      {/* ── Companion panel — slides in from right ── */}
       {rewrite && (
         <aside
           className="tbp-companion-panel tbp-companion-panel--open gl-companion-open"
           aria-label="Personalized learning companion"
         >
-          <LearningCompanion
+          <TutorConversation
+            session={tutorSession}
             sourceAnchor={rewrite.source}
             interest={rewrite.interest}
-            mode={rewrite.mode}
-            title={rewrite.title}
-            content={rewrite.content}
-            limits={rewrite.analogyLimits}
-            isLoading={isLoading}
-            error={error}
-            quiz={companionQuiz}
-            onAction={onRefine}
-            onOutcome={(outcome) => onOutcome(rewrite.mode, outcome)}
-            onSelectQuizOption={setSelectedQuizOption}
-            onSubmitQuiz={(optionId) => {
-              const selected = Number.parseInt(optionId, 10)
-              const score =
-                rewrite.quiz && selected === rewrite.quiz.correctIndex ? 1 : 0
-              setSelectedQuizOption(optionId)
-              setQuizSubmitted(true)
-              setQuizRevealed(false)
-              onQuizResult(rewrite.mode, score, 1)
-            }}
-            onRevealQuiz={() => {
-              if (!quizSubmitted && !quizRevealed) {
-                onQuizResult(rewrite.mode, 0, 1)
-              }
-              setQuizRevealed(true)
-            }}
-            onRetry={() => onRefine(rewrite.mode)}
+            startingSupport={profile?.startingSupport}
+            stuckSupport={profile?.stuckSupport}
+            cloudAllowed={true}
+            onOutcome={(helpful) =>
+              onOutcome(
+                rewrite.mode,
+                helpful ? 'successful' : 'needs-review',
+              )
+            }
             onDismiss={onClearRewrite}
+            crossSourceCandidates={crossSourceCandidates}
+            activeCrossSource={activeCrossSource}
+            crossSourceAllowed={crossSourceAllowed}
+            onCrossSourceChange={setActiveCrossSource}
+            onCrossSourceAllowedChange={(allowed) => {
+              if (activeCrossSource) {
+                onCrossSourcePermissionChange?.(activeCrossSource, allowed)
+              }
+            }}
+            hasSimulation={Boolean(tutorSimulation)}
           />
-          {preferenceSuggestion && (
-            <PreferenceSuggestionCard
-              suggestion={preferenceSuggestion}
-              onApply={(suggestion) => onApplySuggestion(suggestion.id)}
-              onNotNow={(suggestion) => onDeferSuggestion(suggestion.id)}
-              onNeverSuggest={(suggestion) => onNeverSuggest(suggestion.id)}
-            />
-          )}
         </aside>
       )}
     </article>

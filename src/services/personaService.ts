@@ -63,6 +63,7 @@ export interface RewriteSectionOptions {
   mode?: PersonalizationMode
   approvedPresentation?: ApprovedPresentationPreferences
   excerpt?: SourceExcerpt
+  isUserSelection?: boolean
   source?: {
     id: string
     title: string
@@ -137,14 +138,22 @@ function companionRequest(
 ) {
   const interest = profile.interest.trim().replace(/\s+/g, ' ') || 'neutral'
   const mode = options.mode ?? 'analogy'
+  const isExactSelection = Boolean(
+    options.isUserSelection && options.excerpt?.text.trim(),
+  )
   return {
     excerpt: sectionExcerpt(section, options),
+    scope: isExactSelection ? ('selection' as const) : ('section' as const),
     mode,
     profile: { ...profile, interest },
     approvedPresentation: options.approvedPresentation ?? {},
     // The interest lens is independent from the requested presentation format.
     // Keep a vetted bridge available when a local refinement is requested too.
-    presetAnalogy: presetAnalogy(section, interest),
+    // When the student selected a specific passage, skip the preset — the AI
+    // must explain exactly what was highlighted, not the whole-section analogy.
+    presetAnalogy: isExactSelection
+      ? undefined
+      : presetAnalogy(section, interest),
     signal: options.signal,
   }
 }
@@ -183,6 +192,8 @@ export async function rewriteSection(
         : `${artifact.title}: ${artifact.content.slice(0, 180)}`,
     quiz: artifact.quiz ?? null,
     source: artifact.excerpt.anchor,
+    excerpt: artifact.excerpt,
+    scope: artifact.scope,
     interest,
     isMock: artifact.provider === 'local',
     provider: artifact.provider,

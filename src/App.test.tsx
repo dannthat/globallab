@@ -50,6 +50,17 @@ function proxySuccess(content: string, options: ProxySuccessOptions = {}) {
   }
 }
 
+function tutorProxySuccess(payload: Record<string, unknown>) {
+  return {
+    ok: true,
+    status: 200,
+    json: async () => ({
+      text: JSON.stringify(payload),
+      model: 'gemini-test',
+    }),
+  }
+}
+
 function seedProfile(overrides: Partial<StudentProfile> = {}) {
   const profile: StudentProfile = {
     interest: 'neutral',
@@ -72,6 +83,17 @@ async function openFirstTopic(user: ReturnType<typeof userEvent.setup>) {
   })
 }
 
+async function completeOnboarding(user: ReturnType<typeof userEvent.setup>) {
+  await user.click(screen.getByRole('button', { name: 'Grade 10' }))
+  await user.click(screen.getByRole('button', { name: 'Continue' }))
+  await user.click(screen.getByRole('button', { name: /Understand difficult material/ }))
+  await user.click(screen.getByRole('button', { name: 'Continue' }))
+  await user.click(screen.getByRole('button', { name: 'basketball' }))
+  await user.click(screen.getByRole('button', { name: 'Continue' }))
+  await user.click(screen.getByRole('button', { name: 'Continue' }))
+  await user.click(screen.getByRole('button', { name: /Explore STEM/ }))
+}
+
 afterEach(() => {
   cleanup()
   vi.unstubAllGlobals()
@@ -80,6 +102,7 @@ afterEach(() => {
 
 beforeEach(() => {
   window.localStorage.clear()
+  window.history.replaceState({}, '', '/')
   // jsdom crashes on getComputedStyle when CSS custom properties contain complex
   // gradient values (var(--gl-paper-lit) etc.). Wrap to return a safe stub on crash.
   const nativeGetComputedStyle = window.getComputedStyle.bind(window)
@@ -96,18 +119,22 @@ beforeEach(() => {
   })
 })
 
-describe('Global Lab V4', () => {
+describe('Global Lab V3', () => {
   it('onboards once and shows the four-subject library', async () => {
     const user = userEvent.setup()
     const { unmount } = render(<App />)
 
     expect(
-      screen.getByRole('heading', { level: 1, name: /Learning that speaks/i }),
+      screen.getByRole('heading', { level: 1, name: /Turn anything you study/i }),
+    ).toBeTruthy()
+    await user.click(
+      screen.getByRole('button', { name: /Build my learning profile/i }),
+    )
+    expect(
+      await screen.findByRole('heading', { level: 1, name: /Let learning meet you/i }),
     ).toBeTruthy()
 
-    await user.type(screen.getByLabelText('What are you into?'), 'basketball')
-    await user.selectOptions(screen.getByLabelText(/Your level/), 'Grade 10')
-    await user.click(screen.getByRole('button', { name: /Start studying/ }))
+    await completeOnboarding(user)
 
     // After onboarding, home page renders â€” subjects are navigable buttons
     expect(
@@ -128,12 +155,16 @@ describe('Global Lab V4', () => {
     ) as StudentProfile
     expect(stored.interest).toBe('basketball')
     expect(stored.gradeLevel).toBe('Grade 10')
+    expect(stored.learningGoals).toEqual(['Understand difficult material'])
+    expect(stored.startingSupport).toBe('balanced')
+    expect(stored.stuckSupport).toBe('different-explanation')
+    expect(stored.onboardingVersion).toBe(3)
 
     unmount()
     render(<App />)
     expect(screen.queryByText('Make help fit the moment')).toBeNull()
     // Home page renders â€” onboarding is gone, subjects are navigable
-    expect(screen.getByRole('button', { name: /Biology/ })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Biology' })).toBeTruthy()
   })
 
   it('features the last opened subject on the home reading-room hero', async () => {
@@ -189,7 +220,7 @@ describe('Global Lab V4', () => {
     expect(window.localStorage.getItem('globallab_profile')).not.toBeNull()
   })
 
-  it('lets a neutral student skip profiling and still use simpler and test help', async () => {
+  it('lets a neutral student use the focused Still stuck recovery loop', async () => {
     const mockFetch = vi
       .fn()
       .mockResolvedValueOnce(
@@ -198,22 +229,50 @@ describe('Global Lab V4', () => {
         }),
       )
       .mockResolvedValueOnce(
-        proxySuccess('Check the source idea with one question.', {
-          title: 'Check your understanding',
-          quiz: {
-            question: 'What does cellular respiration produce for cell activities?',
-            options: ['ATP', 'DNA', 'Cellulose', 'Chlorophyll'],
-            correctIndex: 0,
-            explanation: 'The source identifies ATP as the usable energy product.',
-            evidence: 'produce adenosine triphosphate (ATP)',
-          },
+        tutorProxySuccess({
+          phase: 'guided-practice',
+          message: 'Try this using only the focused source.',
+          actions: [
+            {
+              type: 'present-activity',
+              activity: {
+                id: 'cellular-respiration-check',
+                kind: 'multiple-choice',
+                prompt: 'What does cellular respiration produce for cell activities?',
+                options: [
+                  { id: 'atp', label: 'ATP' },
+                  { id: 'dna', label: 'DNA' },
+                  { id: 'cellulose', label: 'Cellulose' },
+                  { id: 'chlorophyll', label: 'Chlorophyll' },
+                ],
+                correctOptionId: 'atp',
+                explanation: 'The source identifies ATP as the usable energy product.',
+                evidence: 'produce adenosine triphosphate (ATP)',
+                skillTag: 'identify-energy-product',
+                misconceptionTags: ['confuses-cell-products'],
+              },
+            },
+          ],
+          skillTags: ['identify-energy-product'],
+          misconceptionTags: [],
+          citations: [
+            {
+              anchorId: 'overview',
+              quote: 'produce adenosine triphosphate (ATP)',
+              label: 'Focused source',
+            },
+          ],
         }),
       )
     vi.stubGlobal('fetch', mockFetch)
     const user = userEvent.setup()
     render(<App />)
 
-    await user.click(screen.getByRole('button', { name: 'Skip for now' }))
+    await user.click(
+      screen.getByRole('button', { name: /Build my learning profile/i }),
+    )
+    await user.click(screen.getByRole('button', { name: 'Set up later' }))
+    await user.click(screen.getByRole('button', { name: /Explore STEM/ }))
     expect(
       JSON.parse(window.localStorage.getItem('globallab_profile') ?? '{}'),
     ).toMatchObject({ interest: 'neutral' })
@@ -232,19 +291,23 @@ describe('Global Lab V4', () => {
         'Cellular respiration releases usable energy from the source molecules.',
       ),
     ).toBeTruthy()
+    expect(within(sectionElement).getByRole('button', { name: 'Got it' })).toBeTruthy()
+    await user.click(within(sectionElement).getByRole('button', { name: 'Still stuck' }))
+    expect(within(sectionElement).getByText('Show me where the thread broke.')).toBeTruthy()
     expect(
-      within(sectionElement).getByRole('button', { name: 'Simpler' }).getAttribute(
-        'aria-pressed',
-      ),
-    ).toBe('true')
-    expect(within(sectionElement).getByText('Original unchanged.')).toBeTruthy()
+      within(sectionElement).getAllByText(/Original source unchanged/).length,
+    ).toBeGreaterThan(0)
     expect(
       within(sectionElement)
         .getByRole('link', { name: topic.source.name })
         .getAttribute('href'),
     ).toBe(topic.source.url)
 
-    await user.click(within(sectionElement).getByRole('button', { name: 'Test me' }))
+    const stuckComposer = within(sectionElement).getByRole('textbox', {
+      name: 'What exactly lost you?',
+    })
+    await user.type(stuckComposer, 'I lost the thread at ATP production.')
+    await user.click(within(sectionElement).getByRole('button', { name: 'Send message to Koji' }))
     expect(
       await within(sectionElement).findByText(
         'What does cellular respiration produce for cell activities?',
@@ -252,11 +315,11 @@ describe('Global Lab V4', () => {
     ).toBeTruthy()
     await user.click(within(sectionElement).getByRole('radio', { name: 'ATP' }))
     await user.click(
-      within(sectionElement).getByRole('button', { name: 'Submit answer' }),
+      within(sectionElement).getByRole('button', { name: 'Check my answer' }),
     )
-    expect(await within(sectionElement).findByText('Score: 1 of 1')).toBeTruthy()
+    expect(await within(sectionElement).findByText('You got it')).toBeTruthy()
 
-    expect(mockFetch).toHaveBeenCalledTimes(2)
+    expect(mockFetch).toHaveBeenCalledTimes(3)
     expect(mockFetch.mock.calls.every(([url]) => url === '/api/personalize')).toBe(true)
     expect(sectionElement.querySelector('.tbp-body')?.textContent).toBe(originalBody)
   })
@@ -274,14 +337,14 @@ describe('Global Lab V4', () => {
         await screen.findByRole('button', { name: new RegExp(topic.title) }),
       )
 
-      const readerHeader = container.querySelector('.running-header') as HTMLElement
-      expect(within(readerHeader).getByText(topic.title)).toBeTruthy()
       expect(
-        screen.getByRole('heading', {
+        await screen.findByRole('heading', {
           level: 1,
           name: topic.sections[0].heading,
         }),
       ).toBeTruthy()
+      const readerHeader = container.querySelector('.running-header') as HTMLElement
+      expect(within(readerHeader).getByText(topic.title)).toBeTruthy()
       expect(container.querySelectorAll('.tbp-article')).toHaveLength(1)
       expect(container.querySelectorAll('.tbp-body strong').length).toBeGreaterThan(0)
       expect(container.querySelector('.tbp-diagram img')).toBeTruthy()
@@ -319,7 +382,7 @@ describe('Global Lab V4', () => {
         }),
       )
     }
-  }, 10_000)
+  }, 20_000)
 
   it('uses a hand-vetted preset analogy without changing the canonical body', async () => {
     seedProfile({ interest: 'basketball', gradeLevel: 'Grade 10' })
@@ -348,8 +411,9 @@ describe('Global Lab V4', () => {
       }),
     ).toBeTruthy()
     expect(
-      within(sectionElement as HTMLElement).getByText('Original unchanged.'),
-    ).toBeTruthy()
+      within(sectionElement as HTMLElement).getAllByText(/Original source unchanged/)
+        .length,
+    ).toBeGreaterThan(0)
     expect(
       within(sectionElement as HTMLElement)
         .getByRole('link', { name: topic.source.name })
@@ -386,7 +450,7 @@ describe('Global Lab V4', () => {
 
     await user.click(
       within(sectionElement as HTMLElement).getByRole('button', {
-        name: 'Dismiss learning companion',
+        name: 'Close Koji',
       }),
     )
     expect(

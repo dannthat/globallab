@@ -4,7 +4,7 @@ import type { IncomingMessage, ServerResponse } from 'node:http'
 import { defineConfig, loadEnv, type Plugin } from 'vite'
 
 const MAX_PERSONALIZATION_BODY_BYTES = 16 * 1024 * 1024
-const PERSONALIZATION_TIMEOUT_MS = 30_000
+const PERSONALIZATION_TIMEOUT_MS = 40_000
 
 interface PersonalizationProxyRequest {
   prompt?: unknown
@@ -123,7 +123,7 @@ function personalizationProxy(apiKey: string, model: string): Plugin {
               contents: [{ parts }],
               generationConfig: {
                 temperature: 0.2,
-                maxOutputTokens: 2000,
+                maxOutputTokens: 2500,
                 responseMimeType: 'application/json',
               },
             }),

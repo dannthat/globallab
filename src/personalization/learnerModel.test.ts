@@ -69,7 +69,7 @@ function buildSimplerSuggestion() {
 describe('learner model persistence', () => {
   it('uses a versioned runtime-validated state and safely resets invalid data', () => {
     const initial = createLearnerModelState(NOW)
-    expect(initial.version).toBe(1)
+    expect(initial.version).toBe(2)
     expect(decodeLearnerModel(JSON.stringify(initial), LATER)).toEqual(initial)
 
     const invalid = JSON.stringify({ ...initial, approvedPresentation: { detail: 42 } })

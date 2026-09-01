@@ -30,9 +30,26 @@ export interface SourceInlineData {
 export interface UserSourceContext {
   body: string
   anchor: SourceAnchor
+  /** True only for text the student explicitly selected or typed for Koji. */
+  selectionOnly?: boolean
   inlineData?: SourceInlineData
   analysisType?: 'digital' | 'printed-ocr' | 'vision-latex'
   parsedMath?: ParsedMathSource
+}
+
+export function canUseCloudForUserSelection(
+  context: UserSourceContext,
+  cloudConsent: boolean,
+) {
+  const characters = context.body.trim().length
+  return (
+    cloudConsent &&
+    context.anchor.sourceKind === 'upload' &&
+    context.selectionOnly === true &&
+    !context.inlineData &&
+    characters > 0 &&
+    characters <= 4_000
+  )
 }
 
 export interface ExtractUserSourceContextInput {

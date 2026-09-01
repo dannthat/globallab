@@ -8,17 +8,18 @@ import type {
 } from '../personalization/types'
 import { createLearningCompanion } from '../services/learningCompanionService'
 import {
+  canUseCloudForUserSelection,
   extractUserSourceContext,
   type UserSourceContext,
 } from '../services/sourceContext'
-import { parseMathVision, type ParsedMathSource } from '../services/mathVisionParser'
 import { recognizeLocalImage } from '../services/localOcr'
 import { preferredCompanionMode } from '../hooks/useLearnYourWay'
 import { sourceAnchorKey } from '../personalization/learnerModel'
 import type { useLearnerModel } from './useLearnerModel'
 
-export const UPLOAD_COMPANION_CACHE_KEY = 'gl_upload_learning_companions_v1'
+export const UPLOAD_COMPANION_CACHE_KEY = 'gl_upload_learning_companions_v2'
 export const MAX_CACHED_UPLOAD_COMPANIONS = 60
+export const CLOUD_TUTOR_CONSENT_KEY = 'gl_upload_cloud_tutor_consent_v1'
 
 export interface StoredUploadCompanion {
   key: string
@@ -47,19 +48,33 @@ export function preferenceSignature(preferences: ApprovedPresentationPreferences
   ].join(':')
 }
 
+function studentProfileSignature(profile: StudentProfile) {
+  return [
+    profile.gradeLevel ?? 'unspecified',
+    profile.preferredLanguage ?? 'English',
+    [...(profile.learningGoals ?? [])].sort().join(','),
+    profile.startingSupport ?? 'balanced',
+    profile.stuckSupport ?? 'different-explanation',
+  ]
+    .map((part) => encodeURIComponent(part))
+    .join(':')
+}
+
 export function uploadCompanionKey(
   context: UserSourceContext,
   profile: StudentProfile,
   mode: PersonalizationMode,
   preferences: ApprovedPresentationPreferences,
+  cloudEnabled = false,
 ) {
   return [
     sourceAnchorKey(context.anchor),
     encodeURIComponent(normalizeInterest(profile.interest)),
-    encodeURIComponent(profile.gradeLevel ?? 'unspecified'),
+    studentProfileSignature(profile),
     mode,
     preferenceSignature(preferences),
     textHash(context.body),
+    cloudEnabled ? 'cloud' : 'local',
   ].join('::')
 }
 
@@ -129,6 +144,9 @@ export interface UseCompanionSessionResult {
   setIsHandwritingPromptOpen: (open: boolean) => void
   companionCache: StoredUploadCompanion[]
   localOcrStatus: string | null
+  crossSourceCandidates: UserSourceContext[]
+  cloudTutorAllowed: boolean
+  setCloudTutorAllowed: (allowed: boolean) => void
   companionQuiz: {
     question: string
     options: Array<{ id: string; label: string }>
@@ -139,7 +157,12 @@ export interface UseCompanionSessionResult {
     feedback: string | null
     outcome: { score: number; total: number; ratio: number } | null
   } | null
-  runCompanion: (requestedMode?: PersonalizationMode, force?: boolean) => Promise<void>
+  runCompanion: (
+    requestedMode?: PersonalizationMode,
+    force?: boolean,
+    selectedText?: string,
+    cloudOverride?: boolean,
+  ) => Promise<void>
   handleManualPromptSubmit: () => Promise<void>
 }
 
@@ -160,6 +183,17 @@ export function useCompanionSession({
   )
   const [isCompanionLoading, setIsCompanionLoading] = useState(false)
   const [localOcrStatus, setLocalOcrStatus] = useState<string | null>(null)
+  const [crossSourceCandidates, setCrossSourceCandidates] = useState<
+    UserSourceContext[]
+  >([])
+  const [cloudTutorAllowed, setCloudTutorAllowedState] = useState(() => {
+    if (typeof window === 'undefined') return false
+    try {
+      return window.localStorage.getItem(CLOUD_TUTOR_CONSENT_KEY) === '1'
+    } catch {
+      return false
+    }
+  })
   const [lensError, setLensError] = useState<string | null>(null)
   const [isLensOpen, setIsLensOpen] = useState(false)
   const [selectedQuizOption, setSelectedQuizOption] = useState<string | null>(null)
@@ -172,6 +206,16 @@ export function useCompanionSession({
   )
   const companionControllerRef = useRef<AbortController | null>(null)
 
+  const setCloudTutorAllowed = useCallback((allowed: boolean) => {
+    setCloudTutorAllowedState(allowed)
+    if (typeof window === 'undefined') return
+    try {
+      window.localStorage.setItem(CLOUD_TUTOR_CONSENT_KEY, allowed ? '1' : '0')
+    } catch {
+      // Consent remains active for this session when storage is unavailable.
+    }
+  }, [])
+
   useEffect(() => {
     companionControllerRef.current?.abort()
     // oxlint-disable-next-line react/set-state-in-effect -- Changing source (book or page) invalidates every derived companion state atomically.
@@ -179,6 +223,7 @@ export function useCompanionSession({
     setActiveSourceContext(null)
     setIsCompanionLoading(false)
     setLocalOcrStatus(null)
+    setCrossSourceCandidates([])
     setLensError(null)
     setSelectedQuizOption(null)
     setQuizSubmitted(false)
@@ -192,6 +237,8 @@ export function useCompanionSession({
   const runCompanion = useCallback(async (
     requestedMode?: PersonalizationMode,
     force = false,
+    selectedText?: string,
+    cloudOverride?: boolean,
   ) => {
     setIsLensOpen(true)
     setLensError(null)
@@ -204,6 +251,7 @@ export function useCompanionSession({
       approvedPresentation,
       profile.interest,
     )
+    const cloudConsent = cloudOverride ?? cloudTutorAllowed
     if (requestedMode && activeArtifact) {
       recordRefinement(activeArtifact.excerpt.anchor, mode)
     }
@@ -226,66 +274,48 @@ export function useCompanionSession({
       let contextForCompanion: UserSourceContext = {
         body: context.body,
         anchor: context.anchor,
+        selectionOnly: false,
       }
-      if (context.inlineData) {
+      const selection = selectedText?.replace(/\s+/g, ' ').trim().slice(0, 4_000) ?? ''
+      if (selection) {
+        contextForCompanion = {
+          body: selection,
+          anchor: {
+            ...context.anchor,
+            anchorId: `${context.anchor.anchorId}::selection:${textHash(selection)}`,
+            anchorLabel: `Selected text on ${context.anchor.anchorLabel}`,
+          },
+          analysisType: 'digital',
+          selectionOnly: true,
+        }
+        setLocalOcrStatus(null)
+      } else if (context.inlineData) {
         if (context.inlineData.mimeType !== 'image/jpeg') {
           throw new Error(
             'Audio and video Learn Your Way analysis is not enabled yet. The original media remains unchanged.',
           )
         }
-        setLocalOcrStatus('Analyzing document with Math Vision…')
-        let parsedMath: ParsedMathSource | undefined
-        try {
-          parsedMath = await parseMathVision(context.inlineData, {
-            signal: controller.signal,
-          })
-        } catch {
-          // Fallback to local OCR if vision endpoint is unconfigured or offline
+        setLocalOcrStatus(
+          'OCR is starting locally. The focused page image stays in this browser.',
+        )
+        const extractedText = await recognizeLocalImage(context.inlineData, {
+          signal: controller.signal,
+          onProgress: ({ status, progress }) => {
+            setLocalOcrStatus(
+              `Local OCR: ${status} (${Math.round(progress * 100)}%). The image stays in this browser.`,
+            )
+          },
+        })
+        if (controller.signal.aborted) return
+        contextForCompanion = {
+          body: extractedText,
+          anchor: context.anchor,
+          analysisType: 'printed-ocr',
+          selectionOnly: false,
         }
-
-        if (parsedMath && (parsedMath.theoremLatex || parsedMath.stepsLatex.length > 0)) {
-          const bodyText = [
-            `Topic: ${parsedMath.topic}`,
-            parsedMath.theoremLatex ? `Theorem: ${parsedMath.theoremLatex}` : '',
-            parsedMath.stepsLatex.length > 0
-              ? `Proof Steps:\n${parsedMath.stepsLatex.map((s, i) => `${i + 1}. ${s}`).join('\n')}`
-              : '',
-            `Summary: ${parsedMath.plainSummary}`,
-          ]
-            .filter(Boolean)
-            .join('\n\n')
-
-          contextForCompanion = {
-            body: bodyText,
-            anchor: context.anchor,
-            analysisType: 'vision-latex',
-            parsedMath,
-          }
-          setLocalOcrStatus(
-            'Math Vision extracted the mathematical proof. Generating personalized help…',
-          )
-        } else {
-          setLocalOcrStatus(
-            'OCR is starting locally. The image stays in this browser.',
-          )
-          const extractedText = await recognizeLocalImage(context.inlineData, {
-            signal: controller.signal,
-            onProgress: ({ status, progress }) => {
-              setLocalOcrStatus(
-                `Local OCR: ${status} (${Math.round(progress * 100)}%). The image stays in this browser.`,
-              )
-            },
-          })
-          if (controller.signal.aborted) return
-          contextForCompanion = {
-            body: extractedText,
-            anchor: context.anchor,
-            analysisType: 'printed-ocr',
-          }
-          setLocalOcrStatus(
-            'OCR and Learn Your Way ran locally. No image or extracted text left this browser.',
-          )
-        }
+        setLocalOcrStatus(
+          'OCR and page-wide help ran locally. Select exact text to use cloud Koji.',
+        )
       } else {
         contextForCompanion.analysisType = 'digital'
         setLocalOcrStatus(
@@ -294,11 +324,41 @@ export function useCompanionSession({
       }
       setActiveSourceContext(contextForCompanion)
 
+      const adjacentPage = focusedPage % 2 === 1 ? focusedPage + 1 : focusedPage - 1
+      const canLoadAdjacent =
+        adjacentPage >= 1 &&
+        (previewKind !== 'pdf' || adjacentPage <= (pdfDoc?.numPages ?? 0))
+      if (canLoadAdjacent && !selection) {
+        try {
+          const adjacent = await extractUserSourceContext({
+            book,
+            stored: storedSource,
+            previewKind: previewKind as any,
+            pageNumber: adjacentPage,
+            pdfDocument: pdfDoc,
+          })
+          if (
+            !controller.signal.aborted &&
+            !adjacent.inlineData &&
+            adjacent.body.trim()
+          ) {
+            setCrossSourceCandidates([adjacent])
+          }
+        } catch {
+          // A comparison source is optional; the focused tutor remains available.
+        }
+      }
+
+      const cloudEnabledForContext = canUseCloudForUserSelection(
+        contextForCompanion,
+        cloudConsent,
+      )
       const cacheKey = uploadCompanionKey(
         contextForCompanion,
         profile,
         mode,
         approvedPresentation,
+        cloudEnabledForContext,
       )
       const cached = !force
         ? companionCache.find((entry) => entry.key === cacheKey)
@@ -308,16 +368,16 @@ export function useCompanionSession({
         return
       }
 
-      const isVisionMath = Boolean(contextForCompanion.parsedMath)
       const artifact = await createLearningCompanion({
         excerpt: {
           anchor: contextForCompanion.anchor,
           text: contextForCompanion.body,
         },
+        scope: selection ? 'selection' : 'section',
         mode,
         profile,
         approvedPresentation,
-        localOnly: !isVisionMath,
+        localOnly: !cloudEnabledForContext,
         signal: controller.signal,
       })
       if (controller.signal.aborted) return
@@ -359,6 +419,7 @@ export function useCompanionSession({
     approvedPresentation,
     book,
     companionCache,
+    cloudTutorAllowed,
     focusedPage,
     pdfDoc,
     previewKind,
@@ -380,6 +441,7 @@ export function useCompanionSession({
       ).slice(0, 160)
       const contextForCompanion: UserSourceContext = {
         body: prompt,
+        selectionOnly: true,
         anchor: {
           sourceId: book.id,
           sourceKind: 'upload',
@@ -399,7 +461,11 @@ export function useCompanionSession({
         mode: companionMode,
         profile,
         approvedPresentation,
-        localOnly: true,
+        localOnly: !canUseCloudForUserSelection(
+          contextForCompanion,
+          cloudTutorAllowed,
+        ),
+        scope: 'selection',
       })
       setActiveArtifact(artifact)
     } catch (cause) {
@@ -411,7 +477,7 @@ export function useCompanionSession({
     } finally {
       setIsCompanionLoading(false)
     }
-  }, [approvedPresentation, book, companionMode, focusedPage, handwritingPrompt, profile])
+  }, [approvedPresentation, book, cloudTutorAllowed, companionMode, focusedPage, handwritingPrompt, profile])
 
   useEffect(() => {
     // oxlint-disable-next-line react/set-state-in-effect -- Each generated artifact owns a fresh quiz attempt.
@@ -462,6 +528,9 @@ export function useCompanionSession({
     setIsHandwritingPromptOpen,
     companionCache,
     localOcrStatus,
+    crossSourceCandidates,
+    cloudTutorAllowed,
+    setCloudTutorAllowed,
     companionQuiz,
     runCompanion,
     handleManualPromptSubmit,

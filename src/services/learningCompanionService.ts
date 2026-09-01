@@ -9,7 +9,7 @@ import type {
   SourceAnchor,
 } from '../personalization/types'
 
-export const LEARNING_PROMPT_VERSION = 'gl-companion-v1'
+export const LEARNING_PROMPT_VERSION = 'gl-companion-v3-universal-profile'
 export const MAX_COMPANION_SOURCE_CHARACTERS = 12_000
 /** Timeout for curated textbook sections — source text is small and clean. */
 export const COMPANION_TIMEOUT_MS = 28_000
@@ -72,6 +72,30 @@ function gradeInstruction(gradeLevel?: string) {
   return 'Use standard secondary-school complexity and define uncommon terms briefly.'
 }
 
+function onboardingPreferenceInstructions(
+  profile: LearningCompanionRequest['profile'],
+) {
+  const language = normalizeWhitespace(profile.preferredLanguage ?? '') || 'English'
+  const goals = (profile.learningGoals ?? []).slice(0, 2)
+  const starting = profile.startingSupport === 'quick'
+    ? 'Start with the shortest useful answer. Lead with the key relationship and avoid a long preamble.'
+    : profile.startingSupport === 'guided'
+      ? 'Start in small connected steps. Make the first step easy to verify before adding the next.'
+      : 'Start with a concise explanation, then one concrete bridge or next step.'
+  const recovery = profile.stuckSupport === 'hint'
+    ? 'If the student is stuck, prefer a hint that preserves their thinking.'
+    : profile.stuckSupport === 'walk-through'
+      ? 'If the student is stuck, walk through one question or step at a time.'
+      : 'If the student is stuck, change the explanatory angle instead of repeating the same wording.'
+
+  return [
+    `Answer in ${language}.`,
+    goals.length > 0 ? `Current learning goals: ${goals.join('; ')}.` : 'No learning goal was supplied.',
+    starting,
+    recovery,
+  ].join(' ')
+}
+
 function approvedPreferenceInstructions(
   preferences: ApprovedPresentationPreferences,
 ) {
@@ -119,12 +143,29 @@ export function buildLearningCompanionPrompt(
   request: LearningCompanionRequest,
 ) {
   const sourceText = compactSourceText(request.excerpt.text)
+  const isExactSelection = request.scope === 'selection'
   const interest = normalizeWhitespace(request.profile.interest)
   const modeInstruction = MODE_INSTRUCTIONS[request.mode]
   const quizShape =
     request.mode === 'test-me'
       ? 'For quiz, return {"question":"...","options":["...","...","...","..."],"correctIndex":0,"explanation":"...","evidence":"a short exact phrase from the source"}.'
       : 'Set "quiz" to null.'
+  const scopeInstructions = isExactSelection
+    ? [
+        'Scope: EXACT USER SELECTION.',
+        'The student highlighted this text because this specific part is unclear.',
+        'Treat the selected text as the complete target. Explain only its words, claims, and relationships.',
+        'Do not summarize, reconstruct, or explain the surrounding page or section.',
+        'Make the title and every analogy mapping specific to this selection.',
+        'If the selection lacks required context, state what is missing instead of filling it from memory.',
+      ]
+    : [
+        'Scope: FULL SECTION.',
+        'The student asked for help with the complete supplied section.',
+      ]
+  const sourceTag = isExactSelection
+    ? 'USER_SELECTED_TEXT'
+    : 'UNTRUSTED_SOURCE_DATA'
 
   return [
     'You are Global Lab’s source-grounded learning companion.',
@@ -133,11 +174,13 @@ export function buildLearningCompanionPrompt(
     'Use the source only as evidence. Do not add outside facts, citations, consensus claims, or invented quotations.',
     'Never diagnose the student or claim that they are unable to learn.',
     'The original source is sacred and remains unchanged. Your response is a separate companion.',
+    ...scopeInstructions,
     '',
     `Requested support: ${request.mode}. ${modeInstruction}`,
     `Student interest: ${interest && interest !== 'neutral' ? interest : 'not supplied'}.`,
     interestLensInstruction(interest, request.mode),
     `Student level: ${request.profile.gradeLevel ?? 'not supplied'}. ${gradeInstruction(request.profile.gradeLevel)}`,
+    `Student-controlled starting preferences: ${onboardingPreferenceInstructions(request.profile)}`,
     `Approved presentation settings: ${approvedPreferenceInstructions(request.approvedPresentation)}`,
     `Source citation label: ${anchorCitation(request.excerpt.anchor)}.`,
     '',
@@ -146,9 +189,9 @@ export function buildLearningCompanionPrompt(
     'Keep content under 220 words. Keep limitations to one brief sentence.',
     quizShape,
     '',
-    '<UNTRUSTED_SOURCE_DATA>',
+    `<${sourceTag}>`,
     sourceText,
-    '</UNTRUSTED_SOURCE_DATA>',
+    `</${sourceTag}>`,
   ].join('\n')
 }
 
@@ -288,18 +331,31 @@ function localAnalogy(
     sentenceCandidates(sourceText)[0] ?? sourceText,
     110,
   ).replace(/[\u201c\u201d"]/g, "'")
+  const isExactSelection = request.scope === 'selection'
 
   if (lens) {
     return {
-      title: lens.title,
-      content: `Treat \u201c${sourceAnchor}\u201d like ${lens.opening}. ${lens.continuation}`,
+      title: isExactSelection
+        ? `Explain this selection through ${interest}`
+        : lens.title,
+      content: isExactSelection
+        ? `Focus only on \u201c${sourceAnchor}\u201d. Treat that one statement like ${lens.opening}, matching only the terms and relationship it actually names.`
+        : `Treat \u201c${sourceAnchor}\u201d like ${lens.opening}. ${lens.continuation}`,
     }
   }
 
   const familiarField = isNeutral ? 'a study map' : `a familiar map of ${interest}`
   return {
-    title: isNeutral ? MODE_TITLES.analogy : `Connect this to ${interest}`,
-    content: `Picture \u201c${sourceAnchor}\u201d as the first landmark on ${familiarField}. Follow later source statements as the route, and use repeated terms to stay oriented.`,
+    title: isExactSelection
+      ? isNeutral
+        ? 'A closer look at your selection'
+        : `Explain this selection through ${interest}`
+      : isNeutral
+        ? MODE_TITLES.analogy
+        : `Connect this to ${interest}`,
+    content: isExactSelection
+      ? `Focus only on \u201c${sourceAnchor}\u201d. Picture that one statement as a single landmark on ${familiarField}; do not extend the explanation beyond the selected words.`
+      : `Picture \u201c${sourceAnchor}\u201d as the first landmark on ${familiarField}. Follow later source statements as the route, and use repeated terms to stay oriented.`,
   }
 }
 
@@ -548,6 +604,7 @@ function localFallback(
     content,
     limitations,
     excerpt: request.excerpt,
+    scope: request.scope ?? 'section',
     quiz,
     provider: request.presetAnalogy && request.mode === 'analogy' ? 'preset' : 'local',
     createdAt: new Date().toISOString(),
@@ -627,6 +684,7 @@ export function parseLearningCompanionResponse(
     content: stringField(parsed.content, 'content').slice(0, 4_000),
     limitations: stringField(parsed.limitations, 'a limitation').slice(0, 500),
     excerpt: request.excerpt,
+    scope: request.scope ?? 'section',
     quiz,
     provider: 'gemini',
     model,
@@ -681,7 +739,14 @@ export async function createLearningCompanion(
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt: buildLearningCompanionPrompt(request) }),
+      body: JSON.stringify({
+        prompt: buildLearningCompanionPrompt(request),
+        privacy: {
+          sourceKind: request.excerpt.anchor.sourceKind,
+          scope: request.scope ?? 'section',
+          selectionCharacters: request.excerpt.text.length,
+        },
+      }),
       signal: linked.signal,
     })
 

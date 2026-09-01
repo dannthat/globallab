@@ -1,8 +1,16 @@
-import { Moon, Pencil, Sun } from 'lucide-react'
+import {
+  Home,
+  Library,
+  Moon,
+  Pencil,
+  Sun,
+  WandSparkles,
+} from 'lucide-react'
 import { lazy, Suspense, useEffect, useState, type FormEvent } from 'react'
 import { flushSync } from 'react-dom'
 import { LearnerControlPanel } from './components/LearnerControlPanel'
 import { HomePage } from './components/HomePage'
+import { LandingPage } from './components/LandingPage'
 import { LibraryPage } from './components/LibraryPage'
 import { OnboardingFlow } from './components/OnboardingFlow'
 import { UserBookReader } from './components/UserBookReader'
@@ -14,7 +22,11 @@ import { useLearnerModel } from './hooks/useLearnerModel'
 import { useStudentProfile } from './hooks/useStudentProfile'
 import { useUserLibrary } from './hooks/useUserLibrary'
 import { subjects } from './knowledge'
-import type { PersonalizationMode } from './personalization/types'
+import type {
+  PersonalizationMode,
+  SourceAnchor,
+  SourceExcerpt,
+} from './personalization/types'
 import type { KnowledgeSection, KnowledgeTopic, StudentProfile, Subject, UserBook } from './types'
 
 const SUBJECT_COLORS: Record<string, string> = {
@@ -25,6 +37,25 @@ const SUBJECT_COLORS: Record<string, string> = {
 }
 
 const RECENT_SUBJECT_STORAGE_KEY = 'gl_recent_subject'
+
+type AppRoute = 'landing' | 'onboarding' | 'home' | 'library'
+
+function routeFromLocation(hasProfile: boolean): AppRoute {
+  if (typeof window === 'undefined') return hasProfile ? 'home' : 'landing'
+  const path = window.location.pathname.replace(/\/+$/, '') || '/'
+  if (path === '/welcome') return 'landing'
+  if (path === '/onboarding') return hasProfile ? 'home' : 'onboarding'
+  if (path === '/library') return hasProfile ? 'library' : 'landing'
+  if (path === '/home') return hasProfile ? 'home' : 'landing'
+  return hasProfile ? 'home' : 'landing'
+}
+
+function routePath(route: AppRoute) {
+  if (route === 'landing') return '/welcome'
+  if (route === 'onboarding') return '/onboarding'
+  if (route === 'library') return '/library'
+  return '/home'
+}
 
 function getInitialHomeSubjectId(): string | null {
   const firstAvailableSubject = subjects.find((subject) => !subject.comingSoon)
@@ -81,39 +112,41 @@ function transitionView(update: () => void) {
 
 type LearnerModelController = ReturnType<typeof useLearnerModel>
 
-interface SiteHeaderProps {
-  profile: StudentProfile
-  learnerModel: LearnerModelController
-  isDark: boolean
-  isLibraryOpen: boolean
-  onSaveProfile: (interest: string) => void
-  onToggleDark: () => void
-  onHome: () => void
-  onOpenLibrary: () => void
-}
-
-function SiteHeader({
-  profile,
+function GlobalLearnerControls({
   learnerModel,
-  isDark,
-  isLibraryOpen,
-  onSaveProfile,
-  onToggleDark,
-  onHome,
-  onOpenLibrary,
-}: SiteHeaderProps) {
-  const [isEditing, setIsEditing] = useState(false)
-  const [draft, setDraft] = useState(profile.interest)
-
-  const saveInterest = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const normalized = draft.trim().replace(/\s+/g, ' ')
-    if (!normalized) return
-    setDraft(normalized)
-    onSaveProfile(normalized)
-    setIsEditing(false)
-  }
-
+  profile,
+  onUpdateProfile,
+  onOpenSource,
+}: {
+  learnerModel: LearnerModelController
+  profile: StudentProfile
+  onUpdateProfile: (profile: Omit<StudentProfile, 'createdAt'>) => void
+  onOpenSource?: (anchor: SourceAnchor) => void
+}) {
+  const sourceDataMap = new Map<
+    string,
+    {
+      sourceId: string
+      sourceTitle: string
+      sourceKind: SourceAnchor['sourceKind']
+      evidenceCount: number
+    }
+  >()
+  learnerModel.state.evidence.forEach((event) => {
+    const previous = sourceDataMap.get(event.anchor.sourceId)
+    sourceDataMap.set(event.anchor.sourceId, {
+      sourceId: event.anchor.sourceId,
+      sourceTitle: event.anchor.sourceTitle,
+      sourceKind: event.anchor.sourceKind,
+      evidenceCount: (previous?.evidenceCount ?? 0) + 1,
+    })
+  })
+  const sourceData = [...sourceDataMap.values()].sort((left, right) =>
+    left.sourceTitle.localeCompare(right.sourceTitle),
+  )
+  const activeCrossSourcePermissions = learnerModel.state.crossSourcePermissions.filter(
+    (permission) => !permission.revokedAt,
+  )
   const resetLearningData = () => {
     learnerModel.reset()
     if (typeof window === 'undefined') return
@@ -127,9 +160,74 @@ function SiteHeader({
   }
 
   return (
-    <header className="site-header">
+    <LearnerControlPanel
+      studentProfile={profile}
+      approvedPresentation={learnerModel.approvedPresentation}
+      dueReviews={learnerModel.dueReviews}
+      evidenceCount={learnerModel.state.evidence.length}
+      understandingClaims={learnerModel.understandingClaims}
+      masteryMap={learnerModel.livingMasteryMap}
+      sourceData={sourceData}
+      crossSourcePermissions={activeCrossSourcePermissions}
+      onSetPreference={learnerModel.setExplicitPreference}
+      onClearPreference={learnerModel.clearPreference}
+      onExport={learnerModel.exportState}
+      onReset={resetLearningData}
+      onDecideClaim={learnerModel.decideUnderstandingClaim}
+      onOpenReview={onOpenSource}
+      onDeleteSourceData={learnerModel.deleteSourceData}
+      onRevokeCrossSourcePermission={learnerModel.revokeCrossSourcePermission}
+      onUpdateStudentProfile={onUpdateProfile}
+    />
+  )
+}
+
+interface SiteHeaderProps {
+  profile: StudentProfile
+  learnerModel: LearnerModelController
+  isDark: boolean
+  isLibraryOpen: boolean
+  onSaveProfile: (interest: string) => void
+  onUpdateProfile: (profile: Omit<StudentProfile, 'createdAt'>) => void
+  onToggleDark: () => void
+  onHome: () => void
+  onOpenLibrary: () => void
+  onOpenLearningSource?: (anchor: SourceAnchor) => void
+}
+
+function SiteHeader({
+  profile,
+  learnerModel,
+  isDark,
+  isLibraryOpen,
+  onSaveProfile,
+  onUpdateProfile,
+  onToggleDark,
+  onHome,
+  onOpenLibrary,
+  onOpenLearningSource,
+}: SiteHeaderProps) {
+  const [isEditing, setIsEditing] = useState(false)
+  const [draft, setDraft] = useState(profile.interest)
+
+  const saveInterest = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const normalized = draft.trim().replace(/\s+/g, ' ')
+    if (!normalized) return
+    setDraft(normalized)
+    onSaveProfile(normalized)
+    setIsEditing(false)
+  }
+
+  return (
+    <header className="site-header glw-site-header">
+      <div className="glw-site-header__inner">
       <button type="button" className="brand" onClick={onHome} aria-label="Global Lab home">
-        <span className="brand-name">GlobalLab</span>
+        <span className="glw-brand-mark" aria-hidden="true">GL</span>
+        <span className="glw-brand-copy">
+          <span className="brand-name">GlobalLab</span>
+          <small>Learning workspace</small>
+        </span>
       </button>
 
       <nav className="site-nav" aria-label="Main navigation">
@@ -139,7 +237,8 @@ function SiteHeader({
           aria-current={!isLibraryOpen ? 'page' : undefined}
           onClick={onHome}
         >
-          Home
+          <Home size={15} aria-hidden="true" />
+          <span>Home</span>
         </button>
         <button
           type="button"
@@ -147,7 +246,8 @@ function SiteHeader({
           aria-current={isLibraryOpen ? 'page' : undefined}
           onClick={onOpenLibrary}
         >
-          Library
+          <Library size={15} aria-hidden="true" />
+          <span>Library</span>
         </button>
       </nav>
 
@@ -157,10 +257,12 @@ function SiteHeader({
             type="button"
             className="lens-pill"
             aria-expanded={isEditing}
+            aria-label={'Your learning lens is ' + profile.interest + '. Edit lens.'}
             onClick={() => setIsEditing((current) => !current)}
           >
+            <WandSparkles size={14} aria-hidden="true" />
+            <span className="lens-pill__label">Your lens</span>
             <span className="lens-pill__interest">{profile.interest}</span>
-            <span className="lens-pill__label">lens</span>
             <Pencil size={11} aria-hidden="true" />
           </button>
 
@@ -189,14 +291,11 @@ function SiteHeader({
           )}
         </div>
 
-        <LearnerControlPanel
-          approvedPresentation={learnerModel.approvedPresentation}
-          dueReviews={learnerModel.dueReviews}
-          evidenceCount={learnerModel.state.evidence.length}
-          onSetPreference={learnerModel.setExplicitPreference}
-          onClearPreference={learnerModel.clearPreference}
-          onExport={learnerModel.exportState}
-          onReset={resetLearningData}
+        <GlobalLearnerControls
+          learnerModel={learnerModel}
+          profile={profile}
+          onUpdateProfile={onUpdateProfile}
+          onOpenSource={onOpenLearningSource}
         />
 
         <button
@@ -213,6 +312,7 @@ function SiteHeader({
           )}
         </button>
       </div>
+      </div>
     </header>
   )
 }
@@ -223,6 +323,7 @@ interface ActiveKitabiProps {
   profile: StudentProfile
   isDark: boolean
   learnerModel: LearnerModelController
+  sourceJump?: SourceAnchor | null
   onToggleDark: () => void
   onSaveInterest: (interest: string) => void
   onSelectTopic: (topic: KnowledgeTopic, subject: Subject) => void
@@ -235,6 +336,7 @@ function ActiveKitabi({
   profile,
   isDark,
   learnerModel,
+  sourceJump,
   onToggleDark,
   onSaveInterest,
   onSelectTopic,
@@ -246,6 +348,12 @@ function ActiveKitabi({
     recordRefinement,
     recordHelpful,
     recordQuiz,
+    recordTutorAttempt,
+    recordTutorHint,
+    recordTeachKoji,
+    recordPredictionCycle,
+    hasCrossSourcePermission,
+    setCrossSourcePermission,
     acceptSuggestion,
     notNow,
     neverSuggest,
@@ -260,8 +368,27 @@ function ActiveKitabi({
     getRewrite,
   } = useLearnYourWay(topic, approvedPresentation)
 
-  const handleLearn = (section: KnowledgeSection) => {
-    void learn(section, profile, { approvedPresentation })
+  const handleLearn = (section: KnowledgeSection, excerpt?: string) => {
+    const selectedText = excerpt?.trim()
+    const excerptPayload = selectedText
+      ? {
+          anchor: {
+            sourceId: topic.id,
+            sourceKind: 'global-lab' as const,
+            sourceTitle: topic.source?.name ?? topic.id,
+            anchorId: section.id,
+            anchorLabel: section.heading,
+            url: topic.source?.url,
+            license: topic.source?.license,
+          },
+          text: selectedText,
+        }
+      : undefined
+    void learn(section, profile, {
+      approvedPresentation,
+      excerpt: excerptPayload,
+      isUserSelection: Boolean(excerptPayload),
+    })
   }
 
   const handleRefine = (
@@ -272,7 +399,14 @@ function ActiveKitabi({
     if (activeRewrite) {
       recordRefinement(activeRewrite.source, mode)
     }
-    void learn(section, profile, { mode, approvedPresentation })
+    const selectedExcerpt =
+      activeRewrite?.scope === 'selection' ? activeRewrite.excerpt : undefined
+    void learn(section, profile, {
+      mode,
+      approvedPresentation,
+      excerpt: selectedExcerpt,
+      isUserSelection: Boolean(selectedExcerpt),
+    })
   }
 
   return (
@@ -286,6 +420,12 @@ function ActiveKitabi({
     >
       <LazyKitabiPage
         topic={topic}
+        initialSectionId={
+          sourceJump?.sourceKind === 'global-lab' &&
+          sourceJump.sourceId === topic.id
+            ? sourceJump.anchorId
+            : undefined
+        }
         subject={subject}
         subjectColor={SUBJECT_COLORS[subject.id] ?? SUBJECT_COLORS.biology}
         profile={profile}
@@ -309,6 +449,79 @@ function ActiveKitabi({
         onQuizResult={(rewrite, score, total) => {
           recordQuiz(rewrite.source, score, total, rewrite.mode)
         }}
+        approvedPresentation={approvedPresentation}
+        onTutorAttempt={(rewrite, attempt) => {
+          recordTutorAttempt(rewrite.source, rewrite.mode, {
+            phase: attempt.phase,
+            activityKind: attempt.activityKind,
+            correct: attempt.correct,
+            independent: attempt.independent,
+            hintsUsed: attempt.hintsUsed,
+            revealed: attempt.revealed,
+            skillTag: attempt.skillTag,
+            misconceptionTags: attempt.misconceptionTags,
+            sessionId: attempt.sessionId,
+            turnId: attempt.turnId,
+            responseSummary: attempt.responseSummary,
+            coverage: attempt.coverage,
+          })
+        }}
+        onTutorHint={(rewrite, phase, revealed) => {
+          recordTutorHint(
+            rewrite.source,
+            rewrite.mode,
+            { phase, revealed },
+            revealed,
+          )
+        }}
+        onTutorIntent={(rewrite, mode) => {
+          recordRefinement(rewrite.source, mode)
+        }}
+        onTeachKojiCheck={(rewrite, check, turn) => {
+          recordTeachKoji(rewrite.source, rewrite.mode, {
+            phase: turn.phase,
+            correct: check.coverage === 'complete',
+            independent: false,
+            skillTag: turn.skillTags[0] ?? rewrite.source.anchorLabel,
+            misconceptionTags: turn.misconceptionTags,
+            sessionId: rewrite.sectionId + ':' + rewrite.generatedAt,
+            turnId: turn.id,
+            coverage: check.coverage,
+            sourceQuotes: [check.evidenceQuote],
+            responseSummary: turn.message.slice(0, 500),
+          })
+        }}
+        onPredictionCycleComplete={(rewrite, cycle) => {
+          if (
+            !cycle.prediction ||
+            !cycle.observation ||
+            !cycle.revision ||
+            cycle.accurate === undefined
+          ) return
+          recordPredictionCycle(rewrite.source, rewrite.mode, {
+            phase: 'transfer',
+            correct: cycle.accurate,
+            independent: true,
+            skillTag: rewrite.source.anchorLabel,
+            sessionId: rewrite.sectionId + ':' + rewrite.generatedAt,
+            predictionCycle: {
+              prediction: cycle.prediction,
+              observation: JSON.stringify(cycle.observation.outputs),
+              revision: cycle.revision,
+              accurate: cycle.accurate,
+            },
+          })
+        }}
+        isCrossSourceAllowed={(primary, secondary) =>
+          hasCrossSourcePermission(primary.anchor, secondary.anchor)
+        }
+        onCrossSourcePermissionChange={(
+          primary: SourceExcerpt,
+          secondary: SourceExcerpt,
+          allowed: boolean,
+        ) => {
+          setCrossSourcePermission(primary.anchor, secondary.anchor, allowed)
+        }}
         onClearRewrite={(sectionId) => clearRewrite(sectionId, profile.interest)}
         preferenceSuggestion={pendingSuggestions[0] ?? null}
         onApplySuggestion={acceptSuggestion}
@@ -330,7 +543,8 @@ function App() {
   const [activeSubject, setActiveSubject] = useState<Subject | null>(null)
   const [activeTopic, setActiveTopic] = useState<KnowledgeTopic | null>(null)
   const [activeUserBook, setActiveUserBook] = useState<UserBook | null>(null)
-  const [isLibraryOpen, setIsLibraryOpen] = useState(false)
+  const [learningSourceJump, setLearningSourceJump] = useState<SourceAnchor | null>(null)
+  const [route, setRoute] = useState<AppRoute>(() => routeFromLocation(hasProfile))
   const [homeSubjectId, setHomeSubjectId] = useState<string | null>(
     getInitialHomeSubjectId,
   )
@@ -352,10 +566,55 @@ function App() {
 
   const toggleDark = () => setIsDark((dark) => !dark)
 
+  const navigateRoute = (nextRoute: AppRoute, replace = false) => {
+    const nextPath = routePath(nextRoute)
+    if (typeof window !== 'undefined' && window.location.pathname !== nextPath) {
+      window.history[replace ? 'replaceState' : 'pushState']({}, '', nextPath)
+    }
+    setRoute(nextRoute)
+  }
+
+  useEffect(() => {
+    const syncRoute = () => {
+      const nextRoute = routeFromLocation(Boolean(profile))
+      setRoute(nextRoute)
+      if (nextRoute !== 'onboarding') {
+        setActiveTopic(null)
+        setActiveSubject(null)
+        setActiveUserBook(null)
+      }
+    }
+    window.addEventListener('popstate', syncRoute)
+    return () => window.removeEventListener('popstate', syncRoute)
+  }, [profile])
+
+  if (route === 'landing') {
+    return (
+      <div className='app-shell glw-public-shell'>
+        <a className='skip-link' href='#top'>Skip to content</a>
+        <LandingPage
+          hasProfile={hasProfile}
+          isDark={isDark}
+          onToggleDark={toggleDark}
+          onStart={() => navigateRoute(hasProfile ? 'home' : 'onboarding')}
+          onOpenLibrary={() => navigateRoute(hasProfile ? 'library' : 'onboarding')}
+        />
+      </div>
+    )
+  }
+
   if (!hasProfile || !profile) {
     return (
       <OnboardingFlow
-        onComplete={(interest, gradeLevel) => saveProfile({ interest, gradeLevel })}
+        onComplete={(nextProfile, destination) => {
+          saveProfile(nextProfile)
+          navigateRoute(destination === 'library' ? 'library' : 'home')
+        }}
+        onUpload={(nextProfile, file) => {
+          saveProfile(nextProfile)
+          navigateRoute('library')
+          void addBook(file)
+        }}
       />
     )
   }
@@ -364,11 +623,11 @@ function App() {
     setActiveTopic(null)
     setActiveSubject(null)
     setActiveUserBook(null)
-    setIsLibraryOpen(false)
+    navigateRoute('home')
   }
 
   const openLibrary = () => {
-    setIsLibraryOpen(true)
+    navigateRoute('library')
     setActiveTopic(null)
     setActiveSubject(null)
     setActiveUserBook(null)
@@ -390,7 +649,6 @@ function App() {
       setActiveTopic(null)
       setActiveSubject(subject)
       setActiveUserBook(null)
-      setIsLibraryOpen(false)
     })
   }
 
@@ -399,7 +657,6 @@ function App() {
       setActiveSubject(null)
       setActiveTopic(null)
       setActiveUserBook(book)
-      setIsLibraryOpen(false)
     })
   }
 
@@ -416,11 +673,28 @@ function App() {
     })
   }
 
+  const openLearningSource = (anchor: SourceAnchor) => {
+    setLearningSourceJump(anchor)
+    if (anchor.sourceKind === 'upload') {
+      const book = books.find((candidate) => candidate.id === anchor.sourceId)
+      if (book) selectUserBook(book)
+      return
+    }
+    for (const subject of subjects) {
+      const topic = subject.topics.find((candidate) => candidate.id === anchor.sourceId)
+      if (topic) {
+        selectGlobalTopic(topic, subject)
+        return
+      }
+    }
+    if (anchor.url) window.open(anchor.url, '_blank', 'noopener,noreferrer')
+  }
+
   const updateInterest = (interest: string) => {
     saveProfile({ interest, gradeLevel: profile.gradeLevel })
   }
 
-  // ── User book reader ──
+  // â”€â”€ User book reader â”€â”€
   if (activeUserBook) {
     return (
       <div className='app-shell gl-premium gl-premium-upload-reader'>
@@ -428,6 +702,7 @@ function App() {
           Skip to source
         </a>
         <UserBookReader
+          sourceJump={learningSourceJump}
           book={activeUserBook}
           profile={profile}
           learnerModel={learnerModel}
@@ -445,7 +720,7 @@ function App() {
     )
   }
 
-  // ── Kitabi reader (chapter TOC + section reader) ──
+  // â”€â”€ Kitabi reader (chapter TOC + section reader) â”€â”€
   if (activeSubject && !activeTopic) {
     return (
       <div className='app-shell gl-premium'>
@@ -482,6 +757,7 @@ function App() {
           profile={profile}
           isDark={isDark}
           learnerModel={learnerModel}
+          sourceJump={learningSourceJump}
           onToggleDark={toggleDark}
           onSaveInterest={updateInterest}
           onSelectTopic={selectGlobalTopic}
@@ -493,9 +769,9 @@ function App() {
     )
   }
 
-  // ── Home / Library ──
+  // â”€â”€ Home / Library â”€â”€
   return (
-    <div className='app-shell gl-premium gl-home-shell'>
+    <div className='app-shell gl-premium gl-home-shell glw-workspace-shell'>
       <a className='skip-link' href='#main-content'>
         Skip to content
       </a>
@@ -503,14 +779,16 @@ function App() {
         profile={profile}
         learnerModel={learnerModel}
         isDark={isDark}
-        isLibraryOpen={isLibraryOpen}
+        isLibraryOpen={route === 'library'}
         onSaveProfile={updateInterest}
+        onUpdateProfile={saveProfile}
         onToggleDark={toggleDark}
         onHome={goHome}
         onOpenLibrary={openLibrary}
+        onOpenLearningSource={openLearningSource}
       />
 
-      {isLibraryOpen ? (
+      {route === 'library' ? (
         <LibraryPage
           subjects={subjects}
           books={books}

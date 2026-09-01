@@ -1,4 +1,4 @@
-export const LEARNER_MODEL_VERSION = 1 as const
+export const LEARNER_MODEL_VERSION = 2 as const
 
 export const PERSONALIZATION_MODES = [
   'analogy',
@@ -43,6 +43,9 @@ export interface SourceExcerpt {
   text: string
 }
 
+/** The exact amount of canonical source the student asked the companion to use. */
+export type CompanionSourceScope = 'section' | 'selection'
+
 export type DetailPreference = 'simpler' | 'balanced' | 'detailed'
 export type StructurePreference = 'narrative' | 'steps'
 export type ExamplePreference = 'minimal' | 'more-examples'
@@ -71,8 +74,54 @@ export interface ApprovedPresentationPreferences {
   practice?: ApprovedPreference<PracticePreference>
 }
 
-export type EvidenceKind = 'refinement' | 'helpful' | 'quiz'
+export type EvidenceKind =
+  | 'refinement'
+  | 'helpful'
+  | 'quiz'
+  | 'tutor-attempt'
+  | 'tutor-hint'
+  | 'tutor-reveal'
+  | 'tutor-transfer'
+  | 'teach-koji'
+  | 'prediction-cycle'
 export type LearningOutcome = 'unknown' | 'successful' | 'needs-review'
+
+export type TutorEvidencePhase =
+  | 'diagnose'
+  | 'scaffold'
+  | 'guided-practice'
+  | 'fade-support'
+  | 'transfer'
+  | 'complete'
+
+export interface TutorEvidence {
+  phase: TutorEvidencePhase
+  activityKind?:
+    | 'multiple-choice'
+    | 'short-answer'
+    | 'ordering'
+    | 'matching'
+    | 'hotspot'
+    | 'simulation-prediction'
+  correct?: boolean
+  independent?: boolean
+  hintsUsed?: number
+  revealed?: boolean
+  skillTag?: string
+  misconceptionTags?: string[]
+  /** Stable session pointers keep claims inspectable without storing a transcript twice. */
+  sessionId?: string
+  turnId?: string
+  responseSummary?: string
+  coverage?: 'complete' | 'partial' | 'unsupported'
+  sourceQuotes?: string[]
+  predictionCycle?: {
+    prediction: string
+    observation: string
+    revision: string
+    accurate: boolean
+  }
+}
 
 export interface QuizOutcome {
   score: number
@@ -91,6 +140,74 @@ export interface LearningEvidence {
   refinement?: PersonalizationMode
   helpful?: boolean
   quiz?: QuizOutcome
+  tutor?: TutorEvidence
+}
+
+export type UnderstandingClaimKind =
+  | 'demonstrated'
+  | 'fragile'
+  | 'misconception'
+  | 'missing-reasoning'
+
+export type UnderstandingClaimStatus =
+  | 'active'
+  | 'confirmed'
+  | 'corrected'
+  | 'dismissed'
+
+export interface EvidenceCitation {
+  evidenceId: string
+  anchorKey: string
+  anchor: SourceAnchor
+  occurredAt: string
+  sessionId?: string
+  turnId?: string
+}
+
+/**
+ * A cautious, derived interpretation of raw evidence. It is never an ability,
+ * personality, medical, or protected-trait label and always cites its basis.
+ */
+export interface UnderstandingClaim {
+  id: string
+  conceptKey: string
+  kind: UnderstandingClaimKind
+  summary: string
+  calibration: 'suggests' | 'may-indicate'
+  status: UnderstandingClaimStatus
+  evidence: EvidenceCitation[]
+  createdAt: string
+  updatedAt: string
+  correction?: string
+}
+
+export type UnderstandingClaimDecisionAction =
+  | 'confirm'
+  | 'correct'
+  | 'dismiss'
+  | 'delete'
+
+export interface UnderstandingClaimDecision {
+  id: string
+  claimId: string
+  action: UnderstandingClaimDecisionAction
+  decidedAt: string
+  correction?: string
+}
+
+export interface LearnerInferenceState {
+  refreshedAt: string
+  claims: UnderstandingClaim[]
+}
+
+export interface CrossSourcePermission {
+  id: string
+  primaryAnchorKey: string
+  secondaryAnchorKey: string
+  primaryAnchor?: SourceAnchor
+  secondaryAnchor?: SourceAnchor
+  grantedAt: string
+  revokedAt?: string
 }
 
 export type PreferenceSuggestionStatus =
@@ -108,6 +225,8 @@ export interface PreferenceSuggestion {
   distinctAnchorCount: number
   successfulOutcomeCount: number
   evidenceIds: string[]
+  /** Snapshot of the exact source locations behind the suggestion. */
+  evidence?: EvidenceCitation[]
   status: PreferenceSuggestionStatus
   createdAt: string
   decidedAt?: string
@@ -140,6 +259,26 @@ export interface MasteryRecord {
   nextReviewAt: string
 }
 
+export type MasteryMapStatus =
+  | 'confident'
+  | 'fragile'
+  | 'misconception'
+  | 'prerequisite'
+  | 'unrated'
+
+export interface LivingMasteryNode {
+  conceptKey: string
+  label: string
+  status: MasteryMapStatus
+  evidence: EvidenceCitation[]
+  sourceAnchors: SourceAnchor[]
+  prerequisiteNotes: string[]
+  transferAttempts: number
+  successfulTransfers: number
+  nextReviewAt?: string
+  isReviewDue: boolean
+}
+
 export interface LearnerModelState {
   version: typeof LEARNER_MODEL_VERSION
   updatedAt: string
@@ -149,6 +288,10 @@ export interface LearnerModelState {
   neverSuggest: string[]
   mastery: Record<string, MasteryRecord>
   reviewHistory: ReviewAttempt[]
+  /** Raw evidence stays separate from these reproducible, student-editable inferences. */
+  inference: LearnerInferenceState
+  claimDecisions: UnderstandingClaimDecision[]
+  crossSourcePermissions: CrossSourcePermission[]
 }
 
 export interface StorageLike {

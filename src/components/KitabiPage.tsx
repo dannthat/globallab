@@ -4,6 +4,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Search,
+  WandSparkles,
   X,
 } from 'lucide-react'
 import {
@@ -30,7 +31,16 @@ import type {
   LearningOutcome,
   PersonalizationMode,
   PreferenceSuggestion,
+  ApprovedPresentationPreferences,
+  SourceExcerpt,
 } from '../personalization/types'
+import type {
+  TutorAttemptTelemetry,
+  TutorMachineState,
+  TutorPhase,
+  TutorTurn,
+  TutorUnderstandingCheck,
+} from '../personalization/tutorTypes'
 import { getSectionRewriteKey } from '../hooks/useLearnYourWay'
 import { RunningHeader } from './RunningHeader'
 import { SourcesFooter } from './SourcesFooter'
@@ -45,6 +55,7 @@ const TopicQuizModal = lazy(async () => {
 
 interface KitabiPageProps {
   topic: KnowledgeTopic
+  initialSectionId?: string
   subject: Subject
   subjectColor: string
   profile: StudentProfile | null
@@ -55,7 +66,7 @@ interface KitabiPageProps {
   loadingSectionId: string | null
   error?: string | null
   errorSectionId?: string | null
-  onLearnYourWay: (section: KnowledgeSection) => void
+  onLearnYourWay: (section: KnowledgeSection, excerpt?: string) => void
   onRefine: (section: KnowledgeSection, mode: PersonalizationMode) => void
   onOutcome: (
     rewrite: SectionRewrites[string],
@@ -65,6 +76,38 @@ interface KitabiPageProps {
     rewrite: SectionRewrites[string],
     score: number,
     total: number,
+  ) => void
+  approvedPresentation?: ApprovedPresentationPreferences
+  onTutorAttempt?: (
+    rewrite: SectionRewrites[string],
+    attempt: TutorAttemptTelemetry,
+  ) => void
+  onTutorHint?: (
+    rewrite: SectionRewrites[string],
+    phase: TutorPhase,
+    revealed: boolean,
+  ) => void
+  onTutorIntent?: (
+    rewrite: SectionRewrites[string],
+    mode: PersonalizationMode,
+  ) => void
+  onTeachKojiCheck?: (
+    rewrite: SectionRewrites[string],
+    check: TutorUnderstandingCheck,
+    turn: TutorTurn,
+  ) => void
+  onPredictionCycleComplete?: (
+    rewrite: SectionRewrites[string],
+    cycle: TutorMachineState['predictionCycle'],
+  ) => void
+  isCrossSourceAllowed?: (
+    primary: SourceExcerpt,
+    secondary: SourceExcerpt,
+  ) => boolean
+  onCrossSourcePermissionChange?: (
+    primary: SourceExcerpt,
+    secondary: SourceExcerpt,
+    allowed: boolean,
   ) => void
   onClearRewrite: (sectionId: string) => void
   preferenceSuggestion?: PreferenceSuggestion | null
@@ -185,7 +228,7 @@ function PageTurnPreview({
         <>
           <p className="page-turn-preview-kicker">Next section</p>
           <h3>{section.heading}</h3>
-          <p className="page-turn-preview-copy">{previewText}â€¦</p>
+          <p className="page-turn-preview-copy">{previewText}…</p>
         </>
       ) : (
         <>
@@ -217,6 +260,7 @@ function PageTurnPreview({
 
 export function KitabiPage({
   topic,
+  initialSectionId,
   subject,
   subjectColor,
   profile,
@@ -231,6 +275,14 @@ export function KitabiPage({
   onRefine,
   onOutcome,
   onQuizResult,
+  approvedPresentation = {},
+  onTutorAttempt,
+  onTutorHint,
+  onTutorIntent,
+  onTeachKojiCheck,
+  onPredictionCycleComplete,
+  isCrossSourceAllowed,
+  onCrossSourcePermissionChange,
   onClearRewrite,
   preferenceSuggestion = null,
   onApplySuggestion,
@@ -239,7 +291,12 @@ export function KitabiPage({
   onSelectTopic,
   onBack,
 }: KitabiPageProps) {
-  const [visibleSectionIndex, setVisibleSectionIndex] = useState(0)
+  const [visibleSectionIndex, setVisibleSectionIndex] = useState(() => {
+    const requested = initialSectionId
+      ? topic.sections.findIndex((section) => section.id === initialSectionId)
+      : -1
+    return requested >= 0 ? requested : 0
+  })
   const [pageTurn, setPageTurn] = useState<PageTurn | null>(null)
   const [activeOverlay, setActiveOverlay] = useState<ReaderOverlay>(null)
   const [quickTopicQuery, setQuickTopicQuery] = useState('')
@@ -268,6 +325,31 @@ export function KitabiPage({
         )
       ] ?? null
     : null
+  const primaryTutorExcerpt = rewrite && activeSection
+    ? rewrite.excerpt ?? {
+        anchor: rewrite.source,
+        text: activeSection.body,
+      }
+    : null
+  const crossSourceCandidates = useMemo<SourceExcerpt[]>(
+    () =>
+      topic.sections
+        .filter((section) => section.id !== activeSection?.id)
+        .map((section) => ({
+          anchor: {
+            sourceId: topic.id,
+            sourceKind: 'global-lab' as const,
+            sourceTitle: topic.source?.name ?? topic.title,
+            anchorId: section.id,
+            anchorLabel: section.heading,
+            url: topic.source?.url,
+            license: topic.source?.license,
+            sourceRevision: topic.source?.url ?? topic.id,
+          },
+          text: section.body,
+        })),
+    [activeSection?.id, topic],
+  )
 
   const clearTurnTimers = useCallback(() => {
     if (midpointTimerRef.current !== null) {
@@ -630,19 +712,35 @@ export function KitabiPage({
       />
 
       <div className="ubr-reader-body tbp-reader-body">
-        {/* Left nav strip — vertical section dots */}
+        {/* Compact navigation rail: every control opens real reader UI. */}
         <nav className="tbp-left-strip" aria-label="Section navigation">
-          {topic.sections.map((sec, idx) => (
-            <button
-              key={sec.id}
-              type="button"
-              className={'tbp-left-dot' + (idx === visibleSectionIndex ? ' tbp-left-dot--active' : '')}
-              onClick={() => openSection(idx)}
-              aria-label={`Go to section: ${sec.heading}`}
-              title={sec.heading}
-              disabled={Boolean(pageTurn)}
-            />
-          ))}
+          <button
+            type="button"
+            className={'reader-rail-action' + (activeOverlay === 'contents' ? ' reader-rail-action--active' : '')}
+            onClick={() =>
+              setActiveOverlay((current) =>
+                current === 'contents' ? null : 'contents',
+              )
+            }
+            aria-label="Open table of contents"
+            aria-expanded={activeOverlay === 'contents'}
+          >
+            <BookOpen size={17} aria-hidden="true" />
+            <span>Contents</span>
+          </button>
+          <div className="reader-rail-progress" aria-label="Section progress">
+            {topic.sections.map((sec, idx) => (
+              <button
+                key={sec.id}
+                type="button"
+                className={'tbp-left-dot' + (idx === visibleSectionIndex ? ' tbp-left-dot--active' : '')}
+                onClick={() => openSection(idx)}
+                aria-label={`Go to section: ${sec.heading}`}
+                title={sec.heading}
+                disabled={Boolean(pageTurn)}
+              />
+            ))}
+          </div>
         </nav>
 
         <div className="ubr-reader-stage">
@@ -690,13 +788,45 @@ export function KitabiPage({
                 sectionIndex={visibleSectionIndex}
                 totalSections={topic.sections.length}
                 error={errorSectionId === activeSection.id ? error : null}
-                onLearnYourWay={() => onLearnYourWay(activeSection)}
+                onLearnYourWay={(excerpt) => onLearnYourWay(activeSection, excerpt)}
                 onRefine={(mode) => onRefine(activeSection, mode)}
                 onOutcome={(_mode, outcome) => {
                   if (rewrite) onOutcome(rewrite, outcome)
                 }}
                 onQuizResult={(_mode, score, total) => {
                   if (rewrite) onQuizResult(rewrite, score, total)
+                }}
+                approvedPresentation={approvedPresentation}
+                onTutorAttempt={(attempt) => {
+                  if (rewrite) onTutorAttempt?.(rewrite, attempt)
+                }}
+                onTutorHint={(phase, revealed) => {
+                  if (rewrite) onTutorHint?.(rewrite, phase, revealed)
+                }}
+                onTutorIntent={(mode) => {
+                  if (rewrite) onTutorIntent?.(rewrite, mode)
+                }}
+                onTeachKojiCheck={(check, turn) => {
+                  if (rewrite) onTeachKojiCheck?.(rewrite, check, turn)
+                }}
+                onPredictionCycleComplete={(cycle) => {
+                  if (rewrite) onPredictionCycleComplete?.(rewrite, cycle)
+                }}
+                crossSourceCandidates={crossSourceCandidates}
+                isCrossSourceAllowed={(secondary) =>
+                  Boolean(
+                    primaryTutorExcerpt &&
+                    isCrossSourceAllowed?.(primaryTutorExcerpt, secondary),
+                  )
+                }
+                onCrossSourcePermissionChange={(secondary, allowed) => {
+                  if (rewrite && primaryTutorExcerpt) {
+                    onCrossSourcePermissionChange?.(
+                      primaryTutorExcerpt,
+                      secondary,
+                      allowed,
+                    )
+                  }
                 }}
                 onClearRewrite={() => onClearRewrite(activeSection.id)}
                 preferenceSuggestion={preferenceSuggestion}
@@ -764,21 +894,6 @@ export function KitabiPage({
                 } as CSSProperties
               }
             >
-              <button
-                type="button"
-                className="ubr-nav-contents"
-                aria-label="Open table of contents"
-                aria-expanded={activeOverlay === 'contents'}
-                aria-keyshortcuts="T"
-                onClick={() =>
-                  setActiveOverlay((current) =>
-                    current === 'contents' ? null : 'contents',
-                  )
-                }
-                title="Contents (T)"
-              >
-                <BookOpen size={14} aria-hidden="true" />
-              </button>
               <span className="ubr-nav-label">Section</span>
               <div className="ubr-nav-dots">
                 {topic.sections.map((section, index) => (
@@ -820,24 +935,49 @@ export function KitabiPage({
               <ChevronRight size={17} aria-hidden="true" />
             </button>
           </nav>
+        </div>
 
+        <aside className="reader-tool-rail" aria-label="Reader tools">
           <button
             type="button"
-            className="topic-mastery-trigger"
-            onClick={() => setActiveOverlay('mastery')}
-            aria-haspopup="dialog"
-            aria-label="Test Your Mastery"
+            className={'reader-rail-action' + (activeOverlay === 'topic-switcher' ? ' reader-rail-action--active' : '')}
+            onClick={openQuickTopicSwitcher}
+            aria-label="Search all topics"
+            aria-expanded={activeOverlay === 'topic-switcher'}
           >
-            <span className="topic-mastery-trigger-icon" aria-hidden="true">
-              <BrainCircuit size={18} />
-            </span>
-            <span>
-              <small>5-question topic check</small>
-              <strong>Test Your Mastery</strong>
-            </span>
-            <ChevronRight size={16} aria-hidden="true" />
+            <Search size={17} aria-hidden="true" />
+            <span>Search topics</span>
           </button>
-        </div>
+          <button
+            type="button"
+            className={'reader-rail-action reader-rail-action--lens' + (rewrite ? ' reader-rail-action--active' : '')}
+            disabled={!activeSection || loadingSectionId === activeSection?.id}
+            onClick={() => {
+              if (!activeSection) return
+              if (rewrite) {
+                document
+                  .querySelector<HTMLElement>('.tbp-companion-panel')
+                  ?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+                return
+              }
+              onLearnYourWay(activeSection)
+            }}
+            aria-label={rewrite ? 'Open your personalized note' : 'Learn this section your way'}
+          >
+            <WandSparkles size={17} aria-hidden="true" />
+            <span>{rewrite ? 'Your lens' : 'Learn your way'}</span>
+          </button>
+          <button
+            type="button"
+            className={'reader-rail-action' + (activeOverlay === 'mastery' ? ' reader-rail-action--active' : '')}
+            onClick={() => setActiveOverlay('mastery')}
+            aria-label="Test Your Mastery"
+            aria-haspopup="dialog"
+          >
+            <BrainCircuit size={17} aria-hidden="true" />
+            <span>Test mastery</span>
+          </button>
+        </aside>
       </div>
 
       {activeOverlay === 'contents' && (
@@ -990,13 +1130,13 @@ export function KitabiPage({
               ))}
               {filteredTopicOptions.length === 0 && (
                 <p className="quick-topic-empty">
-                  No topic matches â€œ{quickTopicQuery}â€.
+                  No topic matches “{quickTopicQuery}”.
                 </p>
               )}
             </div>
 
             <footer>
-              <span><kbd>â†‘</kbd><kbd>â†“</kbd> Navigate</span>
+              <span><kbd>↑</kbd><kbd>↓</kbd> Navigate</span>
               <span><kbd>Enter</kbd> Open</span>
               <span>{TOPIC_OPTIONS.length} topics</span>
             </footer>
@@ -1015,7 +1155,7 @@ export function KitabiPage({
                 aria-label="Test your mastery"
               >
                 <div className="topic-quiz-empty" role="status">
-                  Opening your mastery checkâ€¦
+                  Opening your mastery check…
                 </div>
               </section>
             </div>

@@ -28,6 +28,10 @@ function request(
     profile: {
       interest: 'basketball',
       gradeLevel: 'Grade 10',
+      preferredLanguage: 'Arabic',
+      learningGoals: ['Prepare for an exam'],
+      startingSupport: 'guided',
+      stuckSupport: 'different-explanation',
       createdAt: '2026-08-26T00:00:00.000Z',
     },
     approvedPresentation: {},
@@ -60,7 +64,33 @@ describe('learningCompanionService', () => {
     expect(prompt).toContain('The student approved step-by-step structure')
     expect(prompt).toContain('chosen basketball lens is a core requirement')
     expect(prompt).toContain('Use everyday language')
+    expect(prompt).toContain('Answer in Arabic.')
+    expect(prompt).toContain('Current learning goals: Prepare for an exam.')
+    expect(prompt).toContain('Start in small connected steps')
+    expect(prompt).toContain('change the explanatory angle instead of repeating')
     expect(prompt).toContain('National Institute of General Medical Sciences, Glycolysis')
+  })
+
+  it('treats a highlighted sentence as the complete explanation target', () => {
+    const selectedText = 'It splits glucose into pyruvate.'
+    const prompt = buildLearningCompanionPrompt(
+      request({
+        scope: 'selection',
+        excerpt: {
+          ...request().excerpt,
+          text: selectedText,
+        },
+      }),
+    )
+
+    expect(prompt).toContain('Scope: EXACT USER SELECTION.')
+    expect(prompt).toContain(
+      'Do not summarize, reconstruct, or explain the surrounding page or section.',
+    )
+    expect(prompt).toContain('<USER_SELECTED_TEXT>')
+    expect(prompt).toContain(selectedText)
+    expect(prompt).not.toContain('Glycolysis occurs in the cytoplasm.')
+    expect(prompt).not.toContain('<UNTRUSTED_SOURCE_DATA>')
   })
 
   it('uses a vetted preset locally without transmitting source text', async () => {
@@ -223,6 +253,29 @@ describe('learningCompanionService', () => {
     expect(artifact.content).toContain('Glycolysis occurs in the cytoplasm.')
     expect(artifact.content).toContain('opening play')
     expect(artifact.limitations).toContain('not its subject facts')
+  })
+
+  it('keeps a local selected-text analogy focused on that one selection', async () => {
+    const selectedText = 'It splits glucose into pyruvate.'
+    const artifact = await createLearningCompanion(
+      request({
+        localOnly: true,
+        mode: 'analogy',
+        scope: 'selection',
+        presetAnalogy: undefined,
+        excerpt: {
+          ...request().excerpt,
+          text: selectedText,
+        },
+      }),
+    )
+
+    expect(artifact.scope).toBe('selection')
+    expect(artifact.excerpt.text).toBe(selectedText)
+    expect(artifact.title).toBe('Explain this selection through basketball')
+    expect(artifact.content).toContain(selectedText)
+    expect(artifact.content).toContain('that one statement')
+    expect(artifact.content).not.toContain('Follow later source statements')
   })
 
   it('uses whole interest words when choosing a local analogy lens', async () => {

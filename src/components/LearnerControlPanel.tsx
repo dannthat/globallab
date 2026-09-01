@@ -2,23 +2,64 @@ import { BookOpenCheck, Download, Settings2, ShieldCheck, Trash2, X } from 'luci
 import { useEffect, useId, useState, type ChangeEvent } from 'react'
 import type {
   ApprovedPresentationPreferences,
+  CrossSourcePermission,
   MasteryRecord,
+  LivingMasteryNode,
   PreferenceSignal,
   SourceAnchor,
+  UnderstandingClaim,
+  UnderstandingClaimDecisionAction,
 } from '../personalization/types'
+import { UnderstandingMirrorPanel } from './UnderstandingMirrorPanel'
+import type { StudentProfile } from '../types'
 
 type PreferenceDimension = PreferenceSignal['dimension']
 
 interface LearnerControlPanelProps {
+  studentProfile?: StudentProfile
   approvedPresentation: ApprovedPresentationPreferences
   dueReviews: MasteryRecord[]
   evidenceCount: number
+  understandingClaims?: UnderstandingClaim[]
+  masteryMap?: LivingMasteryNode[]
+  sourceData?: Array<{
+    sourceId: string
+    sourceTitle: string
+    sourceKind: SourceAnchor['sourceKind']
+    evidenceCount: number
+  }>
+  crossSourcePermissions?: CrossSourcePermission[]
   onSetPreference: (signal: PreferenceSignal) => void
   onClearPreference: (dimension: PreferenceDimension) => void
   onExport: () => string
   onReset: () => void
   onOpenReview?: (anchor: SourceAnchor) => void
+  onDecideClaim?: (
+    claimId: string,
+    action: UnderstandingClaimDecisionAction,
+    correction?: string,
+  ) => void
+  onDeleteSourceData?: (sourceId: string) => void
+  onRevokeCrossSourcePermission?: (permissionId: string) => void
+  onUpdateStudentProfile?: (profile: Omit<StudentProfile, 'createdAt'>) => void
 }
+
+const LEARNING_LEVELS = [
+  'Grade 9',
+  'Grade 10',
+  'Grade 11',
+  'Grade 12',
+  'University',
+  'Independent learner',
+] as const
+
+const LEARNING_GOALS = [
+  'Understand difficult material',
+  'Prepare for an exam',
+  'Finish an assignment',
+  'Review what I learned',
+  'Explore something new',
+] as const
 
 const CONTROLS = [
   {
@@ -83,18 +124,29 @@ function signalFromSelection(
 }
 
 export function LearnerControlPanel({
+  studentProfile,
   approvedPresentation,
   dueReviews,
   evidenceCount,
+  understandingClaims = [],
+  masteryMap = [],
+  sourceData = [],
+  crossSourcePermissions = [],
   onSetPreference,
   onClearPreference,
   onExport,
   onReset,
   onOpenReview,
+  onDecideClaim = () => undefined,
+  onDeleteSourceData,
+  onRevokeCrossSourcePermission,
+  onUpdateStudentProfile,
 }: LearnerControlPanelProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [confirmReset, setConfirmReset] = useState(false)
+  const [confirmSourceId, setConfirmSourceId] = useState<string | null>(null)
   const [status, setStatus] = useState('')
+  const [interestDraft, setInterestDraft] = useState(studentProfile?.interest ?? '')
   const headingId = useId()
 
   useEffect(() => {
@@ -105,6 +157,23 @@ export function LearnerControlPanel({
     window.addEventListener('keydown', handleEscape)
     return () => window.removeEventListener('keydown', handleEscape)
   }, [isOpen])
+
+  const updateStudentProfile = (updates: Partial<Omit<StudentProfile, 'createdAt'>>) => {
+    if (!studentProfile || !onUpdateStudentProfile) return
+    const { createdAt: _createdAt, ...editableProfile } = studentProfile
+    onUpdateStudentProfile({ ...editableProfile, ...updates })
+    setStatus('Koji defaults saved.')
+  }
+
+  const toggleLearningGoal = (goal: string) => {
+    const current = studentProfile?.learningGoals ?? []
+    const next = current.includes(goal)
+      ? current.filter((item) => item !== goal)
+      : current.length >= 2
+        ? [current[1], goal]
+        : [...current, goal]
+    updateStudentProfile({ learningGoals: next })
+  }
 
   const updatePreference = (
     dimension: PreferenceDimension,
@@ -146,7 +215,10 @@ export function LearnerControlPanel({
         type="button"
         className="learner-controls__trigger"
         aria-expanded={isOpen}
-        onClick={() => setIsOpen((open) => !open)}
+        onClick={() => {
+          if (!isOpen) setInterestDraft(studentProfile?.interest ?? '')
+          setIsOpen((open) => !open)
+        }}
       >
         <Settings2 size={15} aria-hidden="true" />
         Learning settings
@@ -187,6 +259,109 @@ export function LearnerControlPanel({
               preferences, and this is not a diagnosis.
             </p>
           </div>
+
+          <UnderstandingMirrorPanel
+            claims={understandingClaims}
+            masteryMap={masteryMap}
+            onDecideClaim={onDecideClaim}
+            onOpenSource={onOpenReview}
+          />
+
+          {studentProfile && onUpdateStudentProfile && (
+            <section className={'learner-controls__section'} aria-labelledby={`${headingId}-koji-defaults`}>
+              <div className={'learner-controls__section-heading'}>
+                <h3 id={`${headingId}-koji-defaults`}>Koji starting defaults</h3>
+                <span>Editable anytime</span>
+              </div>
+              <p className={'learner-controls__empty'}>
+                These guide the first response. Got it and Still stuck keep improving future help.
+              </p>
+              <div className={'learner-controls__fields learner-controls__profile-fields'}>
+                <label>
+                  <span>Learning context</span>
+                  <select
+                    value={studentProfile.gradeLevel ?? 'Independent learner'}
+                    onChange={(event) => updateStudentProfile({ gradeLevel: event.target.value })}
+                  >
+                    {LEARNING_LEVELS.map((level) => <option key={level}>{level}</option>)}
+                  </select>
+                </label>
+                <label>
+                  <span>Response language</span>
+                  <select
+                    value={studentProfile.preferredLanguage ?? 'English'}
+                    onChange={(event) => updateStudentProfile({ preferredLanguage: event.target.value })}
+                  >
+                    <option>English</option>
+                    <option>Arabic</option>
+                    <option>French</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Start explanations</span>
+                  <select
+                    value={studentProfile.startingSupport ?? 'balanced'}
+                    onChange={(event) => updateStudentProfile({
+                      startingSupport: event.target.value as NonNullable<StudentProfile['startingSupport']>,
+                    })}
+                  >
+                    <option value={'quick'}>Quick and direct</option>
+                    <option value={'balanced'}>Balanced</option>
+                    <option value={'guided'}>Guide me carefully</option>
+                  </select>
+                </label>
+                <label>
+                  <span>When I am still stuck</span>
+                  <select
+                    value={studentProfile.stuckSupport ?? 'different-explanation'}
+                    onChange={(event) => updateStudentProfile({
+                      stuckSupport: event.target.value as NonNullable<StudentProfile['stuckSupport']>,
+                    })}
+                  >
+                    <option value={'hint'}>Give me a hint</option>
+                    <option value={'different-explanation'}>Try a new explanation</option>
+                    <option value={'walk-through'}>Walk through it with me</option>
+                  </select>
+                </label>
+              </div>
+              <div className={'learner-controls__goals'} aria-label={'Learning goals'}>
+                <span>Goals (choose up to two)</span>
+                <div>
+                  {LEARNING_GOALS.map((goal) => (
+                    <button
+                      type={'button'}
+                      key={goal}
+                      aria-pressed={studentProfile.learningGoals?.includes(goal) ?? false}
+                      onClick={() => toggleLearningGoal(goal)}
+                    >
+                      {goal}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <form
+                className={'learner-controls__lens-form'}
+                onSubmit={(event) => {
+                  event.preventDefault()
+                  const interest = interestDraft.trim().replace(/\s+/g, ' ').slice(0, 60)
+                  if (!interest) return
+                  setInterestDraft(interest)
+                  updateStudentProfile({ interest })
+                }}
+              >
+                <label htmlFor={`${headingId}-interest`}>Interest lens</label>
+                <div>
+                  <input
+                    id={`${headingId}-interest`}
+                    value={interestDraft}
+                    maxLength={60}
+                    onChange={(event) => setInterestDraft(event.target.value)}
+                  />
+                  <button type={'submit'} disabled={!interestDraft.trim()}>Save lens</button>
+                </div>
+              </form>
+            </section>
+          )}
 
           <section className="learner-controls__section" aria-labelledby={`${headingId}-preferences`}>
             <div className="learner-controls__section-heading">
@@ -257,6 +432,68 @@ export function LearnerControlPanel({
               <h3 id={`${headingId}-data`}>Your data</h3>
               <p>{evidenceCount} learning interactions are stored in this browser.</p>
             </div>
+            {sourceData.length > 0 && onDeleteSourceData && (
+              <div className="learner-controls__source-data">
+                <h4>Data by source</h4>
+                <ul>
+                  {sourceData.map((source) => (
+                    <li key={source.sourceId}>
+                      <div>
+                        <strong>{source.sourceTitle}</strong>
+                        <span>
+                          {source.sourceKind === 'upload' ? 'Uploaded source' : 'Global Lab source'}
+                          {' - '}{source.evidenceCount} interaction{source.evidenceCount === 1 ? '' : 's'}
+                        </span>
+                      </div>
+                      {confirmSourceId === source.sourceId ? (
+                        <div className="learner-controls__confirm" role="group" aria-label={'Confirm deletion for ' + source.sourceTitle}>
+                          <span>Delete this source's learning data?</span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              onDeleteSourceData(source.sourceId)
+                              setConfirmSourceId(null)
+                              setStatus(`Deleted saved learning data for ${source.sourceTitle}.`)
+                            }}
+                          >Yes</button>
+                          <button type="button" onClick={() => setConfirmSourceId(null)}>Cancel</button>
+                        </div>
+                      ) : (
+                        <button type="button" onClick={() => setConfirmSourceId(source.sourceId)}>
+                          <Trash2 size={13} aria-hidden="true" /> Delete source data
+                        </button>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {crossSourcePermissions.length > 0 && onRevokeCrossSourcePermission && (
+              <div className="learner-controls__source-data">
+                <h4>Allowed source connections</h4>
+                <ul>
+                  {crossSourcePermissions.map((permission) => (
+                    <li key={permission.id}>
+                      <div>
+                        <strong>
+                          {permission.primaryAnchor?.sourceTitle ?? 'Focused source'}
+                          {' + '}
+                          {permission.secondaryAnchor?.sourceTitle ?? 'Second focused source'}
+                        </strong>
+                        <span>Only the two approved extracts may be compared.</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          onRevokeCrossSourcePermission(permission.id)
+                          setStatus('Source comparison permission revoked.')
+                        }}
+                      >Revoke</button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <div className="learner-controls__data-actions">
               <button type="button" onClick={downloadModel}>
                 <Download size={14} aria-hidden="true" />
@@ -269,7 +506,7 @@ export function LearnerControlPanel({
                 </button>
               ) : (
                 <div className="learner-controls__confirm" role="group" aria-label="Confirm deletion">
-                  <span>Delete preferences and review history?</span>
+                  <span>Delete preferences, evidence, mirror claims, and review history?</span>
                   <button type="button" onClick={resetModel}>Yes, delete</button>
                   <button type="button" onClick={() => setConfirmReset(false)}>Cancel</button>
                 </div>

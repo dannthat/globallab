@@ -23,6 +23,16 @@ function normalizeSubjectPreferences(value: unknown) {
   return Object.fromEntries(entries)
 }
 
+function normalizeStringList(value: unknown) {
+  if (!Array.isArray(value)) return undefined
+  const items = value
+    .filter((item): item is string => typeof item === 'string')
+    .map(normalizeText)
+    .filter(Boolean)
+    .slice(0, 4)
+  return items.length > 0 ? [...new Set(items)] : undefined
+}
+
 function migrateProfile(
   value: unknown,
   fallbackCreatedAt: string,
@@ -46,6 +56,30 @@ function migrateProfile(
   if (typeof value.gradeLevel === 'string') {
     const gradeLevel = normalizeText(value.gradeLevel)
     if (gradeLevel) next.gradeLevel = gradeLevel
+  }
+
+  if (typeof value.preferredLanguage === 'string') {
+    const preferredLanguage = normalizeText(value.preferredLanguage)
+    if (preferredLanguage) next.preferredLanguage = preferredLanguage
+  }
+
+  const learningGoals = normalizeStringList(value.learningGoals)
+  if (learningGoals) next.learningGoals = learningGoals
+
+  if (['quick', 'balanced', 'guided'].includes(String(value.startingSupport))) {
+    next.startingSupport = value.startingSupport as StudentProfile['startingSupport']
+  }
+
+  if (
+    ['hint', 'different-explanation', 'walk-through'].includes(
+      String(value.stuckSupport),
+    )
+  ) {
+    next.stuckSupport = value.stuckSupport as StudentProfile['stuckSupport']
+  }
+
+  if (typeof value.onboardingVersion === 'number' && value.onboardingVersion > 0) {
+    next.onboardingVersion = Math.floor(value.onboardingVersion)
   }
 
   const subjectPreferences = normalizeSubjectPreferences(value.subjectPreferences)

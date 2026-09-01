@@ -17,6 +17,7 @@ const mocks = vi.hoisted(() => ({
 vi.mock('../services/fileStore', () => ({ getFile: mocks.getFile }))
 vi.mock('../services/sourceContext', () => ({
   extractUserSourceContext: mocks.extractUserSourceContext,
+  canUseCloudForUserSelection: vi.fn(() => false),
 }))
 vi.mock('../services/localOcr', () => ({
   recognizeLocalImage: mocks.recognizeLocalImage,
@@ -103,6 +104,7 @@ beforeEach(() => {
       anchor,
       text: 'Cellular respiration releases usable energy from glucose.',
     },
+    scope: 'section',
     provider: 'local',
     createdAt: '2026-08-26T00:00:00.000Z',
   }
@@ -157,6 +159,13 @@ describe('uploaded-source Learn Your Way wiring', () => {
     )
     expect(fetchMock).not.toHaveBeenCalled()
     expect(await screen.findByText('Cells release usable energy.')).toBeTruthy()
-    expect(screen.getByText(/No image or extracted text left this browser/i)).toBeTruthy()
+    expect(
+      screen.getByText(/OCR and page-wide help ran locally/i),
+    ).toBeTruthy()
+
+    expect(
+      screen.queryByRole('button', { name: 'Use AI for this selection' }),
+    ).toBeNull()
+    expect(window.localStorage.getItem('gl_upload_cloud_tutor_consent_v1')).toBeNull()
   })
 })

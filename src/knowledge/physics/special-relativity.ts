@@ -47,14 +47,14 @@ Events that are simultaneous in one frame need not be simultaneous in another. R
 
 A light clock illustrates the geometry. In the clock’s rest frame, a light pulse travels vertically between mirrors. To an observer who sees the clock move sideways, the pulse follows a longer diagonal path. Since both observers measure the same light speed, the moving-clock cycle must take longer. The Lorentz factor becomes appreciable only when v is a significant fraction of c.
 
-Time dilation has direct experimental evidence. Fast atmospheric muons reach Earth’s surface in far greater numbers than a nonrelativistic lifetime estimate predicts, because Earth observers measure their decays as slowed; in the muon frame, the atmosphere is length-contracted. Atomic clocks flown on aircraft and clocks aboard navigation satellites accumulate relativistic offsets that must be included alongside gravitational corrections for accurate positioning.`,
-      keyTerms: ['proper time', 'coordinate time', 'time dilation', 'Lorentz factor', 'light clock', 'muon', 'atomic clock', 'navigation satellite'],
+Time dilation has direct experimental evidence. Unstable particles produced in high-energy accelerators survive far longer in the laboratory than their rest-frame lifetimes would allow, because laboratory observers measure the moving particle's internal clock as time-dilated. Atomic clocks transported on aircraft have accumulated measurable relativistic offsets consistent with special-relativistic predictions.`,
+      keyTerms: ['proper time', 'coordinate time', 'time dilation', 'Lorentz factor', 'light clock', 'unstable particle', 'atomic clock', 'particle accelerator'],
       equation: '\\Delta t = \\gamma\\Delta\\tau',
       callouts: [
         {
           type: 'real-world',
-          heading: 'Satellite clocks require relativity',
-          body: 'Global navigation systems correct both special-relativistic motion and general-relativistic gravity effects. Uncorrected clock drift would quickly produce large position errors.',
+          heading: 'Particle accelerators confirm time dilation',
+          body: 'Short-lived particles created in accelerators survive much longer in the laboratory than their measured rest-frame lifetimes predict. The extended lab lifetime matches the time-dilation formula precisely.',
         },
       ],
       presetAnalogies: {
@@ -71,8 +71,8 @@ Time dilation has direct experimental evidence. Fast atmospheric muons reach Ear
 
 Measuring a moving length requires recording both endpoint positions simultaneously in the observer’s frame. Because simultaneity is frame-dependent, another frame does not regard those endpoint measurements as simultaneous. Length contraction is therefore inseparable from relativity of simultaneity. Photographs also include light-travel-time effects and do not directly display the simple contracted shape calculated from simultaneous coordinates.
 
-The phenomenon resolves apparent conflicts involving muons and high-energy particle beams. In Earth’s frame, muon lifetimes are dilated; in each muon’s frame, the atmosphere’s thickness is contracted, so the surface is reached within the muon’s ordinary proper lifetime. Both frames predict the same reunion and decay events because Lorentz transformations preserve their causal relationships.`,
-      keyTerms: ['proper length', 'length contraction', 'longitudinal direction', 'simultaneity', 'endpoint measurement', 'frame-dependent', 'muon frame', 'Lorentz transformation'],
+The phenomenon resolves apparent conflicts involving high-energy particle beams. In the laboratory frame, a fast particle's internal clock is time-dilated; in the particle's rest frame, the distance to the target detector is length-contracted. Both frames predict the same collision events because Lorentz transformations preserve their causal relationships.`,
+      keyTerms: ['proper length', 'length contraction', 'longitudinal direction', 'simultaneity', 'endpoint measurement', 'frame-dependent', 'particle frame', 'Lorentz transformation'],
       equation: 'L = \\frac{L_0}{\\gamma}',
       callouts: [
         {

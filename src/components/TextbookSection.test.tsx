@@ -182,6 +182,61 @@ describe('TextbookSection companion placement', () => {
   })
 })
 describe('TextbookSection persistent highlights', () => {
+  it('sends the exact selected text to Ask companion', () => {
+    const onLearnYourWay = vi.fn()
+    const { container } = render(
+      <TextbookSection
+        topicId="cellular-respiration"
+        section={section}
+        rewrite={null}
+        isLoading={false}
+        profile={profile}
+        topicTitle="Cellular Respiration & ATP Synthesis"
+        topicSubtitle="How cells convert fuel into usable energy"
+        subjectTitle="Biology"
+        sectionIndex={1}
+        totalSections={5}
+        onLearnYourWay={onLearnYourWay}
+        onRefine={vi.fn()}
+        onOutcome={vi.fn()}
+        onQuizResult={vi.fn()}
+        onClearRewrite={vi.fn()}
+        onApplySuggestion={vi.fn()}
+        onDeferSuggestion={vi.fn()}
+        onNeverSuggest={vi.fn()}
+      />,
+    )
+    const body = container.querySelector<HTMLElement>('.tbp-body')
+    const selectedText = 'transfers energy from carbon compounds'
+    const walker = document.createTreeWalker(
+      body as HTMLElement,
+      NodeFilter.SHOW_TEXT,
+    )
+    let selectedNode: Text | null = null
+    while (walker.nextNode()) {
+      const candidate = walker.currentNode as Text
+      if (candidate.data.includes(selectedText)) {
+        selectedNode = candidate
+        break
+      }
+    }
+    expect(selectedNode).not.toBeNull()
+
+    const start = (selectedNode as Text).data.indexOf(selectedText)
+    const range = document.createRange()
+    range.setStart(selectedNode as Text, start)
+    range.setEnd(selectedNode as Text, start + selectedText.length)
+    const selection = window.getSelection()
+    selection?.removeAllRanges()
+    selection?.addRange(range)
+
+    fireEvent.mouseUp(body as HTMLElement, { clientX: 220, clientY: 180 })
+    fireEvent.click(screen.getByRole('button', { name: 'Ask companion' }))
+
+    expect(onLearnYourWay).toHaveBeenCalledOnce()
+    expect(onLearnYourWay).toHaveBeenCalledWith(selectedText)
+  })
+
   it('preserves canonical text and restores a topic-scoped highlight', () => {
     const firstRender = renderSection()
     const body = firstRender.container.querySelector<HTMLElement>('.tbp-body')

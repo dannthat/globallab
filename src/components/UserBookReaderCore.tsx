@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { StudentProfile, UserBook } from '../types'
 import { usePdfDocument, type SourcePreviewKind } from '../hooks/usePdfDocument'
 import { useOcrSession } from '../hooks/useOcrSession'
@@ -6,6 +6,7 @@ import { useCompanionSession } from '../hooks/useCompanionSession'
 import type { useLearnerModel } from '../hooks/useLearnerModel'
 import { PdfSpreadView } from './PdfSpreadView'
 import { CompanionPanel } from './CompanionPanel'
+import type { SourceAnchor } from '../personalization/types'
 
 type SourceBook = UserBook & {
   previewKind?: SourcePreviewKind
@@ -27,6 +28,7 @@ export interface UserBookReaderProps {
   book: UserBook
   profile: StudentProfile
   learnerModel: ReturnType<typeof useLearnerModel>
+  sourceJump?: SourceAnchor | null
   isDark: boolean
   onToggleDark: () => void
   onBack: () => void
@@ -37,13 +39,31 @@ export function UserBookReader({
   book,
   profile,
   learnerModel,
+  sourceJump,
   isDark,
   onToggleDark,
   onBack,
   onRemove,
 }: UserBookReaderProps) {
-  const [focusedPage, setFocusedPage] = useState(1)
-  const [spreadIndex, setSpreadIndex] = useState(0)
+  const initialPage =
+    sourceJump?.sourceId === book.id && sourceJump.page
+      ? sourceJump.page
+      : 1
+  const [focusedPage, setFocusedPage] = useState(initialPage)
+  const [spreadIndex, setSpreadIndex] = useState(
+    Math.floor((initialPage - 1) / 2),
+  )
+
+  useEffect(() => {
+    if (
+      sourceJump?.sourceId !== book.id ||
+      !sourceJump.page ||
+      sourceJump.page < 1
+    ) return
+    // oxlint-disable-next-line react/set-state-in-effect -- An explicit evidence jump must synchronise the controlled reader location.
+    setFocusedPage(sourceJump.page)
+    setSpreadIndex(Math.floor((sourceJump.page - 1) / 2))
+  }, [book.id, sourceJump])
 
   const previewKind = resolvePreviewKind(book as SourceBook)
 

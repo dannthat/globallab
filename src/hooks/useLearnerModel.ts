@@ -1,19 +1,28 @@
 import { useCallback, useMemo, useState } from 'react'
 import {
   acceptPreferenceSuggestion,
+  buildLivingMasteryMap,
   clearPresentationPreference,
+  decideUnderstandingClaim,
   deferPreferenceSuggestion,
+  deleteLearningEvidence,
+  deleteSourceLearningData,
   dismissPreferenceSuggestion,
   exportLearnerModel,
   getDueReviews,
+  grantCrossSourcePermission,
+  hasCrossSourcePermission,
   neverSuggestPreference,
   persistLearnerModel,
   readLearnerModel,
   recordHelpfulEvidence,
   recordQuizEvidence,
   recordRefinementEvidence,
+  recordTutorEvidence,
   resetLearnerModel,
+  revokeCrossSourcePermission,
   scheduleReview,
+  setCrossSourcePermission,
   setExplicitPreference,
 } from '../personalization/learnerModel'
 import type {
@@ -23,6 +32,8 @@ import type {
   ReviewRating,
   SourceAnchor,
   StorageLike,
+  TutorEvidence,
+  UnderstandingClaimDecisionAction,
 } from '../personalization/types'
 
 interface UseLearnerModelOptions {
@@ -94,6 +105,59 @@ export function useLearnerModel(options: UseLearnerModelOptions = {}) {
     [now, update],
   )
 
+  const recordTutorAttempt = useCallback(
+    (
+      anchor: SourceAnchor,
+      mode: PersonalizationMode,
+      tutor: TutorEvidence,
+    ) => {
+      const kind = tutor.phase === 'transfer' ? 'tutor-transfer' : 'tutor-attempt'
+      update((current) =>
+        recordTutorEvidence(current, anchor, mode, kind, tutor, now()),
+      )
+    },
+    [now, update],
+  )
+
+  const recordTutorHint = useCallback(
+    (
+      anchor: SourceAnchor,
+      mode: PersonalizationMode,
+      tutor: TutorEvidence,
+      revealed = false,
+    ) => {
+      update((current) =>
+        recordTutorEvidence(
+          current,
+          anchor,
+          mode,
+          revealed ? 'tutor-reveal' : 'tutor-hint',
+          tutor,
+          now(),
+        ),
+      )
+    },
+    [now, update],
+  )
+
+  const recordTeachKoji = useCallback(
+    (anchor: SourceAnchor, mode: PersonalizationMode, tutor: TutorEvidence) => {
+      update((current) =>
+        recordTutorEvidence(current, anchor, mode, 'teach-koji', tutor, now()),
+      )
+    },
+    [now, update],
+  )
+
+  const recordPredictionCycle = useCallback(
+    (anchor: SourceAnchor, mode: PersonalizationMode, tutor: TutorEvidence) => {
+      update((current) =>
+        recordTutorEvidence(current, anchor, mode, 'prediction-cycle', tutor, now()),
+      )
+    },
+    [now, update],
+  )
+
   const setPreference = useCallback(
     (signal: PreferenceSignal) => {
       update((current) => setExplicitPreference(current, signal, now()))
@@ -136,12 +200,70 @@ export function useLearnerModel(options: UseLearnerModelOptions = {}) {
     [now, update],
   )
 
+  const decideClaim = useCallback(
+    (
+      claimId: string,
+      action: UnderstandingClaimDecisionAction,
+      correction?: string,
+    ) => {
+      update((current) =>
+        decideUnderstandingClaim(current, claimId, action, now(), correction),
+      )
+    },
+    [now, update],
+  )
+
+  const deleteEvidence = useCallback(
+    (evidenceId: string) => {
+      update((current) => deleteLearningEvidence(current, evidenceId, now()))
+    },
+    [now, update],
+  )
+
+  const deleteSourceData = useCallback(
+    (sourceId: string) => {
+      update((current) => deleteSourceLearningData(current, sourceId, now()))
+    },
+    [now, update],
+  )
+
+  const grantCrossSource = useCallback(
+    (primary: SourceAnchor, secondary: SourceAnchor) => {
+      update((current) =>
+        grantCrossSourcePermission(current, primary, secondary, now()),
+      )
+    },
+    [now, update],
+  )
+
+  const revokeCrossSource = useCallback(
+    (permissionId: string) => {
+      update((current) =>
+        revokeCrossSourcePermission(current, permissionId, now()),
+      )
+    },
+    [now, update],
+  )
+
+  const setCrossSourceAllowed = useCallback(
+    (primary: SourceAnchor, secondary: SourceAnchor, allowed: boolean) => {
+      update((current) =>
+        setCrossSourcePermission(current, primary, secondary, allowed, now()),
+      )
+    },
+    [now, update],
+  )
+
   const reset = useCallback(() => {
     setState(resetLearnerModel(storage, now()))
   }, [now, storage])
 
   const exportState = useCallback(() => exportLearnerModel(state), [state])
   const dueReviews = useMemo(() => getDueReviews(state, now()), [now, state])
+  const livingMasteryMap = useMemo(
+    () => buildLivingMasteryMap(state, now()),
+    [now, state],
+  )
   const pendingSuggestions = useMemo(
     () => state.suggestions.filter((suggestion) => suggestion.status === 'pending'),
     [state.suggestions],
@@ -151,18 +273,32 @@ export function useLearnerModel(options: UseLearnerModelOptions = {}) {
     state,
     approvedPresentation: state.approvedPresentation,
     mastery: state.mastery,
+    understandingClaims: state.inference.claims,
+    livingMasteryMap,
     dueReviews,
     pendingSuggestions,
     recordRefinement,
     recordHelpful,
     recordQuiz,
     recordReview,
+    recordTutorAttempt,
+    recordTutorHint,
+    recordTeachKoji,
+    recordPredictionCycle,
     setExplicitPreference: setPreference,
     clearPreference,
     acceptSuggestion,
     notNow,
     dismissSuggestion,
     neverSuggest,
+    decideUnderstandingClaim: decideClaim,
+    deleteEvidence,
+    deleteSourceData,
+    grantCrossSourcePermission: grantCrossSource,
+    revokeCrossSourcePermission: revokeCrossSource,
+    setCrossSourcePermission: setCrossSourceAllowed,
+    hasCrossSourcePermission: (primary: SourceAnchor, secondary: SourceAnchor) =>
+      hasCrossSourcePermission(state, primary, secondary),
     getDueReviews: (at = now()) => getDueReviews(state, at),
     exportState,
     reset,

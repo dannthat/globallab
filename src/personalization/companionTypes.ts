@@ -1,5 +1,6 @@
 import type {
   ApprovedPresentationPreferences,
+  CompanionSourceScope,
   PersonalizationMode,
   SourceExcerpt,
 } from './types'
@@ -20,6 +21,7 @@ export interface LearningCompanionArtifact {
   content: string
   limitations: string
   excerpt: SourceExcerpt
+  scope: CompanionSourceScope
   quiz?: CompanionQuiz
   provider: 'preset' | 'gemini' | 'local'
   model?: string
@@ -28,6 +30,8 @@ export interface LearningCompanionArtifact {
 
 export interface LearningCompanionRequest {
   excerpt: SourceExcerpt
+  /** Defaults to section for older callers. Selection means the excerpt is the complete target. */
+  scope?: CompanionSourceScope
   mode: PersonalizationMode
   profile: StudentProfile
   approvedPresentation: ApprovedPresentationPreferences

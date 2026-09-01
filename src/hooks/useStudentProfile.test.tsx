@@ -19,6 +19,11 @@ describe('useStudentProfile', () => {
       JSON.stringify({
         interest: '  basketball   tactics ',
         gradeLevel: ' Grade 10 ',
+        preferredLanguage: ' Arabic ',
+        learningGoals: ['Prepare for an exam', 'Prepare for an exam'],
+        startingSupport: 'guided',
+        stuckSupport: 'hint',
+        onboardingVersion: 3,
         createdAt: CREATED_AT,
         subjectPreferences: { biology: 'visual-first' },
         ignoredLegacyField: true,
@@ -30,6 +35,11 @@ describe('useStudentProfile', () => {
     expect(result.current.profile).toEqual({
       interest: 'basketball tactics',
       gradeLevel: 'Grade 10',
+      preferredLanguage: 'Arabic',
+      learningGoals: ['Prepare for an exam'],
+      startingSupport: 'guided',
+      stuckSupport: 'hint',
+      onboardingVersion: 3,
       createdAt: CREATED_AT,
       subjectPreferences: { biology: 'visual-first' },
     })

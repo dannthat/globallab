@@ -1,6 +1,8 @@
 import type {
+  CompanionSourceScope,
   PersonalizationMode,
   SourceAnchor,
+  SourceExcerpt,
 } from '../personalization/types'
 
 export type StudyMode = 'cram' | 'explorer'
@@ -47,6 +49,11 @@ export type PersonaSelection = PersonaPreset | 'custom'
 export interface StudentProfile {
   interest: string
   gradeLevel?: string
+  preferredLanguage?: string
+  learningGoals?: string[]
+  startingSupport?: 'quick' | 'balanced' | 'guided'
+  stuckSupport?: 'hint' | 'different-explanation' | 'walk-through'
+  onboardingVersion?: number
   createdAt: string
   subjectPreferences?: Record<string, string>
 }
@@ -114,6 +121,9 @@ export interface RewrittenSection {
   analogyUsed: string
   quiz: LearningQuiz | null
   source: SourceAnchor
+  /** Preserves the exact target for retries and refinement actions. */
+  excerpt?: SourceExcerpt
+  scope?: CompanionSourceScope
   interest: string
   isMock: boolean
   provider: 'preset' | 'gemini' | 'local'

@@ -6,6 +6,11 @@ import {
   useState,
   type CSSProperties,
 } from 'react'
+import type { SimulationComponentProps } from '../../personalization/simulationProtocol'
+import {
+  publishSimulationState,
+  subscribeToTutorSimulationActions,
+} from '../../personalization/simulationProtocol'
 
 const CANVAS_HEIGHT = 246
 
@@ -26,7 +31,11 @@ function themeColor(
   return styles.getPropertyValue(property).trim() || fallback
 }
 
-export function WaveInterferenceSim() {
+export function WaveInterferenceSim({
+  simulationId = 'wave-mechanics::standalone',
+  topicId = 'wave-mechanics',
+  sectionId = 'overview',
+}: SimulationComponentProps = {}) {
   const titleId = useId()
   const descriptionId = useId()
   const wavelengthId = useId()
@@ -43,6 +52,46 @@ export function WaveInterferenceSim() {
   const fringeSpacingMetres =
     (wavelengthMetres * screenDistance) / separationMetres
   const fringeSpacingMillimetres = fringeSpacingMetres * 1_000
+
+  useEffect(
+    () =>
+      subscribeToTutorSimulationActions(simulationId, (action) => {
+        if (action.type !== 'set-simulation-control' || typeof action.value !== 'number') {
+          return
+        }
+        if (action.controlId === 'wavelength') {
+          setWavelength(Math.min(700, Math.max(400, action.value)))
+        } else if (action.controlId === 'slitSeparation') {
+          setSlitSeparation(Math.min(1, Math.max(0.1, action.value)))
+        } else if (action.controlId === 'screenDistance') {
+          setScreenDistance(Math.min(5, Math.max(1, action.value)))
+        }
+      }),
+    [simulationId],
+  )
+
+  useEffect(() => {
+    publishSimulationState({
+      simulationId,
+      topicId,
+      sectionId,
+      label: 'Double-slit wave interference',
+      controls: { wavelength, slitSeparation, screenDistance },
+      outputs: {
+        fringeSpacingMillimetres: Number(fringeSpacingMillimetres.toFixed(3)),
+        patternColor: wavelengthColor(wavelength),
+      },
+      updatedAt: new Date().toISOString(),
+    })
+  }, [
+    fringeSpacingMillimetres,
+    screenDistance,
+    sectionId,
+    simulationId,
+    slitSeparation,
+    topicId,
+    wavelength,
+  ])
 
   const draw = useCallback(() => {
     const canvas = canvasRef.current
