@@ -20,6 +20,66 @@ const retryDelay = (response, attempt) => {
   return 500 + attempt * 350
 }
 
+const providerFailureDetails = async (response) => {
+  let providerCode = null
+  let providerMessage = null
+
+  try {
+    const body = await response.clone().json()
+    providerCode = typeof body?.error?.status === 'string'
+      ? body.error.status
+      : null
+    providerMessage = typeof body?.error?.message === 'string'
+      ? body.error.message.slice(0, 500)
+      : null
+  } catch {
+    // Provider bodies are not guaranteed to be JSON. The HTTP status still
+    // gives operators a useful, non-secret diagnostic.
+  }
+
+  return {
+    providerStatus: response.status,
+    providerCode,
+    providerMessage,
+  }
+}
+
+const providerFailureResponse = (status) => {
+  if (status === 429) {
+    return {
+      status: 429,
+      code: 'RATE_LIMITED',
+      error: 'The personalization service is busy. Try again shortly.',
+    }
+  }
+  if ([401, 403].includes(status)) {
+    return {
+      status: 502,
+      code: 'PROVIDER_AUTH_FAILED',
+      error: 'The personalization deployment could not authenticate with Gemini.',
+    }
+  }
+  if (status === 404) {
+    return {
+      status: 502,
+      code: 'PROVIDER_MODEL_UNAVAILABLE',
+      error: 'The configured personalization model is unavailable.',
+    }
+  }
+  if (status === 400) {
+    return {
+      status: 502,
+      code: 'PROVIDER_REQUEST_REJECTED',
+      error: 'Gemini rejected the personalization request.',
+    }
+  }
+  return {
+    status: 502,
+    code: 'PROVIDER_UNAVAILABLE',
+    error: 'The personalization provider could not complete this request.',
+  }
+}
+
 function validatePrivacy(body) {
   const privacy = body?.privacy
   if (
@@ -153,12 +213,19 @@ export default async function personalize(request) {
 
     if (!providerResponse?.ok) {
       const status = providerResponse?.status ?? 502
+      const failure = providerFailureResponse(status)
+      const details = providerResponse
+        ? await providerFailureDetails(providerResponse)
+        : { providerStatus: status, providerCode: null, providerMessage: null }
+      console.error('[personalize] Gemini request failed', {
+        model,
+        ...details,
+      })
       return json({
-        error: status === 429
-          ? 'The personalization service is busy. Try again shortly.'
-          : 'The personalization provider could not complete this request.',
-        code: status === 429 ? 'RATE_LIMITED' : 'PROVIDER_ERROR',
-      }, status === 429 ? 429 : 502)
+        error: failure.error,
+        code: failure.code,
+        providerStatus: status,
+      }, failure.status)
     }
 
     const providerData = await providerResponse.json()

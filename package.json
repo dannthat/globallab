@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "start": "node server/personalization-server.mjs",
     "build": "tsc -b && vite build",
     "lint": "oxlint src",
     "test": "node --max-old-space-size=8192 ./node_modules/vitest/vitest.mjs run --pool=forks --maxWorkers=1",
